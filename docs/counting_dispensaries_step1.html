@@ -148,7 +148,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./Final Report_draft.html">
- <span class="menu-text">final report(DRAFT)</span></a>
+ <span class="menu-text">The Final Report (DRAFT)</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link active" href="./counting_dispensaries_step1.html" aria-current="page">
@@ -180,8 +180,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#goal" id="toc-goal" class="nav-link active" data-scroll-target="#goal">Goal:</a></li>
-  <li><a href="#this-code" id="toc-this-code" class="nav-link" data-scroll-target="#this-code">This Code:</a></li>
+  <li><a href="#this-code-creates-a-dataframe-of-dispensaries-from-2013---2013" id="toc-this-code-creates-a-dataframe-of-dispensaries-from-2013---2013" class="nav-link active" data-scroll-target="#this-code-creates-a-dataframe-of-dispensaries-from-2013---2013">This code: creates a dataframe of dispensaries from 2013 - 2013</a></li>
   <li><a href="#nimbys-method" id="toc-nimbys-method" class="nav-link" data-scroll-target="#nimbys-method">NIMBY’s Method:</a></li>
   <li><a href="#my-method" id="toc-my-method" class="nav-link" data-scroll-target="#my-method">My Method:</a>
   <ul class="collapse">
@@ -218,13 +217,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<p><span style="font-size: 90%;"><em>“Not in my backyard? Not so fast. The effect of marijuana legalization on neighborhood crime” (NIMBY)</em></span></p>
-<section id="goal" class="level2">
-<h2 class="anchored" data-anchor-id="goal">Goal:</h2>
-<p>Calculate the average YOY growth of dispensaries by county</p>
-</section>
-<section id="this-code" class="level2">
-<h2 class="anchored" data-anchor-id="this-code">This Code:</h2>
+<p><img src="images/counting dispensaries.png" class="img-fluid"></p>
+<section id="this-code-creates-a-dataframe-of-dispensaries-from-2013---2013" class="level2">
+<h2 class="anchored" data-anchor-id="this-code-creates-a-dataframe-of-dispensaries-from-2013---2013">This code: creates a dataframe of dispensaries from 2013 - 2013</h2>
 <ol type="1">
 <li><p>lists all the files in the current working directory</p></li>
 <li><p>retains the file name as new variable</p></li>
@@ -274,28 +269,22 @@ The following objects are masked from 'package:base':
 <p>combines all 700 files into a single data frame</p>
 <p><span style="font-size: 80%;"><em>adapted from “<a href="https://community.rstudio.com/t/pass-chunk-of-filename-to-column-name-in-a-loop/141523" title="Posit Community">Pass chunk of filename to column name in a loop</a>”</em></span></p>
 <div class="cell">
-<details>
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set working directory for this chunk only</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">"~/gvsu/winter 23/CIS 635/NIMBY/cleaning/dsp_data"</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>dsp <span class="ot">&lt;-</span> <span class="fu">dir_ls</span>() <span class="sc">%&gt;%</span> <span class="fu">set_names</span>() <span class="co"># grab all of the file names </span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">#  the .id parameter creates a new column called "filename" </span></span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>all_dsps <span class="ot">&lt;-</span> <span class="fu">map_df</span>(dsp, <span class="sc">~</span><span class="fu">read_excel</span>(.x), <span class="at">.id =</span> <span class="st">"filename"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-stderr">
 <pre><code>New names:
 New names:
 New names:
 • `` -&gt; `...8`</code></pre>
 </div>
-<details>
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># extract the date from the file name and create a new date column</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>all_dsps <span class="ot">&lt;-</span> all_dsps <span class="sc">%&gt;%</span> </span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">date =</span> <span class="fu">str_extract</span>(filename, <span class="st">"</span><span class="sc">\\</span><span class="st">d{6}"</span>),</span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">date =</span> <span class="fu">as.Date</span>(<span class="fu">paste0</span>(<span class="st">"01"</span>, date), <span class="at">format =</span> <span class="st">"%d%m%Y"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
 </section>
 <section id="create-uniform-observation-fields" class="level3">
@@ -303,8 +292,6 @@ New names:
 <p>over the years different naming conventions and styles were used</p>
 <p><span style="font-size: 80%;"><em>adapted from “<a href="https://www.statology.org/dplyr-coalesce" title="Statology">How to Use the coalesce() Function in dplyr</a>”</em></span></p>
 <div class="cell">
-<details>
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># use coalesce to combine like columns and override the N/A</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>all_dsps<span class="ot">&lt;-</span>  all_dsps <span class="sc">%&gt;%</span> </span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">dba =</span> <span class="fu">coalesce</span>(DBA,<span class="st">`</span><span class="at">DOING BUSINESS AS</span><span class="st">`</span>)) <span class="sc">%&gt;%</span> </span>
@@ -320,7 +307,6 @@ New names:
 <span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co"># select the relevant fields</span></span>
 <span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>all_dsps <span class="ot">&lt;-</span> all_dsps <span class="sc">%&gt;%</span></span>
 <span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="dv">1</span>, <span class="dv">26</span>, <span class="dv">37</span><span class="sc">:</span><span class="dv">42</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
 </section>
 <section id="create-uniform-business-names" class="level3">
@@ -328,8 +314,6 @@ New names:
 <p>…to the best of my ability <br></p>
 <p>I now know clever naming conventions for cannabis dispensaries. <br> takes a few minutes</p>
 <div class="cell">
-<details>
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># same case</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>all_dsps<span class="sc">$</span>dba <span class="ot">&lt;-</span> <span class="fu">toupper</span>(all_dsps<span class="sc">$</span>dba) <span class="co"># DBA = "Doing Business As"</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -461,19 +445,13 @@ New names:
 <span id="cb6-129"><a href="#cb6-129" aria-hidden="true" tabindex="-1"></a>all_dsps<span class="sc">$</span>dba <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">"WALKING RAVEN II"</span>,<span class="st">"WALKING RAVEN"</span>, all_dsps<span class="sc">$</span>dba)</span>
 <span id="cb6-130"><a href="#cb6-130" aria-hidden="true" tabindex="-1"></a>all_dsps<span class="sc">$</span>dba <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">"WOLF PAC CANNABIS"</span>,<span class="st">"WOLFPAC CANNABIS"</span>, all_dsps<span class="sc">$</span>dba)</span>
 <span id="cb6-131"><a href="#cb6-131" aria-hidden="true" tabindex="-1"></a>all_dsps<span class="sc">$</span>dba <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">"ALLGREENS"</span>,<span class="st">"CANNABIS MEDICAL TECHNOLOGY"</span>, all_dsps<span class="sc">$</span>dba)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
 <p>exporting so I do not have to sit through this again</p>
 <div class="cell">
-<details>
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(all_dsps,</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>          <span class="st">"~/gvsu/winter 23/CIS 635/NIMBY/cleaning/counting_dispensaries/dps_data_cleaned/dispensaries.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
 <div class="cell">
-<details>
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>cleaned_dsps <span class="ot">&lt;-</span> all_dsps</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>cleaned_dsps <span class="ot">&lt;-</span> cleaned_dsps <span class="sc">%&gt;%</span></span>
@@ -487,15 +465,12 @@ New names:
 <span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>dsps<span class="sc">$</span>dba <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(dsps<span class="sc">$</span>dba <span class="sc">==</span> <span class="st">"NONE"</span>, <span class="cn">NA</span>, dsps<span class="sc">$</span>dba) <span class="co"># change the None's to NAs</span></span>
 <span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>dsps<span class="sc">$</span>zip<span class="ot">&lt;-</span>  <span class="fu">substr</span>(dsps<span class="sc">$</span>zip, <span class="at">start =</span> <span class="dv">1</span>, <span class="at">stop =</span> <span class="dv">5</span>) <span class="co"># remove trailing numbers</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
 </section>
 <section id="find-missing-business-names" class="level3">
 <h3 class="anchored" data-anchor-id="find-missing-business-names">find missing business names</h3>
 <p><span style="font-size: 80%;"><em>adapted from “<a href="https://stackoverflow.com/questions/52465215/dplyr-solution-using-slice-and-group" title="StackOverflow">Dplyr solution using slice and group</a>”</em></span></p>
 <div class="cell">
-<details>
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># select all business names and license numbers</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>dsps_list <span class="ot">&lt;-</span>dsps  <span class="sc">%&gt;%</span> </span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(dba, license_no) <span class="co">#</span></span>
@@ -529,14 +504,10 @@ New names:
 <span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>    type,</span>
 <span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>    date,</span>
 <span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>    year)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
 <p>Look at this, it’s glorious, almost</p>
 <div class="cell">
-<details>
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dsps_merge)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>  license_no                         dba   city   zip    type       date year
 1  402-00001 CANNABIS MEDICAL TECHNOLOGY Denver 80204 medical 2020-08-01 2020
@@ -552,8 +523,6 @@ New names:
 <h3 class="anchored" data-anchor-id="find-the-missing-zip-codes">find the missing zip codes</h3>
 <p>I’ll repeat the same process above for geography</p>
 <div class="cell">
-<details>
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>dsps_zips <span class="ot">&lt;-</span>dsps_merge  <span class="sc">%&gt;%</span> </span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(zip, city, license_no) <span class="co"># add type for a distinct list</span></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -587,7 +556,6 @@ New names:
 <span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a><span class="co"># export for manual review if needed</span></span>
 <span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(storelist,</span>
 <span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a>          <span class="st">"~/gvsu/winter 23/CIS 635/NIMBY/cleaning/counting_dispensaries/dps_data_cleaned/dispensaries.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
 </section>
 <section id="find-dispensaries-that-are-both-medical-and-recreational-sellers" class="level3">
@@ -595,8 +563,6 @@ New names:
 <p><span style="font-size: 80%;"><em>adapted from “<a href="https://www.youtube.com/watch?v=Yg-pNqzDuN4" title="Statistics Globe Youtube Channel">Join Data with dplyr in R: 6 Examples</a>”</em></span></p>
 <p>This is where things start to go awry, with the given data it is very difficult to identify a business that operates as both</p>
 <div class="cell">
-<details>
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># divide this into two new dataframes, one for medical, one for recreational</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>med_dsp <span class="ot">&lt;-</span> <span class="fu">filter</span>(storelist, type <span class="sc">==</span> <span class="st">"medical"</span>)</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>rec_dsp <span class="ot">&lt;-</span> <span class="fu">filter</span>(storelist, type <span class="sc">==</span> <span class="st">"retail"</span>)</span>
@@ -632,7 +598,6 @@ New names:
 <span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(storelist_cleaned,</span>
 <span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a>          <span class="st">"dispensary_types_defined.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
 
 

@@ -148,11 +148,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./Final Report_draft.html">
- <span class="menu-text">Final Report(DRAFT)</span></a>
+ <span class="menu-text">The Final Report (DRAFT)</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./counting_dispensaries_step1.html">
- <span class="menu-text">Counting Dispensaries</span></a>
+ <span class="menu-text">counting dispensaries</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./Label the Dispensaries with GeoCodes_step2.html">
@@ -180,7 +180,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#this-code" id="toc-this-code" class="nav-link active" data-scroll-target="#this-code">This Code</a></li>
+  <li><a href="#this-code-finds-the-crime-and-dispensary-rates-per-10000-by-county" id="toc-this-code-finds-the-crime-and-dispensary-rates-per-10000-by-county" class="nav-link active" data-scroll-target="#this-code-finds-the-crime-and-dispensary-rates-per-10000-by-county">This code: finds the crime and dispensary rates per 10,000 by county</a>
+  <ul class="collapse">
   <li><a href="#load-packages" id="toc-load-packages" class="nav-link" data-scroll-target="#load-packages">load packages</a></li>
   <li><a href="#load-in-data" id="toc-load-in-data" class="nav-link" data-scroll-target="#load-in-data">load in data</a></li>
   <li><a href="#find-the-three-year-average-count-of-dispensaries" id="toc-find-the-three-year-average-count-of-dispensaries" class="nav-link" data-scroll-target="#find-the-three-year-average-count-of-dispensaries">find the three year average count of dispensaries</a></li>
@@ -191,6 +192,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#filter-to-get-2016-data-and-pivot-summarize-by-year-and-geography" id="toc-filter-to-get-2016-data-and-pivot-summarize-by-year-and-geography" class="nav-link" data-scroll-target="#filter-to-get-2016-data-and-pivot-summarize-by-year-and-geography">filter to get 2016 data, and pivot, summarize by year and geography</a></li>
   <li><a href="#calculate-the-crimes-per-capita" id="toc-calculate-the-crimes-per-capita" class="nav-link" data-scroll-target="#calculate-the-crimes-per-capita">calculate the crimes per capita</a></li>
   <li><a href="#time-to-join-the-per-capitas-together" id="toc-time-to-join-the-per-capitas-together" class="nav-link" data-scroll-target="#time-to-join-the-per-capitas-together">time to join the per capitas together!</a></li>
+  </ul></li>
   </ul>
 </nav>
 </nav>
@@ -217,8 +219,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<section id="this-code" class="level3">
-<h3 class="anchored" data-anchor-id="this-code">This Code</h3>
+<p><img src="images/per capita.png" class="img-fluid"></p>
+<section id="this-code-finds-the-crime-and-dispensary-rates-per-10000-by-county" class="level2">
+<h2 class="anchored" data-anchor-id="this-code-finds-the-crime-and-dispensary-rates-per-10000-by-county">This code: finds the crime and dispensary rates per 10,000 by county</h2>
 <ol type="1">
 <li><p>finds the population three year average</p></li>
 <li><p>calculates dispensaries per capita</p></li>
@@ -226,7 +229,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>calculates the county crime rates</p></li>
 <li><p>matches the crime rates with the dispensaries per capita by geoid</p></li>
 </ol>
-</section>
 <section id="load-packages" class="level3">
 <h3 class="anchored" data-anchor-id="load-packages">load packages</h3>
 <div class="cell">
@@ -449,6 +451,7 @@ Fetching data by table type ("B/C", "S", "DP") and combining the result.</code><
 </div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

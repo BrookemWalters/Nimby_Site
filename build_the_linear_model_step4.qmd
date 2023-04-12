@@ -11,31 +11,19 @@ format:
 
 Implements my variables into two linear models and outputs very sad p-values and confidence variables
 
-Notes from NIMBY:
+#### variable checklist: 
 
-variable checklist
+-   crimes per capita and YoY change
 
-Δcrime_i,t: This is the dependent variable in the regression. It represents
+-   dispensaries per capita and YoY change
 
-the year-over-year change in crime rates for county i in year t.
+-   Poverty Rate
 
-This variable is the one we are trying to explain with the other variables in the regression.
+-   \% Black
 
-𝛽0: This is the intercept term in the regression equation.
+-   \% Hispanic
 
-It represents the expected value of Δcrime_i,t when all the independent
-
-variables in the regression are equal to zero.
-
-𝛽1: This is the coefficient on the year-over-year change in the number of
-
-dispensaries (Δdisp_i,t). It represents the expected change in Δcrime_i,t
-
-for a one-unit increase in Δdisp_i,t, holding all other variables constant.
-
-Δdisp_i,t: This is the year-over-year change in the number of dispensaries
-
-for county i in year t. It is one of the independent variables in the regression.
+-   Employment
 
 ```{r, echo=FALSE, warning=FALSE}
 source("~/gvsu/winter 23/CIS 635/NIMBY/cleaning/linear_model/variables/crime and dispenaries per capita.R")

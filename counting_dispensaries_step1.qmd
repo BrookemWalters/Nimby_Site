@@ -1,5 +1,5 @@
 ---
-title: "Counting Dispensaries"
+title: "counting dispensaries"
 format:
   html:
     theme: lumen

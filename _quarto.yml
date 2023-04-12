@@ -13,7 +13,7 @@ website:
       - counting_dispensaries_step1.qmd
       - Label the Dispensaries with GeoCodes_step2.qmd
       - calculate crime and dispensaries per capita_step3.qmd
-      - build_the_linear_model_step4
+      - build_the_linear_model_step4.qmd
 
 format:
   html:

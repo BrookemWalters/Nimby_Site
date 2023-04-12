@@ -1,11 +1,5 @@
 ---
-title: "Qsite"
+title: "Replicating NIMBY"
 ---
 
-This is a Quarto website.
-
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
-
-```{r}
-1 + 1
-```
+This is the home to my CIS 635 Final Project

@@ -13,9 +13,9 @@ editor:
 
 ### This code:
 
-1.   matches zip codes to census geocodes
+1.  matches zip codes to census geocodes
 
-2.   connects to census API
+2.  connects to census API
 
 3.  pulls in demographic populations
 
@@ -23,11 +23,11 @@ editor:
 
 5.  matches the statistics above with year-over-year changes in dispensaries
 
-6.   creates a table showing dispensary YOY growth by socioeconomic quartiles
+6.  creates a table showing dispensary YOY growth by socioeconomic quartiles
 
 ### load packages
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, warning=FALSE}
 library(lubridate) # filter for just the month of December
 library(sf) # spacial data
 library(tigris) # to pull in census boundaries

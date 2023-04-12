@@ -1,5 +1,5 @@
 ---
-title: "Replicating NIMBY"
+title: "Final Report(DRAFT)"
 format:
   html:
     theme: minty
@@ -47,7 +47,8 @@ reveal unintended ill-consequences.
 [^2]: Michigan Department of Treasury. "Adult-Use Marijuana Payments
     Being Distributed to Michigan Municipalities and Counties."
     Michigan.gov, 28 Feb. 2023,
-    https://www.michigan.gov/treasury/news/2023/02/28/adult-use-marijuana-payments-being--distributed-to-michigan-municipalities-and-counties, , Accessed 12 Apr. 2023.
+    https://www.michigan.gov/treasury/news/2023/02/28/adult-use-marijuana-payments-being--distributed-to-michigan-municipalities-and-counties,
+    , Accessed 12 Apr. 2023.
 
 In my data mining project, I explore the relationship between the
 presence of cannabis dispensaries and neighborhood crime rates. By
@@ -92,13 +93,14 @@ theft.
 ## - Methods
 
 -   Processing 700 dispensary business records into a single dataframe
-    \| [code](https://rpubs.com/ekoorb03/1026866 "Rpubs_draft")
+    \|
+    [code](https://brookemwalters.github.io/Nimby_Site/counting_dispensaries_step1.html "Counting Dispensaries")
 
 -   Look at socioeconomic factors next to dispensary growth rates \|
-    [code](https://rpubs.com/ekoorb03/1026911)
+    [code](https://brookemwalters.github.io/Nimby_Site/Label%20the%20Dispensaries%20with%20GeoCodes_step2.html "Geocodes, Census Variables, and Dispensaries Per Capita")
 
 -   Calculating dispensaries and crime per capita \|
-    [code](https://rpubs.com/ekoorb03/1026914)
+    [code](https://brookemwalters.github.io/Nimby_Site/calculate%20crime%20and%20dispensaries%20per%20capita_step3.html "per capita")
 
 -   Creating the linear model \| code
 

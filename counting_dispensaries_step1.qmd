@@ -57,7 +57,7 @@ Accessed April 2023
 
 #### Install Packages:
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, warning=FALSE}
 library(tidyverse) # purr package mapping, dplyer package 
 library(readxl) # read in the excel files
 library(openxlsx) # open excel

@@ -21,7 +21,7 @@ format:
 
 ### load packages
 
-```{r, echo=false}
+```{r, echo=FALSE, warning=FALSE}
 library(fs) # for listing all files in a directory
 library(lubridate) # format dates
 library(openxlsx) # open excel
@@ -118,7 +118,7 @@ dsps_per_capita  <-  dsps_per_capita %>% mutate_at(vars(starts_with("dps")), fun
 
 ### pull in the fbi crime data same as the dispensary
 
-```{r}
+```{r, echo=FALSE, warning=FALSE}
 setwd("~/gvsu/winter 23/CIS 635/NIMBY/cleaning/crime/FBI Crime Rates")
 co_crime <- dir_ls() %>% set_names()
 all_co_crime <- map_df(co_crime, ~read_excel(.x), .id = "filename")

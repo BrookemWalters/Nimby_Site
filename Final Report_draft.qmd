@@ -1,5 +1,5 @@
 ---
-title: "Final Report(DRAFT)"
+title: "final report(DRAFT)"
 format:
   html:
     theme: minty
@@ -23,11 +23,11 @@ neighborhood crime*
 
 ## - Introduction
 
-Somewhere in my mother's basement is my prized 1995 tie-dyed  DARE (Drug
-Abuse Resistance Education) tee-shirt, a paradoxical relic of elementary
-classroom hours spent discussing the dangers of peer-led drug use.
- Those fears were not unwarranted, the CDC (Center for Disease Control)
-reports that 136 Americans die daily from opioids and illicitly
+Somewhere in my mother's basement, is my prized 1995 tie-dyed  DARE
+(Drug Abuse Resistance Education) tee-shirt, a paradoxical relic of
+elementary classroom hours spent discussing the dangers of peer-led drug
+use.  Those fears were not unwarranted, the CDC (Center for Disease
+Control) reports that 136 Americans die daily from opioids and illicitly
 manufactured fentanyl[^1], for me - a friend or three. In my experience,
 most drug prevention programs portray cannabis as the catalyst to the
 life doomed by addiction.
@@ -102,7 +102,8 @@ theft.
 -   Calculating dispensaries and crime per capita \|
     [code](https://brookemwalters.github.io/Nimby_Site/calculate%20crime%20and%20dispensaries%20per%20capita_step3.html "per capita")
 
--   Creating the linear model \| code
+-   Creating the linear model \|
+    [code](https://brookemwalters.github.io/Nimby_Site/build_the_linear_model_step4.html)
 
 ## - Results and Discussion
 

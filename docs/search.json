@@ -9,8 +9,57 @@
   {
     "objectID": "about.html",
     "href": "about.html",
-    "title": "About",
+    "title": "Replicating NIMBY",
     "section": "",
-    "text": "About this site\n\n1 + 1\n\n[1] 2"
+    "text": "Illustration by Simon Landrein, for the NewYorker\nhow do I make the table of contents show up on the side?"
+  },
+  {
+    "objectID": "about.html#introduction",
+    "href": "about.html#introduction",
+    "title": "Replicating NIMBY",
+    "section": "- Introduction",
+    "text": "- Introduction\nSomewhere in my mother’s basement is my prized 1995 tie-dyed  DARE (Drug Abuse Resistance Education) tee-shirt, a paradoxical relic of elementary classroom hours spent discussing the dangers of peer-led drug use.  Those fears were not unwarranted, the CDC (Center for Disease Control) reports that 136 Americans die daily from opioids and illicitly manufactured fentanyl1, for me - a friend or three. In my experience, most drug prevention programs portray cannabis as the catalyst to the life doomed by addiction.\nWhen recreational cannabis use became legal in Michigan, the culture shift was palpable. In an ironic twist of fate, the taboo habits of those formerly deemed social deviants are now capitalized and funding K-12 education2. I am fascinated by this turn of events, and I am curious if there are predictors from more tenured “green” states that reveal unintended ill-consequences.\nIn my data mining project, I explore the relationship between the presence of cannabis dispensaries and neighborhood crime rates. By replicating the methodology of Brinkman and Mok-Lamme’s 2019 study, “Not in my backyard? Not so fast. The effect of marijuana legalization on neighborhood crime” (NIMBY), I aim to contribute a nuanced perspective on Michigan’s budding industry and how it shapes public safety and city planning.\nMy approach involved immersing myself in the wild world of crime and cannabis statistics in Colorado. Using the data sources outlined in NIMBY, I built the variables defined in NIMBY’s linear regression model, described in more detail in the methods section.\nIn line with the results in NIMBY, my findings indicate that there is no statistically significant relationship between an increased presence of cannabis dispensaries and crime."
+  },
+  {
+    "objectID": "about.html#related-work",
+    "href": "about.html#related-work",
+    "title": "Replicating NIMBY",
+    "section": "- Related work",
+    "text": "- Related work\nOne related body of work is the 2021 meta-analysis conducted by D. Mark Anderson and Daniel I. Rees’ paper “The Public Health Effects of Legalizing Marijuana.” The appendix includes a side-by-side comparison of over 70 studies related to the impact of marijuana legalization on public health outcomes by empirical strategy, and study results. This paper served as an excellent resource to understand the ways in which this topic is being studied, including the study I will replicate. The authors concluded that research around cannabis and public health outcomes are driven by the growing amount of state-level data, but the results are mixed. Further research along with careful policy design is needed to mitigate the negative impact of legalization on crime rates and other outcomes.\nHowever, the 2019 paper, “Marijuana Dispensaries and Neighborhood Crime and Disorder in Denver, Colorado” by Lorrine A. Hughes, Lonnie M. Schaible and Katherine Jimmerson found contridictory results. By using a Bayesian Poisson regression model types of crimes committed , dispensaries are associated with statistically significant increases in rates of neighborhood crime and disorder except for murder and auto theft."
+  },
+  {
+    "objectID": "about.html#methods",
+    "href": "about.html#methods",
+    "title": "Replicating NIMBY",
+    "section": "- Methods",
+    "text": "- Methods\n\nProcessing 700 dispensary business records into a single dataframe | code\nLook at socioeconomic factors next to dispensary growth rates | code\nCalculating dispensaries and crime per capita | code\nCreating the linear model | code"
+  },
+  {
+    "objectID": "about.html#results-and-discussion",
+    "href": "about.html#results-and-discussion",
+    "title": "Replicating NIMBY",
+    "section": "- Results and Discussion",
+    "text": "- Results and Discussion"
+  },
+  {
+    "objectID": "about.html#conclusion",
+    "href": "about.html#conclusion",
+    "title": "Replicating NIMBY",
+    "section": "- Conclusion",
+    "text": "- Conclusion"
+  },
+  {
+    "objectID": "about.html#data-and-software",
+    "href": "about.html#data-and-software",
+    "title": "Replicating NIMBY",
+    "section": "- Data and Software",
+    "text": "- Data and Software\n\nData Sources:\n\nColorado Department of Revenue: Medical and Retail Marijuana Licencees\nCity and County of Denver Surveyor’s Office: Denver Geographic Boundaries\nFBI Uniform Crime Reporting Program: Colorado\n2014 American Community Survey: Colorado Population, Race, Ethnicity, and Poverty Rates\n\n\n\nSoftware:\n\nRstudio\n\nPackages:\n\nQuarto\nTidy Census\nTidy Verse\nExcel Sheets\n\n\nMicrosoft Excel\n\n\n\nData Sources:"
+  },
+  {
+    "objectID": "about.html#references",
+    "href": "about.html#references",
+    "title": "Replicating NIMBY",
+    "section": "- References",
+    "text": "- References\nBrinkman, J., & Mok-Lamme, D. (2019). Not in my backyard? Not so fast. The effect of marijuana legalization on neighborhood crime. Regional Science and Urban Economics, 78. https://doi-org.ezproxy.gvsu.edu/10.1016/j.regsciurbeco.2019.103460\nAnderson, D. M., & Rees, D. I. (2023). The Public Health Effects of Legalizing Marijuana. Journal of Economic Literature, 61(1), 86–143. https://doi-org.ezproxy.gvsu.edu/10.1257/jel.20211635\nHughes, Lorine A., Lonnie M. Schaible, and Katherine Jimmerson. “Marijuana Dispensaries and Neighborhood Crime and Disorder in Denver, Colorado.” Justice Quarterly, vol. 37, no. 3, 2020, pp. 461-485, doi: 10.1080/07418825.2019.1567807."
   }
 ]

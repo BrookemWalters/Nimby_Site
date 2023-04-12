@@ -1,5 +1,4 @@
 ---
-title: "counting dispensaries"
 format:
   html:
     theme: minty
@@ -12,6 +11,8 @@ editor:
 ---
 
 ![](images/counting%20dispensaries.png)
+
+# counting dispensaries:
 
 ## This code: creates a dataframe of dispensaries from 2013 - 2013
 

@@ -8,6 +8,7 @@ format:
 editor: 
   markdown: 
     wrap: 72
+bibliography: references.bib
 ---
 
 ![Illustration by Simon Landrein, for the
@@ -132,17 +133,23 @@ theft.
 
     -   Packages:
 
-        -   Quarto
+        -   fs [@fs]
 
-        -   Tidy Census
+        -   lubridate [@lubridate]
 
-        -   Tidy Verse
+        -   openxlsx [@openxlsx]
 
-        -   Excel Sheets
+        -   readx [@readxl]
 
--   Microsoft Excel
+        -   sf [@sf]
 
-### Data Sources:
+        -   tidycensus [@tidycensus]
+
+        -   tidygeocoder [@tidygeocoder]
+
+        -   tidyverse [@tidyverse]
+
+        -   tigris [@tigris]
 
 ## - References
 

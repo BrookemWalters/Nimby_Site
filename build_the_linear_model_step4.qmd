@@ -7,11 +7,13 @@ format:
     toc-location: left
 ---
 
-### This Code:
+![](images/regression%20model.png)
+
+## This code: imports the variables into a linear regression model
 
 Implements my variables into two linear models and outputs very sad p-values and confidence variables
 
-#### variable checklist: 
+#### variable checklist:
 
 -   crimes per capita and YoY change
 

@@ -7,7 +7,9 @@ format:
     toc-location: left
 ---
 
-### This Code
+![](images/per%20capita.png)
+
+## This code: finds the crime and dispensary rates  per 10,000 by county
 
 1.  finds the population three year average
 

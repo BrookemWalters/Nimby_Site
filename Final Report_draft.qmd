@@ -1,9 +1,10 @@
 ---
 format:
   html:
-    theme: moon
+    theme: minty
     toc: true
     toc-location: left
+    code-fold: true
 
 bibliography: references.bib
 ---

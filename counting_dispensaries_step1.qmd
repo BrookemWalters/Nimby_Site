@@ -2,23 +2,18 @@
 title: "counting dispensaries"
 format:
   html:
-    theme: lumen
+    theme: minty
     toc: true
     toc-location: left
-    code-fold: true
+    code-fold: false
 editor: 
   markdown: 
     wrap: 85
 ---
 
-[*"Not in my backyard? Not so fast. The effect of marijuana legalization on
-neighborhood crime" (NIMBY)*]{style="font-size: 90%;"}
+![](images/counting%20dispensaries.png)
 
-## Goal:
-
-Calculate the average YOY growth of dispensaries by county
-
-## This Code:
+## This code: creates a dataframe of dispensaries from 2013 - 2013
 
 1.  lists all the files in the current working directory
 

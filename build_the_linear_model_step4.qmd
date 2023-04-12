@@ -1,0 +1,55 @@
+---
+title: "linear regression"
+format:
+  html:
+    theme: minty
+    toc: true
+    toc-location: left
+---
+
+Notes from NIMBY:
+
+# variable checklist
+
+# Δcrime_i,t: This is the dependent variable in the regression. It represents 
+# the year-over-year change in crime rates for county i in year t. 
+# This variable is the one we are trying to explain with the other variables in the regression.
+
+
+
+# 𝛽0: This is the intercept term in the regression equation. 
+# It represents the expected value of Δcrime_i,t when all the independent
+# variables in the regression are equal to zero.
+
+# 𝛽1: This is the coefficient on the year-over-year change in the number of 
+# dispensaries (Δdisp_i,t). It represents the expected change in Δcrime_i,t 
+# for a one-unit increase in Δdisp_i,t, holding all other variables constant.
+
+
+# Δdisp_i,t: This is the year-over-year change in the number of dispensaries 
+# for county i in year t. It is one of the independent variables in the regression.
+
+
+```{r}
+source("~/gvsu/winter 23/CIS 635/NIMBY/cleaning/linear_model/variables/crime and dispenaries per capita.R")
+colnames(linear_variables) 
+
+modell <- lm(linear_variables$crime_yoy_avg ~ linear_variables$dsp_yoy_avg,  
+             data = linear_variables)
+
+summary(modell)
+modell
+
+#  y = YOY crime at the county level
+model2 <- lm(linear_variables$crime_yoy_avg ~ linear_variables$dsp_yoy_avg +
+               linear_variables$pct_poverty_rate  +
+               linear_variables$pct_black  +
+               linear_variables$pct_hispanic  +
+               linear_variables$employeed_pop,
+                data = linear_variables)
+
+summary(model2)
+model2
+
+```
+

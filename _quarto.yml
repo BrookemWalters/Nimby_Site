@@ -9,7 +9,11 @@ website:
       - href: index.qmd
         text: Home
         
-      - about.qmd
+      - Final Report_draft.qmd
+      - counting_dispensaries_step1.qmd
+      - Label the Dispensaries with GeoCodes_step2.qmd
+      - calculate crime and dispensaries per capita_step3.qmd
+      - build_the_linear_model_step4
 
 format:
   html:

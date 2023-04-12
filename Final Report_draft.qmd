@@ -14,8 +14,6 @@ editor:
 NewYorker](https://media.newyorker.com/photos/5b353b4efdf4c046b6f74d13/4:3/w_3324,h_2493,c_limit/Burdick-TV-Crime.jpg){fig-align="center"
 width="100%"}
 
-how do I make the table of contents show up on the side?
-
 # **Replicating NIMBY**
 
 *exploring the relationship between marijuana legalization on

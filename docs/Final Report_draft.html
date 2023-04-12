@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.335">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Replicating NIMBY</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Replicating NIMBY</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html">
+ <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="./Final Report_draft.html" aria-current="page">
+ <span class="menu-text">Replicating NIMBY</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./counting_dispensaries_step1.html">
+ <span class="menu-text">Counting all of the Dispensaries</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./Label the Dispensaries with GeoCodes_step2.html">
+ <span class="menu-text">Geocodes, Census Variables, and Dispensaries Per Capita</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./calculate crime and dispensaries per capita_step3.html">
+ <span class="menu-text">dispensaries and crime per capita</span></a>
+  </li>  
+  <li class="dropdown-header">
+ <span class="menu-text">build_the_linear_model_step4</span></li>
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#replicating-nimby" id="toc-replicating-nimby" class="nav-link active" data-scroll-target="#replicating-nimby"><strong>Replicating NIMBY</strong></a></li>
+  <li><a href="#contents" id="toc-contents" class="nav-link" data-scroll-target="#contents">Contents:</a>
+  <ul class="collapse">
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">- Introduction</a></li>
+  <li><a href="#related-work" id="toc-related-work" class="nav-link" data-scroll-target="#related-work">- Related work</a></li>
+  <li><a href="#methods" id="toc-methods" class="nav-link" data-scroll-target="#methods">- Methods</a></li>
+  <li><a href="#results-and-discussion" id="toc-results-and-discussion" class="nav-link" data-scroll-target="#results-and-discussion">- Results and Discussion</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">- Conclusion</a></li>
+  <li><a href="#data-and-software" id="toc-data-and-software" class="nav-link" data-scroll-target="#data-and-software">- Data and Software</a>
+  <ul class="collapse">
+  <li><a href="#data-sources" id="toc-data-sources" class="nav-link" data-scroll-target="#data-sources">Data Sources:</a></li>
+  <li><a href="#software" id="toc-software" class="nav-link" data-scroll-target="#software">Software:</a></li>
+  <li><a href="#data-sources-1" id="toc-data-sources-1" class="nav-link" data-scroll-target="#data-sources-1">Data Sources:</a></li>
+  </ul></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">- References</a></li>
+  </ul></li>
+  </ul>
+</nav>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Replicating NIMBY</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://media.newyorker.com/photos/5b353b4efdf4c046b6f74d13/4:3/w_3324,h_2493,c_limit/Burdick-TV-Crime.jpg" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Illustration by Simon Landrein, for the NewYorker</figcaption><p></p>
+</figure>
+</div>
+<section id="replicating-nimby" class="level1">
+<h1><strong>Replicating NIMBY</strong></h1>
+<p><em>exploring the relationship between marijuana legalization on neighborhood crime</em></p>
+</section>
+<section id="contents" class="level1">
+<h1>Contents:</h1>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">- Introduction</h2>
+<p>Somewhere in my mother’s basement is my prized 1995 tie-dyed &nbsp;DARE (Drug Abuse Resistance Education) tee-shirt, a paradoxical relic of elementary classroom hours spent discussing the dangers of peer-led drug use. &nbsp;Those fears were not unwarranted, the CDC (Center for Disease Control) reports that 136 Americans die daily from opioids and illicitly manufactured fentanyl<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, for me - a friend or three. In my experience, most drug prevention programs portray cannabis as the catalyst to the life doomed by addiction.</p>
+<p>When recreational cannabis use became legal in Michigan, the culture shift was palpable. In an ironic twist of fate, the taboo habits of those formerly deemed social deviants are now capitalized and funding K-12 education<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. I am fascinated by this turn of events, and I am curious if there are predictors from more tenured “green” states that reveal unintended ill-consequences.</p>
+<p>In my data mining project, I explore the relationship between the presence of cannabis dispensaries and neighborhood crime rates. By replicating the methodology of Brinkman and Mok-Lamme’s 2019 study, “N<em>ot in my backyard? Not so fast. The effect of marijuana legalization on neighborhood crime</em>” (NIMBY), I aim to contribute a nuanced perspective on Michigan’s budding industry and how it shapes public safety and city planning.</p>
+<p>My approach involved immersing myself in the wild world of crime and cannabis statistics in Colorado. Using the data sources outlined in NIMBY, I built the variables defined in NIMBY’s linear regression model, described in more detail in the methods section.</p>
+<p>In line with the results in NIMBY, my findings indicate that there is no statistically significant relationship between an increased presence of cannabis dispensaries and crime.</p>
+</section>
+<section id="related-work" class="level2">
+<h2 class="anchored" data-anchor-id="related-work">- Related work</h2>
+<p>One related body of work is the 2021 meta-analysis conducted by D. Mark Anderson and Daniel I. Rees’ paper “The Public Health Effects of Legalizing Marijuana.” The appendix includes a side-by-side comparison of over 70 studies related to the impact of marijuana legalization on public health outcomes by empirical strategy, and study results. This paper served as an excellent resource to understand the ways in which this topic is being studied, including the study I will replicate. The authors concluded that research around cannabis and public health outcomes are driven by the growing amount of state-level data, but the results are mixed. Further research along with careful policy design is needed to mitigate the negative impact of legalization on crime rates and other outcomes.</p>
+<p>However, the 2019 paper, “Marijuana Dispensaries and Neighborhood Crime and Disorder in Denver, Colorado” by Lorrine A. Hughes, Lonnie M. Schaible and Katherine Jimmerson found contridictory results. By using a Bayesian Poisson regression model types of crimes committed , dispensaries are associated with statistically significant increases in rates of neighborhood crime and disorder except for murder and auto theft.</p>
+</section>
+<section id="methods" class="level2">
+<h2 class="anchored" data-anchor-id="methods">- Methods</h2>
+<ul>
+<li><p>Processing 700 dispensary business records into a single dataframe | <a href="https://rpubs.com/ekoorb03/1026866" title="Rpubs_draft">code</a></p></li>
+<li><p>Look at socioeconomic factors next to dispensary growth rates | <a href="https://rpubs.com/ekoorb03/1026911">code</a></p></li>
+<li><p>Calculating dispensaries and crime per capita | <a href="https://rpubs.com/ekoorb03/1026914">code</a></p></li>
+<li><p>Creating the linear model | code</p></li>
+</ul>
+</section>
+<section id="results-and-discussion" class="level2">
+<h2 class="anchored" data-anchor-id="results-and-discussion">- Results and Discussion</h2>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">- Conclusion</h2>
+</section>
+<section id="data-and-software" class="level2">
+<h2 class="anchored" data-anchor-id="data-and-software">- Data and Software</h2>
+<section id="data-sources" class="level3">
+<h3 class="anchored" data-anchor-id="data-sources">Data Sources:</h3>
+<ul>
+<li><p>Colorado Department of Revenue: <a href="https://sbg.colorado.gov/med/licensee-information" title="Dispensaries in the State of Colorado 2013 - 2023 by month, type, and location">Medical and Retail Marijuana Licencees</a></p></li>
+<li><p>City and County of Denver Surveyor’s Office: <a href="https://www.denvergov.org/opendata/dataset/city-and-county-of-denver-annexations" title="annexations of the City and County of Denver from 1864 to the present">Denver Geographic Boundaries</a></p></li>
+<li><p>FBI Uniform Crime Reporting Program: <a href="https://ucr.fbi.gov/about-us/cjis/ucr/nibrs/2014/tables/main" title="City and County Level Crimes *2015 and beyond found by adjusting the year in the URL">Colorado</a></p></li>
+<li><p>2014 American Community Survey: <a href="https://www.census.gov/acs/www/data/data-tables-and-tools/data-profiles/2014/" title="Connected to the API via the TidyCensus Package">Colorado Population, Race, Ethnicity, and Poverty Rates</a></p></li>
+</ul>
+</section>
+<section id="software" class="level3">
+<h3 class="anchored" data-anchor-id="software">Software:</h3>
+<ul>
+<li><p>Rstudio</p>
+<ul>
+<li><p>Packages:</p>
+<ul>
+<li><p>Quarto</p></li>
+<li><p>Tidy Census</p></li>
+<li><p>Tidy Verse</p></li>
+<li><p>Excel Sheets</p></li>
+</ul></li>
+</ul></li>
+<li><p>Microsoft Excel</p></li>
+</ul>
+</section>
+<section id="data-sources-1" class="level3">
+<h3 class="anchored" data-anchor-id="data-sources-1">Data Sources:</h3>
+</section>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">- References</h2>
+<p>Brinkman, J., &amp; Mok-Lamme, D. (2019). Not in my backyard? <em>Not so fast. The effect of marijuana legalization on neighborhood crime</em>. Regional Science and Urban Economics, 78. https://doi-org.ezproxy.gvsu.edu/10.1016/j.regsciurbeco.2019.103460</p>
+<p>Anderson, D. M., &amp; Rees, D. I. (2023). <em>The Public Health Effects of Legalizing Marijuana.</em> Journal of Economic Literature, 61(1), 86–143. https://doi-org.ezproxy.gvsu.edu/10.1257/jel.20211635</p>
+<p>Hughes, Lorine A., Lonnie M. Schaible, and Katherine Jimmerson. “Marijuana Dispensaries and Neighborhood Crime and Disorder in Denver, Colorado.” Justice Quarterly, vol.&nbsp;37, no. 3, 2020, pp.&nbsp;461-485, doi: 10.1080/07418825.2019.1567807.</p>
+
+
+</section>
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>Drug Abuse Statistics. “Drug Overdose Deaths.” Drug Abuse Statistics, 2022, https://drugabusestatistics.org/drug-overdose-deaths, Accessed 12 Apr.&nbsp;2023.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Michigan Department of Treasury. “Adult-Use Marijuana Payments Being Distributed to Michigan Municipalities and Counties.” Michigan.gov, 28 Feb.&nbsp;2023, https://www.michigan.gov/treasury/news/2023/02/28/adult-use-marijuana-payments-being–distributed-to-michigan-municipalities-and-counties, , Accessed 12 Apr.&nbsp;2023.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

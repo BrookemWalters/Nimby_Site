@@ -1,0 +1,326 @@
+---
+title: "Geocodes, Census Variables, and Dispensaries Per Capita"
+format:
+  html:
+    theme: lumen
+    toc: true
+    toc-location: left
+    code-fold: true
+editor: 
+  markdown: 
+    wrap: 85
+---
+
+### load packages
+
+```{r, echo=FALSE}
+library(lubridate) # filter for just the month of December
+library(sf) # spacial data
+library(tigris) # to pull in census boundaries
+options(tigris_use_cache = TRUE) # save to local memory
+library(tidycensus) # to pull demographic data from the census
+library(tidyverse)
+```
+
+### import data
+
+```{r}
+# list of dispensaries
+dsps <-  as.data.frame(read.csv("~/gvsu/winter 23/CIS 635/NIMBY/cleaning/counting_dispensaries/dps_data_cleaned/dispensary_types_defined.csv"))
+
+# list of all zip codes with at lease one dispensary
+dsps_zips <-  as.data.frame(read.csv("~/gvsu/winter 23/CIS 635/NIMBY/cleaning/counting_dispensaries/dps_data_cleaned/dsps_zips.csv"))
+
+#county geocodes scraped from Wikipedia
+county_codes <- (read.csv("~/gvsu/winter 23/CIS 635/NIMBY/cleaning/density tables/county_FIPS_codes.csv"))
+```
+
+### match geographic shape files to dispensary zip codes
+
+grab tract info from the tigris package
+
+[*adapted from "[How to Use the coalesce() Function in
+dplyr](https://www.statology.org/dplyr-coalesce "Statology")"*]{style="font-size: 80%;"}
+
+```{r, echo=FALSE}
+zctas <- zctas(state = 08, year = 2010, class = "sf")
+tracts <- tracts(state = 08, year = 2010, class = "sf")
+
+zip_tracts<- st_join(zctas, tracts) # Perform the spatial join.
+
+# Keep only the relevant columns
+zip_tracts <- st_set_geometry(zip_tracts, NULL) # remove the spacial codes
+zip_tracts <-  zip_tracts %>% # grabbing the geocodes
+  select(ZCTA5CE10,COUNTYFP, TRACTCE10,  NAME10,NAMELSAD10, GEOID10.y)
+
+# update the column names
+colnames(zip_tracts) <- c("zip",
+                          "county_code",
+                          "census tract",
+                          "tract_code",
+                          "tract name",
+                          "GEOID")
+
+# pull in the dispesnary geographies 
+dsps_zips$zip<-  as.character(dsps_zips$zip) # convert to character
+dsps_zips <- distinct(dsps_zips, zip) # just keep the zips
+dsps_geos <- left_join(dsps_zips, zip_tracts, by = "zip")
+
+
+## this is not an ideal way to match dispensaries to tracts, as they overlap
+dsps_geos<- dsps_geos %>% 
+  group_by(zip) %>% 
+  slice(1)
+```
+
+### match the files to the county codes
+
+```{r}
+# time to add the spacial data to my dispensary list!
+dsps$zip <-  as.character(dsps$zip) # convert_back to characters
+dsps<- left_join(dsps, dsps_geos, by = "zip")
+dsps$county_code <-  as.integer(dsps$county_code)
+
+# a lovely document with dispensary tracts and county codes
+dsps<- left_join(dsps, county_codes, by = "county_code")
+
+# saving for later in case I can use the tract level data
+write.csv(dsps, "~/gvsu/winter 23/CIS 635/NIMBY/cleaning/counting_dispensaries/dps_data_cleaned/dispenaries_tracts.csv")
+```
+
+### count the dispensaries
+
+```{r}
+dsps_summed <-  dsps %>% 
+  filter(month(date) == 12) %>% 
+  filter(year < 2017) %>% 
+  select(dba, county_code, "GEOID" =GEOID.y, year) %>% 
+  group_by(year, GEOID) %>% 
+  summarise(num_licenses = n()) %>% 
+  pivot_wider(names_from = year, values_from = num_licenses, values_fill = 0)
+
+write.csv(dsps_summed, "~/gvsu/winter 23/CIS 635/NIMBY/cleaning/counting_dispensaries/dps_data_cleaned/dispensary_counts_county_year.csv")
+```
+
+### pull in the census data with Tidy Census
+
+the paper looks at the poverty rate, percent black, percent Hispanic, and the
+employment rate demographic data comes from the U.S. Census 2014 American Community
+Survey 5-year sample, and employment data comes from the U.S. Census 2013
+Origin-Destination Employment Statistics
+
+I've already established an API census_api_key("\[API removed for privacy\]", install
+= TRUE)
+
+[SocialExplore.com](https://www.socialexplorer.com/data/ACS2013_5yr/metadata/?ds=ACS13_5yr&var=B17001001)
+is a helpful website for definitions:
+
+```{r}
+#I've already established an API census_api_key
+#("\[API removed for privacy\]", install= TRUE)
+
+demo_factors <- get_acs(
+  year = 2014,
+  geography = "county",
+  state = "CO",
+  variables = c(population_14 = "B01001_001",
+                pov_base_14 = "B17001_001", # Universe: Population for whom poverty status Is determined (base of % poverty)
+                pov_pop_14 = "B17001_002", # Income in the Past 12 Months Below Poverty Level
+                employeed = "B23025_002", # employed in labor for (16+)
+                black = "B03002_004",
+                hispanic = "B03002_012"),
+
+  output = "wide"
+) 
+# i look forward to the day when the racial makeup of a zip code isn't an assumed identifier for poverty
+colnames(demo_factors)
+```
+
+### match the change in dsps density with demeographics
+```{r}
+# switching from merging to left joins since it's easier to read
+demo_factors$GEOID <-  as.integer(demo_factors$GEOID)
+dsps_summed$GEOID <-  as.integer(dsps_summed$GEOID)
+
+dsps_yoy_demos <- left_join(demo_factors, dsps_summed, by = "GEOID")
+colnames(dsps_yoy_demos)
+
+dsps_yoy_demos <- dsps_yoy_demos %>%
+  mutate_at(vars(15:18), replace_na, replace = 0) %>%
+  group_by(GEOID) %>% # add the total ins
+  summarize(
+    pop_2014 = sum(population_14E),
+    pov_pop_14 = sum(pov_pop_14E),
+    pov_base = sum(pov_base_14E),
+    black_pop = sum(blackE),
+    hispanic_pop = sum(hispanicE),
+    employeed_pop = sum(employeedE),
+    `2013` = sum(`2013`),
+    `2014` = sum(`2014`),
+    `2015` = sum(`2015`),
+    `2016` = sum(`2016`)
+  )
+```
+
+### Calculate the year-over-year change average in dispensaries for the state of Colorado
+```{r}
+# import my yoy function, it's going to do some work
+source("~/gvsu/winter 23/CIS 635/NIMBY/formatted code/yoy_function.r")
+```
+
+
+```{r}
+colorado_yoy_average <-  dsps_yoy_demos %>% 
+  summarize(
+    `2013` = sum(`2013`),
+    `2014` = sum(`2014`),
+    `2015` = sum(`2015`),
+    `2016` = sum(`2016`)
+  )
+
+colorado_yoy_average <-  yoy_avg_function(colorado_yoy_average) %>% 
+  select("Colorado_Average" = dsp_yoy_avg)
+```
+
+
+
+### find the race, poverty and employment rates at the county level
+```{r}
+# make the rates
+# create the percentages:
+dsps_yoy_demos  <- dsps_yoy_demos %>% 
+  #create percentages  
+  mutate(pct_poverty_rate = (pov_pop_14/pov_base),
+         pct_black = (black_pop/ pop_2014),
+         pct_hispanic = (hispanic_pop/ pop_2014)) %>% 
+  #round
+  mutate_at(vars(starts_with("pct")), funs(round(., 3)))
+```
+
+
+
+### create quintiles to recreate  Table 1 pg 78
+
+```{r}
+dsps_yoy_demos <- dsps_yoy_demos %>% 
+  mutate(qrt_pov = ntile(pct_poverty_rate,4)) %>% 
+  mutate(qrt_black = ntile(pct_black,4)) %>%
+  mutate(qrt_hispanic = ntile(pct_hispanic,4)) %>% 
+  mutate(qrt_employment = ntile(employeed_pop,4))
+
+# calculate the YOY average
+dsps_yoy_qtiles <- yoy_avg_function(dsps_yoy_demos) 
+# save the data for the crime per capita calculations
+write.csv(dsps_yoy_qtiles, "~/gvsu/winter 23/CIS 635/NIMBY/cleaning/counting_dispensaries/dps_data_cleaned/dsps_yoy_qtiles.csv")
+```
+
+
+clean up the columns to just look at the quartiles and count of dispensaries
+```{r}
+# poverty quartiles by dispensary density
+poverty_qts <- dsps_yoy_qtiles %>% 
+  select(
+    qrt_pov,
+    `2013`,
+    `2014`,
+    `2015`,
+    `2016`
+      ) %>% 
+  group_by(qrt_pov) %>% # add the total ins
+  summarize(
+    `2013` = sum(`2013`),
+    `2014` = sum(`2014`),
+    `2015` = sum(`2015`),
+    `2016` = sum(`2016`)
+  ) %>% 
+  yoy_avg_function  %>% 
+  select(1,9)
+  
+
+# iI checked and my total match across quartiles, and look similar to the area graph data
+# black population quartiles by dispensary density
+black_qts <- dsps_yoy_qtiles %>% 
+  select(
+    qrt_black,
+    `2013`,
+    `2014`,
+    `2015`,
+    `2016`
+  ) %>% 
+  group_by(qrt_black) %>% # add the total ins
+  summarize(
+    `2013` = sum(`2013`),
+    `2014` = sum(`2014`),
+    `2015` = sum(`2015`),
+    `2016` = sum(`2016`)
+  ) %>% 
+  yoy_avg_function  %>% 
+  select(1,9)
+
+# Hispanic quartiles by dispensary density
+hispanic_qts <- dsps_yoy_qtiles %>% 
+  select(
+    qrt_hispanic,
+    `2013`,
+    `2014`,
+    `2015`,
+    `2016`
+  ) %>% 
+  group_by(qrt_hispanic) %>% # add the total ins
+  summarize(
+    `2013` = sum(`2013`),
+    `2014` = sum(`2014`),
+    `2015` = sum(`2015`),
+    `2016` = sum(`2016`)
+  ) %>% 
+  yoy_avg_function  %>% 
+  select(1,9)
+
+# employment quartiles by dispensary density
+employment_qts <- dsps_yoy_qtiles %>% 
+  select(
+    qrt_employment,
+    `2013`,
+    `2014`,
+    `2015`,
+    `2016`
+    ) %>% 
+    group_by(qrt_employment) %>% # add the total ins
+      summarize(
+        `2013` = sum(`2013`),
+        `2014` = sum(`2014`),
+        `2015` = sum(`2015`),
+        `2016` = sum(`2016`)
+      ) %>% 
+  yoy_avg_function  %>% 
+  select(1,9)
+```
+
+
+### put everything together
+while my colorado average is close my values do not align with the paper
+
+```{r}
+# put everything together 
+density_table1 <- poverty_qts %>%
+  left_join(black_qts, by = c("qrt_pov" = "qrt_black")) %>%
+  left_join(hispanic_qts, by = c("qrt_pov" = "qrt_hispanic")) %>%
+  left_join(employment_qts, by = c("qrt_pov" = "qrt_employment"))
+
+
+# 
+# rename the columns
+colnames(density_table1) <- c("Quartile", "Pov. Rate", "Pct. Black", "Pct. Hispanic", "Employment", "Colorado Average")
+# 
+combined_table <- bind_rows(density_table1 , colorado_yoy_average)
+
+# Average change in dispensary density by local characteristics [Table 1]
+density_table1
+combined_table
+```
+
+
+
+
+
+

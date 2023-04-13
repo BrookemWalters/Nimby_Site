@@ -4,6 +4,10 @@ format:
     theme: minty
     toc: true
     toc-location: left
+    code-fold: false
+editor: 
+  markdown: 
+    wrap: 85
 ---
 
 ![](images/regression%20model.png)

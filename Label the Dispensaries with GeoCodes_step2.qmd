@@ -1,5 +1,4 @@
 ---
-title: "census variables"
 format:
   html:
     theme: minty

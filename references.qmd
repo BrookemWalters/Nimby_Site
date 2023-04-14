@@ -1,0 +1,50 @@
+---
+format:
+  html:
+    toc: true
+bibliography: references.bib
+---
+
+![](images/Main%20Title.png){fig-align="center"}
+
+### Data Sources:
+
+-   Colorado Department of Revenue: [Medical and Retail Marijuana Licencees](https://sbg.colorado.gov/med/licensee-information "Dispensaries in the State of Colorado 2013 - 2023 by month, type, and location")
+
+-   City and County of Denver Surveyor's Office: [Denver Geographic Boundaries](https://www.denvergov.org/opendata/dataset/city-and-county-of-denver-annexations "annexations of the City and County of Denver from 1864 to the present")
+
+-   FBI Uniform Crime Reporting Program: [Colorado](https://ucr.fbi.gov/about-us/cjis/ucr/nibrs/2014/tables/main "City and County Level Crimes *2015 and beyond found by adjusting the year in the URL")
+
+-   2014 American Community Survey: [Colorado Population, Race, Ethnicity, and Poverty Rates](https://www.census.gov/acs/www/data/data-tables-and-tools/data-profiles/2014/ "Connected to the API via the TidyCensus Package")
+
+### Software:
+
+-   Rstudio
+
+    -   Packages:
+
+        -   fs [@fs]
+
+        -   lubridate [@lubridate]
+
+        -   openxlsx [@openxlsx]
+
+        -   readx [@readxl]
+
+        -   sf [@sf]
+
+        -   tidycensus [@tidycensus]
+
+        -   tidygeocoder [@tidygeocoder]
+
+        -   tidyverse [@tidyverse]
+
+        -   tigris [@tigris]
+
+## - Works Cited
+
+Brinkman, J., & Mok-Lamme, D. (2019). Not in my backyard? *Not so fast. The effect of marijuana legalization on neighborhood crime*. Regional Science and Urban Economics, 78. https://doi-org.ezproxy.gvsu.edu/10.1016/j.regsciurbeco.2019.103460
+
+Anderson, D. M., & Rees, D. I. (2023). *The Public Health Effects of Legalizing Marijuana.* Journal of Economic Literature, 61(1), 86--143. https://doi-org.ezproxy.gvsu.edu/10.1257/jel.20211635
+
+Hughes, Lorine A., Lonnie M. Schaible, and Katherine Jimmerson. "Marijuana Dispensaries and Neighborhood Crime and Disorder in Denver, Colorado." Justice Quarterly, vol. 37, no. 3, 2020, pp. 461-485, doi: 10.1080/07418825.2019.1567807.

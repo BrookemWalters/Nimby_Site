@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Replicating NIMBY – final-report_draft</title>
+<title>replicating nimby</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,25 +20,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}
 </style>
 
 
@@ -49,6 +30,7 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./images/Main Title.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -82,15 +64,18 @@ div.csl-indent {
 <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="floating nav-fixed">
+<body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    <img src="./images/logo.png" alt="" class="navbar-logo">
+    </a>
     <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">Replicating NIMBY</span>
+    <span class="navbar-title">replicating nimby</span>
     </a>
   </div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
@@ -99,30 +84,37 @@ div.csl-indent {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html">
- <span class="menu-text">Home</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link active" href="./Final Report_draft.html" aria-current="page">
- <span class="menu-text">The Final Report (DRAFT)</span></a>
+    <a class="nav-link" href="./Final Report_draft.html">
+ <span class="menu-text">final report</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./counting_dispensaries_step1.html">
- <span class="menu-text">counting dispensaries:</span></a>
+ <span class="menu-text">database</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./Label the Dispensaries with GeoCodes_step2.html">
- <span class="menu-text">census variables</span></a>
+ <span class="menu-text">classification</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./calculate crime and dispensaries per capita_step3.html">
- <span class="menu-text">per capita:</span></a>
+ <span class="menu-text">statisics</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./build_the_linear_model_step4.html">
- <span class="menu-text">linear regression:</span></a>
+ <span class="menu-text">prediction</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./references.html">
+ <span class="menu-text">references</span></a>
   </li>  
 </ul>
+              <div class="quarto-toggle-container">
+                  <a href="" class="quarto-reader-toggle nav-link" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+              </div>
               <div id="quarto-search" class="" title="Search"></div>
           </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
@@ -131,8 +123,9 @@ div.csl-indent {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
-    <nav id="TOC" role="doc-toc" class="toc-active">
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
@@ -143,18 +136,9 @@ div.csl-indent {
   <li><a href="#methods" id="toc-methods" class="nav-link" data-scroll-target="#methods">- Methods</a></li>
   <li><a href="#results-and-discussion" id="toc-results-and-discussion" class="nav-link" data-scroll-target="#results-and-discussion">- Results and Discussion</a></li>
   <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">- Conclusion</a></li>
-  <li><a href="#data-and-software" id="toc-data-and-software" class="nav-link" data-scroll-target="#data-and-software">- Data and Software</a>
-  <ul class="collapse">
-  <li><a href="#data-sources" id="toc-data-sources" class="nav-link" data-scroll-target="#data-sources">Data Sources:</a></li>
-  <li><a href="#software" id="toc-software" class="nav-link" data-scroll-target="#software">Software:</a></li>
-  </ul></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">- References</a></li>
   </ul></li>
   </ul>
 </nav>
-</nav>
-<!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -196,80 +180,13 @@ div.csl-indent {
 </section>
 <section id="conclusion" class="level2">
 <h2 class="anchored" data-anchor-id="conclusion">- Conclusion</h2>
-</section>
-<section id="data-and-software" class="level2">
-<h2 class="anchored" data-anchor-id="data-and-software">- Data and Software</h2>
-<section id="data-sources" class="level3">
-<h3 class="anchored" data-anchor-id="data-sources">Data Sources:</h3>
-<ul>
-<li><p>Colorado Department of Revenue: <a href="https://sbg.colorado.gov/med/licensee-information" title="Dispensaries in the State of Colorado 2013 - 2023 by month, type, and location">Medical and Retail Marijuana Licencees</a></p></li>
-<li><p>City and County of Denver Surveyor’s Office: <a href="https://www.denvergov.org/opendata/dataset/city-and-county-of-denver-annexations" title="annexations of the City and County of Denver from 1864 to the present">Denver Geographic Boundaries</a></p></li>
-<li><p>FBI Uniform Crime Reporting Program: <a href="https://ucr.fbi.gov/about-us/cjis/ucr/nibrs/2014/tables/main" title="City and County Level Crimes *2015 and beyond found by adjusting the year in the URL">Colorado</a></p></li>
-<li><p>2014 American Community Survey: <a href="https://www.census.gov/acs/www/data/data-tables-and-tools/data-profiles/2014/" title="Connected to the API via the TidyCensus Package">Colorado Population, Race, Ethnicity, and Poverty Rates</a></p></li>
-</ul>
-</section>
-<section id="software" class="level3">
-<h3 class="anchored" data-anchor-id="software">Software:</h3>
-<ul>
-<li><p>Rstudio</p>
-<ul>
-<li><p>Packages:</p>
-<ul>
-<li><p>fs <span class="citation" data-cites="fs">(<a href="#ref-fs" role="doc-biblioref">Hester, Wickham, and Csárdi 2021</a>)</span></p></li>
-<li><p>lubridate <span class="citation" data-cites="lubridate">(<a href="#ref-lubridate" role="doc-biblioref">Grolemund and Wickham 2011</a>)</span></p></li>
-<li><p>openxlsx <span class="citation" data-cites="openxlsx">(<a href="#ref-openxlsx" role="doc-biblioref">Schauberger and Walker 2023</a>)</span></p></li>
-<li><p>readx <span class="citation" data-cites="readxl">(<a href="#ref-readxl" role="doc-biblioref">Wickham and Bryan 2023</a>)</span></p></li>
-<li><p>sf <span class="citation" data-cites="sf">(<a href="#ref-sf" role="doc-biblioref">Pebesma 2018</a>)</span></p></li>
-<li><p>tidycensus <span class="citation" data-cites="tidycensus">(<a href="#ref-tidycensus" role="doc-biblioref">Walker and Herman 2023</a>)</span></p></li>
-<li><p>tidygeocoder <span class="citation" data-cites="tidygeocoder">(<a href="#ref-tidygeocoder" role="doc-biblioref">Cambon et al. 2021</a>)</span></p></li>
-<li><p>tidyverse <span class="citation" data-cites="tidyverse">(<a href="#ref-tidyverse" role="doc-biblioref">Wickham et al. 2019</a>)</span></p></li>
-<li><p>tigris <span class="citation" data-cites="tigris">(<a href="#ref-tigris" role="doc-biblioref">Walker 2023</a>)</span></p></li>
-</ul></li>
-</ul></li>
-</ul>
-</section>
-</section>
-<section id="references" class="level2">
-<h2 class="anchored" data-anchor-id="references">- References</h2>
-<p>Brinkman, J., &amp; Mok-Lamme, D. (2019). Not in my backyard? <em>Not so fast. The effect of marijuana legalization on neighborhood crime</em>. Regional Science and Urban Economics, 78. https://doi-org.ezproxy.gvsu.edu/10.1016/j.regsciurbeco.2019.103460</p>
-<p>Anderson, D. M., &amp; Rees, D. I. (2023). <em>The Public Health Effects of Legalizing Marijuana.</em> Journal of Economic Literature, 61(1), 86–143. https://doi-org.ezproxy.gvsu.edu/10.1257/jel.20211635</p>
-<p>Hughes, Lorine A., Lonnie M. Schaible, and Katherine Jimmerson. “Marijuana Dispensaries and Neighborhood Crime and Disorder in Denver, Colorado.” Justice Quarterly, vol.&nbsp;37, no. 3, 2020, pp.&nbsp;461-485, doi: 10.1080/07418825.2019.1567807.</p>
-
 
 
 </section>
 </section>
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
-<div id="ref-tidygeocoder" class="csl-entry" role="doc-biblioentry">
-Cambon, Jesse, Diego Hernangómez, Christopher Belanger, and Daniel Possenriede. 2021. <span>“Tidygeocoder: An r Package for Geocoding”</span> 6: 3544. <a href="https://doi.org/10.21105/joss.03544">https://doi.org/10.21105/joss.03544</a>.
-</div>
-<div id="ref-lubridate" class="csl-entry" role="doc-biblioentry">
-Grolemund, Garrett, and Hadley Wickham. 2011. <span>“Dates and Times Made Easy with <span></span>Lubridate<span></span>”</span> 40. <a href="https://www.jstatsoft.org/v40/i03/">https://www.jstatsoft.org/v40/i03/</a>.
-</div>
-<div id="ref-fs" class="csl-entry" role="doc-biblioentry">
-Hester, Jim, Hadley Wickham, and Gábor Csárdi. 2021. <span>“Fs: Cross-Platform File System Operations Based on ’Libuv’.”</span> <a href="https://CRAN.R-project.org/package=fs">https://CRAN.R-project.org/package=fs</a>.
-</div>
-<div id="ref-sf" class="csl-entry" role="doc-biblioentry">
-Pebesma, Edzer. 2018. <span>“<span></span>Simple Features for r: Standardized Support for Spatial Vector Data<span></span>”</span> 10. <a href="https://doi.org/10.32614/RJ-2018-009">https://doi.org/10.32614/RJ-2018-009</a>.
-</div>
-<div id="ref-openxlsx" class="csl-entry" role="doc-biblioentry">
-Schauberger, Philipp, and Alexander Walker. 2023. <span>“Openxlsx: Read, Write and Edit Xlsx Files.”</span> <a href="https://CRAN.R-project.org/package=openxlsx">https://CRAN.R-project.org/package=openxlsx</a>.
-</div>
-<div id="ref-tigris" class="csl-entry" role="doc-biblioentry">
-Walker, Kyle. 2023. <span>“Tigris: Load Census TIGER/Line Shapefiles.”</span> <a href="https://CRAN.R-project.org/package=tigris">https://CRAN.R-project.org/package=tigris</a>.
-</div>
-<div id="ref-tidycensus" class="csl-entry" role="doc-biblioentry">
-Walker, Kyle, and Matt Herman. 2023. <span>“Tidycensus: Load US Census Boundary and Attribute Data as ’Tidyverse’ and ’Sf’-Ready Data Frames.”</span> <a href="https://CRAN.R-project.org/package=tidycensus">https://CRAN.R-project.org/package=tidycensus</a>.
-</div>
-<div id="ref-tidyverse" class="csl-entry" role="doc-biblioentry">
-Wickham, Hadley, Mara Averick, Jennifer Bryan, Winston Chang, Lucy D’Agostino McGowan, Romain François, Garrett Grolemund, et al. 2019. <span>“Welcome to the <span></span>Tidyverse<span></span>”</span> 4: 1686. <a href="https://doi.org/10.21105/joss.01686">https://doi.org/10.21105/joss.01686</a>.
-</div>
-<div id="ref-readxl" class="csl-entry" role="doc-biblioentry">
-Wickham, Hadley, and Jennifer Bryan. 2023. <span>“Readxl: Read Excel Files.”</span> <a href="https://CRAN.R-project.org/package=readxl">https://CRAN.R-project.org/package=readxl</a>.
-</div>
-</div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 
 <ol>
 <li id="fn1"><p>Drug Abuse Statistics. “Drug Overdose Deaths.” Drug Abuse Statistics, 2022, https://drugabusestatistics.org/drug-overdose-deaths, Accessed 12 Apr.&nbsp;2023.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>

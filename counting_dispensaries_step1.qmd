@@ -1,13 +1,7 @@
 ---
 format:
   html:
-    theme: minty
     toc: true
-    toc-location: left
-    code-fold: false
-editor: 
-  markdown: 
-    wrap: 85
 ---
 
 ![](images/counting%20dispensaries.png)
@@ -26,8 +20,7 @@ editor:
 
 5.  merges the same variables with different names together and overrides the N/As
 
-6.  cleans up the business names creates a new type variable based of the license
-    number prefix
+6.  cleans up the business names creates a new type variable based of the license number prefix
 
 7.  finds missing business names and finds and replaces the NAs
 
@@ -35,19 +28,13 @@ editor:
 
 ## NIMBY's Method:
 
-> *The data on dispensary locations come from the Colorado Department of Revenue,
-> which starting in January 2013 has published a monthly list of each active medical
-> and recreational license. Overall, our sample covers 48 months between 2013 and
-> 2016 for 143 census tracts in the City of Denver.* [@brinkman2017]
+> *The data on dispensary locations come from the Colorado Department of Revenue, which starting in January 2013 has published a monthly list of each active medical and recreational license. Overall, our sample covers 48 months between 2013 and 2016 for 143 census tracts in the City of Denver.* [@brinkman2017]
 
-NIMBY's data were accessed at a longer active
-[Colorado.gov](www.colorado.gov/pacific/enforcement/%20archived-med-medical-and-retail-marijuana-licensee-lists "Accessed by the authors in January 2017")
-page: in January 2017.
+NIMBY's data were accessed at a longer active [Colorado.gov](www.colorado.gov/pacific/enforcement/%20archived-med-medical-and-retail-marijuana-licensee-lists "Accessed by the authors in January 2017") page: in January 2017.
 
 ## My Method:
 
-*Data Source:* Colorado Department of Revenue: [Medical and Retail Marijuana
-Licencees](https://sbg.colorado.gov/med/licensee-information "Dispensaries in the State of Colorado 2013 - 2023 by month, type, and location")
+*Data Source:* Colorado Department of Revenue: [Medical and Retail Marijuana Licencees](https://sbg.colorado.gov/med/licensee-information "Dispensaries in the State of Colorado 2013 - 2023 by month, type, and location")
 
 Accessed April 2023
 
@@ -66,8 +53,7 @@ library(tidygeocoder)# match zip codes
 
 combines all 700 files into a single data frame
 
-[*adapted from "[Pass chunk of filename to column name in a
-loop](https://community.rstudio.com/t/pass-chunk-of-filename-to-column-name-in-a-loop/141523 "Posit Community")"*]{style="font-size: 80%;"}
+[*adapted from "[Pass chunk of filename to column name in a loop](https://community.rstudio.com/t/pass-chunk-of-filename-to-column-name-in-a-loop/141523 "Posit Community")"*]{style="font-size: 80%;"}
 
 ```{r, warning=FALSE}
 # set working directory for this chunk only
@@ -87,8 +73,7 @@ all_dsps <- all_dsps %>%
 
 over the years different naming conventions and styles were used
 
-[*adapted from "[How to Use the coalesce() Function in
-dplyr](https://www.statology.org/dplyr-coalesce "Statology")"*]{style="font-size: 80%;"}
+[*adapted from "[How to Use the coalesce() Function in dplyr](https://www.statology.org/dplyr-coalesce "Statology")"*]{style="font-size: 80%;"}
 
 ```{r}
 # use coalesce to combine like columns and override the N/A
@@ -112,8 +97,7 @@ all_dsps <- all_dsps %>%
 
 ...to the best of my ability <br>
 
-I now know clever naming conventions for cannabis dispensaries. <br> takes a few
-minutes
+I now know clever naming conventions for cannabis dispensaries. <br> takes a few minutes
 
 ```{r}
 # same case
@@ -274,8 +258,7 @@ dsps$zip<-  substr(dsps$zip, start = 1, stop = 5) # remove trailing numbers
 
 ### find missing business names
 
-[*adapted from "[Dplyr solution using slice and
-group](https://stackoverflow.com/questions/52465215/dplyr-solution-using-slice-and-group "StackOverflow")"*]{style="font-size: 80%;"}
+[*adapted from "[Dplyr solution using slice and group](https://stackoverflow.com/questions/52465215/dplyr-solution-using-slice-and-group "StackOverflow")"*]{style="font-size: 80%;"}
 
 ```{r}
 # select all business names and license numbers
@@ -361,11 +344,9 @@ write.csv(storelist,
 
 ### find dispensaries that are both medical and recreational sellers
 
-[*adapted from "[Join Data with dplyr in R: 6
-Examples](https://www.youtube.com/watch?v=Yg-pNqzDuN4 "Statistics Globe Youtube Channel")"*]{style="font-size: 80%;"}
+[*adapted from "[Join Data with dplyr in R: 6 Examples](https://www.youtube.com/watch?v=Yg-pNqzDuN4 "Statistics Globe Youtube Channel")"*]{style="font-size: 80%;"}
 
-This is where things start to go awry, with the given data it is very difficult to
-identify a business that operates as both
+This is where things start to go awry, with the given data it is very difficult to identify a business that operates as both
 
 ```{r}
 # divide this into two new dataframes, one for medical, one for recreational

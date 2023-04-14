@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Replicating NIMBY – calculate-crime-and-dispensaries-per-capita_step3</title>
+<title>replicating nimby – calculate-crime-and-dispensaries-per-capita_step3</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -93,6 +93,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./images/Main Title.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -133,8 +134,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    <img src="./images/logo.png" alt="" class="navbar-logo">
+    </a>
     <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">Replicating NIMBY</span>
+    <span class="navbar-title">replicating nimby</span>
     </a>
   </div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
@@ -143,30 +147,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html">
- <span class="menu-text">Home</span></a>
-  </li>  
-  <li class="nav-item">
     <a class="nav-link" href="./Final Report_draft.html">
- <span class="menu-text">The Final Report (DRAFT)</span></a>
+ <span class="menu-text">final report</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./counting_dispensaries_step1.html">
- <span class="menu-text">counting dispensaries:</span></a>
+ <span class="menu-text">database</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./Label the Dispensaries with GeoCodes_step2.html">
- <span class="menu-text">census variables</span></a>
+ <span class="menu-text">classification</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link active" href="./calculate crime and dispensaries per capita_step3.html" aria-current="page">
- <span class="menu-text">per capita:</span></a>
+ <span class="menu-text">statisics</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./build_the_linear_model_step4.html">
- <span class="menu-text">linear regression:</span></a>
+ <span class="menu-text">prediction</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./references.html">
+ <span class="menu-text">references</span></a>
   </li>  
 </ul>
+              <div class="quarto-toggle-container">
+                  <a href="" class="quarto-reader-toggle nav-link" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+              </div>
               <div id="quarto-search" class="" title="Search"></div>
           </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
@@ -180,9 +191,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#per-capita" id="toc-per-capita" class="nav-link active" data-scroll-target="#per-capita">per capita:</a>
-  <ul class="collapse">
-  <li><a href="#load-packages" id="toc-load-packages" class="nav-link" data-scroll-target="#load-packages">load packages</a></li>
+  <li><a href="#load-packages" id="toc-load-packages" class="nav-link active" data-scroll-target="#load-packages">load packages</a></li>
   <li><a href="#load-in-data" id="toc-load-in-data" class="nav-link" data-scroll-target="#load-in-data">load in data</a></li>
   <li><a href="#find-the-three-year-average-count-of-dispensaries" id="toc-find-the-three-year-average-count-of-dispensaries" class="nav-link" data-scroll-target="#find-the-three-year-average-count-of-dispensaries">find the three year average count of dispensaries</a></li>
   <li><a href="#find-the-local-population-rates" id="toc-find-the-local-population-rates" class="nav-link" data-scroll-target="#find-the-local-population-rates">find the local population rates</a></li>
@@ -192,7 +201,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#filter-to-get-2016-data-and-pivot-summarize-by-year-and-geography" id="toc-filter-to-get-2016-data-and-pivot-summarize-by-year-and-geography" class="nav-link" data-scroll-target="#filter-to-get-2016-data-and-pivot-summarize-by-year-and-geography">filter to get 2016 data, and pivot, summarize by year and geography</a></li>
   <li><a href="#calculate-the-crimes-per-capita" id="toc-calculate-the-crimes-per-capita" class="nav-link" data-scroll-target="#calculate-the-crimes-per-capita">calculate the crimes per capita</a></li>
   <li><a href="#time-to-join-the-per-capitas-together" id="toc-time-to-join-the-per-capitas-together" class="nav-link" data-scroll-target="#time-to-join-the-per-capitas-together">time to join the per capitas together!</a></li>
-  </ul></li>
   </ul>
 </nav>
 </nav>
@@ -205,8 +213,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 
 <p><img src="images/per capita.png" class="img-fluid"></p>
-<section id="per-capita" class="level1">
-<h1>per capita:</h1>
 <p><strong>This code: finds the crime and dispensary rates per 10,000 by county</strong></p>
 <ol type="1">
 <li><p>finds the population three year average</p></li>
@@ -437,7 +443,6 @@ Fetching data by table type ("B/C", "S", "DP") and combining the result.</code><
 </div>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->

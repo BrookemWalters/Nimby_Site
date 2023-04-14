@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Replicating NIMBY</title>
+<title>replicating nimby</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,6 +30,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./images/Main Title.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -70,8 +71,11 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    <img src="./images/logo.png" alt="" class="navbar-logo">
+    </a>
     <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">Replicating NIMBY</span>
+    <span class="navbar-title">replicating nimby</span>
     </a>
   </div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
@@ -80,30 +84,37 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page">
- <span class="menu-text">Home</span></a>
-  </li>  
-  <li class="nav-item">
     <a class="nav-link" href="./Final Report_draft.html">
- <span class="menu-text">The Final Report (DRAFT)</span></a>
+ <span class="menu-text">final report</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./counting_dispensaries_step1.html">
- <span class="menu-text">counting dispensaries:</span></a>
+ <span class="menu-text">database</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./Label the Dispensaries with GeoCodes_step2.html">
- <span class="menu-text">census variables</span></a>
+ <span class="menu-text">classification</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./calculate crime and dispensaries per capita_step3.html">
- <span class="menu-text">per capita:</span></a>
+ <span class="menu-text">statisics</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./build_the_linear_model_step4.html">
- <span class="menu-text">linear regression:</span></a>
+ <span class="menu-text">prediction</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./references.html">
+ <span class="menu-text">references</span></a>
   </li>  
 </ul>
+              <div class="quarto-toggle-container">
+                  <a href="" class="quarto-reader-toggle nav-link" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+              </div>
               <div id="quarto-search" class="" title="Search"></div>
           </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
@@ -114,33 +125,74 @@ ul.task-list li input[type="checkbox"] {
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#the-final-report-draft" id="toc-the-final-report-draft" class="nav-link active" data-scroll-target="#the-final-report-draft">The Final Report (DRAFT)</a>
+  <ul class="collapse">
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">- Introduction</a></li>
+  <li><a href="#related-works" id="toc-related-works" class="nav-link" data-scroll-target="#related-works">- Related Works</a></li>
+  <li><a href="#methods" id="toc-methods" class="nav-link" data-scroll-target="#methods">- Methods</a></li>
+  <li><a href="#results-and-discussion" id="toc-results-and-discussion" class="nav-link" data-scroll-target="#results-and-discussion">- Results and Discussion</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">- Conclusion</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Replicating NIMBY</h1>
+
+
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Main Title.png" class="img-fluid figure-img"></p>
+</figure>
 </div>
+<section id="the-final-report-draft" class="level1">
+<h1>The Final Report (DRAFT)</h1>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">- Introduction</h2>
+<p>Somewhere in my mother’s basement, is my prized 1995 tie-dyed <a href="https://dare.org/">DARE</a> tee-shirt, a paradoxical relic of elementary classroom hours spent discussing the dangers of peer-led drug use. &nbsp;Those fears were not unwarranted, the CDC (Center for Disease Control) reports that 136 Americans die daily from opioids and illicitly manufactured fentanyl<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, for me - a friend or three. In my experience, most drug prevention programs portray cannabis as the catalyst to the life doomed by addiction.</p>
+<p>When recreational cannabis use became legal in Michigan, the culture shift was palpable. In an ironic twist of fate, the taboo habits of those once deamed as social deviants are now capitalized and funding K-12 education<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. I am fascinated by this turn of events, and I am curious if there are predictors from more tenured “green” states that reveal unintended ill-consequences.</p>
+<p>In my data mining project, I explore the relationship between the presence of cannabis dispensaries and neighborhood crime rates. By replicating the methodology of Brinkman and Mok-Lamme’s 2019 study, “<em>Not in my backyard? Not so fast. The effect of marijuana legalization on neighborhood crime</em>” (NIMBY), I aim to contribute a nuanced perspective on Michigan’s budding industry and how it shapes public safety and city planning.</p>
+<p>My approach involved immersing myself in the wild world of crime and cannabis statistics in Colorado. Using the data sources outlined in NIMBY, I built the variables defined in NIMBY’s linear regression model, described in more detail in the methods section.</p>
+<p>In line with the results in NIMBY, my findings indicate that there is no statistically significant relationship between an increased presence of cannabis dispensaries and crime.</p>
+</section>
+<section id="related-works" class="level2">
+<h2 class="anchored" data-anchor-id="related-works">- Related Works</h2>
+<p>One related body of work is the 2021 meta-analysis conducted by D. Mark Anderson and Daniel I. Rees’ paper “The Public Health Effects of Legalizing Marijuana.” The appendix includes a side-by-side comparison of over 70 studies related to the impact of marijuana legalization on public health outcomes by empirical strategy, and study results. This paper served as an excellent resource to understand the ways in which this topic is being studied, including the study I will replicate. The authors concluded that research around cannabis and public health outcomes are driven by the growing amount of state-level data, but the results are mixed. Further research along with careful policy design is needed to mitigate the negative impact of legalization on crime rates and other outcomes.</p>
+<p>However, the 2019 paper, “Marijuana Dispensaries and Neighborhood Crime and Disorder in Denver, Colorado” by Lorrine A. Hughes, Lonnie M. Schaible and Katherine Jimmerson found contridictory results. Their Bayesian Poisson regression model associated the presence of dispensaries with statistically significant increases in rates of neighborhood crime except for murder and auto theft.</p>
+<p><img src="https://www.netsuite.com/portal/assets/img/business-articles/data-warehouse/social-data-mining.jpg?v2" class="img-fluid" width="688"></p>
+</section>
+<section id="methods" class="level2">
+<h2 class="anchored" data-anchor-id="methods">- Methods</h2>
+<ul>
+<li><p>Processing 700 dispensary business records into a single dataframe | <a href="https://brookemwalters.github.io/Nimby_Site/counting_dispensaries_step1.html" title="Counting Dispensaries">code</a></p></li>
+<li><p>Cross comparing socioeconomic factors next to dispensary growth rates | <a href="https://brookemwalters.github.io/Nimby_Site/Label%20the%20Dispensaries%20with%20GeoCodes_step2.html" title="Geocodes, Census Variables, and Dispensaries Per Capita">code</a></p></li>
+<li><p>Calculating dispensaries and crime per capita | <a href="https://brookemwalters.github.io/Nimby_Site/calculate%20crime%20and%20dispensaries%20per%20capita_step3.html" title="per capita">code</a></p></li>
+<li><p>Creating the linear model | <a href="https://brookemwalters.github.io/Nimby_Site/build_the_linear_model_step4.html">code</a></p></li>
+</ul>
+</section>
+<section id="results-and-discussion" class="level2">
+<h2 class="anchored" data-anchor-id="results-and-discussion">- Results and Discussion</h2>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">- Conclusion</h2>
 
 
-
-<div class="quarto-title-meta">
-
-    
-  
-    
-  </div>
-  
-
-</header>
-
-<p>This is the home to my CIS 635 Final Project</p>
+</section>
+</section>
 
 
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 
-</main> <!-- /main -->
+<ol>
+<li id="fn1"><p>Drug Abuse Statistics. “Drug Overdose Deaths.” Drug Abuse Statistics, 2022, https://drugabusestatistics.org/drug-overdose-deaths, Accessed 12 Apr.&nbsp;2023.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Michigan Department of Treasury. “Adult-Use Marijuana Payments Being Distributed to Michigan Municipalities and Counties.” Michigan.gov, 28 Feb.&nbsp;2023, https://www.michigan.gov/treasury/news/2023/02/28/adult-use-marijuana-payments-being–distributed-to-michigan-municipalities-and-counties, , Accessed 12 Apr.&nbsp;2023.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

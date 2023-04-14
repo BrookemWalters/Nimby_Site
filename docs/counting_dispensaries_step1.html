@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Replicating NIMBY – counting_dispensaries_step1</title>
+<title>replicating nimby – counting_dispensaries_step1</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -93,6 +93,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./images/Main Title.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -126,15 +127,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="floating nav-fixed">
+<body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    <img src="./images/logo.png" alt="" class="navbar-logo">
+    </a>
     <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">Replicating NIMBY</span>
+    <span class="navbar-title">replicating nimby</span>
     </a>
   </div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
@@ -143,30 +147,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html">
- <span class="menu-text">Home</span></a>
-  </li>  
-  <li class="nav-item">
     <a class="nav-link" href="./Final Report_draft.html">
- <span class="menu-text">The Final Report (DRAFT)</span></a>
+ <span class="menu-text">final report</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link active" href="./counting_dispensaries_step1.html" aria-current="page">
- <span class="menu-text">counting dispensaries:</span></a>
+ <span class="menu-text">database</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./Label the Dispensaries with GeoCodes_step2.html">
- <span class="menu-text">census variables</span></a>
+ <span class="menu-text">classification</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./calculate crime and dispensaries per capita_step3.html">
- <span class="menu-text">per capita:</span></a>
+ <span class="menu-text">statisics</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./build_the_linear_model_step4.html">
- <span class="menu-text">linear regression:</span></a>
+ <span class="menu-text">prediction</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./references.html">
+ <span class="menu-text">references</span></a>
   </li>  
 </ul>
+              <div class="quarto-toggle-container">
+                  <a href="" class="quarto-reader-toggle nav-link" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+              </div>
               <div id="quarto-search" class="" title="Search"></div>
           </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
@@ -175,14 +186,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
-    <nav id="TOC" role="doc-toc" class="toc-active">
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#counting-dispensaries" id="toc-counting-dispensaries" class="nav-link active" data-scroll-target="#counting-dispensaries">counting dispensaries:</a>
-  <ul class="collapse">
-  <li><a href="#nimbys-method" id="toc-nimbys-method" class="nav-link" data-scroll-target="#nimbys-method">NIMBY’s Method:</a></li>
+  <li><a href="#nimbys-method" id="toc-nimbys-method" class="nav-link active" data-scroll-target="#nimbys-method">NIMBY’s Method:</a></li>
   <li><a href="#my-method" id="toc-my-method" class="nav-link" data-scroll-target="#my-method">My Method:</a>
   <ul class="collapse">
   <li><a href="#map-and-iterate-through-all-the-excel-files" id="toc-map-and-iterate-through-all-the-excel-files" class="nav-link" data-scroll-target="#map-and-iterate-through-all-the-excel-files">map and iterate through all the Excel files</a></li>
@@ -192,12 +202,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#find-the-missing-zip-codes" id="toc-find-the-missing-zip-codes" class="nav-link" data-scroll-target="#find-the-missing-zip-codes">find the missing zip codes</a></li>
   <li><a href="#find-dispensaries-that-are-both-medical-and-recreational-sellers" id="toc-find-dispensaries-that-are-both-medical-and-recreational-sellers" class="nav-link" data-scroll-target="#find-dispensaries-that-are-both-medical-and-recreational-sellers">find dispensaries that are both medical and recreational sellers</a></li>
   </ul></li>
-  </ul></li>
   </ul>
 </nav>
-</nav>
-<!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -205,8 +211,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 
 <p><img src="images/counting dispensaries.png" class="img-fluid"></p>
-<section id="counting-dispensaries" class="level1">
-<h1>counting dispensaries:</h1>
 <p><strong>This code: creates a dataframe of dispensaries from 2013 - 2023</strong></p>
 <ol type="1">
 <li><p>lists all the files in the current working directory</p></li>
@@ -588,7 +592,6 @@ New names:
 </div>
 
 
-</section>
 </section>
 </section>
 

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Replicating NIMBY - census variables</title>
+<title>replicating nimby – label-the-dispensaries-with-geocodes_step2</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -93,6 +93,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./images/Main Title.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -126,15 +127,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="floating nav-fixed">
+<body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    <img src="./images/logo.png" alt="" class="navbar-logo">
+    </a>
     <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">Replicating NIMBY</span>
+    <span class="navbar-title">replicating nimby</span>
     </a>
   </div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
@@ -143,30 +147,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html">
- <span class="menu-text">Home</span></a>
-  </li>  
-  <li class="nav-item">
     <a class="nav-link" href="./Final Report_draft.html">
- <span class="menu-text">The Final Report (DRAFT)</span></a>
+ <span class="menu-text">final report</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./counting_dispensaries_step1.html">
- <span class="menu-text">counting dispensaries:</span></a>
+ <span class="menu-text">database</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link active" href="./Label the Dispensaries with GeoCodes_step2.html" aria-current="page">
- <span class="menu-text">census variables</span></a>
+ <span class="menu-text">classification</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./calculate crime and dispensaries per capita_step3.html">
- <span class="menu-text">per capita:</span></a>
+ <span class="menu-text">statisics</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./build_the_linear_model_step4.html">
- <span class="menu-text">linear regression:</span></a>
+ <span class="menu-text">prediction</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./references.html">
+ <span class="menu-text">references</span></a>
   </li>  
 </ul>
+              <div class="quarto-toggle-container">
+                  <a href="" class="quarto-reader-toggle nav-link" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+              </div>
               <div id="quarto-search" class="" title="Search"></div>
           </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
@@ -175,14 +186,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
-    <nav id="TOC" role="doc-toc" class="toc-active">
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#census-variables" id="toc-census-variables" class="nav-link active" data-scroll-target="#census-variables">census variables:</a>
-  <ul class="collapse">
-  <li><a href="#load-packages" id="toc-load-packages" class="nav-link" data-scroll-target="#load-packages">load packages</a></li>
+  <li><a href="#load-packages" id="toc-load-packages" class="nav-link active" data-scroll-target="#load-packages">load packages</a></li>
   <li><a href="#import-data" id="toc-import-data" class="nav-link" data-scroll-target="#import-data">import data</a></li>
   <li><a href="#match-geographic-shape-files-to-dispensary-zip-codes" id="toc-match-geographic-shape-files-to-dispensary-zip-codes" class="nav-link" data-scroll-target="#match-geographic-shape-files-to-dispensary-zip-codes">match geographic shape files to dispensary zip codes</a></li>
   <li><a href="#match-the-files-to-the-county-codes" id="toc-match-the-files-to-the-county-codes" class="nav-link" data-scroll-target="#match-the-files-to-the-county-codes">match the files to the county codes</a></li>
@@ -193,44 +203,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#find-the-race-poverty-and-employment-rates-at-the-county-level" id="toc-find-the-race-poverty-and-employment-rates-at-the-county-level" class="nav-link" data-scroll-target="#find-the-race-poverty-and-employment-rates-at-the-county-level">find the race, poverty and employment rates at the county level</a></li>
   <li><a href="#create-quintiles-to-recreate-table-1-pg-78" id="toc-create-quintiles-to-recreate-table-1-pg-78" class="nav-link" data-scroll-target="#create-quintiles-to-recreate-table-1-pg-78">create quintiles to recreate Table 1 pg 78</a></li>
   <li><a href="#put-everything-together" id="toc-put-everything-together" class="nav-link" data-scroll-target="#put-everything-together">put everything together</a></li>
-  </ul></li>
   </ul>
 </nav>
-</nav>
-<!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">census variables</h1>
-</div>
 
-
-
-<div class="quarto-title-meta">
-
-    
-  
-    
-  </div>
-  
-
-</header>
 
 <p><img src="images/census factors.png" class="img-fluid"></p>
-<section id="census-variables" class="level1">
-<h1>census variables:</h1>
 <p><strong>This code: creates a table of dispensary density by socioeconomic factors</strong></p>
 <ol type="1">
-<li><p>matches zip codes to census geocodes</p></li>
-<li><p>connects to census API</p></li>
-<li><p>pulls in demographic populations</p></li>
-<li><p>calculates poverty, race, and employment count rates</p></li>
-<li><p>matches the statistics above with year-over-year changes in dispensaries</p></li>
-<li><p>creates a table showing dispensary YOY growth by socioeconomic quartiles</p></li>
+<li><p><a href="https://brookemwalters.github.io/Nimby_Site/Label%20the%20Dispensaries%20with%20GeoCodes_step2.html#match-the-files-to-the-county-codes" title="match the files to the county codes">matches zip codes to census geocodes</a></p></li>
+<li><p><a href="https://brookemwalters.github.io/Nimby_Site/Label%20the%20Dispensaries%20with%20GeoCodes_step2.html#pull-in-the-census-data-with-tidy-census">connects to census API</a></p></li>
+<li><p><a href="https://brookemwalters.github.io/Nimby_Site/Label%20the%20Dispensaries%20with%20GeoCodes_step2.html#pull-in-the-census-data-with-tidy-census">pulls in demographic populations</a></p></li>
+<li><p><a href="https://brookemwalters.github.io/Nimby_Site/Label%20the%20Dispensaries%20with%20GeoCodes_step2.html#find-the-race-poverty-and-employment-rates-at-the-county-level">calculates poverty, race, and employment count rates</a></p></li>
+<li><p><a href="https://brookemwalters.github.io/Nimby_Site/Label%20the%20Dispensaries%20with%20GeoCodes_step2.html#match-the-change-in-dispensary-density-with-demographics">matches the statistics above with year-over-year changes in dispensaries</a></p></li>
+<li><p><a href="https://brookemwalters.github.io/Nimby_Site/Label%20the%20Dispensaries%20with%20GeoCodes_step2.html#put-everything-together">creates a table showing dispensary YOY growth by socioeconomic quartiles</a></p></li>
 </ol>
 <section id="load-packages" class="level3">
 <h3 class="anchored" data-anchor-id="load-packages">load packages</h3>
@@ -569,7 +558,6 @@ in your R script or .Rprofile.</code></pre>
 </div>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->

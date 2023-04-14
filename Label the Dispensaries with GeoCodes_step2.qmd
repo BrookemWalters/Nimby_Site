@@ -6,8 +6,6 @@ format:
 
 ![](images/census%20factors.png)
 
-# census variables:
-
 **This code: creates a table of dispensary density by socioeconomic factors**
 
 1.  [matches zip codes to census geocodes](https://brookemwalters.github.io/Nimby_Site/Label%20the%20Dispensaries%20with%20GeoCodes_step2.html#match-the-files-to-the-county-codes "match the files to the county codes")

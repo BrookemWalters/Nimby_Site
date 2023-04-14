@@ -6,8 +6,6 @@ format:
 
 ![](images/regression%20model.png)
 
-# linear regression:
-
 **This code: imports the variables into a linear regression model**
 
 Implements my variables into two linear models and outputs very sad p-values and confidence variables

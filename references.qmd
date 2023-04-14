@@ -7,6 +7,10 @@ bibliography: references.bib
 
 ![](images/Main%20Title.png){fig-align="center"}
 
+### image credit:
+
+artist: "moomusician", vectorstock.com
+
 ### Data Sources:
 
 -   Colorado Department of Revenue: [Medical and Retail Marijuana Licencees](https://sbg.colorado.gov/med/licensee-information "Dispensaries in the State of Colorado 2013 - 2023 by month, type, and location")

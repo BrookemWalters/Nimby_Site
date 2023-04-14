@@ -6,8 +6,6 @@ format:
 
 ![](images/counting%20dispensaries.png)
 
-# counting dispensaries:
-
 **This code: creates a dataframe of dispensaries from 2013 - 2023**
 
 1.  lists all the files in the current working directory

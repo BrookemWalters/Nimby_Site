@@ -1,9 +1,7 @@
 ---
 format:
   html:
-    theme: minty
     toc: true
-    toc-location: left
 ---
 
 ![](images/regression%20model.png)

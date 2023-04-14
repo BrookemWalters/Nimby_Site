@@ -1,23 +1,39 @@
 project:
   type: website
-  output-dir:  docs
+  output-dir:  site
 
 website:
-  title: "Replicating NIMBY"
+  title: replicating nimby
+  page-navigation: true
+  reader-mode: true
+  favicon: "images/Main Title.png"
   navbar:
-    left:
-      - href: index.qmd
-        text: Home
-        
-      - Final Report_draft.qmd
-      - counting_dispensaries_step1.qmd
-      - Label the Dispensaries with GeoCodes_step2.qmd
-      - calculate crime and dispensaries per capita_step3.qmd
-      - build_the_linear_model_step4.qmd
+    search: true
+    background: white
+    collapse-below: lg
+    type: dark
+    logo: "images/logo.png"
+    left: 
+      - text: final report
+        href: Final Report_draft.qmd
+      - text: database
+        href: counting_dispensaries_step1.qmd
+      - text: classification
+        href: Label the Dispensaries with GeoCodes_step2.qmd
+      - text: statisics
+        href: calculate crime and dispensaries per capita_step3.qmd
+      - text: prediction
+        href: build_the_linear_model_step4.qmd
+      - text: references
+        href: references.qmd 
+      
+
+
+
 
 format:
   html:
-    theme: minty
+    theme: yeti
     css: styles.css
     toc: true
 

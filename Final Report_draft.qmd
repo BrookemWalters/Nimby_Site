@@ -1,11 +1,7 @@
 ---
 format:
   html:
-    theme: minty
     toc: true
-    toc-location: left
-    code-fold: true
-
 bibliography: references.bib
 ---
 
@@ -87,7 +83,7 @@ However, the 2019 paper, "Marijuana Dispensaries and Neighborhood Crime and Diso
 
         -   tigris [@tigris]
 
-## - References
+## - Works Cited
 
 Brinkman, J., & Mok-Lamme, D. (2019). Not in my backyard? *Not so fast. The effect of marijuana legalization on neighborhood crime*. Regional Science and Urban Economics, 78. https://doi-org.ezproxy.gvsu.edu/10.1016/j.regsciurbeco.2019.103460
 

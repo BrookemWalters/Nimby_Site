@@ -1,14 +1,7 @@
 ---
-title: "census variables"
 format:
   html:
-    theme: minty
     toc: true
-    toc-location: left
-    code-fold: false
-editor: 
-  markdown: 
-    wrap: 85
 ---
 
 ![](images/census%20factors.png)
@@ -17,17 +10,17 @@ editor:
 
 **This code: creates a table of dispensary density by socioeconomic factors**
 
-1.  matches zip codes to census geocodes
+1.  [matches zip codes to census geocodes](https://brookemwalters.github.io/Nimby_Site/Label%20the%20Dispensaries%20with%20GeoCodes_step2.html#match-the-files-to-the-county-codes "match the files to the county codes")
 
-2.  connects to census API
+2.  [connects to census API](https://brookemwalters.github.io/Nimby_Site/Label%20the%20Dispensaries%20with%20GeoCodes_step2.html#pull-in-the-census-data-with-tidy-census)
 
-3.  pulls in demographic populations
+3.  [pulls in demographic populations](https://brookemwalters.github.io/Nimby_Site/Label%20the%20Dispensaries%20with%20GeoCodes_step2.html#pull-in-the-census-data-with-tidy-census)
 
-4.  calculates poverty, race, and employment count rates
+4.  [calculates poverty, race, and employment count rates](https://brookemwalters.github.io/Nimby_Site/Label%20the%20Dispensaries%20with%20GeoCodes_step2.html#find-the-race-poverty-and-employment-rates-at-the-county-level)
 
-5.  matches the statistics above with year-over-year changes in dispensaries
+5.  [matches the statistics above with year-over-year changes in dispensaries](https://brookemwalters.github.io/Nimby_Site/Label%20the%20Dispensaries%20with%20GeoCodes_step2.html#match-the-change-in-dispensary-density-with-demographics)
 
-6.  creates a table showing dispensary YOY growth by socioeconomic quartiles
+6.  [creates a table showing dispensary YOY growth by socioeconomic quartiles](https://brookemwalters.github.io/Nimby_Site/Label%20the%20Dispensaries%20with%20GeoCodes_step2.html#put-everything-together)
 
 ### load packages
 
@@ -57,8 +50,7 @@ county_codes <- (read.csv("~/gvsu/winter 23/CIS 635/NIMBY/cleaning/density table
 
 grab tract info from the tigris package
 
-[*adapted from "[How to Use the coalesce() Function in
-dplyr](https://www.statology.org/dplyr-coalesce "Statology")"*]{style="font-size: 80%;"}
+[*adapted from "[How to Use the coalesce() Function in dplyr](https://www.statology.org/dplyr-coalesce "Statology")"*]{style="font-size: 80%;"}
 
 ```{r, echo=FALSE}
 zctas <- zctas(state = 08, year = 2010, class = "sf")
@@ -122,16 +114,11 @@ write.csv(dsps_summed, "~/gvsu/winter 23/CIS 635/NIMBY/cleaning/counting_dispens
 
 ### pull in the census data with Tidy Census
 
-the paper looks at the poverty rate, percent black, percent Hispanic, and the
-employment rate demographic data comes from the U.S. Census 2014 American Community
-Survey 5-year sample, and employment data comes from the U.S. Census 2013
-Origin-Destination Employment Statistics
+the paper looks at the poverty rate, percent black, percent Hispanic, and the employment rate demographic data comes from the U.S. Census 2014 American Community Survey 5-year sample, and employment data comes from the U.S. Census 2013 Origin-Destination Employment Statistics
 
-I've already established an API census_api_key("\[API removed for privacy\]", install
-= TRUE)
+I've already established an API census_api_key("\[API removed for privacy\]", install = TRUE)
 
-[SocialExplore.com](https://www.socialexplorer.com/data/ACS2013_5yr/metadata/?ds=ACS13_5yr&var=B17001001)
-is a helpful website for definitions:
+[SocialExplore.com](https://www.socialexplorer.com/data/ACS2013_5yr/metadata/?ds=ACS13_5yr&var=B17001001) is a helpful website for definitions:
 
 ```{r}
 #I've already established an API census_api_key

@@ -97,7 +97,7 @@ all_dsps <- all_dsps %>%
 
 I now know clever naming conventions for cannabis dispensaries. <br> takes a few minutes
 
-```{r}
+```{r, cache=TRUE}
 # same case
 all_dsps$dba <- toupper(all_dsps$dba) # DBA = "Doing Business As"
 

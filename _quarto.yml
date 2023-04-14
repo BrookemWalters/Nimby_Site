@@ -20,7 +20,7 @@ website:
         href: counting_dispensaries_step1.qmd
       - text: classification
         href: Label the Dispensaries with GeoCodes_step2.qmd
-      - text: statisics
+      - text: statistics
         href: calculate crime and dispensaries per capita_step3.qmd
       - text: prediction
         href: build_the_linear_model_step4.qmd

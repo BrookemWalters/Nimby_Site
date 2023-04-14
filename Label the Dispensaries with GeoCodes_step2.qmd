@@ -1,4 +1,5 @@
 ---
+title: "census variables"
 format:
   html:
     theme: minty
@@ -12,9 +13,9 @@ editor:
 
 ![](images/census%20factors.png)
 
-# census variables: 
+# census variables:
 
-## This code: creates a table of dispensary density by socioeconomic factors
+**This code: creates a table of dispensary density by socioeconomic factors**
 
 1.  matches zip codes to census geocodes
 

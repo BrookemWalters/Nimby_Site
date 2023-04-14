@@ -4,17 +4,13 @@ format:
     theme: minty
     toc: true
     toc-location: left
-    code-fold: false
-editor: 
-  markdown: 
-    wrap: 85
 ---
 
 ![](images/regression%20model.png)
 
-# linear regression: 
+# linear regression:
 
-## This code: imports the variables into a linear regression model
+**This code: imports the variables into a linear regression model**
 
 Implements my variables into two linear models and outputs very sad p-values and confidence variables
 

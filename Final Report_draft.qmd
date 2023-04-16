@@ -35,17 +35,22 @@ However, the 2019 paper, "Marijuana Dispensaries and Neighborhood Crime and Diso
 
 ## - Methods
 
-I outline my methodology in more detail under the outlined categories in this site's navigation bar. In summation, here's how I approached this project:
+While the objective of Replicating NIMBY is to analyze the relationship between crime cannabis dispensaries location using the data sources presented in the original paper's methodology, I had to adjust my approach due to data quality and time constraints. The diagram below shows how I used R code to build the linear model and it's variables. I broke the code down into four parts which are highlighted in this site's navigation bar.
 
--   Processed 700 dispensary business records into a single dataframe \| [code](https://brookemwalters.github.io/Nimby_Site/counting_dispensaries_step1.html "Counting Dispensaries")
+```         
+```
 
--   Cross compared socioeconomic factors next to dispensary growth rates \| [code](https://brookemwalters.github.io/Nimby_Site/Label%20the%20Dispensaries%20with%20GeoCodes_step2.html "Geocodes, Census Variables, and Dispensaries Per Capita")
+![](images/methodology.png)
 
--   Calculated dispensaries and crime per capita \| [code](https://brookemwalters.github.io/Nimby_Site/calculate%20crime%20and%20dispensaries%20per%20capita_step3.html "per capita")
+In summation, the data mining pipeline consisted of several stages.
 
--   Created a linear model regression model exploring the relationship between these variables \| [code](https://brookemwalters.github.io/Nimby_Site/build_the_linear_model_step4.html)
+-   Dispensary license records were cleaned and preprocessed, removing irrelevant columns, standardizing the format, and aggregating the data by county and year. \| [code](https://brookemwalters.github.io/Nimby_Site/counting_dispensaries_step1.html "Counting Dispensaries")
 
-    ![](images/methodology.png)
+-   Demographic data was extracted using the TidyCensus package, which facilitated the retrieval of data for specific variables from the American Community Survey (ACS) census dataset .\| [code](https://brookemwalters.github.io/Nimby_Site/Label%20the%20Dispensaries%20with%20GeoCodes_step2.html "Geocodes, Census Variables, and Dispensaries Per Capita")
+
+-   The datasets were then joined together by county-level identifiers (GEOID), allowing for the computation of per capita values for dispensaries and crime rates and year-over-year fluctuations. \| [code](https://brookemwalters.github.io/Nimby_Site/calculate%20crime%20and%20dispensaries%20per%20capita_step3.html "per capita")
+
+-   Finally, I introduced the new variables into a linear model regression model. \| [code](https://brookemwalters.github.io/Nimby_Site/build_the_linear_model_step4.html)
 
 ## - Results and Discussion
 

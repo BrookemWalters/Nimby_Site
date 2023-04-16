@@ -7,42 +7,4 @@ bibliography: references.bib
 
 ![](images/Main%20Title.png){fig-align="center"}
 
-# The Final Report (DRAFT)
-
-## - Introduction
-
-Somewhere in my mother's basement, is my prized 1995 tie-dyed [DARE](https://dare.org/) tee-shirt, a paradoxical relic of elementary classroom hours spent discussing the dangers of peer-led drug use.  Those fears were not unwarranted, the CDC (Center for Disease Control) reports that 136 Americans die daily from opioids and illicitly manufactured fentanyl[^1], for me - a friend or three. In my experience, most drug prevention programs portray cannabis as the catalyst to the life doomed by addiction.
-
-[^1]: Drug Abuse Statistics. "Drug Overdose Deaths." Drug Abuse Statistics, 2022, https://drugabusestatistics.org/drug-overdose-deaths, Accessed 12 Apr. 2023.
-
-When recreational cannabis use became legal in Michigan, the culture shift was palpable. In an ironic twist of fate, the taboo habits of those once deamed as social deviants are now capitalized and funding K-12 education[^2]. I am fascinated by this turn of events, and I am curious if there are predictors from more tenured "green" states that reveal unintended ill-consequences.
-
-[^2]: Michigan Department of Treasury. "Adult-Use Marijuana Payments Being Distributed to Michigan Municipalities and Counties." Michigan.gov, 28 Feb. 2023, https://www.michigan.gov/treasury/news/2023/02/28/adult-use-marijuana-payments-being--distributed-to-michigan-municipalities-and-counties, , Accessed 12 Apr. 2023.
-
-In my data mining project, I explore the relationship between the presence of cannabis dispensaries and neighborhood crime rates. By replicating the methodology of Brinkman and Mok-Lamme's 2019 study, "*Not in my backyard? Not so fast. The effect of marijuana legalization on neighborhood crime*" (NIMBY), I aim to contribute a nuanced perspective on Michigan's budding industry and how it shapes public safety and city planning.
-
-My approach involved immersing myself in the wild world of crime and cannabis statistics in Colorado. Using the data sources outlined in NIMBY, I built the variables defined in NIMBY's linear regression model, described in more detail in the methods section.
-
-In line with the results in NIMBY, my findings indicate that there is no statistically significant relationship between an increased presence of cannabis dispensaries and crime.
-
-## - Related Works
-
-One related body of work is the 2021 meta-analysis conducted by D. Mark Anderson and Daniel I. Rees' paper "The Public Health Effects of Legalizing Marijuana." The appendix includes a side-by-side comparison of over 70 studies related to the impact of marijuana legalization on public health outcomes by empirical strategy, and study results. This paper served as an excellent resource to understand the ways in which this topic is being studied, including the study I will replicate. The authors concluded that research around cannabis and public health outcomes are driven by the growing amount of state-level data, but the results are mixed. Further research along with careful policy design is needed to mitigate the negative impact of legalization on crime rates and other outcomes.
-
-However, the 2019 paper, "Marijuana Dispensaries and Neighborhood Crime and Disorder in Denver, Colorado" by Lorrine A. Hughes, Lonnie M. Schaible and Katherine Jimmerson found contridictory results. Their Bayesian Poisson regression model associated the presence of dispensaries with statistically significant increases in rates of neighborhood crime except for murder and auto theft.
-
-![](https://www.netsuite.com/portal/assets/img/business-articles/data-warehouse/social-data-mining.jpg?v2){width="688"}
-
-## - Methods
-
--   Processing 700 dispensary business records into a single dataframe \| [code](https://brookemwalters.github.io/Nimby_Site/counting_dispensaries_step1.html "Counting Dispensaries")
-
--   Cross comparing socioeconomic factors next to dispensary growth rates \| [code](https://brookemwalters.github.io/Nimby_Site/Label%20the%20Dispensaries%20with%20GeoCodes_step2.html "Geocodes, Census Variables, and Dispensaries Per Capita")
-
--   Calculating dispensaries and crime per capita \| [code](https://brookemwalters.github.io/Nimby_Site/calculate%20crime%20and%20dispensaries%20per%20capita_step3.html "per capita")
-
--   Creating the linear model \| [code](https://brookemwalters.github.io/Nimby_Site/build_the_linear_model_step4.html)
-
-## - Results and Discussion
-
-## - Conclusion
+Home to my CIS 635 [Final Project.](https://brookemwalters.github.io/Nimby_Site/Final%20Report_draft.html)

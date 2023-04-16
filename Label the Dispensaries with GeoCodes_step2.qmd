@@ -202,7 +202,7 @@ dsps_yoy_demos  <- dsps_yoy_demos %>%
   mutate_at(vars(starts_with("pct")), funs(round(., 3)))
 ```
 
-### create quintiles to recreate Table 1 pg 78
+### create quartiles to recreate Table 1 pg 78
 
 ```{r}
 dsps_yoy_demos <- dsps_yoy_demos %>% 

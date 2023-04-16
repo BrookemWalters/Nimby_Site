@@ -380,7 +380,7 @@ My approach to creating three buckets of dispensaries:
 
 -   divide the data into two sets; "medical" and "retail" ,
 
--    cross compare the lists, and identify where a business name appears in both categories during the same time period
+-   cross compare the lists, and identify where a business name appears in both categories during the same time period
 
 -   remove the collocations from the retail and medical businesses
 

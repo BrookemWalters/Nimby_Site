@@ -3,7 +3,8 @@ format:
   html:
     theme: minty
     toc: true
-    toc-location: left
+    code-fold: show
+    code-overflow: wrap
 ---
 
 ![](images/per%20capita.png)

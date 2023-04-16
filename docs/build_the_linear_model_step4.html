@@ -160,7 +160,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./calculate crime and dispensaries per capita_step3.html">
- <span class="menu-text">statisics</span></a>
+ <span class="menu-text">statistics</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link active" href="./build_the_linear_model_step4.html" aria-current="page">
@@ -209,7 +209,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>Employment</p></li>
 </ul>
 <div class="cell">
+<details open="">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"~/gvsu/winter 23/CIS 635/NIMBY/cleaning/linear_model/variables/crime and dispenaries per capita.R"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stderr">
 <pre><code>── Attaching packages ─────────────────────────────────────── tidyverse 1.3.2 ──
 ✔ ggplot2 3.4.0      ✔ purrr   1.0.1 
@@ -231,16 +234,22 @@ The following objects are masked from 'package:base':
 `summarise()` has grouped output by 'Geography'. You can override using the `.groups` argument.
 Getting data from the 2010-2014 5-year ACS</code></pre>
 </div>
+<details open="">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(linear_variables) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] "GEOID"            "County"           "crime_per_cap"    "dps_per_cap"     
  [5] "crime_yoy_avg"    "dsp_yoy_avg"      "pct_poverty_rate" "pct_black"       
  [9] "pct_hispanic"     "employeed_pop"   </code></pre>
 </div>
+<details open="">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>modell <span class="ot">&lt;-</span> <span class="fu">lm</span>(linear_variables<span class="sc">$</span>crime_yoy_avg <span class="sc">~</span> linear_variables<span class="sc">$</span>dsp_yoy_avg,  </span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">data =</span> linear_variables)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(modell)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -262,7 +271,10 @@ Residual standard error: 0.29 on 62 degrees of freedom
 Multiple R-squared:  0.003972,  Adjusted R-squared:  -0.01209 
 F-statistic: 0.2472 on 1 and 62 DF,  p-value: 0.6208</code></pre>
 </div>
+<details open="">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>modell</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -273,6 +285,8 @@ Coefficients:
                  (Intercept)  linear_variables$dsp_yoy_avg  
                      0.12923                      -0.07123  </code></pre>
 </div>
+<details open="">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#  y = YOY crime at the county level</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(linear_variables<span class="sc">$</span>crime_yoy_avg <span class="sc">~</span> linear_variables<span class="sc">$</span>dsp_yoy_avg <span class="sc">+</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>               linear_variables<span class="sc">$</span>pct_poverty_rate  <span class="sc">+</span></span>
@@ -282,6 +296,7 @@ Coefficients:
 <span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>                <span class="at">data =</span> linear_variables)</span>
 <span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -307,7 +322,10 @@ Residual standard error: 0.2976 on 58 degrees of freedom
 Multiple R-squared:  0.01903,   Adjusted R-squared:  -0.06554 
 F-statistic: 0.225 on 5 and 58 DF,  p-value: 0.9502</code></pre>
 </div>
+<details open="">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>model2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:

@@ -260,6 +260,8 @@ in your R script or .Rprofile.</code></pre>
 <section id="import-data" class="level3">
 <h3 class="anchored" data-anchor-id="import-data">import data</h3>
 <div class="cell">
+<details open="">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># list of dispensaries</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>dsps <span class="ot">&lt;-</span>  <span class="fu">as.data.frame</span>(<span class="fu">read.csv</span>(<span class="st">"~/gvsu/winter 23/CIS 635/NIMBY/cleaning/counting_dispensaries/dps_data_cleaned/dispensary_types_defined.csv"</span>))</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -268,6 +270,7 @@ in your R script or .Rprofile.</code></pre>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">#county geocodes scraped from Wikipedia</span></span>
 <span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>county_codes <span class="ot">&lt;-</span> (<span class="fu">read.csv</span>(<span class="st">"~/gvsu/winter 23/CIS 635/NIMBY/cleaning/density tables/county_FIPS_codes.csv"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 </section>
 <section id="match-geographic-shape-files-to-dispensary-zip-codes" class="level3">
@@ -281,6 +284,8 @@ in your R script or .Rprofile.</code></pre>
 <section id="match-the-files-to-the-county-codes" class="level3">
 <h3 class="anchored" data-anchor-id="match-the-files-to-the-county-codes">match the files to the county codes</h3>
 <div class="cell">
+<details open="">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># time to add the spacial data to my dispensary list!</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>dsps<span class="sc">$</span>zip <span class="ot">&lt;-</span>  <span class="fu">as.character</span>(dsps<span class="sc">$</span>zip) <span class="co"># convert_back to characters</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>dsps<span class="ot">&lt;-</span> <span class="fu">left_join</span>(dsps, dsps_geos, <span class="at">by =</span> <span class="st">"zip"</span>)</span>
@@ -291,11 +296,14 @@ in your R script or .Rprofile.</code></pre>
 <span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co"># saving for later in case I can use the tract level data</span></span>
 <span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(dsps, <span class="st">"~/gvsu/winter 23/CIS 635/NIMBY/cleaning/counting_dispensaries/dps_data_cleaned/dispenaries_tracts.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 </section>
 <section id="count-the-dispensaries" class="level3">
 <h3 class="anchored" data-anchor-id="count-the-dispensaries">count the dispensaries</h3>
 <div class="cell">
+<details open="">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>dsps_summed <span class="ot">&lt;-</span>  dsps <span class="sc">%&gt;%</span> </span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">month</span>(date) <span class="sc">==</span> <span class="dv">12</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">&lt;</span> <span class="dv">2017</span>) <span class="sc">%&gt;%</span> </span>
@@ -303,11 +311,15 @@ in your R script or .Rprofile.</code></pre>
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(year, GEOID) <span class="sc">%&gt;%</span> </span>
 <span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">num_licenses =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span> </span>
 <span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> year, <span class="at">values_from =</span> num_licenses, <span class="at">values_fill =</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stderr">
 <pre><code>`summarise()` has grouped output by 'year'. You can override using the
 `.groups` argument.</code></pre>
 </div>
+<details open="">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(dsps_summed, <span class="st">"~/gvsu/winter 23/CIS 635/NIMBY/cleaning/counting_dispensaries/dps_data_cleaned/dispensary_counts_county_year.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 </section>
 <section id="pull-in-the-census-data-with-tidy-census" class="level3">
@@ -316,6 +328,8 @@ in your R script or .Rprofile.</code></pre>
 <p>I’ve already established an API census_api_key(“[API removed for privacy]”, install = TRUE)</p>
 <p><a href="https://www.socialexplorer.com/data/ACS2013_5yr/metadata/?ds=ACS13_5yr&amp;var=B17001001">SocialExplore.com</a> is a helpful website for definitions:</p>
 <div class="cell">
+<details open="">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#I've already established an API census_api_key</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co">#("\[API removed for privacy\]", install= TRUE)</span></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -332,11 +346,15 @@ in your R script or .Rprofile.</code></pre>
 <span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">output =</span> <span class="st">"wide"</span></span>
 <span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stderr">
 <pre><code>Getting data from the 2010-2014 5-year ACS</code></pre>
 </div>
+<details open="">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># i look forward to the day when the racial makeup of a zip code isn't an assumed identifier for poverty</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(demo_factors)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] "GEOID"          "NAME"           "population_14E" "population_14M"
  [5] "pov_base_14E"   "pov_base_14M"   "pov_pop_14E"    "pov_pop_14M"   
@@ -348,12 +366,15 @@ in your R script or .Rprofile.</code></pre>
 <section id="match-the-change-in-dispensary-density-with-demographics" class="level3">
 <h3 class="anchored" data-anchor-id="match-the-change-in-dispensary-density-with-demographics">match the change in dispensary density with demographics</h3>
 <div class="cell">
+<details open="">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># switching from merging to left joins since it's easier to read</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>demo_factors<span class="sc">$</span>GEOID <span class="ot">&lt;-</span>  <span class="fu">as.integer</span>(demo_factors<span class="sc">$</span>GEOID)</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>dsps_summed<span class="sc">$</span>GEOID <span class="ot">&lt;-</span>  <span class="fu">as.integer</span>(dsps_summed<span class="sc">$</span>GEOID)</span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>dsps_yoy_demos <span class="ot">&lt;-</span> <span class="fu">left_join</span>(demo_factors, dsps_summed, <span class="at">by =</span> <span class="st">"GEOID"</span>)</span>
 <span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(dsps_yoy_demos)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] "GEOID"          "NAME"           "population_14E" "population_14M"
  [5] "pov_base_14E"   "pov_base_14M"   "pov_pop_14E"    "pov_pop_14M"   
@@ -361,6 +382,8 @@ in your R script or .Rprofile.</code></pre>
 [13] "hispanicE"      "hispanicM"      "2013"           "2014"          
 [17] "2015"           "2016"          </code></pre>
 </div>
+<details open="">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>dsps_yoy_demos <span class="ot">&lt;-</span> dsps_yoy_demos <span class="sc">%&gt;%</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_at</span>(<span class="fu">vars</span>(<span class="dv">15</span><span class="sc">:</span><span class="dv">18</span>), replace_na, <span class="at">replace =</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(GEOID) <span class="sc">%&gt;%</span> <span class="co"># add the total ins</span></span>
@@ -376,15 +399,21 @@ in your R script or .Rprofile.</code></pre>
 <span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">2015</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">sum</span>(<span class="st">`</span><span class="at">2015</span><span class="st">`</span>),</span>
 <span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">2016</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">sum</span>(<span class="st">`</span><span class="at">2016</span><span class="st">`</span>)</span>
 <span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 </section>
 <section id="calculate-the-year-over-year-change-average-in-dispensaries-for-the-state-of-colorado" class="level3">
 <h3 class="anchored" data-anchor-id="calculate-the-year-over-year-change-average-in-dispensaries-for-the-state-of-colorado">Calculate the year-over-year change average in dispensaries for the state of Colorado</h3>
 <div class="cell">
+<details open="">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># import my yoy function, it's going to do some work</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"~/gvsu/winter 23/CIS 635/NIMBY/formatted code/yoy_function.r"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <div class="cell">
+<details open="">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>colorado_yoy_average <span class="ot">&lt;-</span>  dsps_yoy_demos <span class="sc">%&gt;%</span> </span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">2013</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">sum</span>(<span class="st">`</span><span class="at">2013</span><span class="st">`</span>),</span>
@@ -395,6 +424,7 @@ in your R script or .Rprofile.</code></pre>
 <span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>colorado_yoy_average <span class="ot">&lt;-</span>  <span class="fu">yoy_avg_function</span>(colorado_yoy_average) <span class="sc">%&gt;%</span> </span>
 <span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="st">"Colorado_Average"</span> <span class="ot">=</span> dsp_yoy_avg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: `funs()` was deprecated in dplyr 0.8.0.
 ℹ Please use a list of either functions or lambdas:
@@ -410,6 +440,8 @@ in your R script or .Rprofile.</code></pre>
 <section id="find-the-race-poverty-and-employment-rates-at-the-county-level" class="level3">
 <h3 class="anchored" data-anchor-id="find-the-race-poverty-and-employment-rates-at-the-county-level">find the race, poverty and employment rates at the county level</h3>
 <div class="cell">
+<details open="">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># make the rates</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="co"># create the percentages:</span></span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>dsps_yoy_demos  <span class="ot">&lt;-</span> dsps_yoy_demos <span class="sc">%&gt;%</span> </span>
@@ -419,11 +451,14 @@ in your R script or .Rprofile.</code></pre>
 <span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">pct_hispanic =</span> (hispanic_pop<span class="sc">/</span> pop_2014)) <span class="sc">%&gt;%</span> </span>
 <span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  <span class="co">#round</span></span>
 <span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_at</span>(<span class="fu">vars</span>(<span class="fu">starts_with</span>(<span class="st">"pct"</span>)), <span class="fu">funs</span>(<span class="fu">round</span>(., <span class="dv">3</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 </section>
 <section id="create-quintiles-to-recreate-table-1-pg-78" class="level3">
 <h3 class="anchored" data-anchor-id="create-quintiles-to-recreate-table-1-pg-78">create quintiles to recreate Table 1 pg 78</h3>
 <div class="cell">
+<details open="">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>dsps_yoy_demos <span class="ot">&lt;-</span> dsps_yoy_demos <span class="sc">%&gt;%</span> </span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">qrt_pov =</span> <span class="fu">ntile</span>(pct_poverty_rate,<span class="dv">4</span>)) <span class="sc">%&gt;%</span> </span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">qrt_black =</span> <span class="fu">ntile</span>(pct_black,<span class="dv">4</span>)) <span class="sc">%&gt;%</span></span>
@@ -434,9 +469,12 @@ in your R script or .Rprofile.</code></pre>
 <span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>dsps_yoy_qtiles <span class="ot">&lt;-</span> <span class="fu">yoy_avg_function</span>(dsps_yoy_demos) </span>
 <span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="co"># save the data for the crime per capita calculations</span></span>
 <span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(dsps_yoy_qtiles, <span class="st">"~/gvsu/winter 23/CIS 635/NIMBY/cleaning/counting_dispensaries/dps_data_cleaned/dsps_yoy_qtiles.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <p>clean up the columns to just look at the quartiles and count of dispensaries</p>
 <div class="cell">
+<details open="">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># poverty quartiles by dispensary density</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>poverty_qts <span class="ot">&lt;-</span> dsps_yoy_qtiles <span class="sc">%&gt;%</span> </span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(</span>
@@ -514,12 +552,15 @@ in your R script or .Rprofile.</code></pre>
 <span id="cb23-75"><a href="#cb23-75" aria-hidden="true" tabindex="-1"></a>      ) <span class="sc">%&gt;%</span> </span>
 <span id="cb23-76"><a href="#cb23-76" aria-hidden="true" tabindex="-1"></a>  yoy_avg_function  <span class="sc">%&gt;%</span> </span>
 <span id="cb23-77"><a href="#cb23-77" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="dv">1</span>,<span class="dv">9</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 </section>
 <section id="put-everything-together" class="level3">
 <h3 class="anchored" data-anchor-id="put-everything-together">put everything together</h3>
 <p>while my colorado average is close my values do not align with the paper</p>
 <div class="cell">
+<details open="">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># put everything together </span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>density_table1 <span class="ot">&lt;-</span> poverty_qts <span class="sc">%&gt;%</span></span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(black_qts, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"qrt_pov"</span> <span class="ot">=</span> <span class="st">"qrt_black"</span>)) <span class="sc">%&gt;%</span></span>
@@ -535,6 +576,7 @@ in your R script or .Rprofile.</code></pre>
 <span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Average change in dispensary density by local characteristics [Table 1]</span></span>
 <span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>density_table1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4 × 5
   Quartile `Pov. Rate` `Pct. Black` `Pct. Hispanic` Employment
@@ -544,7 +586,10 @@ in your R script or .Rprofile.</code></pre>
 3        3       0.15         0.074           0.113      0.219
 4        4       0.1          0.113           0.134      0.085</code></pre>
 </div>
+<details open="">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>combined_table</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 5 × 6
   Quartile `Pov. Rate` `Pct. Black` `Pct. Hispanic` Employment Colorado_Average

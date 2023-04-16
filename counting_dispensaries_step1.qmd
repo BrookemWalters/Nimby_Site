@@ -1,6 +1,8 @@
 ---
 format:
   html:
+    code-fold: show
+    code-overflow: wrap
     toc: true
 ---
 
@@ -8,38 +10,40 @@ format:
 
 **This code: creates a dataframe of dispensaries from 2013 - 2023**
 
-1.  lists all the files in the current working directory
+1.  retrieves all of the filenames from the working directory
+2.  retains the filename as new variable
+3.  combines the listed excel files from that directory into a single dataframe
+4.  creates a new date variable extracted from the filename
+5.  combined like variables with different column names together and overrides the N/As
+6.  cleans up the business names, and creates a new type variable based of the license number prefix
+7.  finds missing business names and finds and replaces the null values
+8.  finds the missing zips codes and replaces the null values
 
-2.  retains the file name as new variable
-
-3.  combines the listed excel files from that directory them into a single data frame
-
-4.  create a new date variable extracted from the file name
-
-5.  merges the same variables with different names together and overrides the N/As
-
-6.  cleans up the business names creates a new type variable based of the license number prefix
-
-7.  finds missing business names and finds and replaces the NAs
-
-8.  finds the missing zips codes and finds and replaces the NAs
+This section of my methodology was the most time intensive. Having quality historical data is the foundation of my project. Calculating the number of dispensaries is a key variable for the linear regression model.
 
 ## NIMBY's Method:
 
-> *The data on dispensary locations come from the Colorado Department of Revenue, which starting in January 2013 has published a monthly list of each active medical and recreational license. Overall, our sample covers 48 months between 2013 and 2016 for 143 census tracts in the City of Denver.* [@brinkman2017]
+> *The data on dispensary locations come from the Colorado Department of Revenue, which starting in January 2013 has published a monthly list of each active medical and recreational license. Overall, our sample covers 48 months between 2013 and 2016 for 143 census tracts in the City of Denver.*
+>
+> [@brinkman2017]
 
-NIMBY's data were accessed at a longer active [Colorado.gov](www.colorado.gov/pacific/enforcement/%20archived-med-medical-and-retail-marijuana-licensee-lists "Accessed by the authors in January 2017") page: in January 2017.
+This section of my methodology was the most time intensive. Having quality historical data is the foundation of my project. Calculating the number of dispensaries is a key variable for the linear regression model.
+
+NIMBY's data were accessed at the no longer active [Colorado.gov](www.colorado.gov/pacific/enforcement/%20archived-med-medical-and-retail-marijuana-licensee-lists "Accessed by the authors in January 2017") page: in January 2017.\
 
 ## My Method:
 
-*Data Source:* Colorado Department of Revenue: [Medical and Retail Marijuana Licencees](https://sbg.colorado.gov/med/licensee-information "Dispensaries in the State of Colorado 2013 - 2023 by month, type, and location")
-
+*Data Source:* Colorado Department of Revenue: [Medical and Retail Marijuana Licencees](https://sbg.colorado.gov/med/licensee-information "Dispensaries in the State of Colorado 2013 - 2023 by month, type, and location")![](images/CoDeptRev.png){width="165"}\
 Accessed April 2023
 
-#### Install Packages:
+Before running the code below, I downloaded the dispensary files from the Colorado Department of Revenue's monthly list of med licensee data archive, and manually adjusted the naming convention to reflect the file's time period.
 
-```{r, echo=FALSE, warning=FALSE}
-library(tidyverse) # purr package mapping, dplyer package 
+\
+
+### install packages:
+
+```{r echo=FALSE, warning=FALSE}
+library(tidyverse) # data wrangling
 library(readxl) # read in the excel files
 library(openxlsx) # open excel
 library(fs) # for listing all files in a directory
@@ -47,9 +51,7 @@ library(lubridate) # format dates
 library(tidygeocoder)# match zip codes
 ```
 
-### map and iterate through all the Excel files
-
-combines all 700 files into a single data frame
+### combine files into a single dataframe, with a new date field:
 
 [*adapted from "[Pass chunk of filename to column name in a loop](https://community.rstudio.com/t/pass-chunk-of-filename-to-column-name-in-a-loop/141523 "Posit Community")"*]{style="font-size: 80%;"}
 
@@ -67,9 +69,17 @@ all_dsps <- all_dsps %>%
          date = as.Date(paste0("01", date), format = "%d%m%Y"))
 ```
 
-### create uniform observation fields
+\
 
-over the years different naming conventions and styles were used
+### create uniform observation fields:
+
+The ledgers vary throughout the years. In order to create a cohesive database, I needed to ensure like fields held the same naming conventions so they can be aggregated together down the road.
+
+| dispensary record fields: |                             |
+|---------------------------|-----------------------------|
+| **city**                  | **dba** (doing business as) |
+| **licensee**              | **license number**          |
+| **zip code**              |                             |
 
 [*adapted from "[How to Use the coalesce() Function in dplyr](https://www.statology.org/dplyr-coalesce "Statology")"*]{style="font-size: 80%;"}
 
@@ -82,7 +92,7 @@ all_dsps<-  all_dsps %>%
   mutate(zip = coalesce(ZIP, Zip, ZipCode)) %>% 
   mutate(license_no = coalesce(`Lic #`,`LICENSE #`, `License Number`,LicenseNumber, license_no, `License #` )) 
 
-#make a year column / variable
+ #make a year column / variable
 all_dsps$year <- substr(all_dsps$date, 1,4)
 
 
@@ -91,11 +101,11 @@ all_dsps <- all_dsps %>%
   select(1, 26, 37:42)
 ```
 
+\
+
 ### create uniform business names
 
-...to the best of my ability <br>
-
-I now know clever naming conventions for cannabis dispensaries. <br> takes a few minutes
+Another inconsistent feature of the ledger includes many variations in the spelling of a business name. Throughout this project, I became vary familiar with the cannabis related business names and puns. I assume that if a similarly spelled business holds the same licence number, I can override that name to reflect the predominant naming convention. This tedious task was crucial in allowing me to match businesses that sell both medial and recreational products under different licenses.
 
 ```{r, cache=TRUE}
 # same case
@@ -231,12 +241,18 @@ all_dsps$dba <- gsub("WOLF PAC CANNABIS","WOLFPAC CANNABIS", all_dsps$dba)
 all_dsps$dba <- gsub("ALLGREENS","CANNABIS MEDICAL TECHNOLOGY", all_dsps$dba)
 ```
 
-exporting so I do not have to sit through this again
+This process takes a few minutes, so I exported the data for manual review.
 
 ```{r}
 write.csv(all_dsps,
           "~/gvsu/winter 23/CIS 635/NIMBY/cleaning/counting_dispensaries/dps_data_cleaned/dispensaries.csv")
 ```
+
+\
+
+### identify and label dispensaries by their type
+
+There are several type of licenses recorded by the Colorado Department of Revenue. NIMBY focuses on recreational and medical dispensaries, so those are the businesses I have identified based on the license number as shown below.
 
 ```{r}
 cleaned_dsps <- all_dsps
@@ -254,9 +270,13 @@ dsps$dba <- ifelse(dsps$dba == "NONE", NA, dsps$dba) # change the None's to NAs
 dsps$zip<-  substr(dsps$zip, start = 1, stop = 5) # remove trailing numbers
 ```
 
+\
+
 ### find missing business names
 
 [*adapted from "[Dplyr solution using slice and group](https://stackoverflow.com/questions/52465215/dplyr-solution-using-slice-and-group "StackOverflow")"*]{style="font-size: 80%;"}
+
+Along with variations in spelling, some years the "doing business as" field was left blank. Assuming the license number is only assigned to the same business identified in another time period, I can use that information to create a master list of business names to match against.
 
 ```{r}
 # select all business names and license numbers
@@ -294,15 +314,17 @@ dsps_merge <-  dsps_merge %>%
     year)
 ```
 
-Look at this, it's glorious, almost
+Here is the new cleaned list of businesses with limited null fields!
 
 ```{r}
 head(dsps_merge)
 ```
 
+\
+
 ### find the missing zip codes
 
-I'll repeat the same process above for geography
+This same issue arrives with the zip code field, I apply the same technique here.
 
 ```{r}
 dsps_zips <-dsps_merge  %>% 
@@ -340,11 +362,27 @@ write.csv(storelist,
           "~/gvsu/winter 23/CIS 635/NIMBY/cleaning/counting_dispensaries/dps_data_cleaned/dispensaries.csv")
 ```
 
+\
+
 ### find dispensaries that are both medical and recreational sellers
 
 [*adapted from "[Join Data with dplyr in R: 6 Examples](https://www.youtube.com/watch?v=Yg-pNqzDuN4 "Statistics Globe Youtube Channel")"*]{style="font-size: 80%;"}
 
-This is where things start to go awry, with the given data it is very difficult to identify a business that operates as both
+This is where my methodology differs drastically from the original paper. NIMBY matches the physical locations to determine which licensees are both medical and recreational (or retail).
+
+> *Our algorithm utilizes a customized cross-walk that identifies licenses assigned to the same address (e.g. matches 250 W. Colfax to 250 West Colfax) and identifies the co-location of medical and recreational based on the name of the business holding the licenses (since recreational licensees were granted only to the license holders of medical license).*
+>
+> [@brinkman2017]
+
+![](images/classifying.png){width="245"}
+
+My approach to creating three buckets of dispensaries:
+
+-   divide the data into two sets; "medical" and "retail" ,
+
+-    cross compare the lists, and identify where a business name appears in both categories during the same time period
+
+-   remove the collocations from the retail and medical businesses
 
 ```{r}
 # divide this into two new dataframes, one for medical, one for recreational

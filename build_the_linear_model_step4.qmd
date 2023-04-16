@@ -1,7 +1,9 @@
 ---
 format:
   html:
+    code-fold: show
     toc: true
+    code-overflow: wrap
 ---
 
 ![](images/regression%20model.png)

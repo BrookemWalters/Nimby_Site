@@ -15,7 +15,7 @@ Somewhere in my mother's basement, is my prized 1995 tie-dyed [DARE](https://dar
 
 [^1]: Drug Abuse Statistics. "Drug Overdose Deaths." Drug Abuse Statistics, 2022, https://drugabusestatistics.org/drug-overdose-deaths, Accessed 12 Apr. 2023.
 
-When recreational cannabis use became legal in Michigan, the culture shift was palpable. In an ironic twist of fate, the taboo habits of those once deamed as social deviants are now capitalized and funding K-12 education[^2]. I am fascinated by this turn of events, and I am curious if there are predictors from more tenured "green" states that reveal unintended ill-consequences.
+When recreational cannabis use became legal in Michigan, the culture shift was palpable. In an ironic twist of fate, the taboo habits of those once deemed as social deviants are now capitalized and funding K-12 education[^2]. I am fascinated by this turn of events, and I am curious if there are predictors from more tenured "green" states that reveal unintended ill-consequences.
 
 [^2]: Michigan Department of Treasury. "Adult-Use Marijuana Payments Being Distributed to Michigan Municipalities and Counties." Michigan.gov, 28 Feb. 2023, https://www.michigan.gov/treasury/news/2023/02/28/adult-use-marijuana-payments-being--distributed-to-michigan-municipalities-and-counties, , Accessed 12 Apr. 2023.
 
@@ -35,13 +35,17 @@ However, the 2019 paper, "Marijuana Dispensaries and Neighborhood Crime and Diso
 
 ## - Methods
 
--   Processing 700 dispensary business records into a single dataframe \| [code](https://brookemwalters.github.io/Nimby_Site/counting_dispensaries_step1.html "Counting Dispensaries")
+I outline my methodology in more detail under the outlined categories in this site's navigation bar. In summation, here's how I approached this project:
 
--   Cross comparing socioeconomic factors next to dispensary growth rates \| [code](https://brookemwalters.github.io/Nimby_Site/Label%20the%20Dispensaries%20with%20GeoCodes_step2.html "Geocodes, Census Variables, and Dispensaries Per Capita")
+-   Processed 700 dispensary business records into a single dataframe \| [code](https://brookemwalters.github.io/Nimby_Site/counting_dispensaries_step1.html "Counting Dispensaries")
 
--   Calculating dispensaries and crime per capita \| [code](https://brookemwalters.github.io/Nimby_Site/calculate%20crime%20and%20dispensaries%20per%20capita_step3.html "per capita")
+-   Cross compared socioeconomic factors next to dispensary growth rates \| [code](https://brookemwalters.github.io/Nimby_Site/Label%20the%20Dispensaries%20with%20GeoCodes_step2.html "Geocodes, Census Variables, and Dispensaries Per Capita")
 
--   Creating the linear model \| [code](https://brookemwalters.github.io/Nimby_Site/build_the_linear_model_step4.html)
+-   Calculated dispensaries and crime per capita \| [code](https://brookemwalters.github.io/Nimby_Site/calculate%20crime%20and%20dispensaries%20per%20capita_step3.html "per capita")
+
+-   Created a linear model regression model exploring the relationship between these variables \| [code](https://brookemwalters.github.io/Nimby_Site/build_the_linear_model_step4.html)
+
+    ![](images/methodology.png)
 
 ## - Results and Discussion
 

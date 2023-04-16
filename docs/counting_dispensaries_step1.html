@@ -160,7 +160,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./calculate crime and dispensaries per capita_step3.html">
- <span class="menu-text">statisics</span></a>
+ <span class="menu-text">statistics</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./build_the_linear_model_step4.html">
@@ -195,9 +195,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#nimbys-method" id="toc-nimbys-method" class="nav-link active" data-scroll-target="#nimbys-method">NIMBY’s Method:</a></li>
   <li><a href="#my-method" id="toc-my-method" class="nav-link" data-scroll-target="#my-method">My Method:</a>
   <ul class="collapse">
-  <li><a href="#map-and-iterate-through-all-the-excel-files" id="toc-map-and-iterate-through-all-the-excel-files" class="nav-link" data-scroll-target="#map-and-iterate-through-all-the-excel-files">map and iterate through all the Excel files</a></li>
-  <li><a href="#create-uniform-observation-fields" id="toc-create-uniform-observation-fields" class="nav-link" data-scroll-target="#create-uniform-observation-fields">create uniform observation fields</a></li>
+  <li><a href="#install-packages" id="toc-install-packages" class="nav-link" data-scroll-target="#install-packages">install packages:</a></li>
+  <li><a href="#combine-files-into-a-single-dataframe-with-a-new-date-field" id="toc-combine-files-into-a-single-dataframe-with-a-new-date-field" class="nav-link" data-scroll-target="#combine-files-into-a-single-dataframe-with-a-new-date-field">combine files into a single dataframe, with a new date field:</a></li>
+  <li><a href="#create-uniform-observation-fields" id="toc-create-uniform-observation-fields" class="nav-link" data-scroll-target="#create-uniform-observation-fields">create uniform observation fields:</a></li>
   <li><a href="#create-uniform-business-names" id="toc-create-uniform-business-names" class="nav-link" data-scroll-target="#create-uniform-business-names">create uniform business names</a></li>
+  <li><a href="#identify-and-label-dispensaries-by-their-type" id="toc-identify-and-label-dispensaries-by-their-type" class="nav-link" data-scroll-target="#identify-and-label-dispensaries-by-their-type">identify and label dispensaries by their type</a></li>
   <li><a href="#find-missing-business-names" id="toc-find-missing-business-names" class="nav-link" data-scroll-target="#find-missing-business-names">find missing business names</a></li>
   <li><a href="#find-the-missing-zip-codes" id="toc-find-the-missing-zip-codes" class="nav-link" data-scroll-target="#find-the-missing-zip-codes">find the missing zip codes</a></li>
   <li><a href="#find-dispensaries-that-are-both-medical-and-recreational-sellers" id="toc-find-dispensaries-that-are-both-medical-and-recreational-sellers" class="nav-link" data-scroll-target="#find-dispensaries-that-are-both-medical-and-recreational-sellers">find dispensaries that are both medical and recreational sellers</a></li>
@@ -213,28 +215,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="images/counting dispensaries.png" class="img-fluid"></p>
 <p><strong>This code: creates a dataframe of dispensaries from 2013 - 2023</strong></p>
 <ol type="1">
-<li><p>lists all the files in the current working directory</p></li>
-<li><p>retains the file name as new variable</p></li>
-<li><p>combines the listed excel files from that directory them into a single data frame</p></li>
-<li><p>create a new date variable extracted from the file name</p></li>
-<li><p>merges the same variables with different names together and overrides the N/As</p></li>
-<li><p>cleans up the business names creates a new type variable based of the license number prefix</p></li>
-<li><p>finds missing business names and finds and replaces the NAs</p></li>
-<li><p>finds the missing zips codes and finds and replaces the NAs</p></li>
+<li>retrieves all of the filenames from the working directory</li>
+<li>retains the filename as new variable</li>
+<li>combines the listed excel files from that directory into a single dataframe</li>
+<li>creates a new date variable extracted from the filename</li>
+<li>combined like variables with different column names together and overrides the N/As</li>
+<li>cleans up the business names, and creates a new type variable based of the license number prefix</li>
+<li>finds missing business names and finds and replaces the null values</li>
+<li>finds the missing zips codes and replaces the null values</li>
 </ol>
+<p>This section of my methodology was the most time intensive. Having quality historical data is the foundation of my project. Calculating the number of dispensaries is a key variable for the linear regression model.</p>
 <section id="nimbys-method" class="level2">
 <h2 class="anchored" data-anchor-id="nimbys-method">NIMBY’s Method:</h2>
 <blockquote class="blockquote">
-<p><em>The data on dispensary locations come from the Colorado Department of Revenue, which starting in January 2013 has published a monthly list of each active medical and recreational license. Overall, our sample covers 48 months between 2013 and 2016 for 143 census tracts in the City of Denver.</em> <span class="citation" data-cites="brinkman2017">[@brinkman2017]</span></p>
+<p><em>The data on dispensary locations come from the Colorado Department of Revenue, which starting in January 2013 has published a monthly list of each active medical and recreational license. Overall, our sample covers 48 months between 2013 and 2016 for 143 census tracts in the City of Denver.</em></p>
+<p><span class="citation" data-cites="brinkman2017">[@brinkman2017]</span></p>
 </blockquote>
-<p>NIMBY’s data were accessed at a longer active <a href="www.colorado.gov/pacific/enforcement/ archived-med-medical-and-retail-marijuana-licensee-lists" title="Accessed by the authors in January 2017">Colorado.gov</a> page: in January 2017.</p>
+<p>This section of my methodology was the most time intensive. Having quality historical data is the foundation of my project. Calculating the number of dispensaries is a key variable for the linear regression model.</p>
+<p>NIMBY’s data were accessed at the no longer active <a href="www.colorado.gov/pacific/enforcement/ archived-med-medical-and-retail-marijuana-licensee-lists" title="Accessed by the authors in January 2017">Colorado.gov</a> page: in January 2017.<br>
+</p>
 </section>
 <section id="my-method" class="level2">
 <h2 class="anchored" data-anchor-id="my-method">My Method:</h2>
-<p><em>Data Source:</em> Colorado Department of Revenue: <a href="https://sbg.colorado.gov/med/licensee-information" title="Dispensaries in the State of Colorado 2013 - 2023 by month, type, and location">Medical and Retail Marijuana Licencees</a></p>
-<p>Accessed April 2023</p>
-<section id="install-packages" class="level4">
-<h4 class="anchored" data-anchor-id="install-packages">Install Packages:</h4>
+<p><em>Data Source:</em> Colorado Department of Revenue: <a href="https://sbg.colorado.gov/med/licensee-information" title="Dispensaries in the State of Colorado 2013 - 2023 by month, type, and location">Medical and Retail Marijuana Licencees</a><img src="images/CoDeptRev.png" class="img-fluid" width="165"><br>
+Accessed April 2023</p>
+<p>Before running the code below, I downloaded the dispensary files from the Colorado Department of Revenue’s monthly list of med licensee data&nbsp;archive, and manually adjusted the naming convention to reflect the file’s time period.</p>
+<p><br>
+</p>
+<section id="install-packages" class="level3">
+<h3 class="anchored" data-anchor-id="install-packages">install packages:</h3>
 <div class="cell">
 <div class="cell-output cell-output-stderr">
 <pre><code>── Attaching packages ─────────────────────────────────────── tidyverse 1.3.2 ──
@@ -255,34 +264,65 @@ The following objects are masked from 'package:base':
 </div>
 </div>
 </section>
-<section id="map-and-iterate-through-all-the-excel-files" class="level3">
-<h3 class="anchored" data-anchor-id="map-and-iterate-through-all-the-excel-files">map and iterate through all the Excel files</h3>
-<p>combines all 700 files into a single data frame</p>
+<section id="combine-files-into-a-single-dataframe-with-a-new-date-field" class="level3">
+<h3 class="anchored" data-anchor-id="combine-files-into-a-single-dataframe-with-a-new-date-field">combine files into a single dataframe, with a new date field:</h3>
 <p><span style="font-size: 80%;"><em>adapted from “<a href="https://community.rstudio.com/t/pass-chunk-of-filename-to-column-name-in-a-loop/141523" title="Posit Community">Pass chunk of filename to column name in a loop</a>”</em></span></p>
 <div class="cell">
+<details open="">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set working directory for this chunk only</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">"~/gvsu/winter 23/CIS 635/NIMBY/cleaning/dsp_data"</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>dsp <span class="ot">&lt;-</span> <span class="fu">dir_ls</span>() <span class="sc">%&gt;%</span> <span class="fu">set_names</span>() <span class="co"># grab all of the file names </span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">#  the .id parameter creates a new column called "filename" </span></span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>all_dsps <span class="ot">&lt;-</span> <span class="fu">map_df</span>(dsp, <span class="sc">~</span><span class="fu">read_excel</span>(.x), <span class="at">.id =</span> <span class="st">"filename"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stderr">
 <pre><code>New names:
 New names:
 New names:
 • `` -&gt; `...8`</code></pre>
 </div>
+<details open="">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># extract the date from the file name and create a new date column</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>all_dsps <span class="ot">&lt;-</span> all_dsps <span class="sc">%&gt;%</span> </span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">date =</span> <span class="fu">str_extract</span>(filename, <span class="st">"</span><span class="sc">\\</span><span class="st">d{6}"</span>),</span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">date =</span> <span class="fu">as.Date</span>(<span class="fu">paste0</span>(<span class="st">"01"</span>, date), <span class="at">format =</span> <span class="st">"%d%m%Y"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
+<p><br>
+</p>
 </section>
 <section id="create-uniform-observation-fields" class="level3">
-<h3 class="anchored" data-anchor-id="create-uniform-observation-fields">create uniform observation fields</h3>
-<p>over the years different naming conventions and styles were used</p>
+<h3 class="anchored" data-anchor-id="create-uniform-observation-fields">create uniform observation fields:</h3>
+<p>The ledgers vary throughout the years. In order to create a cohesive database, I needed to ensure like fields held the same naming conventions so they can be aggregated together down the road.</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>dispensary record fields:</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>city</strong></td>
+<td><strong>dba</strong> (doing business as)</td>
+</tr>
+<tr class="even">
+<td><strong>licensee</strong></td>
+<td><strong>license number</strong></td>
+</tr>
+<tr class="odd">
+<td><strong>zip code</strong></td>
+<td></td>
+</tr>
+</tbody>
+</table>
 <p><span style="font-size: 80%;"><em>adapted from “<a href="https://www.statology.org/dplyr-coalesce" title="Statology">How to Use the coalesce() Function in dplyr</a>”</em></span></p>
 <div class="cell">
+<details open="">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># use coalesce to combine like columns and override the N/A</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>all_dsps<span class="ot">&lt;-</span>  all_dsps <span class="sc">%&gt;%</span> </span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">dba =</span> <span class="fu">coalesce</span>(DBA,<span class="st">`</span><span class="at">DOING BUSINESS AS</span><span class="st">`</span>)) <span class="sc">%&gt;%</span> </span>
@@ -291,20 +331,24 @@ New names:
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">zip =</span> <span class="fu">coalesce</span>(ZIP, Zip, ZipCode)) <span class="sc">%&gt;%</span> </span>
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">license_no =</span> <span class="fu">coalesce</span>(<span class="st">`</span><span class="at">Lic #</span><span class="st">`</span>,<span class="st">`</span><span class="at">LICENSE #</span><span class="st">`</span>, <span class="st">`</span><span class="at">License Number</span><span class="st">`</span>,LicenseNumber, license_no, <span class="st">`</span><span class="at">License #</span><span class="st">`</span> )) </span>
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co">#make a year column / variable</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a> <span class="co">#make a year column / variable</span></span>
 <span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>all_dsps<span class="sc">$</span>year <span class="ot">&lt;-</span> <span class="fu">substr</span>(all_dsps<span class="sc">$</span>date, <span class="dv">1</span>,<span class="dv">4</span>)</span>
 <span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co"># select the relevant fields</span></span>
 <span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>all_dsps <span class="ot">&lt;-</span> all_dsps <span class="sc">%&gt;%</span></span>
 <span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="dv">1</span>, <span class="dv">26</span>, <span class="dv">37</span><span class="sc">:</span><span class="dv">42</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
+<p><br>
+</p>
 </section>
 <section id="create-uniform-business-names" class="level3">
 <h3 class="anchored" data-anchor-id="create-uniform-business-names">create uniform business names</h3>
-<p>…to the best of my ability <br></p>
-<p>I now know clever naming conventions for cannabis dispensaries. <br> takes a few minutes</p>
-<div class="cell">
+<p>Another inconsistent feature of the ledger includes many variations in the spelling of a business name. Throughout this project, I became vary familiar with the cannabis related business names and puns. I assume that if a similarly spelled business holds the same licence number, I can override that name to reflect the predominant naming convention. This tedious task was crucial in allowing me to match businesses that sell both medial and recreational products under different licenses.</p>
+<div class="cell" data-hash="counting_dispensaries_step1_cache/html/unnamed-chunk-4_96991be65cf8926bf856d69716a12679">
+<details open="">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># same case</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>all_dsps<span class="sc">$</span>dba <span class="ot">&lt;-</span> <span class="fu">toupper</span>(all_dsps<span class="sc">$</span>dba) <span class="co"># DBA = "Doing Business As"</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -436,13 +480,25 @@ New names:
 <span id="cb6-129"><a href="#cb6-129" aria-hidden="true" tabindex="-1"></a>all_dsps<span class="sc">$</span>dba <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">"WALKING RAVEN II"</span>,<span class="st">"WALKING RAVEN"</span>, all_dsps<span class="sc">$</span>dba)</span>
 <span id="cb6-130"><a href="#cb6-130" aria-hidden="true" tabindex="-1"></a>all_dsps<span class="sc">$</span>dba <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">"WOLF PAC CANNABIS"</span>,<span class="st">"WOLFPAC CANNABIS"</span>, all_dsps<span class="sc">$</span>dba)</span>
 <span id="cb6-131"><a href="#cb6-131" aria-hidden="true" tabindex="-1"></a>all_dsps<span class="sc">$</span>dba <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">"ALLGREENS"</span>,<span class="st">"CANNABIS MEDICAL TECHNOLOGY"</span>, all_dsps<span class="sc">$</span>dba)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
-<p>exporting so I do not have to sit through this again</p>
+<p>This process takes a few minutes, so I exported the data for manual review.</p>
 <div class="cell">
+<details open="">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(all_dsps,</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>          <span class="st">"~/gvsu/winter 23/CIS 635/NIMBY/cleaning/counting_dispensaries/dps_data_cleaned/dispensaries.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
+<p><br>
+</p>
+</section>
+<section id="identify-and-label-dispensaries-by-their-type" class="level3">
+<h3 class="anchored" data-anchor-id="identify-and-label-dispensaries-by-their-type">identify and label dispensaries by their type</h3>
+<p>There are several type of licenses recorded by the Colorado Department of Revenue. NIMBY focuses on recreational and medical dispensaries, so those are the businesses I have identified based on the license number as shown below.</p>
 <div class="cell">
+<details open="">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>cleaned_dsps <span class="ot">&lt;-</span> all_dsps</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>cleaned_dsps <span class="ot">&lt;-</span> cleaned_dsps <span class="sc">%&gt;%</span></span>
@@ -456,12 +512,18 @@ New names:
 <span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>dsps<span class="sc">$</span>dba <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(dsps<span class="sc">$</span>dba <span class="sc">==</span> <span class="st">"NONE"</span>, <span class="cn">NA</span>, dsps<span class="sc">$</span>dba) <span class="co"># change the None's to NAs</span></span>
 <span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>dsps<span class="sc">$</span>zip<span class="ot">&lt;-</span>  <span class="fu">substr</span>(dsps<span class="sc">$</span>zip, <span class="at">start =</span> <span class="dv">1</span>, <span class="at">stop =</span> <span class="dv">5</span>) <span class="co"># remove trailing numbers</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
+<p><br>
+</p>
 </section>
 <section id="find-missing-business-names" class="level3">
 <h3 class="anchored" data-anchor-id="find-missing-business-names">find missing business names</h3>
 <p><span style="font-size: 80%;"><em>adapted from “<a href="https://stackoverflow.com/questions/52465215/dplyr-solution-using-slice-and-group" title="StackOverflow">Dplyr solution using slice and group</a>”</em></span></p>
+<p>Along with variations in spelling, some years the “doing business as” field was left blank. Assuming the license number is only assigned to the same business identified in another time period, I can use that information to create a master list of business names to match against.</p>
 <div class="cell">
+<details open="">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># select all business names and license numbers</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>dsps_list <span class="ot">&lt;-</span>dsps  <span class="sc">%&gt;%</span> </span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(dba, license_no) <span class="co">#</span></span>
@@ -495,10 +557,14 @@ New names:
 <span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>    type,</span>
 <span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>    date,</span>
 <span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>    year)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
-<p>Look at this, it’s glorious, almost</p>
+<p>Here is the new cleaned list of businesses with limited null fields!</p>
 <div class="cell">
+<details open="">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dsps_merge)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>  license_no                         dba   city   zip    type       date year
 1  402-00001 CANNABIS MEDICAL TECHNOLOGY Denver 80204 medical 2020-08-01 2020
@@ -509,11 +575,15 @@ New names:
 6  402-00001 CANNABIS MEDICAL TECHNOLOGY Denver 80204 medical 2016-05-01 2016</code></pre>
 </div>
 </div>
+<p><br>
+</p>
 </section>
 <section id="find-the-missing-zip-codes" class="level3">
 <h3 class="anchored" data-anchor-id="find-the-missing-zip-codes">find the missing zip codes</h3>
-<p>I’ll repeat the same process above for geography</p>
+<p>This same issue arrives with the zip code field, I apply the same technique here.</p>
 <div class="cell">
+<details open="">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>dsps_zips <span class="ot">&lt;-</span>dsps_merge  <span class="sc">%&gt;%</span> </span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(zip, city, license_no) <span class="co"># add type for a distinct list</span></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -547,13 +617,29 @@ New names:
 <span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a><span class="co"># export for manual review if needed</span></span>
 <span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(storelist,</span>
 <span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a>          <span class="st">"~/gvsu/winter 23/CIS 635/NIMBY/cleaning/counting_dispensaries/dps_data_cleaned/dispensaries.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
+<p><br>
+</p>
 </section>
 <section id="find-dispensaries-that-are-both-medical-and-recreational-sellers" class="level3">
 <h3 class="anchored" data-anchor-id="find-dispensaries-that-are-both-medical-and-recreational-sellers">find dispensaries that are both medical and recreational sellers</h3>
 <p><span style="font-size: 80%;"><em>adapted from “<a href="https://www.youtube.com/watch?v=Yg-pNqzDuN4" title="Statistics Globe Youtube Channel">Join Data with dplyr in R: 6 Examples</a>”</em></span></p>
-<p>This is where things start to go awry, with the given data it is very difficult to identify a business that operates as both</p>
+<p>This is where my methodology differs drastically from the original paper. NIMBY matches the physical locations to determine which licensees are both medical and recreational (or retail).</p>
+<blockquote class="blockquote">
+<p><em>Our algorithm utilizes a customized cross-walk that identifies licenses assigned to the same address (e.g.&nbsp;matches 250 W. Colfax to 250 West Colfax) and identifies the co-location of medical and recreational based on the name of the business holding the licenses (since recreational licensees were granted only to the license holders of medical license).</em></p>
+<p><span class="citation" data-cites="brinkman2017">[@brinkman2017]</span></p>
+</blockquote>
+<p><img src="images/classifying.png" class="img-fluid" width="245"></p>
+<p>My approach to creating three buckets of dispensaries:</p>
+<ul>
+<li><p>divide the data into two sets; “medical” and “retail” ,</p></li>
+<li><p>cross compare the lists, and identify where a business name appears in both categories during the same time period</p></li>
+<li><p>remove the collocations from the retail and medical businesses</p></li>
+</ul>
 <div class="cell">
+<details open="">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># divide this into two new dataframes, one for medical, one for recreational</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>med_dsp <span class="ot">&lt;-</span> <span class="fu">filter</span>(storelist, type <span class="sc">==</span> <span class="st">"medical"</span>)</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>rec_dsp <span class="ot">&lt;-</span> <span class="fu">filter</span>(storelist, type <span class="sc">==</span> <span class="st">"retail"</span>)</span>
@@ -589,6 +675,7 @@ New names:
 <span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(storelist_cleaned,</span>
 <span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a>          <span class="st">"dispensary_types_defined.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 
 

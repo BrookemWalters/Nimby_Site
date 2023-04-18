@@ -532,7 +532,7 @@ in your R script or .Rprofile.</code></pre>
 </details>
 </div>
 <p>&nbsp;</p>
-<p>Prepare the data to be presented in a simple summarized table</p>
+<p>Transform the data into a tabluar format to be presented in a simple summarized table</p>
 <div class="cell">
 <details open="">
 <summary>Code</summary>
@@ -662,7 +662,7 @@ in your R script or .Rprofile.</code></pre>
 # … with abbreviated variable name ¹​`Colorado Average`</code></pre>
 </div>
 </div>
-<p>format the table for a side by side comparison <span style="font-size: 80%;"><em>adapted from “<a href="https://towardsdatascience.com/top-7-packages-for-making-beautiful-tables-in-r-7683d054e541" title="Devashree Madhugiri">Top 7 Packages for Making Beautiful Tables in R</a>”</em></span></p>
+<p>format the table for a side by side comparison <span style="font-size: 80%;"><em>adapted from “<a href="https://www.youtube.com/watch?v=dxDeotwylr8" title="R for the Rest of Us">Making high-quality tables in R with the gt package</a>”</em></span></p>
 <div class="cell">
 <details open="">
 <summary>Code</summary>
@@ -677,36 +677,71 @@ in your R script or .Rprofile.</code></pre>
 <span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(<span class="at">title =</span> <span class="st">"average change in dispensary density by local characteristics"</span>,</span>
 <span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>             <span class="at">subtitle =</span> <span class="st">"Brooke's Version"</span></span>
 <span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>              ) <span class="sc">%&gt;%</span></span>
-<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># format the first column</span></span>
-<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(<span class="at">style =</span> <span class="fu">list</span>(<span class="fu">cell_fill</span>(<span class="at">color =</span> <span class="st">"#DEDDB6"</span>), </span>
-<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">cell_text</span>(<span class="at">weight =</span> <span class="st">"bold"</span>)),</span>
-<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a>            <span class="at">locations =</span> <span class="fu">cells_body</span>(<span class="at">columns =</span> Quartile)) <span class="sc">%&gt;%</span> </span>
-<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># format the state comparison</span></span>
-<span id="cb31-19"><a href="#cb31-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(<span class="at">style =</span> <span class="fu">list</span>(<span class="fu">cell_fill</span>(<span class="at">color =</span> <span class="st">"#EAB8B7"</span>), </span>
-<span id="cb31-20"><a href="#cb31-20" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">cell_text</span>(<span class="at">weight =</span> <span class="st">"bold"</span>)),</span>
-<span id="cb31-21"><a href="#cb31-21" aria-hidden="true" tabindex="-1"></a>            <span class="at">locations =</span> <span class="fu">cells_body</span>(<span class="at">columns =</span> <span class="st">`</span><span class="at">Colorado Average</span><span class="st">`</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(<span class="at">style =</span> <span class="fu">cell_borders</span>(</span>
+<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">sides =</span> <span class="st">"top"</span>,</span>
+<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"#EAB8B7"</span>,</span>
+<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">weight =</span> <span class="fu">px</span>(<span class="dv">2</span>)</span>
+<span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb31-19"><a href="#cb31-19" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb31-20"><a href="#cb31-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">location =</span> <span class="fu">cells_body</span>(</span>
+<span id="cb31-21"><a href="#cb31-21" aria-hidden="true" tabindex="-1"></a>      <span class="at">columns =</span> <span class="fu">everything</span>(),</span>
+<span id="cb31-22"><a href="#cb31-22" aria-hidden="true" tabindex="-1"></a>    ))<span class="sc">%&gt;%</span> </span>
+<span id="cb31-23"><a href="#cb31-23" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb31-24"><a href="#cb31-24" aria-hidden="true" tabindex="-1"></a>  <span class="co"># format the first column</span></span>
+<span id="cb31-25"><a href="#cb31-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(<span class="at">style =</span> <span class="fu">list</span>(</span>
+<span id="cb31-26"><a href="#cb31-26" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cell_text</span>(<span class="at">weight =</span> <span class="st">"bold"</span>)),</span>
+<span id="cb31-27"><a href="#cb31-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_body</span>(<span class="at">columns =</span> Quartile)) <span class="sc">%&gt;%</span> </span>
+<span id="cb31-28"><a href="#cb31-28" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb31-29"><a href="#cb31-29" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb31-30"><a href="#cb31-30" aria-hidden="true" tabindex="-1"></a>  <span class="co"># format the state comparison</span></span>
+<span id="cb31-31"><a href="#cb31-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(<span class="at">style =</span> <span class="fu">list</span>( <span class="fu">cell_text</span>(<span class="at">weight =</span> <span class="st">"bold"</span>)),</span>
+<span id="cb31-32"><a href="#cb31-32" aria-hidden="true" tabindex="-1"></a>            <span class="at">locations =</span> <span class="fu">cells_body</span>(<span class="at">columns =</span> <span class="st">`</span><span class="at">Colorado Average</span><span class="st">`</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb31-33"><a href="#cb31-33" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb31-34"><a href="#cb31-34" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb31-35"><a href="#cb31-35" aria-hidden="true" tabindex="-1"></a>    <span class="co"># format the overall table</span></span>
+<span id="cb31-36"><a href="#cb31-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(<span class="at">style =</span> <span class="fu">cell_text</span>(</span>
+<span id="cb31-37"><a href="#cb31-37" aria-hidden="true" tabindex="-1"></a>    <span class="at">align =</span> <span class="st">"center"</span>),</span>
+<span id="cb31-38"><a href="#cb31-38" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_body</span>(<span class="at">columns =</span> <span class="cn">TRUE</span>) <span class="co"># Apply the style to all columns in the body of the table</span></span>
+<span id="cb31-39"><a href="#cb31-39" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb31-40"><a href="#cb31-40" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb31-41"><a href="#cb31-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-42"><a href="#cb31-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">opt_table_lines</span>(<span class="at">extent =</span>  <span class="st">"default"</span>) <span class="sc">%&gt;%</span> <span class="co"># keep table lines</span></span>
+<span id="cb31-43"><a href="#cb31-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_options</span>(</span>
+<span id="cb31-44"><a href="#cb31-44" aria-hidden="true" tabindex="-1"></a>    <span class="at">column_labels.border.top.color =</span> <span class="st">"white"</span>,</span>
+<span id="cb31-45"><a href="#cb31-45" aria-hidden="true" tabindex="-1"></a>    <span class="at">column_labels.border.top.width =</span> <span class="fu">px</span>(<span class="dv">3</span>), <span class="co"># adjusts space between title and column headers</span></span>
+<span id="cb31-46"><a href="#cb31-46" aria-hidden="true" tabindex="-1"></a>    <span class="at">column_labels.border.bottom.color =</span> <span class="st">"black"</span>,</span>
+<span id="cb31-47"><a href="#cb31-47" aria-hidden="true" tabindex="-1"></a>    <span class="at">table_body.hlines.color =</span> <span class="st">"white"</span>,</span>
+<span id="cb31-48"><a href="#cb31-48" aria-hidden="true" tabindex="-1"></a>    <span class="at">table_body.border.bottom.color =</span>  <span class="st">"white"</span>,</span>
+<span id="cb31-49"><a href="#cb31-49" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb31-50"><a href="#cb31-50" aria-hidden="true" tabindex="-1"></a>    <span class="at">table.width =</span> <span class="fu">pct</span>(<span class="dv">100</span>),</span>
+<span id="cb31-51"><a href="#cb31-51" aria-hidden="true" tabindex="-1"></a>    <span class="at">data_row.padding =</span> <span class="fu">px</span>(<span class="dv">10</span>),</span>
+<span id="cb31-52"><a href="#cb31-52" aria-hidden="true" tabindex="-1"></a>    <span class="at">column_labels.background.color =</span> <span class="st">"#EAB8B7"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Since gt v0.3.0, `columns = TRUE` has been deprecated.
+• Please use `columns = everything()` instead.</code></pre>
+</div>
 <div class="cell-output-display">
 
-<div id="nrfosolsog" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#nrfosolsog table {
+<div id="nlbwtkdcda" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#nlbwtkdcda table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#nrfosolsog thead, #nrfosolsog tbody, #nrfosolsog tfoot, #nrfosolsog tr, #nrfosolsog td, #nrfosolsog th {
+#nlbwtkdcda thead, #nlbwtkdcda tbody, #nlbwtkdcda tfoot, #nlbwtkdcda tr, #nlbwtkdcda td, #nlbwtkdcda th {
   border-style: none;
 }
 
-#nrfosolsog p {
+#nlbwtkdcda p {
   margin: 0;
   padding: 0;
 }
 
-#nrfosolsog .gt_table {
+#nlbwtkdcda .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -717,7 +752,7 @@ in your R script or .Rprofile.</code></pre>
   font-weight: normal;
   font-style: normal;
   background-color: #FFFFFF;
-  width: auto;
+  width: 100%;
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #A8A8A8;
@@ -732,12 +767,12 @@ in your R script or .Rprofile.</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#nrfosolsog .gt_caption {
+#nlbwtkdcda .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#nrfosolsog .gt_title {
+#nlbwtkdcda .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -749,7 +784,7 @@ in your R script or .Rprofile.</code></pre>
   border-bottom-width: 0;
 }
 
-#nrfosolsog .gt_subtitle {
+#nlbwtkdcda .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -761,7 +796,7 @@ in your R script or .Rprofile.</code></pre>
   border-top-width: 0;
 }
 
-#nrfosolsog .gt_heading {
+#nlbwtkdcda .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -773,19 +808,19 @@ in your R script or .Rprofile.</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#nrfosolsog .gt_bottom_border {
+#nlbwtkdcda .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#nrfosolsog .gt_col_headings {
+#nlbwtkdcda .gt_col_headings {
   border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
+  border-top-width: 3px;
+  border-top-color: #FFFFFF;
   border-bottom-style: solid;
   border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
+  border-bottom-color: #000000;
   border-left-style: none;
   border-left-width: 1px;
   border-left-color: #D3D3D3;
@@ -794,9 +829,9 @@ in your R script or .Rprofile.</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#nrfosolsog .gt_col_heading {
+#nlbwtkdcda .gt_col_heading {
   color: #333333;
-  background-color: #FFFFFF;
+  background-color: #EAB8B7;
   font-size: 100%;
   font-weight: normal;
   text-transform: inherit;
@@ -814,9 +849,9 @@ in your R script or .Rprofile.</code></pre>
   overflow-x: hidden;
 }
 
-#nrfosolsog .gt_column_spanner_outer {
+#nlbwtkdcda .gt_column_spanner_outer {
   color: #333333;
-  background-color: #FFFFFF;
+  background-color: #EAB8B7;
   font-size: 100%;
   font-weight: normal;
   text-transform: inherit;
@@ -826,18 +861,18 @@ in your R script or .Rprofile.</code></pre>
   padding-right: 4px;
 }
 
-#nrfosolsog .gt_column_spanner_outer:first-child {
+#nlbwtkdcda .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#nrfosolsog .gt_column_spanner_outer:last-child {
+#nlbwtkdcda .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#nrfosolsog .gt_column_spanner {
+#nlbwtkdcda .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
+  border-bottom-color: #000000;
   vertical-align: bottom;
   padding-top: 5px;
   padding-bottom: 5px;
@@ -846,11 +881,11 @@ in your R script or .Rprofile.</code></pre>
   width: 100%;
 }
 
-#nrfosolsog .gt_spanner_row {
+#nlbwtkdcda .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#nrfosolsog .gt_group_heading {
+#nlbwtkdcda .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -876,7 +911,7 @@ in your R script or .Rprofile.</code></pre>
   text-align: left;
 }
 
-#nrfosolsog .gt_empty_group_heading {
+#nlbwtkdcda .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -891,23 +926,23 @@ in your R script or .Rprofile.</code></pre>
   vertical-align: middle;
 }
 
-#nrfosolsog .gt_from_md > :first-child {
+#nlbwtkdcda .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#nrfosolsog .gt_from_md > :last-child {
+#nlbwtkdcda .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#nrfosolsog .gt_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
+#nlbwtkdcda .gt_row {
+  padding-top: 10px;
+  padding-bottom: 10px;
   padding-left: 5px;
   padding-right: 5px;
   margin: 10px;
   border-top-style: solid;
   border-top-width: 1px;
-  border-top-color: #D3D3D3;
+  border-top-color: #FFFFFF;
   border-left-style: none;
   border-left-width: 1px;
   border-left-color: #D3D3D3;
@@ -918,7 +953,7 @@ in your R script or .Rprofile.</code></pre>
   overflow-x: hidden;
 }
 
-#nrfosolsog .gt_stub {
+#nlbwtkdcda .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -931,7 +966,7 @@ in your R script or .Rprofile.</code></pre>
   padding-right: 5px;
 }
 
-#nrfosolsog .gt_stub_row_group {
+#nlbwtkdcda .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -945,15 +980,15 @@ in your R script or .Rprofile.</code></pre>
   vertical-align: top;
 }
 
-#nrfosolsog .gt_row_group_first td {
+#nlbwtkdcda .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#nrfosolsog .gt_row_group_first th {
+#nlbwtkdcda .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#nrfosolsog .gt_summary_row {
+#nlbwtkdcda .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -963,16 +998,16 @@ in your R script or .Rprofile.</code></pre>
   padding-right: 5px;
 }
 
-#nrfosolsog .gt_first_summary_row {
+#nlbwtkdcda .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#nrfosolsog .gt_first_summary_row.thick {
+#nlbwtkdcda .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#nrfosolsog .gt_last_summary_row {
+#nlbwtkdcda .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -982,7 +1017,7 @@ in your R script or .Rprofile.</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#nrfosolsog .gt_grand_summary_row {
+#nlbwtkdcda .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -992,7 +1027,7 @@ in your R script or .Rprofile.</code></pre>
   padding-right: 5px;
 }
 
-#nrfosolsog .gt_first_grand_summary_row {
+#nlbwtkdcda .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1002,7 +1037,7 @@ in your R script or .Rprofile.</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#nrfosolsog .gt_last_grand_summary_row_top {
+#nlbwtkdcda .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1012,20 +1047,20 @@ in your R script or .Rprofile.</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#nrfosolsog .gt_striped {
+#nlbwtkdcda .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#nrfosolsog .gt_table_body {
+#nlbwtkdcda .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
   border-bottom-style: solid;
   border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
+  border-bottom-color: #FFFFFF;
 }
 
-#nrfosolsog .gt_footnotes {
+#nlbwtkdcda .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1039,7 +1074,7 @@ in your R script or .Rprofile.</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#nrfosolsog .gt_footnote {
+#nlbwtkdcda .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1048,7 +1083,7 @@ in your R script or .Rprofile.</code></pre>
   padding-right: 5px;
 }
 
-#nrfosolsog .gt_sourcenotes {
+#nlbwtkdcda .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1062,7 +1097,7 @@ in your R script or .Rprofile.</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#nrfosolsog .gt_sourcenote {
+#nlbwtkdcda .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1070,63 +1105,63 @@ in your R script or .Rprofile.</code></pre>
   padding-right: 5px;
 }
 
-#nrfosolsog .gt_left {
+#nlbwtkdcda .gt_left {
   text-align: left;
 }
 
-#nrfosolsog .gt_center {
+#nlbwtkdcda .gt_center {
   text-align: center;
 }
 
-#nrfosolsog .gt_right {
+#nlbwtkdcda .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#nrfosolsog .gt_font_normal {
+#nlbwtkdcda .gt_font_normal {
   font-weight: normal;
 }
 
-#nrfosolsog .gt_font_bold {
+#nlbwtkdcda .gt_font_bold {
   font-weight: bold;
 }
 
-#nrfosolsog .gt_font_italic {
+#nlbwtkdcda .gt_font_italic {
   font-style: italic;
 }
 
-#nrfosolsog .gt_super {
+#nlbwtkdcda .gt_super {
   font-size: 65%;
 }
 
-#nrfosolsog .gt_footnote_marks {
+#nlbwtkdcda .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#nrfosolsog .gt_asterisk {
+#nlbwtkdcda .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#nrfosolsog .gt_indent_1 {
+#nlbwtkdcda .gt_indent_1 {
   text-indent: 5px;
 }
 
-#nrfosolsog .gt_indent_2 {
+#nlbwtkdcda .gt_indent_2 {
   text-indent: 10px;
 }
 
-#nrfosolsog .gt_indent_3 {
+#nlbwtkdcda .gt_indent_3 {
   text-indent: 15px;
 }
 
-#nrfosolsog .gt_indent_4 {
+#nlbwtkdcda .gt_indent_4 {
   text-indent: 20px;
 }
 
-#nrfosolsog .gt_indent_5 {
+#nlbwtkdcda .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1148,36 +1183,601 @@ in your R script or .Rprofile.</code></pre>
     </tr>
   </thead>
   <tbody class="gt_table_body">
-    <tr><td headers="Quartile" class="gt_row gt_right" style="background-color: #DEDDB6; font-weight: bold;">1</td>
-<td headers="Poverty Rate" class="gt_row gt_right">0.072</td>
-<td headers="Pct. Black" class="gt_row gt_right">0.159</td>
-<td headers="Pct. Hispanic" class="gt_row gt_right">0.163</td>
-<td headers="Employment" class="gt_row gt_right">0.500</td>
-<td headers="Colorado Average" class="gt_row gt_right" style="background-color: #EAB8B7; font-weight: bold;"></td></tr>
-    <tr><td headers="Quartile" class="gt_row gt_right" style="background-color: #DEDDB6; font-weight: bold;">2</td>
-<td headers="Poverty Rate" class="gt_row gt_right">0.140</td>
-<td headers="Pct. Black" class="gt_row gt_right">0.269</td>
-<td headers="Pct. Hispanic" class="gt_row gt_right">0.049</td>
-<td headers="Employment" class="gt_row gt_right">0.508</td>
-<td headers="Colorado Average" class="gt_row gt_right" style="background-color: #EAB8B7; font-weight: bold;"></td></tr>
-    <tr><td headers="Quartile" class="gt_row gt_right" style="background-color: #DEDDB6; font-weight: bold;">3</td>
-<td headers="Poverty Rate" class="gt_row gt_right">0.150</td>
-<td headers="Pct. Black" class="gt_row gt_right">0.074</td>
-<td headers="Pct. Hispanic" class="gt_row gt_right">0.113</td>
-<td headers="Employment" class="gt_row gt_right">0.219</td>
-<td headers="Colorado Average" class="gt_row gt_right" style="background-color: #EAB8B7; font-weight: bold;"></td></tr>
-    <tr><td headers="Quartile" class="gt_row gt_right" style="background-color: #DEDDB6; font-weight: bold;">4</td>
-<td headers="Poverty Rate" class="gt_row gt_right">0.100</td>
-<td headers="Pct. Black" class="gt_row gt_right">0.113</td>
-<td headers="Pct. Hispanic" class="gt_row gt_right">0.134</td>
-<td headers="Employment" class="gt_row gt_right">0.085</td>
-<td headers="Colorado Average" class="gt_row gt_right" style="background-color: #EAB8B7; font-weight: bold;"></td></tr>
-    <tr><td headers="Quartile" class="gt_row gt_right" style="background-color: #DEDDB6; font-weight: bold;"></td>
-<td headers="Poverty Rate" class="gt_row gt_right"></td>
-<td headers="Pct. Black" class="gt_row gt_right"></td>
-<td headers="Pct. Hispanic" class="gt_row gt_right"></td>
-<td headers="Employment" class="gt_row gt_right"></td>
-<td headers="Colorado Average" class="gt_row gt_right" style="background-color: #EAB8B7; font-weight: bold;">0.115</td></tr>
+    <tr><td headers="Quartile" class="gt_row gt_right" style="border-top-width: 2px; border-top-style: solid; border-top-color: #EAB8B7; font-weight: bold; text-align: center;">1</td>
+<td headers="Poverty Rate" class="gt_row gt_right" style="border-top-width: 2px; border-top-style: solid; border-top-color: #EAB8B7; text-align: center;">0.072</td>
+<td headers="Pct. Black" class="gt_row gt_right" style="border-top-width: 2px; border-top-style: solid; border-top-color: #EAB8B7; text-align: center;">0.159</td>
+<td headers="Pct. Hispanic" class="gt_row gt_right" style="border-top-width: 2px; border-top-style: solid; border-top-color: #EAB8B7; text-align: center;">0.163</td>
+<td headers="Employment" class="gt_row gt_right" style="border-top-width: 2px; border-top-style: solid; border-top-color: #EAB8B7; text-align: center;">0.500</td>
+<td headers="Colorado Average" class="gt_row gt_right" style="border-top-width: 2px; border-top-style: solid; border-top-color: #EAB8B7; font-weight: bold; text-align: center;"></td></tr>
+    <tr><td headers="Quartile" class="gt_row gt_right" style="border-top-width: 2px; border-top-style: solid; border-top-color: #EAB8B7; font-weight: bold; text-align: center;">2</td>
+<td headers="Poverty Rate" class="gt_row gt_right" style="border-top-width: 2px; border-top-style: solid; border-top-color: #EAB8B7; text-align: center;">0.140</td>
+<td headers="Pct. Black" class="gt_row gt_right" style="border-top-width: 2px; border-top-style: solid; border-top-color: #EAB8B7; text-align: center;">0.269</td>
+<td headers="Pct. Hispanic" class="gt_row gt_right" style="border-top-width: 2px; border-top-style: solid; border-top-color: #EAB8B7; text-align: center;">0.049</td>
+<td headers="Employment" class="gt_row gt_right" style="border-top-width: 2px; border-top-style: solid; border-top-color: #EAB8B7; text-align: center;">0.508</td>
+<td headers="Colorado Average" class="gt_row gt_right" style="border-top-width: 2px; border-top-style: solid; border-top-color: #EAB8B7; font-weight: bold; text-align: center;"></td></tr>
+    <tr><td headers="Quartile" class="gt_row gt_right" style="border-top-width: 2px; border-top-style: solid; border-top-color: #EAB8B7; font-weight: bold; text-align: center;">3</td>
+<td headers="Poverty Rate" class="gt_row gt_right" style="border-top-width: 2px; border-top-style: solid; border-top-color: #EAB8B7; text-align: center;">0.150</td>
+<td headers="Pct. Black" class="gt_row gt_right" style="border-top-width: 2px; border-top-style: solid; border-top-color: #EAB8B7; text-align: center;">0.074</td>
+<td headers="Pct. Hispanic" class="gt_row gt_right" style="border-top-width: 2px; border-top-style: solid; border-top-color: #EAB8B7; text-align: center;">0.113</td>
+<td headers="Employment" class="gt_row gt_right" style="border-top-width: 2px; border-top-style: solid; border-top-color: #EAB8B7; text-align: center;">0.219</td>
+<td headers="Colorado Average" class="gt_row gt_right" style="border-top-width: 2px; border-top-style: solid; border-top-color: #EAB8B7; font-weight: bold; text-align: center;"></td></tr>
+    <tr><td headers="Quartile" class="gt_row gt_right" style="border-top-width: 2px; border-top-style: solid; border-top-color: #EAB8B7; font-weight: bold; text-align: center;">4</td>
+<td headers="Poverty Rate" class="gt_row gt_right" style="border-top-width: 2px; border-top-style: solid; border-top-color: #EAB8B7; text-align: center;">0.100</td>
+<td headers="Pct. Black" class="gt_row gt_right" style="border-top-width: 2px; border-top-style: solid; border-top-color: #EAB8B7; text-align: center;">0.113</td>
+<td headers="Pct. Hispanic" class="gt_row gt_right" style="border-top-width: 2px; border-top-style: solid; border-top-color: #EAB8B7; text-align: center;">0.134</td>
+<td headers="Employment" class="gt_row gt_right" style="border-top-width: 2px; border-top-style: solid; border-top-color: #EAB8B7; text-align: center;">0.085</td>
+<td headers="Colorado Average" class="gt_row gt_right" style="border-top-width: 2px; border-top-style: solid; border-top-color: #EAB8B7; font-weight: bold; text-align: center;"></td></tr>
+    <tr><td headers="Quartile" class="gt_row gt_right" style="border-top-width: 2px; border-top-style: solid; border-top-color: #EAB8B7; font-weight: bold; text-align: center;"></td>
+<td headers="Poverty Rate" class="gt_row gt_right" style="border-top-width: 2px; border-top-style: solid; border-top-color: #EAB8B7; text-align: center;"></td>
+<td headers="Pct. Black" class="gt_row gt_right" style="border-top-width: 2px; border-top-style: solid; border-top-color: #EAB8B7; text-align: center;"></td>
+<td headers="Pct. Hispanic" class="gt_row gt_right" style="border-top-width: 2px; border-top-style: solid; border-top-color: #EAB8B7; text-align: center;"></td>
+<td headers="Employment" class="gt_row gt_right" style="border-top-width: 2px; border-top-style: solid; border-top-color: #EAB8B7; text-align: center;"></td>
+<td headers="Colorado Average" class="gt_row gt_right" style="border-top-width: 2px; border-top-style: solid; border-top-color: #EAB8B7; font-weight: bold; text-align: center;">0.115</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+</div>
+</div>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># table attempt 2</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>table2 <span class="ot">&lt;-</span> combined_table <span class="sc">%&gt;%</span><span class="fu">gt</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sub_missing</span>(</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">columns =</span> <span class="fu">everything</span>(), <span class="co"># remove the null vaules from the colorado average data</span></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">missing_text =</span> <span class="st">""</span></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(<span class="at">title =</span> <span class="st">"average change in dispensary density by local characteristics"</span>,</span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>             <span class="at">subtitle =</span> <span class="st">"Brooke's Version"</span></span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>              ) <span class="sc">%&gt;%</span></span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(</span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">list</span>(</span>
+<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a>      <span class="fu">cell_text</span>(<span class="at">weight =</span> <span class="st">"bold"</span>)</span>
+<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_column_labels</span>(<span class="fu">everything</span>()</span>
+<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a>   )</span>
+<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a>   ) <span class="sc">%&gt;%</span> </span>
+<span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(</span>
+<span id="cb33-20"><a href="#cb33-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">list</span>(</span>
+<span id="cb33-21"><a href="#cb33-21" aria-hidden="true" tabindex="-1"></a>      <span class="fu">cell_fill</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">alpha =</span> <span class="fl">0.2</span>),</span>
+<span id="cb33-22"><a href="#cb33-22" aria-hidden="true" tabindex="-1"></a>      <span class="fu">cell_borders</span>(</span>
+<span id="cb33-23"><a href="#cb33-23" aria-hidden="true" tabindex="-1"></a>        <span class="at">side =</span> <span class="fu">c</span>(<span class="st">"left"</span>, <span class="st">"right"</span>), </span>
+<span id="cb33-24"><a href="#cb33-24" aria-hidden="true" tabindex="-1"></a>        <span class="at">color =</span> <span class="st">"black"</span>,</span>
+<span id="cb33-25"><a href="#cb33-25" aria-hidden="true" tabindex="-1"></a>        <span class="at">weight =</span> <span class="fu">px</span>(<span class="dv">2</span>)</span>
+<span id="cb33-26"><a href="#cb33-26" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb33-27"><a href="#cb33-27" aria-hidden="true" tabindex="-1"></a>      ),</span>
+<span id="cb33-28"><a href="#cb33-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_body</span>(</span>
+<span id="cb33-29"><a href="#cb33-29" aria-hidden="true" tabindex="-1"></a>      <span class="at">columns =</span> <span class="fu">vars</span>(<span class="st">`</span><span class="at">Colorado Average</span><span class="st">`</span>))</span>
+<span id="cb33-30"><a href="#cb33-30" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb33-31"><a href="#cb33-31" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb33-32"><a href="#cb33-32" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tab_style</span>(<span class="at">style =</span> <span class="fu">list</span>( <span class="fu">cell_text</span>(<span class="at">weight =</span> <span class="st">"bold"</span>),</span>
+<span id="cb33-33"><a href="#cb33-33" aria-hidden="true" tabindex="-1"></a>              <span class="at">color =</span> <span class="st">"pink"</span>),</span>
+<span id="cb33-34"><a href="#cb33-34" aria-hidden="true" tabindex="-1"></a>            <span class="at">locations =</span> <span class="fu">cells_body</span>(<span class="at">columns =</span> <span class="st">`</span><span class="at">Colorado Average</span><span class="st">`</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb33-35"><a href="#cb33-35" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb33-36"><a href="#cb33-36" aria-hidden="true" tabindex="-1"></a>    <span class="fu">opt_table_lines</span>(<span class="at">extent =</span>  <span class="st">"default"</span>) <span class="sc">%&gt;%</span> <span class="co"># keep table lines</span></span>
+<span id="cb33-37"><a href="#cb33-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_options</span>(</span>
+<span id="cb33-38"><a href="#cb33-38" aria-hidden="true" tabindex="-1"></a>    <span class="at">column_labels.border.top.color =</span> <span class="st">"white"</span>,</span>
+<span id="cb33-39"><a href="#cb33-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">column_labels.border.top.width =</span> <span class="fu">px</span>(<span class="dv">3</span>), <span class="co"># adjusts space between title and column headers</span></span>
+<span id="cb33-40"><a href="#cb33-40" aria-hidden="true" tabindex="-1"></a>    <span class="at">column_labels.border.bottom.color =</span> <span class="st">"black"</span>,</span>
+<span id="cb33-41"><a href="#cb33-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-42"><a href="#cb33-42" aria-hidden="true" tabindex="-1"></a>    <span class="at">table_body.border.bottom.color =</span>  <span class="st">"white"</span>,</span>
+<span id="cb33-43"><a href="#cb33-43" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb33-44"><a href="#cb33-44" aria-hidden="true" tabindex="-1"></a>    <span class="at">table.width =</span> <span class="fu">pct</span>(<span class="dv">100</span>),</span>
+<span id="cb33-45"><a href="#cb33-45" aria-hidden="true" tabindex="-1"></a>    <span class="at">data_row.padding =</span> <span class="fu">px</span>(<span class="dv">10</span>),</span>
+<span id="cb33-46"><a href="#cb33-46" aria-hidden="true" tabindex="-1"></a>    <span class="at">column_labels.background.color =</span> <span class="st">"#EAB8B7"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb33-47"><a href="#cb33-47" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb33-48"><a href="#cb33-48" aria-hidden="true" tabindex="-1"></a>  <span class="co"># align text to the center</span></span>
+<span id="cb33-49"><a href="#cb33-49" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(<span class="at">style =</span> <span class="fu">cell_text</span>(</span>
+<span id="cb33-50"><a href="#cb33-50" aria-hidden="true" tabindex="-1"></a>    <span class="at">align =</span> <span class="st">"center"</span>),</span>
+<span id="cb33-51"><a href="#cb33-51" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_body</span>(<span class="at">columns =</span> <span class="cn">TRUE</span>) <span class="co"># Apply the style to all columns in the body of the table</span></span>
+<span id="cb33-52"><a href="#cb33-52" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Since gt v0.3.0, `columns = vars(...)` has been deprecated.
+• Please use `columns = c(...)` instead.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Since gt v0.3.0, `columns = TRUE` has been deprecated.
+• Please use `columns = everything()` instead.</code></pre>
+</div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>table2  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+
+<div id="dvstcfonxf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#dvstcfonxf table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#dvstcfonxf thead, #dvstcfonxf tbody, #dvstcfonxf tfoot, #dvstcfonxf tr, #dvstcfonxf td, #dvstcfonxf th {
+  border-style: none;
+}
+
+#dvstcfonxf p {
+  margin: 0;
+  padding: 0;
+}
+
+#dvstcfonxf .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: 100%;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#dvstcfonxf .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#dvstcfonxf .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#dvstcfonxf .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#dvstcfonxf .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#dvstcfonxf .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#dvstcfonxf .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 3px;
+  border-top-color: #FFFFFF;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #000000;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#dvstcfonxf .gt_col_heading {
+  color: #333333;
+  background-color: #EAB8B7;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#dvstcfonxf .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #EAB8B7;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#dvstcfonxf .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#dvstcfonxf .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#dvstcfonxf .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #000000;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#dvstcfonxf .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#dvstcfonxf .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#dvstcfonxf .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#dvstcfonxf .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#dvstcfonxf .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#dvstcfonxf .gt_row {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#dvstcfonxf .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#dvstcfonxf .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#dvstcfonxf .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#dvstcfonxf .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#dvstcfonxf .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#dvstcfonxf .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#dvstcfonxf .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#dvstcfonxf .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#dvstcfonxf .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#dvstcfonxf .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#dvstcfonxf .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#dvstcfonxf .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#dvstcfonxf .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #FFFFFF;
+}
+
+#dvstcfonxf .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#dvstcfonxf .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#dvstcfonxf .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#dvstcfonxf .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#dvstcfonxf .gt_left {
+  text-align: left;
+}
+
+#dvstcfonxf .gt_center {
+  text-align: center;
+}
+
+#dvstcfonxf .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#dvstcfonxf .gt_font_normal {
+  font-weight: normal;
+}
+
+#dvstcfonxf .gt_font_bold {
+  font-weight: bold;
+}
+
+#dvstcfonxf .gt_font_italic {
+  font-style: italic;
+}
+
+#dvstcfonxf .gt_super {
+  font-size: 65%;
+}
+
+#dvstcfonxf .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#dvstcfonxf .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#dvstcfonxf .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#dvstcfonxf .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#dvstcfonxf .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#dvstcfonxf .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#dvstcfonxf .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    <tr class="gt_heading">
+      <td colspan="6" class="gt_heading gt_title gt_font_normal" style="">average change in dispensary density by local characteristics</td>
+    </tr>
+    <tr class="gt_heading">
+      <td colspan="6" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style="">Brooke's Version</td>
+    </tr>
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="font-weight: bold;" scope="col" id="Quartile">Quartile</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="font-weight: bold;" scope="col" id="Poverty Rate">Poverty Rate</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="font-weight: bold;" scope="col" id="Pct. Black">Pct. Black</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="font-weight: bold;" scope="col" id="Pct. Hispanic">Pct. Hispanic</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="font-weight: bold;" scope="col" id="Employment">Employment</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="font-weight: bold;" scope="col" id="Colorado Average">Colorado Average</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="Quartile" class="gt_row gt_right" style="text-align: center;">1</td>
+<td headers="Poverty Rate" class="gt_row gt_right" style="text-align: center;">0.072</td>
+<td headers="Pct. Black" class="gt_row gt_right" style="text-align: center;">0.159</td>
+<td headers="Pct. Hispanic" class="gt_row gt_right" style="text-align: center;">0.163</td>
+<td headers="Employment" class="gt_row gt_right" style="text-align: center;">0.500</td>
+<td headers="Colorado Average" class="gt_row gt_right" style="background-color: rgba(0,0,0,0.2); border-left-width: 2px; border-left-style: solid; border-left-color: black; border-right-width: 2px; border-right-style: solid; border-right-color: black; font-weight: bold; text-align: center; pink"></td></tr>
+    <tr><td headers="Quartile" class="gt_row gt_right" style="text-align: center;">2</td>
+<td headers="Poverty Rate" class="gt_row gt_right" style="text-align: center;">0.140</td>
+<td headers="Pct. Black" class="gt_row gt_right" style="text-align: center;">0.269</td>
+<td headers="Pct. Hispanic" class="gt_row gt_right" style="text-align: center;">0.049</td>
+<td headers="Employment" class="gt_row gt_right" style="text-align: center;">0.508</td>
+<td headers="Colorado Average" class="gt_row gt_right" style="background-color: rgba(0,0,0,0.2); border-left-width: 2px; border-left-style: solid; border-left-color: black; border-right-width: 2px; border-right-style: solid; border-right-color: black; font-weight: bold; text-align: center; pink"></td></tr>
+    <tr><td headers="Quartile" class="gt_row gt_right" style="text-align: center;">3</td>
+<td headers="Poverty Rate" class="gt_row gt_right" style="text-align: center;">0.150</td>
+<td headers="Pct. Black" class="gt_row gt_right" style="text-align: center;">0.074</td>
+<td headers="Pct. Hispanic" class="gt_row gt_right" style="text-align: center;">0.113</td>
+<td headers="Employment" class="gt_row gt_right" style="text-align: center;">0.219</td>
+<td headers="Colorado Average" class="gt_row gt_right" style="background-color: rgba(0,0,0,0.2); border-left-width: 2px; border-left-style: solid; border-left-color: black; border-right-width: 2px; border-right-style: solid; border-right-color: black; font-weight: bold; text-align: center; pink"></td></tr>
+    <tr><td headers="Quartile" class="gt_row gt_right" style="text-align: center;">4</td>
+<td headers="Poverty Rate" class="gt_row gt_right" style="text-align: center;">0.100</td>
+<td headers="Pct. Black" class="gt_row gt_right" style="text-align: center;">0.113</td>
+<td headers="Pct. Hispanic" class="gt_row gt_right" style="text-align: center;">0.134</td>
+<td headers="Employment" class="gt_row gt_right" style="text-align: center;">0.085</td>
+<td headers="Colorado Average" class="gt_row gt_right" style="background-color: rgba(0,0,0,0.2); border-left-width: 2px; border-left-style: solid; border-left-color: black; border-right-width: 2px; border-right-style: solid; border-right-color: black; font-weight: bold; text-align: center; pink"></td></tr>
+    <tr><td headers="Quartile" class="gt_row gt_right" style="text-align: center;"></td>
+<td headers="Poverty Rate" class="gt_row gt_right" style="text-align: center;"></td>
+<td headers="Pct. Black" class="gt_row gt_right" style="text-align: center;"></td>
+<td headers="Pct. Hispanic" class="gt_row gt_right" style="text-align: center;"></td>
+<td headers="Employment" class="gt_row gt_right" style="text-align: center;"></td>
+<td headers="Colorado Average" class="gt_row gt_right" style="background-color: rgba(0,0,0,0.2); border-left-width: 2px; border-left-style: solid; border-left-color: black; border-right-width: 2px; border-right-style: solid; border-right-color: black; font-weight: bold; text-align: center; pink">0.115</td></tr>
   </tbody>
   
   

@@ -53,6 +53,11 @@ In summation, the data mining pipeline consisted of several stages, each color c
 
 ## - Results and Discussion
 
+|              | NIMBY's Results                 | Replication Results                   |
+|--------------|-----------------------------|-----------------------------|
+|              | ![](images/Table1(cropped).jpg) | ![](images/Rplot01.jpeg){width="866"} |
+| how to read: |                                 |                                       |
+
 ## - Conclusion
 
 ## - Data and Software

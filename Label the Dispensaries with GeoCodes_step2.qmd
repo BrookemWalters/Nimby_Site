@@ -11,11 +11,20 @@ format:
 **This code: creates a table of dispensary density by socioeconomic factors**
 
 1.  matches zip codes to census geocodes\
+
 2.  connects to census API\
+
 3.  retrieves demographic populations\
+
 4.  calculates poverty, race, and employment count rates\
+
 5.  matches the statistics above with year-over-year changes in dispensaries\
+
 6.  creates a table showing dispensary YOY growth by socioeconomic quartiles\
+
+This section of my methodology was the most exciting for me, yet it was also where I recognized the need to adapt my approach. My first limitation encountered was the challenge of matching dispensary locations with their corresponding census tract locations. To achieve this, I would need to obtain each location's physical address, which was not provided by Colorado.gov's dispensary archive. While this information can be accessed through vendors or searching the web, I proceed with county-level data for the scope of this project.
+
+Nonetheless, the TIGRIS package's ability to create maps at the census tract level remains a potent instrument in an analyst's arsenal. Although the tract level identifiers are not utilized beyond this point, I have included it as a reference for future projects and as part of my Replicating NIMBY journey. Owing to the differences in methodology, I do not anticipate my figures to align flawlessly; however, examining the overall trends for congruence remains a worthwhile endeavor.
 
 ### load packages
 
@@ -203,7 +212,7 @@ colorado_yoy_average <-  dsps_yoy_demos %>%
   )
 
 colorado_yoy_average <-  yoy_avg_function(colorado_yoy_average) %>% 
-  select("Colorado_Average" = dsp_yoy_avg)
+  select("Colorado Average" = dsp_yoy_avg)
 ```
 
 ### find the race, poverty and employment rates at the county level
@@ -241,7 +250,7 @@ write.csv(dsps_yoy_qtiles, "~/gvsu/winter 23/CIS 635/NIMBY/cleaning/counting_dis
 
  
 
-clean up the columns to just look at the quartiles and count of dispensaries
+Prepare the data to be presented in a simple summarized table
 
 ```{r warning=FALSE}
 # poverty quartiles by dispensary density
@@ -350,20 +359,23 @@ format the table for a side by side comparison [*adapted from "[Top 7 Packages f
 
 # use the gt package to format the intel
 combined_table %>%gt() %>% 
-    fmt_missing(
+    sub_missing(
     columns = everything(), # remove the null vaules from the colorado average data
     missing_text = ""
   ) %>% 
   
-  
+  # format the title
   tab_header(title = "average change in dispensary density by local characteristics",
              subtitle = "Brooke's Version"
               ) %>%
+  
+  # format the first column
   tab_style(style = list(cell_fill(color = "#DEDDB6"), 
                          cell_text(weight = "bold")),
-            locations = cells_body(columns = Quartile))%>%
-  tab_style(
-    style = list(cell_fill(color = "#EAB8B7"),
-                 cell_text(weight = "bold")), 
-    locations = cells_body(columns = Colorado_Average))
+            locations = cells_body(columns = Quartile)) %>% 
+  
+  # format the state comparison
+  tab_style(style = list(cell_fill(color = "#EAB8B7"), 
+                         cell_text(weight = "bold")),
+            locations = cells_body(columns = `Colorado Average`)) 
 ```

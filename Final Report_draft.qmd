@@ -27,28 +27,27 @@ In line with the results in NIMBY, my findings indicate that there is no statist
 
 ## - Related Works
 
-One related body of work is the 2021 meta-analysis conducted by D. Mark Anderson and Daniel I. Rees' paper "The Public Health Effects of Legalizing Marijuana." The appendix includes a side-by-side comparison of over 70 studies related to the impact of marijuana legalization on public health outcomes by empirical strategy, and study results. This paper served as an excellent resource to understand the ways in which this topic is being studied, including the study I will replicate. The authors concluded that research around cannabis and public health outcomes are driven by the growing amount of state-level data, but the results are mixed. Further research along with careful policy design is needed to mitigate the negative impact of legalization on crime rates and other outcomes.
+A related and noteworthy body of work is the 2021 meta-analysis conducted by D. Mark Anderson and Daniel I. Rees' paper "The Public Health Effects of Legalizing Marijuana." The appendix presents an extensive comparison of 70 studies related to the impact of marijuana legalization on public health outcomes by empirical strategy, and study results. This paper served as an excellent resource to understand the myriad of ways in which this topic is being studied, including the study I will replicate. The authors ultimately conclude that while the existing body of research benefits from a wealth of state-level data, the outcomes remain inconclusive. Further research along with careful policy design is needed to mitigate the negative impact of legalization on crime rates and other outcomes.
 
-However, the 2019 paper, "Marijuana Dispensaries and Neighborhood Crime and Disorder in Denver, Colorado" by Lorrine A. Hughes, Lonnie M. Schaible and Katherine Jimmerson found contridictory results. Their Bayesian Poisson regression model associated the presence of dispensaries with statistically significant increases in rates of neighborhood crime except for murder and auto theft.
+In contrast, the 2019 paper "Marijuana Dispensaries and Neighborhood Crime and Disorder in Denver, Colorado" by Lorrine A. Hughes, Lonnie M. Schaible, and Katherine Jimmerson offers contradictory findings. Utilizing a Bayesian Poisson regression model, the authors discovered a statistically significant correlation between the presence of dispensaries and increased rates of neighborhood crime---except for murder and auto theft. This study highlights the complexities of the issue and the necessity for a more nuanced understanding of the interplay between cannabis dispensaries and crime rates.
 
 ![](https://www.netsuite.com/portal/assets/img/business-articles/data-warehouse/social-data-mining.jpg?v2){width="688"}
 
 ## - Methods
 
-While the objective of Replicating NIMBY is to analyze the relationship between crime cannabis dispensaries location using the data sources presented in the original paper's methodology, I had to adjust my approach due to data quality and time constraints. The diagram below shows how I used R code to build the linear model and it's variables. I broke the code down into four parts which are highlighted in this site's navigation bar.
+While striving to replicate NIMBY's observations regarding crime outcomes and cannabis dispensary locations, I employed the data sources delineated in the original paper's methodology. However, due to data quality issues and time limitations, I found it necessary to modify my approach. The diagram presented below illustrates the utilization of R code to construct a data pipeline for the linear model and its associated variables.
 
-```         
-```
+In the interest of interpretability, I divided my work into four distinct segments, each highlighted in the navigation bar of this site. I hope this structured breakdown allows readers to navigate through my process efficiently, providing a transparent insight into my methods employed and limitations faced in this project.
 
 ![](images/methodology.png)
 
-In summation, the data mining pipeline consisted of several stages.
+In summation, the data mining pipeline consisted of several stages, each color coded above.
 
 -   Dispensary license records were cleaned and preprocessed, removing irrelevant columns, standardizing the format, and aggregating the data by county and year. \| [code](https://brookemwalters.github.io/Nimby_Site/counting_dispensaries_step1.html "Counting Dispensaries")
 
--   Demographic data was extracted using the TidyCensus package, which facilitated the retrieval of data for specific variables from the American Community Survey (ACS) census dataset .\| [code](https://brookemwalters.github.io/Nimby_Site/Label%20the%20Dispensaries%20with%20GeoCodes_step2.html "Geocodes, Census Variables, and Dispensaries Per Capita")
+-   Leveraging the power of the TidyCensus package, I extracted population data for the targeted variables from the American Community Survey (ACS) census database. \| [code](https://brookemwalters.github.io/Nimby_Site/Label%20the%20Dispensaries%20with%20GeoCodes_step2.html "Geocodes, Census Variables, and Dispensaries Per Capita")
 
--   The datasets were then joined together by county-level identifiers (GEOID), allowing for the computation of per capita values for dispensaries and crime rates and year-over-year fluctuations. \| [code](https://brookemwalters.github.io/Nimby_Site/calculate%20crime%20and%20dispensaries%20per%20capita_step3.html "per capita")
+-   I wove the datasets together using county-level identifiers (GEOID), allowing for the computation of per capita values for dispensaries and crime rates and year-over-year fluctuations. \| [code](#0 "per capita")
 
 -   Finally, I introduced the new variables into a linear model regression model. \| [code](https://brookemwalters.github.io/Nimby_Site/build_the_linear_model_step4.html)
 

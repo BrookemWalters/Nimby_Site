@@ -14,10 +14,10 @@ format:
 2.  retains the filename as new variable
 3.  combines the listed excel files from that directory into a single dataframe
 4.  creates a new date variable extracted from the filename
-5.  combined like variables with different column names together and overrides the N/As
-6.  cleans up the business names, and creates a new type variable based of the license number prefix
-7.  finds missing business names and finds and replaces the null values
-8.  finds the missing zips codes and replaces the null values
+5.  merges like variables with different column names together and overrides the N/As
+6.  cleans up the business names, and classifies the observation drawn from the license number prefix
+7.  finds missing business names and replaces the null values with features extracted matching license numbers
+8.  finds the missing zips codes and replaces the null values with matching license numbers
 
 This section of my methodology was the most time intensive. Having quality historical data is the foundation of my project. Calculating the number of dispensaries is a key variable for the linear regression model.
 
@@ -27,8 +27,6 @@ This section of my methodology was the most time intensive. Having quality histo
 >
 > [@brinkman2017]
 
-This section of my methodology was the most time intensive. Having quality historical data is the foundation of my project. Calculating the number of dispensaries is a key variable for the linear regression model.
-
 NIMBY's data were accessed at the no longer active [Colorado.gov](www.colorado.gov/pacific/enforcement/%20archived-med-medical-and-retail-marijuana-licensee-lists "Accessed by the authors in January 2017") page: in January 2017.\
 
 ## My Method:
@@ -36,7 +34,7 @@ NIMBY's data were accessed at the no longer active [Colorado.gov](www.colorado.g
 *Data Source:* Colorado Department of Revenue: [Medical and Retail Marijuana Licencees](https://sbg.colorado.gov/med/licensee-information "Dispensaries in the State of Colorado 2013 - 2023 by month, type, and location")![](images/CoDeptRev.png){width="165"}\
 Accessed April 2023
 
-Before running the code below, I downloaded the dispensary files from the Colorado Department of Revenue's monthly list of med licensee data archive, and manually adjusted the naming convention to reflect the file's time period.
+Before running the code below, I downloaded the dispensary files from the Colorado Department of Revenue's monthly list of med licensee data archive, and manually adjusted the naming convention to reflect the file's time period.
 
 \
 
@@ -95,6 +93,7 @@ all_dsps<-  all_dsps %>%
  #make a year column / variable
 all_dsps$year <- substr(all_dsps$date, 1,4)
 
+# write.csv(all_dsps, "firstbatch.csv")
 
 # select the relevant fields
 all_dsps <- all_dsps %>%
@@ -197,6 +196,7 @@ all_dsps$dba <- gsub("LOTUS MEDICAL II","LOTUS MEDICAL", all_dsps$dba)
 all_dsps$dba <- gsub("MAGGIE?S FARM","MAGGIES FARM", all_dsps$dba)
 all_dsps$dba <- gsub("MAGNOLIA ROAD CANNABIS COMPANY","MAGNOLIA ROAD", all_dsps$dba)
 all_dsps$dba <- gsub("MAGNOLIA ROAD CANNABIS","MAGNOLIA ROAD", all_dsps$dba)
+all_dsps$dba <- gsub("MAGNOLIA ROAD CANNABIS","MAGNOLIA ROAD", all_dsps$dba)
 
  # removes all of the trailing names conventions
 all_dsps$dba <- gsub("MEDICINE MAN(?!.)$","MEDICINE MAN", all_dsps$dba, perl = TRUE )
@@ -239,6 +239,8 @@ all_dsps$dba <- gsub("UNITY RD. CANNABIS SHOP","UNITY ROAD", all_dsps$dba)
 all_dsps$dba <- gsub("WALKING RAVEN II","WALKING RAVEN", all_dsps$dba)
 all_dsps$dba <- gsub("WOLF PAC CANNABIS","WOLFPAC CANNABIS", all_dsps$dba)
 all_dsps$dba <- gsub("ALLGREENS","CANNABIS MEDICAL TECHNOLOGY", all_dsps$dba)
+all_dsps$dba <- gsub("3D CANNABIS CENTER AND 3D DISPENSARY","3D CANNABIS CENTER", all_dsps$dba)
+
 ```
 
 This process takes a few minutes, so I exported the data for manual review.
@@ -300,6 +302,7 @@ dsps_merge <- merge(dsps, dsps_list, by = "license_no", all.x= TRUE)
 #update the "doing business as" column, replace the N/As
 dsps_merge$dba <- coalesce(dsps_merge$dba.y, dsps_merge$dba.x)
 
+# if that still doesn't work, update the umatched licence numbers with the licensee name
 dsps_merge$dba <- coalesce(dsps_merge$dba, dsps_merge$licensee)
 
 # remove the duplicated columns
@@ -312,6 +315,8 @@ dsps_merge <-  dsps_merge %>%
     type,
     date,
     year)
+
+
 ```
 
 Here is the new cleaned list of businesses with limited null fields!
@@ -324,7 +329,7 @@ head(dsps_merge)
 
 ### find the missing zip codes
 
-This same issue arrives with the zip code field, I apply the same technique here.
+This same issue occurs with the zip code field, I apply the same technique used to find missing businesses.
 
 ```{r}
 dsps_zips <-dsps_merge  %>% 
@@ -380,7 +385,7 @@ My approach to creating three buckets of dispensaries:
 
 -   divide the data into two sets; "medical" and "retail" ,
 
--   cross compare the lists, and identify where a business name appears in both categories during the same time period
+-   cross compare the lists, and identify where a business name appears in the "both" categories during the same time period
 
 -   remove the collocations from the retail and medical businesses
 

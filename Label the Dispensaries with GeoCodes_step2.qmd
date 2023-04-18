@@ -10,17 +10,12 @@ format:
 
 **This code: creates a table of dispensary density by socioeconomic factors**
 
-1.  [matches zip codes to census geocodes](https://brookemwalters.github.io/Nimby_Site/Label%20the%20Dispensaries%20with%20GeoCodes_step2.html#match-the-files-to-the-county-codes "match the files to the county codes")
-
-2.  [connects to census API](https://brookemwalters.github.io/Nimby_Site/Label%20the%20Dispensaries%20with%20GeoCodes_step2.html#pull-in-the-census-data-with-tidy-census)
-
-3.  [pulls in demographic populations](https://brookemwalters.github.io/Nimby_Site/Label%20the%20Dispensaries%20with%20GeoCodes_step2.html#pull-in-the-census-data-with-tidy-census)
-
-4.  [calculates poverty, race, and employment count rates](https://brookemwalters.github.io/Nimby_Site/Label%20the%20Dispensaries%20with%20GeoCodes_step2.html#find-the-race-poverty-and-employment-rates-at-the-county-level)
-
-5.  [matches the statistics above with year-over-year changes in dispensaries](https://brookemwalters.github.io/Nimby_Site/Label%20the%20Dispensaries%20with%20GeoCodes_step2.html#match-the-change-in-dispensary-density-with-demographics)
-
-6.  [creates a table showing dispensary YOY growth by socioeconomic quartiles](https://brookemwalters.github.io/Nimby_Site/Label%20the%20Dispensaries%20with%20GeoCodes_step2.html#put-everything-together)
+1.  matches zip codes to census geocodes\
+2.  connects to census API\
+3.  retrieves demographic populations\
+4.  calculates poverty, race, and employment count rates\
+5.  matches the statistics above with year-over-year changes in dispensaries\
+6.  creates a table showing dispensary YOY growth by socioeconomic quartiles\
 
 ### load packages
 
@@ -31,6 +26,7 @@ library(tigris) # to pull in census boundaries
 options(tigris_use_cache = TRUE) # save to local memory
 library(tidycensus) # to pull demographic data from the census
 library(tidyverse)
+library(gt)# formatting an interactive table
 ```
 
 ### import data
@@ -46,11 +42,11 @@ dsps_zips <-  as.data.frame(read.csv("~/gvsu/winter 23/CIS 635/NIMBY/cleaning/co
 county_codes <- (read.csv("~/gvsu/winter 23/CIS 635/NIMBY/cleaning/density tables/county_FIPS_codes.csv"))
 ```
 
-### match geographic shape files to dispensary zip codes
+### spatial join between dispensary locations and geocodes
 
-grab tract info from the tigris package
+At this stage, the zip codes are my main geographical identifier for my dispensary data frame. In an attempt to find the tract level data, I tapped into the tigris package. It was here I realized that a county level analysis was my best approach. My original goal was to pull in the spacial data for mapping later.
 
-[*adapted from "[How to Use the coalesce() Function in dplyr](https://www.statology.org/dplyr-coalesce "Statology")"*]{style="font-size: 80%;"}
+[*adapted from "[tigris](https://github.com/walkerke/tigris "Kyle Walker")"*]{style="font-size: 80%;"}
 
 ```{r, echo=FALSE}
 zctas <- zctas(state = 08, year = 2010, class = "sf")
@@ -83,13 +79,15 @@ dsps_geos<- dsps_geos %>%
   slice(1)
 ```
 
+\
+
 ### match the files to the county codes
 
 ```{r}
 # time to add the spacial data to my dispensary list!
 dsps$zip <-  as.character(dsps$zip) # convert_back to characters
 dsps<- left_join(dsps, dsps_geos, by = "zip")
-dsps$county_code <-  as.integer(dsps$county_code)
+dsps$county_code <-  as.integer(dsps$county_code) # using an intgers to join other datasets
 
 # a lovely document with dispensary tracts and county codes
 dsps<- left_join(dsps, county_codes, by = "county_code")
@@ -112,7 +110,7 @@ dsps_summed <-  dsps %>%
 write.csv(dsps_summed, "~/gvsu/winter 23/CIS 635/NIMBY/cleaning/counting_dispensaries/dps_data_cleaned/dispensary_counts_county_year.csv")
 ```
 
-### pull in the census data with Tidy Census
+### retrieve census population data with Tidy Census
 
 the paper looks at the poverty rate, percent black, percent Hispanic, and the employment rate demographic data comes from the U.S. Census 2014 American Community Survey 5-year sample, and employment data comes from the U.S. Census 2013 Origin-Destination Employment Statistics
 
@@ -141,7 +139,11 @@ demo_factors <- get_acs(
 colnames(demo_factors)
 ```
 
+\
+
 ### match the change in dispensary density with demographics
+
+Here I join two datasets using "GEOID", aggregate and sums up the annual population and demographic factors by geographic ID, and creates new columns that represent the total population and economic indicators for each geographic ID. The resulting dataset has one row per unique geographic ID.
 
 ```{r}
 # switching from merging to left joins since it's easier to read
@@ -166,14 +168,30 @@ dsps_yoy_demos <- dsps_yoy_demos %>%
     `2015` = sum(`2015`),
     `2016` = sum(`2016`)
   )
+
 ```
 
-### Calculate the year-over-year change average in dispensaries for the state of Colorado
+## year-over-year function
+
+One of former professors told me, if you have do write something three times then it's time to write a function! The year over year variance is another crucial aspect of NIMBY's model. This function will be applied to several variables
 
 ```{r}
-# import my yoy function, it's going to do some work
-source("~/gvsu/winter 23/CIS 635/NIMBY/formatted code/yoy_function.r")
+# make a function to calculate the year over year changes
+yoy_avg_function <- function(df) {
+  # calculate  growth rates
+  df$yoy_2014 <- ((df$`2014` - df$`2013`) / df$`2013`) 
+  df$yoy_2015 <- ((df$`2015` - df$`2014`) / df$`2014`) 
+  df$yoy_2016 <- ((df$`2016` - df$`2015`) / df$`2015`) 
+  
+  # average growth rate and round to 3 decimal places
+  df$dsp_yoy_avg <- rowMeans(df[, c("yoy_2014", "yoy_2015", "yoy_2016")], na.rm = TRUE)
+  df <- df %>% mutate_at(vars(starts_with("dsp")), funs(round(., 3))) # round
+  
+  return(df)
+}
 ```
+
+### calculate the year-over-year change average in dispensaries for the state of Colorado
 
 ```{r}
 colorado_yoy_average <-  dsps_yoy_demos %>% 
@@ -202,7 +220,11 @@ dsps_yoy_demos  <- dsps_yoy_demos %>%
   mutate_at(vars(starts_with("pct")), funs(round(., 3)))
 ```
 
-### create quartiles to recreate Table 1 pg 78
+### create quartiles to recreate table1
+
+![table1 from the original paper is my second reference at cross comparing my results against NIMBY's](images/Table1.png)
+
+Using the ntile function, I classify the dispensary year-over-year changes by counties quartiles of the various variables
 
 ```{r}
 dsps_yoy_demos <- dsps_yoy_demos %>% 
@@ -217,9 +239,11 @@ dsps_yoy_qtiles <- yoy_avg_function(dsps_yoy_demos)
 write.csv(dsps_yoy_qtiles, "~/gvsu/winter 23/CIS 635/NIMBY/cleaning/counting_dispensaries/dps_data_cleaned/dsps_yoy_qtiles.csv")
 ```
 
+ 
+
 clean up the columns to just look at the quartiles and count of dispensaries
 
-```{r}
+```{r warning=FALSE}
 # poverty quartiles by dispensary density
 poverty_qts <- dsps_yoy_qtiles %>% 
   select(
@@ -240,7 +264,7 @@ poverty_qts <- dsps_yoy_qtiles %>%
   select(1,9)
   
 
-# iI checked and my total match across quartiles, and look similar to the area graph data
+# I checked and my total match across quartiles, and look similar to the area graph data
 # black population quartiles by dispensary density
 black_qts <- dsps_yoy_qtiles %>% 
   select(
@@ -299,9 +323,7 @@ employment_qts <- dsps_yoy_qtiles %>%
   select(1,9)
 ```
 
-### put everything together
-
-while my colorado average is close my values do not align with the paper
+### create a table of all my variables:
 
 ```{r}
 # put everything together 
@@ -313,11 +335,35 @@ density_table1 <- poverty_qts %>%
 
 # 
 # rename the columns
-colnames(density_table1) <- c("Quartile", "Pov. Rate", "Pct. Black", "Pct. Hispanic", "Employment", "Colorado Average")
+colnames(density_table1) <- c("Quartile", "Poverty Rate", "Pct. Black", "Pct. Hispanic", "Employment", "Colorado Average")
 # 
 combined_table <- bind_rows(density_table1 , colorado_yoy_average)
 
 # Average change in dispensary density by local characteristics [Table 1]
 density_table1
 combined_table
+```
+
+format the table for a side by side comparison [*adapted from "[Top 7 Packages for Making Beautiful Tables in R](https://towardsdatascience.com/top-7-packages-for-making-beautiful-tables-in-r-7683d054e541 "Devashree Madhugiri")"*]{style="font-size: 80%;"}
+
+```{r}
+
+# use the gt package to format the intel
+combined_table %>%gt() %>% 
+    fmt_missing(
+    columns = everything(), # remove the null vaules from the colorado average data
+    missing_text = ""
+  ) %>% 
+  
+  
+  tab_header(title = "average change in dispensary density by local characteristics",
+             subtitle = "Brooke's Version"
+              ) %>%
+  tab_style(style = list(cell_fill(color = "#DEDDB6"), 
+                         cell_text(weight = "bold")),
+            locations = cells_body(columns = Quartile))%>%
+  tab_style(
+    style = list(cell_fill(color = "#EAB8B7"),
+                 cell_text(weight = "bold")), 
+    locations = cells_body(columns = Colorado_Average))
 ```

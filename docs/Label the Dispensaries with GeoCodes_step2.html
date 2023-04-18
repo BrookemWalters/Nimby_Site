@@ -194,15 +194,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <ul>
   <li><a href="#load-packages" id="toc-load-packages" class="nav-link active" data-scroll-target="#load-packages">load packages</a></li>
   <li><a href="#import-data" id="toc-import-data" class="nav-link" data-scroll-target="#import-data">import data</a></li>
-  <li><a href="#match-geographic-shape-files-to-dispensary-zip-codes" id="toc-match-geographic-shape-files-to-dispensary-zip-codes" class="nav-link" data-scroll-target="#match-geographic-shape-files-to-dispensary-zip-codes">match geographic shape files to dispensary zip codes</a></li>
+  <li><a href="#spatial-join-between-dispensary-locations-and-geocodes" id="toc-spatial-join-between-dispensary-locations-and-geocodes" class="nav-link" data-scroll-target="#spatial-join-between-dispensary-locations-and-geocodes">spatial join between dispensary locations and geocodes</a></li>
   <li><a href="#match-the-files-to-the-county-codes" id="toc-match-the-files-to-the-county-codes" class="nav-link" data-scroll-target="#match-the-files-to-the-county-codes">match the files to the county codes</a></li>
   <li><a href="#count-the-dispensaries" id="toc-count-the-dispensaries" class="nav-link" data-scroll-target="#count-the-dispensaries">count the dispensaries</a></li>
-  <li><a href="#pull-in-the-census-data-with-tidy-census" id="toc-pull-in-the-census-data-with-tidy-census" class="nav-link" data-scroll-target="#pull-in-the-census-data-with-tidy-census">pull in the census data with Tidy Census</a></li>
+  <li><a href="#retrieve-census-population-data-with-tidy-census" id="toc-retrieve-census-population-data-with-tidy-census" class="nav-link" data-scroll-target="#retrieve-census-population-data-with-tidy-census">retrieve census population data with Tidy Census</a></li>
   <li><a href="#match-the-change-in-dispensary-density-with-demographics" id="toc-match-the-change-in-dispensary-density-with-demographics" class="nav-link" data-scroll-target="#match-the-change-in-dispensary-density-with-demographics">match the change in dispensary density with demographics</a></li>
-  <li><a href="#calculate-the-year-over-year-change-average-in-dispensaries-for-the-state-of-colorado" id="toc-calculate-the-year-over-year-change-average-in-dispensaries-for-the-state-of-colorado" class="nav-link" data-scroll-target="#calculate-the-year-over-year-change-average-in-dispensaries-for-the-state-of-colorado">Calculate the year-over-year change average in dispensaries for the state of Colorado</a></li>
+  <li><a href="#year-over-year-function" id="toc-year-over-year-function" class="nav-link" data-scroll-target="#year-over-year-function">year-over-year function</a>
+  <ul class="collapse">
+  <li><a href="#calculate-the-year-over-year-change-average-in-dispensaries-for-the-state-of-colorado" id="toc-calculate-the-year-over-year-change-average-in-dispensaries-for-the-state-of-colorado" class="nav-link" data-scroll-target="#calculate-the-year-over-year-change-average-in-dispensaries-for-the-state-of-colorado">calculate the year-over-year change average in dispensaries for the state of Colorado</a></li>
   <li><a href="#find-the-race-poverty-and-employment-rates-at-the-county-level" id="toc-find-the-race-poverty-and-employment-rates-at-the-county-level" class="nav-link" data-scroll-target="#find-the-race-poverty-and-employment-rates-at-the-county-level">find the race, poverty and employment rates at the county level</a></li>
-  <li><a href="#create-quartiles-to-recreate-table-1-pg-78" id="toc-create-quartiles-to-recreate-table-1-pg-78" class="nav-link" data-scroll-target="#create-quartiles-to-recreate-table-1-pg-78">create quartiles to recreate Table 1 pg 78</a></li>
-  <li><a href="#put-everything-together" id="toc-put-everything-together" class="nav-link" data-scroll-target="#put-everything-together">put everything together</a></li>
+  <li><a href="#create-quartiles-to-recreate-table1" id="toc-create-quartiles-to-recreate-table1" class="nav-link" data-scroll-target="#create-quartiles-to-recreate-table1">create quartiles to recreate table1</a></li>
+  <li><a href="#create-a-table-of-all-my-variables" id="toc-create-a-table-of-all-my-variables" class="nav-link" data-scroll-target="#create-a-table-of-all-my-variables">create a table of all my variables:</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -214,12 +217,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="images/census factors.png" class="img-fluid"></p>
 <p><strong>This code: creates a table of dispensary density by socioeconomic factors</strong></p>
 <ol type="1">
-<li><p><a href="https://brookemwalters.github.io/Nimby_Site/Label%20the%20Dispensaries%20with%20GeoCodes_step2.html#match-the-files-to-the-county-codes" title="match the files to the county codes">matches zip codes to census geocodes</a></p></li>
-<li><p><a href="https://brookemwalters.github.io/Nimby_Site/Label%20the%20Dispensaries%20with%20GeoCodes_step2.html#pull-in-the-census-data-with-tidy-census">connects to census API</a></p></li>
-<li><p><a href="https://brookemwalters.github.io/Nimby_Site/Label%20the%20Dispensaries%20with%20GeoCodes_step2.html#pull-in-the-census-data-with-tidy-census">pulls in demographic populations</a></p></li>
-<li><p><a href="https://brookemwalters.github.io/Nimby_Site/Label%20the%20Dispensaries%20with%20GeoCodes_step2.html#find-the-race-poverty-and-employment-rates-at-the-county-level">calculates poverty, race, and employment count rates</a></p></li>
-<li><p><a href="https://brookemwalters.github.io/Nimby_Site/Label%20the%20Dispensaries%20with%20GeoCodes_step2.html#match-the-change-in-dispensary-density-with-demographics">matches the statistics above with year-over-year changes in dispensaries</a></p></li>
-<li><p><a href="https://brookemwalters.github.io/Nimby_Site/Label%20the%20Dispensaries%20with%20GeoCodes_step2.html#put-everything-together">creates a table showing dispensary YOY growth by socioeconomic quartiles</a></p></li>
+<li>matches zip codes to census geocodes<br>
+</li>
+<li>connects to census API<br>
+</li>
+<li>retrieves demographic populations<br>
+</li>
+<li>calculates poverty, race, and employment count rates<br>
+</li>
+<li>matches the statistics above with year-over-year changes in dispensaries<br>
+</li>
+<li>creates a table showing dispensary YOY growth by socioeconomic quartiles<br>
+</li>
 </ol>
 <section id="load-packages" class="level3">
 <h3 class="anchored" data-anchor-id="load-packages">load packages</h3>
@@ -242,10 +251,10 @@ in your R script or .Rprofile.</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>── Attaching packages ─────────────────────────────────────── tidyverse 1.3.2 ──
-✔ ggplot2 3.4.0      ✔ purrr   1.0.1 
-✔ tibble  3.1.8      ✔ dplyr   1.0.10
-✔ tidyr   1.2.1      ✔ stringr 1.5.0 
-✔ readr   2.1.3      ✔ forcats 0.5.2 
+✔ ggplot2 3.4.0     ✔ purrr   1.0.1
+✔ tibble  3.2.1     ✔ dplyr   1.1.1
+✔ tidyr   1.2.1     ✔ stringr 1.5.0
+✔ readr   2.1.3     ✔ forcats 0.5.2
 ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ lubridate::as.difftime() masks base::as.difftime()
 ✖ lubridate::date()        masks base::date()
@@ -273,13 +282,15 @@ in your R script or .Rprofile.</code></pre>
 </details>
 </div>
 </section>
-<section id="match-geographic-shape-files-to-dispensary-zip-codes" class="level3">
-<h3 class="anchored" data-anchor-id="match-geographic-shape-files-to-dispensary-zip-codes">match geographic shape files to dispensary zip codes</h3>
-<p>grab tract info from the tigris package</p>
-<p><span style="font-size: 80%;"><em>adapted from “<a href="https://www.statology.org/dplyr-coalesce" title="Statology">How to Use the coalesce() Function in dplyr</a>”</em></span></p>
+<section id="spatial-join-between-dispensary-locations-and-geocodes" class="level3">
+<h3 class="anchored" data-anchor-id="spatial-join-between-dispensary-locations-and-geocodes">spatial join between dispensary locations and geocodes</h3>
+<p>At this stage, the zip codes are my main geographical identifier for my dispensary data frame. In an attempt to find the tract level data, I tapped into the tigris package. It was here I realized that a county level analysis was my best approach. My original goal was to pull in the spacial data for mapping later.</p>
+<p><span style="font-size: 80%;"><em>adapted from “<a href="https://github.com/walkerke/tigris" title="Kyle Walker">tigris</a>”</em></span></p>
 <div class="cell">
 
 </div>
+<p><br>
+</p>
 </section>
 <section id="match-the-files-to-the-county-codes" class="level3">
 <h3 class="anchored" data-anchor-id="match-the-files-to-the-county-codes">match the files to the county codes</h3>
@@ -289,7 +300,7 @@ in your R script or .Rprofile.</code></pre>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># time to add the spacial data to my dispensary list!</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>dsps<span class="sc">$</span>zip <span class="ot">&lt;-</span>  <span class="fu">as.character</span>(dsps<span class="sc">$</span>zip) <span class="co"># convert_back to characters</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>dsps<span class="ot">&lt;-</span> <span class="fu">left_join</span>(dsps, dsps_geos, <span class="at">by =</span> <span class="st">"zip"</span>)</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>dsps<span class="sc">$</span>county_code <span class="ot">&lt;-</span>  <span class="fu">as.integer</span>(dsps<span class="sc">$</span>county_code)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>dsps<span class="sc">$</span>county_code <span class="ot">&lt;-</span>  <span class="fu">as.integer</span>(dsps<span class="sc">$</span>county_code) <span class="co"># using an intgers to join other datasets</span></span>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># a lovely document with dispensary tracts and county codes</span></span>
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>dsps<span class="ot">&lt;-</span> <span class="fu">left_join</span>(dsps, county_codes, <span class="at">by =</span> <span class="st">"county_code"</span>)</span>
@@ -322,8 +333,8 @@ in your R script or .Rprofile.</code></pre>
 </details>
 </div>
 </section>
-<section id="pull-in-the-census-data-with-tidy-census" class="level3">
-<h3 class="anchored" data-anchor-id="pull-in-the-census-data-with-tidy-census">pull in the census data with Tidy Census</h3>
+<section id="retrieve-census-population-data-with-tidy-census" class="level3">
+<h3 class="anchored" data-anchor-id="retrieve-census-population-data-with-tidy-census">retrieve census population data with Tidy Census</h3>
 <p>the paper looks at the poverty rate, percent black, percent Hispanic, and the employment rate demographic data comes from the U.S. Census 2014 American Community Survey 5-year sample, and employment data comes from the U.S. Census 2013 Origin-Destination Employment Statistics</p>
 <p>I’ve already established an API census_api_key(“[API removed for privacy]”, install = TRUE)</p>
 <p><a href="https://www.socialexplorer.com/data/ACS2013_5yr/metadata/?ds=ACS13_5yr&amp;var=B17001001">SocialExplore.com</a> is a helpful website for definitions:</p>
@@ -362,9 +373,12 @@ in your R script or .Rprofile.</code></pre>
 [13] "hispanicE"      "hispanicM"     </code></pre>
 </div>
 </div>
+<p><br>
+</p>
 </section>
 <section id="match-the-change-in-dispensary-density-with-demographics" class="level3">
 <h3 class="anchored" data-anchor-id="match-the-change-in-dispensary-density-with-demographics">match the change in dispensary density with demographics</h3>
+<p>Here I join two datasets using “GEOID”, aggregate and sums up the annual population and demographic factors by geographic ID, and creates new columns that represent the total population and economic indicators for each geographic ID. The resulting dataset has one row per unique geographic ID.</p>
 <div class="cell">
 <details open="">
 <summary>Code</summary>
@@ -402,15 +416,29 @@ in your R script or .Rprofile.</code></pre>
 </details>
 </div>
 </section>
-<section id="calculate-the-year-over-year-change-average-in-dispensaries-for-the-state-of-colorado" class="level3">
-<h3 class="anchored" data-anchor-id="calculate-the-year-over-year-change-average-in-dispensaries-for-the-state-of-colorado">Calculate the year-over-year change average in dispensaries for the state of Colorado</h3>
+<section id="year-over-year-function" class="level2">
+<h2 class="anchored" data-anchor-id="year-over-year-function">year-over-year function</h2>
+<p>One of former professors told me, if you have do write something three times then it’s time to write a function! The year over year variance is another crucial aspect of NIMBY’s model. This function will be applied to several variables</p>
 <div class="cell">
 <details open="">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># import my yoy function, it's going to do some work</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"~/gvsu/winter 23/CIS 635/NIMBY/formatted code/yoy_function.r"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># make a function to calculate the year over year changes</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>yoy_avg_function <span class="ot">&lt;-</span> <span class="cf">function</span>(df) {</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># calculate  growth rates</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  df<span class="sc">$</span>yoy_2014 <span class="ot">&lt;-</span> ((df<span class="sc">$</span><span class="st">`</span><span class="at">2014</span><span class="st">`</span> <span class="sc">-</span> df<span class="sc">$</span><span class="st">`</span><span class="at">2013</span><span class="st">`</span>) <span class="sc">/</span> df<span class="sc">$</span><span class="st">`</span><span class="at">2013</span><span class="st">`</span>) </span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  df<span class="sc">$</span>yoy_2015 <span class="ot">&lt;-</span> ((df<span class="sc">$</span><span class="st">`</span><span class="at">2015</span><span class="st">`</span> <span class="sc">-</span> df<span class="sc">$</span><span class="st">`</span><span class="at">2014</span><span class="st">`</span>) <span class="sc">/</span> df<span class="sc">$</span><span class="st">`</span><span class="at">2014</span><span class="st">`</span>) </span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  df<span class="sc">$</span>yoy_2016 <span class="ot">&lt;-</span> ((df<span class="sc">$</span><span class="st">`</span><span class="at">2016</span><span class="st">`</span> <span class="sc">-</span> df<span class="sc">$</span><span class="st">`</span><span class="at">2015</span><span class="st">`</span>) <span class="sc">/</span> df<span class="sc">$</span><span class="st">`</span><span class="at">2015</span><span class="st">`</span>) </span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># average growth rate and round to 3 decimal places</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>  df<span class="sc">$</span>dsp_yoy_avg <span class="ot">&lt;-</span> <span class="fu">rowMeans</span>(df[, <span class="fu">c</span>(<span class="st">"yoy_2014"</span>, <span class="st">"yoy_2015"</span>, <span class="st">"yoy_2016"</span>)], <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>  df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">mutate_at</span>(<span class="fu">vars</span>(<span class="fu">starts_with</span>(<span class="st">"dsp"</span>)), <span class="fu">funs</span>(<span class="fu">round</span>(., <span class="dv">3</span>))) <span class="co"># round</span></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(df)</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
+<section id="calculate-the-year-over-year-change-average-in-dispensaries-for-the-state-of-colorado" class="level3">
+<h3 class="anchored" data-anchor-id="calculate-the-year-over-year-change-average-in-dispensaries-for-the-state-of-colorado">calculate the year-over-year change average in dispensaries for the state of Colorado</h3>
 <div class="cell">
 <details open="">
 <summary>Code</summary>
@@ -452,157 +480,715 @@ in your R script or .Rprofile.</code></pre>
 <span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  <span class="co">#round</span></span>
 <span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_at</span>(<span class="fu">vars</span>(<span class="fu">starts_with</span>(<span class="st">"pct"</span>)), <span class="fu">funs</span>(<span class="fu">round</span>(., <span class="dv">3</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: `funs()` was deprecated in dplyr 0.8.0.
+ℹ Please use a list of either functions or lambdas:
+
+# Simple named list: list(mean = mean, median = median)
+
+# Auto named with `tibble::lst()`: tibble::lst(mean, median)
+
+# Using lambdas list(~ mean(., trim = .2), ~ median(., na.rm = TRUE))</code></pre>
+</div>
 </div>
 </section>
-<section id="create-quartiles-to-recreate-table-1-pg-78" class="level3">
-<h3 class="anchored" data-anchor-id="create-quartiles-to-recreate-table-1-pg-78">create quartiles to recreate Table 1 pg 78</h3>
+<section id="create-quartiles-to-recreate-table1" class="level3">
+<h3 class="anchored" data-anchor-id="create-quartiles-to-recreate-table1">create quartiles to recreate table1</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Table1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">table1 from the original paper is my second reference at cross comparing my results against NIMBY’s</figcaption><p></p>
+</figure>
+</div>
+<p>Using the ntile function, I classify the dispensary year-over-year changes by counties quartiles of the various variables</p>
 <div class="cell">
 <details open="">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>dsps_yoy_demos <span class="ot">&lt;-</span> dsps_yoy_demos <span class="sc">%&gt;%</span> </span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">qrt_pov =</span> <span class="fu">ntile</span>(pct_poverty_rate,<span class="dv">4</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">qrt_black =</span> <span class="fu">ntile</span>(pct_black,<span class="dv">4</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">qrt_hispanic =</span> <span class="fu">ntile</span>(pct_hispanic,<span class="dv">4</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">qrt_employment =</span> <span class="fu">ntile</span>(employeed_pop,<span class="dv">4</span>))</span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate the YOY average</span></span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>dsps_yoy_qtiles <span class="ot">&lt;-</span> <span class="fu">yoy_avg_function</span>(dsps_yoy_demos) </span>
-<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="co"># save the data for the crime per capita calculations</span></span>
-<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(dsps_yoy_qtiles, <span class="st">"~/gvsu/winter 23/CIS 635/NIMBY/cleaning/counting_dispensaries/dps_data_cleaned/dsps_yoy_qtiles.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>dsps_yoy_demos <span class="ot">&lt;-</span> dsps_yoy_demos <span class="sc">%&gt;%</span> </span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">qrt_pov =</span> <span class="fu">ntile</span>(pct_poverty_rate,<span class="dv">4</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">qrt_black =</span> <span class="fu">ntile</span>(pct_black,<span class="dv">4</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">qrt_hispanic =</span> <span class="fu">ntile</span>(pct_hispanic,<span class="dv">4</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">qrt_employment =</span> <span class="fu">ntile</span>(employeed_pop,<span class="dv">4</span>))</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate the YOY average</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>dsps_yoy_qtiles <span class="ot">&lt;-</span> <span class="fu">yoy_avg_function</span>(dsps_yoy_demos) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: `funs()` was deprecated in dplyr 0.8.0.
+ℹ Please use a list of either functions or lambdas:
+
+# Simple named list: list(mean = mean, median = median)
+
+# Auto named with `tibble::lst()`: tibble::lst(mean, median)
+
+# Using lambdas list(~ mean(., trim = .2), ~ median(., na.rm = TRUE))</code></pre>
+</div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># save the data for the crime per capita calculations</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(dsps_yoy_qtiles, <span class="st">"~/gvsu/winter 23/CIS 635/NIMBY/cleaning/counting_dispensaries/dps_data_cleaned/dsps_yoy_qtiles.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
+<p>&nbsp;</p>
 <p>clean up the columns to just look at the quartiles and count of dispensaries</p>
 <div class="cell">
 <details open="">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># poverty quartiles by dispensary density</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>poverty_qts <span class="ot">&lt;-</span> dsps_yoy_qtiles <span class="sc">%&gt;%</span> </span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(</span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    qrt_pov,</span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">2013</span><span class="st">`</span>,</span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">2014</span><span class="st">`</span>,</span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">2015</span><span class="st">`</span>,</span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">2016</span><span class="st">`</span></span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>      ) <span class="sc">%&gt;%</span> </span>
-<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(qrt_pov) <span class="sc">%&gt;%</span> <span class="co"># add the total ins</span></span>
-<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
-<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">2013</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">sum</span>(<span class="st">`</span><span class="at">2013</span><span class="st">`</span>),</span>
-<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">2014</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">sum</span>(<span class="st">`</span><span class="at">2014</span><span class="st">`</span>),</span>
-<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">2015</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">sum</span>(<span class="st">`</span><span class="at">2015</span><span class="st">`</span>),</span>
-<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">2016</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">sum</span>(<span class="st">`</span><span class="at">2016</span><span class="st">`</span>)</span>
-<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
-<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>  yoy_avg_function  <span class="sc">%&gt;%</span> </span>
-<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="dv">1</span>,<span class="dv">9</span>)</span>
-<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a><span class="co"># iI checked and my total match across quartiles, and look similar to the area graph data</span></span>
-<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a><span class="co"># black population quartiles by dispensary density</span></span>
-<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a>black_qts <span class="ot">&lt;-</span> dsps_yoy_qtiles <span class="sc">%&gt;%</span> </span>
-<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(</span>
-<span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a>    qrt_black,</span>
-<span id="cb23-26"><a href="#cb23-26" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">2013</span><span class="st">`</span>,</span>
-<span id="cb23-27"><a href="#cb23-27" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">2014</span><span class="st">`</span>,</span>
-<span id="cb23-28"><a href="#cb23-28" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">2015</span><span class="st">`</span>,</span>
-<span id="cb23-29"><a href="#cb23-29" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">2016</span><span class="st">`</span></span>
-<span id="cb23-30"><a href="#cb23-30" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
-<span id="cb23-31"><a href="#cb23-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(qrt_black) <span class="sc">%&gt;%</span> <span class="co"># add the total ins</span></span>
-<span id="cb23-32"><a href="#cb23-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
-<span id="cb23-33"><a href="#cb23-33" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">2013</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">sum</span>(<span class="st">`</span><span class="at">2013</span><span class="st">`</span>),</span>
-<span id="cb23-34"><a href="#cb23-34" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">2014</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">sum</span>(<span class="st">`</span><span class="at">2014</span><span class="st">`</span>),</span>
-<span id="cb23-35"><a href="#cb23-35" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">2015</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">sum</span>(<span class="st">`</span><span class="at">2015</span><span class="st">`</span>),</span>
-<span id="cb23-36"><a href="#cb23-36" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">2016</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">sum</span>(<span class="st">`</span><span class="at">2016</span><span class="st">`</span>)</span>
-<span id="cb23-37"><a href="#cb23-37" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
-<span id="cb23-38"><a href="#cb23-38" aria-hidden="true" tabindex="-1"></a>  yoy_avg_function  <span class="sc">%&gt;%</span> </span>
-<span id="cb23-39"><a href="#cb23-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="dv">1</span>,<span class="dv">9</span>)</span>
-<span id="cb23-40"><a href="#cb23-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-41"><a href="#cb23-41" aria-hidden="true" tabindex="-1"></a><span class="co"># Hispanic quartiles by dispensary density</span></span>
-<span id="cb23-42"><a href="#cb23-42" aria-hidden="true" tabindex="-1"></a>hispanic_qts <span class="ot">&lt;-</span> dsps_yoy_qtiles <span class="sc">%&gt;%</span> </span>
-<span id="cb23-43"><a href="#cb23-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(</span>
-<span id="cb23-44"><a href="#cb23-44" aria-hidden="true" tabindex="-1"></a>    qrt_hispanic,</span>
-<span id="cb23-45"><a href="#cb23-45" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">2013</span><span class="st">`</span>,</span>
-<span id="cb23-46"><a href="#cb23-46" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">2014</span><span class="st">`</span>,</span>
-<span id="cb23-47"><a href="#cb23-47" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">2015</span><span class="st">`</span>,</span>
-<span id="cb23-48"><a href="#cb23-48" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">2016</span><span class="st">`</span></span>
-<span id="cb23-49"><a href="#cb23-49" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
-<span id="cb23-50"><a href="#cb23-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(qrt_hispanic) <span class="sc">%&gt;%</span> <span class="co"># add the total ins</span></span>
-<span id="cb23-51"><a href="#cb23-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
-<span id="cb23-52"><a href="#cb23-52" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">2013</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">sum</span>(<span class="st">`</span><span class="at">2013</span><span class="st">`</span>),</span>
-<span id="cb23-53"><a href="#cb23-53" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">2014</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">sum</span>(<span class="st">`</span><span class="at">2014</span><span class="st">`</span>),</span>
-<span id="cb23-54"><a href="#cb23-54" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">2015</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">sum</span>(<span class="st">`</span><span class="at">2015</span><span class="st">`</span>),</span>
-<span id="cb23-55"><a href="#cb23-55" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">2016</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">sum</span>(<span class="st">`</span><span class="at">2016</span><span class="st">`</span>)</span>
-<span id="cb23-56"><a href="#cb23-56" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
-<span id="cb23-57"><a href="#cb23-57" aria-hidden="true" tabindex="-1"></a>  yoy_avg_function  <span class="sc">%&gt;%</span> </span>
-<span id="cb23-58"><a href="#cb23-58" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="dv">1</span>,<span class="dv">9</span>)</span>
-<span id="cb23-59"><a href="#cb23-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-60"><a href="#cb23-60" aria-hidden="true" tabindex="-1"></a><span class="co"># employment quartiles by dispensary density</span></span>
-<span id="cb23-61"><a href="#cb23-61" aria-hidden="true" tabindex="-1"></a>employment_qts <span class="ot">&lt;-</span> dsps_yoy_qtiles <span class="sc">%&gt;%</span> </span>
-<span id="cb23-62"><a href="#cb23-62" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(</span>
-<span id="cb23-63"><a href="#cb23-63" aria-hidden="true" tabindex="-1"></a>    qrt_employment,</span>
-<span id="cb23-64"><a href="#cb23-64" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">2013</span><span class="st">`</span>,</span>
-<span id="cb23-65"><a href="#cb23-65" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">2014</span><span class="st">`</span>,</span>
-<span id="cb23-66"><a href="#cb23-66" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">2015</span><span class="st">`</span>,</span>
-<span id="cb23-67"><a href="#cb23-67" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">2016</span><span class="st">`</span></span>
-<span id="cb23-68"><a href="#cb23-68" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span> </span>
-<span id="cb23-69"><a href="#cb23-69" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(qrt_employment) <span class="sc">%&gt;%</span> <span class="co"># add the total ins</span></span>
-<span id="cb23-70"><a href="#cb23-70" aria-hidden="true" tabindex="-1"></a>      <span class="fu">summarize</span>(</span>
-<span id="cb23-71"><a href="#cb23-71" aria-hidden="true" tabindex="-1"></a>        <span class="st">`</span><span class="at">2013</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">sum</span>(<span class="st">`</span><span class="at">2013</span><span class="st">`</span>),</span>
-<span id="cb23-72"><a href="#cb23-72" aria-hidden="true" tabindex="-1"></a>        <span class="st">`</span><span class="at">2014</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">sum</span>(<span class="st">`</span><span class="at">2014</span><span class="st">`</span>),</span>
-<span id="cb23-73"><a href="#cb23-73" aria-hidden="true" tabindex="-1"></a>        <span class="st">`</span><span class="at">2015</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">sum</span>(<span class="st">`</span><span class="at">2015</span><span class="st">`</span>),</span>
-<span id="cb23-74"><a href="#cb23-74" aria-hidden="true" tabindex="-1"></a>        <span class="st">`</span><span class="at">2016</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">sum</span>(<span class="st">`</span><span class="at">2016</span><span class="st">`</span>)</span>
-<span id="cb23-75"><a href="#cb23-75" aria-hidden="true" tabindex="-1"></a>      ) <span class="sc">%&gt;%</span> </span>
-<span id="cb23-76"><a href="#cb23-76" aria-hidden="true" tabindex="-1"></a>  yoy_avg_function  <span class="sc">%&gt;%</span> </span>
-<span id="cb23-77"><a href="#cb23-77" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="dv">1</span>,<span class="dv">9</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># poverty quartiles by dispensary density</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>poverty_qts <span class="ot">&lt;-</span> dsps_yoy_qtiles <span class="sc">%&gt;%</span> </span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>    qrt_pov,</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">2013</span><span class="st">`</span>,</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">2014</span><span class="st">`</span>,</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">2015</span><span class="st">`</span>,</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">2016</span><span class="st">`</span></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>      ) <span class="sc">%&gt;%</span> </span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(qrt_pov) <span class="sc">%&gt;%</span> <span class="co"># add the total ins</span></span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">2013</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">sum</span>(<span class="st">`</span><span class="at">2013</span><span class="st">`</span>),</span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">2014</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">sum</span>(<span class="st">`</span><span class="at">2014</span><span class="st">`</span>),</span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">2015</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">sum</span>(<span class="st">`</span><span class="at">2015</span><span class="st">`</span>),</span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">2016</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">sum</span>(<span class="st">`</span><span class="at">2016</span><span class="st">`</span>)</span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>  yoy_avg_function  <span class="sc">%&gt;%</span> </span>
+<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="dv">1</span>,<span class="dv">9</span>)</span>
+<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-21"><a href="#cb26-21" aria-hidden="true" tabindex="-1"></a><span class="co"># I checked and my total match across quartiles, and look similar to the area graph data</span></span>
+<span id="cb26-22"><a href="#cb26-22" aria-hidden="true" tabindex="-1"></a><span class="co"># black population quartiles by dispensary density</span></span>
+<span id="cb26-23"><a href="#cb26-23" aria-hidden="true" tabindex="-1"></a>black_qts <span class="ot">&lt;-</span> dsps_yoy_qtiles <span class="sc">%&gt;%</span> </span>
+<span id="cb26-24"><a href="#cb26-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(</span>
+<span id="cb26-25"><a href="#cb26-25" aria-hidden="true" tabindex="-1"></a>    qrt_black,</span>
+<span id="cb26-26"><a href="#cb26-26" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">2013</span><span class="st">`</span>,</span>
+<span id="cb26-27"><a href="#cb26-27" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">2014</span><span class="st">`</span>,</span>
+<span id="cb26-28"><a href="#cb26-28" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">2015</span><span class="st">`</span>,</span>
+<span id="cb26-29"><a href="#cb26-29" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">2016</span><span class="st">`</span></span>
+<span id="cb26-30"><a href="#cb26-30" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb26-31"><a href="#cb26-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(qrt_black) <span class="sc">%&gt;%</span> <span class="co"># add the total ins</span></span>
+<span id="cb26-32"><a href="#cb26-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb26-33"><a href="#cb26-33" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">2013</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">sum</span>(<span class="st">`</span><span class="at">2013</span><span class="st">`</span>),</span>
+<span id="cb26-34"><a href="#cb26-34" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">2014</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">sum</span>(<span class="st">`</span><span class="at">2014</span><span class="st">`</span>),</span>
+<span id="cb26-35"><a href="#cb26-35" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">2015</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">sum</span>(<span class="st">`</span><span class="at">2015</span><span class="st">`</span>),</span>
+<span id="cb26-36"><a href="#cb26-36" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">2016</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">sum</span>(<span class="st">`</span><span class="at">2016</span><span class="st">`</span>)</span>
+<span id="cb26-37"><a href="#cb26-37" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb26-38"><a href="#cb26-38" aria-hidden="true" tabindex="-1"></a>  yoy_avg_function  <span class="sc">%&gt;%</span> </span>
+<span id="cb26-39"><a href="#cb26-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="dv">1</span>,<span class="dv">9</span>)</span>
+<span id="cb26-40"><a href="#cb26-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-41"><a href="#cb26-41" aria-hidden="true" tabindex="-1"></a><span class="co"># Hispanic quartiles by dispensary density</span></span>
+<span id="cb26-42"><a href="#cb26-42" aria-hidden="true" tabindex="-1"></a>hispanic_qts <span class="ot">&lt;-</span> dsps_yoy_qtiles <span class="sc">%&gt;%</span> </span>
+<span id="cb26-43"><a href="#cb26-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(</span>
+<span id="cb26-44"><a href="#cb26-44" aria-hidden="true" tabindex="-1"></a>    qrt_hispanic,</span>
+<span id="cb26-45"><a href="#cb26-45" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">2013</span><span class="st">`</span>,</span>
+<span id="cb26-46"><a href="#cb26-46" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">2014</span><span class="st">`</span>,</span>
+<span id="cb26-47"><a href="#cb26-47" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">2015</span><span class="st">`</span>,</span>
+<span id="cb26-48"><a href="#cb26-48" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">2016</span><span class="st">`</span></span>
+<span id="cb26-49"><a href="#cb26-49" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb26-50"><a href="#cb26-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(qrt_hispanic) <span class="sc">%&gt;%</span> <span class="co"># add the total ins</span></span>
+<span id="cb26-51"><a href="#cb26-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb26-52"><a href="#cb26-52" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">2013</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">sum</span>(<span class="st">`</span><span class="at">2013</span><span class="st">`</span>),</span>
+<span id="cb26-53"><a href="#cb26-53" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">2014</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">sum</span>(<span class="st">`</span><span class="at">2014</span><span class="st">`</span>),</span>
+<span id="cb26-54"><a href="#cb26-54" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">2015</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">sum</span>(<span class="st">`</span><span class="at">2015</span><span class="st">`</span>),</span>
+<span id="cb26-55"><a href="#cb26-55" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">2016</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">sum</span>(<span class="st">`</span><span class="at">2016</span><span class="st">`</span>)</span>
+<span id="cb26-56"><a href="#cb26-56" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb26-57"><a href="#cb26-57" aria-hidden="true" tabindex="-1"></a>  yoy_avg_function  <span class="sc">%&gt;%</span> </span>
+<span id="cb26-58"><a href="#cb26-58" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="dv">1</span>,<span class="dv">9</span>)</span>
+<span id="cb26-59"><a href="#cb26-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-60"><a href="#cb26-60" aria-hidden="true" tabindex="-1"></a><span class="co"># employment quartiles by dispensary density</span></span>
+<span id="cb26-61"><a href="#cb26-61" aria-hidden="true" tabindex="-1"></a>employment_qts <span class="ot">&lt;-</span> dsps_yoy_qtiles <span class="sc">%&gt;%</span> </span>
+<span id="cb26-62"><a href="#cb26-62" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(</span>
+<span id="cb26-63"><a href="#cb26-63" aria-hidden="true" tabindex="-1"></a>    qrt_employment,</span>
+<span id="cb26-64"><a href="#cb26-64" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">2013</span><span class="st">`</span>,</span>
+<span id="cb26-65"><a href="#cb26-65" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">2014</span><span class="st">`</span>,</span>
+<span id="cb26-66"><a href="#cb26-66" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">2015</span><span class="st">`</span>,</span>
+<span id="cb26-67"><a href="#cb26-67" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">2016</span><span class="st">`</span></span>
+<span id="cb26-68"><a href="#cb26-68" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span> </span>
+<span id="cb26-69"><a href="#cb26-69" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(qrt_employment) <span class="sc">%&gt;%</span> <span class="co"># add the total ins</span></span>
+<span id="cb26-70"><a href="#cb26-70" aria-hidden="true" tabindex="-1"></a>      <span class="fu">summarize</span>(</span>
+<span id="cb26-71"><a href="#cb26-71" aria-hidden="true" tabindex="-1"></a>        <span class="st">`</span><span class="at">2013</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">sum</span>(<span class="st">`</span><span class="at">2013</span><span class="st">`</span>),</span>
+<span id="cb26-72"><a href="#cb26-72" aria-hidden="true" tabindex="-1"></a>        <span class="st">`</span><span class="at">2014</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">sum</span>(<span class="st">`</span><span class="at">2014</span><span class="st">`</span>),</span>
+<span id="cb26-73"><a href="#cb26-73" aria-hidden="true" tabindex="-1"></a>        <span class="st">`</span><span class="at">2015</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">sum</span>(<span class="st">`</span><span class="at">2015</span><span class="st">`</span>),</span>
+<span id="cb26-74"><a href="#cb26-74" aria-hidden="true" tabindex="-1"></a>        <span class="st">`</span><span class="at">2016</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">sum</span>(<span class="st">`</span><span class="at">2016</span><span class="st">`</span>)</span>
+<span id="cb26-75"><a href="#cb26-75" aria-hidden="true" tabindex="-1"></a>      ) <span class="sc">%&gt;%</span> </span>
+<span id="cb26-76"><a href="#cb26-76" aria-hidden="true" tabindex="-1"></a>  yoy_avg_function  <span class="sc">%&gt;%</span> </span>
+<span id="cb26-77"><a href="#cb26-77" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="dv">1</span>,<span class="dv">9</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </section>
-<section id="put-everything-together" class="level3">
-<h3 class="anchored" data-anchor-id="put-everything-together">put everything together</h3>
-<p>while my colorado average is close my values do not align with the paper</p>
+<section id="create-a-table-of-all-my-variables" class="level3">
+<h3 class="anchored" data-anchor-id="create-a-table-of-all-my-variables">create a table of all my variables:</h3>
 <div class="cell">
 <details open="">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># put everything together </span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>density_table1 <span class="ot">&lt;-</span> poverty_qts <span class="sc">%&gt;%</span></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(black_qts, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"qrt_pov"</span> <span class="ot">=</span> <span class="st">"qrt_black"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(hispanic_qts, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"qrt_pov"</span> <span class="ot">=</span> <span class="st">"qrt_hispanic"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(employment_qts, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"qrt_pov"</span> <span class="ot">=</span> <span class="st">"qrt_employment"</span>))</span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a><span class="co"># rename the columns</span></span>
-<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(density_table1) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Quartile"</span>, <span class="st">"Pov. Rate"</span>, <span class="st">"Pct. Black"</span>, <span class="st">"Pct. Hispanic"</span>, <span class="st">"Employment"</span>, <span class="st">"Colorado Average"</span>)</span>
-<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>combined_table <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(density_table1 , colorado_yoy_average)</span>
-<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Average change in dispensary density by local characteristics [Table 1]</span></span>
-<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>density_table1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># put everything together </span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>density_table1 <span class="ot">&lt;-</span> poverty_qts <span class="sc">%&gt;%</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(black_qts, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"qrt_pov"</span> <span class="ot">=</span> <span class="st">"qrt_black"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(hispanic_qts, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"qrt_pov"</span> <span class="ot">=</span> <span class="st">"qrt_hispanic"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(employment_qts, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"qrt_pov"</span> <span class="ot">=</span> <span class="st">"qrt_employment"</span>))</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a><span class="co"># rename the columns</span></span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(density_table1) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Quartile"</span>, <span class="st">"Poverty Rate"</span>, <span class="st">"Pct. Black"</span>, <span class="st">"Pct. Hispanic"</span>, <span class="st">"Employment"</span>, <span class="st">"Colorado Average"</span>)</span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>combined_table <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(density_table1 , colorado_yoy_average)</span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Average change in dispensary density by local characteristics [Table 1]</span></span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>density_table1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4 × 5
-  Quartile `Pov. Rate` `Pct. Black` `Pct. Hispanic` Employment
-     &lt;int&gt;       &lt;dbl&gt;        &lt;dbl&gt;           &lt;dbl&gt;      &lt;dbl&gt;
-1        1       0.072        0.159           0.163      0.5  
-2        2       0.14         0.269           0.049      0.508
-3        3       0.15         0.074           0.113      0.219
-4        4       0.1          0.113           0.134      0.085</code></pre>
+  Quartile `Poverty Rate` `Pct. Black` `Pct. Hispanic` Employment
+     &lt;int&gt;          &lt;dbl&gt;        &lt;dbl&gt;           &lt;dbl&gt;      &lt;dbl&gt;
+1        1          0.072        0.159           0.163      0.5  
+2        2          0.14         0.269           0.049      0.508
+3        3          0.15         0.074           0.113      0.219
+4        4          0.1          0.113           0.134      0.085</code></pre>
 </div>
 <details open="">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>combined_table</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>combined_table</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 5 × 6
-  Quartile `Pov. Rate` `Pct. Black` `Pct. Hispanic` Employment Colorado_Average
-     &lt;int&gt;       &lt;dbl&gt;        &lt;dbl&gt;           &lt;dbl&gt;      &lt;dbl&gt;            &lt;dbl&gt;
-1        1       0.072        0.159           0.163      0.5             NA    
-2        2       0.14         0.269           0.049      0.508           NA    
-3        3       0.15         0.074           0.113      0.219           NA    
-4        4       0.1          0.113           0.134      0.085           NA    
-5       NA      NA           NA              NA         NA                0.115</code></pre>
+  Quartile `Poverty Rate` `Pct. Black` `Pct. Hispanic` Employment Colorado_Ave…¹
+     &lt;int&gt;          &lt;dbl&gt;        &lt;dbl&gt;           &lt;dbl&gt;      &lt;dbl&gt;          &lt;dbl&gt;
+1        1          0.072        0.159           0.163      0.5           NA    
+2        2          0.14         0.269           0.049      0.508         NA    
+3        3          0.15         0.074           0.113      0.219         NA    
+4        4          0.1          0.113           0.134      0.085         NA    
+5       NA         NA           NA              NA         NA              0.115
+# … with abbreviated variable name ¹​Colorado_Average</code></pre>
+</div>
+</div>
+<p>format the table for a side by side comparison <span style="font-size: 80%;"><em>adapted from “<a href="https://towardsdatascience.com/top-7-packages-for-making-beautiful-tables-in-r-7683d054e541" title="Devashree Madhugiri">Top 7 Packages for Making Beautiful Tables in R</a>”</em></span></p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># use the gt package to format the intel</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>combined_table <span class="sc">%&gt;%</span><span class="fu">gt</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">fmt_missing</span>(</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">columns =</span> <span class="fu">everything</span>(), <span class="co"># remove the null vaules from the colorado average data</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">missing_text =</span> <span class="st">""</span></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(<span class="at">title =</span> <span class="st">"average change in dispensary density by local characteristics"</span>,</span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>             <span class="at">subtitle =</span> <span class="st">"Brooke's Version"</span></span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>              ) <span class="sc">%&gt;%</span></span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(<span class="at">style =</span> <span class="fu">list</span>(<span class="fu">cell_fill</span>(<span class="at">color =</span> <span class="st">"#DEDDB6"</span>), </span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">cell_text</span>(<span class="at">weight =</span> <span class="st">"bold"</span>)),</span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a>            <span class="at">locations =</span> <span class="fu">cells_body</span>(<span class="at">columns =</span> Quartile))<span class="sc">%&gt;%</span></span>
+<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(</span>
+<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">list</span>(<span class="fu">cell_fill</span>(<span class="at">color =</span> <span class="st">"#EAB8B7"</span>),</span>
+<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">cell_text</span>(<span class="at">weight =</span> <span class="st">"bold"</span>)), </span>
+<span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_body</span>(<span class="at">columns =</span> Colorado_Average))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Since gt v0.6.0 the `fmt_missing()` function is deprecated and will soon be
+removed.
+• Use the `sub_missing()` function instead.
+This warning is displayed once every 8 hours.</code></pre>
+</div>
+<div class="cell-output-display">
+
+<div id="qydjaelmdt" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#qydjaelmdt table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#qydjaelmdt thead, #qydjaelmdt tbody, #qydjaelmdt tfoot, #qydjaelmdt tr, #qydjaelmdt td, #qydjaelmdt th {
+  border-style: none;
+}
+
+#qydjaelmdt p {
+  margin: 0;
+  padding: 0;
+}
+
+#qydjaelmdt .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#qydjaelmdt .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#qydjaelmdt .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#qydjaelmdt .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#qydjaelmdt .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#qydjaelmdt .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#qydjaelmdt .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#qydjaelmdt .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#qydjaelmdt .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#qydjaelmdt .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#qydjaelmdt .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#qydjaelmdt .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#qydjaelmdt .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#qydjaelmdt .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#qydjaelmdt .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#qydjaelmdt .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#qydjaelmdt .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#qydjaelmdt .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#qydjaelmdt .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#qydjaelmdt .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#qydjaelmdt .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#qydjaelmdt .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#qydjaelmdt .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#qydjaelmdt .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#qydjaelmdt .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#qydjaelmdt .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#qydjaelmdt .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#qydjaelmdt .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#qydjaelmdt .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#qydjaelmdt .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#qydjaelmdt .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#qydjaelmdt .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#qydjaelmdt .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#qydjaelmdt .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#qydjaelmdt .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#qydjaelmdt .gt_left {
+  text-align: left;
+}
+
+#qydjaelmdt .gt_center {
+  text-align: center;
+}
+
+#qydjaelmdt .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#qydjaelmdt .gt_font_normal {
+  font-weight: normal;
+}
+
+#qydjaelmdt .gt_font_bold {
+  font-weight: bold;
+}
+
+#qydjaelmdt .gt_font_italic {
+  font-style: italic;
+}
+
+#qydjaelmdt .gt_super {
+  font-size: 65%;
+}
+
+#qydjaelmdt .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#qydjaelmdt .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#qydjaelmdt .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#qydjaelmdt .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#qydjaelmdt .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#qydjaelmdt .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#qydjaelmdt .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    <tr class="gt_heading">
+      <td colspan="6" class="gt_heading gt_title gt_font_normal" style="">average change in dispensary density by local characteristics</td>
+    </tr>
+    <tr class="gt_heading">
+      <td colspan="6" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style="">Brooke's Version</td>
+    </tr>
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Quartile">Quartile</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Poverty Rate">Poverty Rate</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Pct. Black">Pct. Black</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Pct. Hispanic">Pct. Hispanic</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Employment">Employment</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Colorado_Average">Colorado_Average</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="Quartile" class="gt_row gt_right" style="background-color: #DEDDB6; font-weight: bold;">1</td>
+<td headers="Poverty Rate" class="gt_row gt_right">0.072</td>
+<td headers="Pct. Black" class="gt_row gt_right">0.159</td>
+<td headers="Pct. Hispanic" class="gt_row gt_right">0.163</td>
+<td headers="Employment" class="gt_row gt_right">0.500</td>
+<td headers="Colorado_Average" class="gt_row gt_right" style="background-color: #EAB8B7; font-weight: bold;"></td></tr>
+    <tr><td headers="Quartile" class="gt_row gt_right" style="background-color: #DEDDB6; font-weight: bold;">2</td>
+<td headers="Poverty Rate" class="gt_row gt_right">0.140</td>
+<td headers="Pct. Black" class="gt_row gt_right">0.269</td>
+<td headers="Pct. Hispanic" class="gt_row gt_right">0.049</td>
+<td headers="Employment" class="gt_row gt_right">0.508</td>
+<td headers="Colorado_Average" class="gt_row gt_right" style="background-color: #EAB8B7; font-weight: bold;"></td></tr>
+    <tr><td headers="Quartile" class="gt_row gt_right" style="background-color: #DEDDB6; font-weight: bold;">3</td>
+<td headers="Poverty Rate" class="gt_row gt_right">0.150</td>
+<td headers="Pct. Black" class="gt_row gt_right">0.074</td>
+<td headers="Pct. Hispanic" class="gt_row gt_right">0.113</td>
+<td headers="Employment" class="gt_row gt_right">0.219</td>
+<td headers="Colorado_Average" class="gt_row gt_right" style="background-color: #EAB8B7; font-weight: bold;"></td></tr>
+    <tr><td headers="Quartile" class="gt_row gt_right" style="background-color: #DEDDB6; font-weight: bold;">4</td>
+<td headers="Poverty Rate" class="gt_row gt_right">0.100</td>
+<td headers="Pct. Black" class="gt_row gt_right">0.113</td>
+<td headers="Pct. Hispanic" class="gt_row gt_right">0.134</td>
+<td headers="Employment" class="gt_row gt_right">0.085</td>
+<td headers="Colorado_Average" class="gt_row gt_right" style="background-color: #EAB8B7; font-weight: bold;"></td></tr>
+    <tr><td headers="Quartile" class="gt_row gt_right" style="background-color: #DEDDB6; font-weight: bold;"></td>
+<td headers="Poverty Rate" class="gt_row gt_right"></td>
+<td headers="Pct. Black" class="gt_row gt_right"></td>
+<td headers="Pct. Hispanic" class="gt_row gt_right"></td>
+<td headers="Employment" class="gt_row gt_right"></td>
+<td headers="Colorado_Average" class="gt_row gt_right" style="background-color: #EAB8B7; font-weight: bold;">0.115</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
 </div>
 </div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

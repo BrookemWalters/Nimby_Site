@@ -11,20 +11,15 @@ format:
 **This code: creates a table of dispensary density by socioeconomic factors**
 
 1.  matches zip codes to census geocodes\
-
 2.  connects to census API\
-
-3.  retrieves demographic populations\
-
-4.  calculates poverty, race, and employment count rates\
-
+3.  retrieves demographic population data\
+4.  calculates poverty, race, and employment rates\
 5.  matches the statistics above with year-over-year changes in dispensaries\
-
 6.  creates a table showing dispensary YOY growth by socioeconomic quartiles\
 
-This section of my methodology was the most exciting for me, yet it was also where I recognized the need to adapt my approach. My first limitation encountered was the challenge of matching dispensary locations with their corresponding census tract locations. To achieve this, I would need to obtain each location's physical address, which was not provided by Colorado.gov's dispensary archive. While this information can be accessed through vendors or searching the web, I proceed with county-level data for the scope of this project.
+This section of my methodology was the most exciting for me, yet it was also where I recognized the need to adapt my approach. My first limitation was the challenge of matching dispensary locations to their corresponding census tracts. To achieve this, I would need to obtain each location's physical address, which was not provided by Colorado.Gov's dispensary archive. While this information can be accessed for a price through vendors or tediously scraping the web, for the sake of time and sanity, proceeding with county-level data was my best option for completing this project.
 
-Nonetheless, the TIGRIS package's ability to create maps at the census tract level remains a potent instrument in an analyst's arsenal. Although the tract level identifiers are not utilized beyond this point, I have included it as a reference for future projects and as part of my Replicating NIMBY journey. Owing to the differences in methodology, I do not anticipate my figures to align flawlessly; however, examining the overall trends for congruence remains a worthwhile endeavor.
+Nonetheless, the TIGRIS package's ability to create maps at the census tract level remains a potent instrument in an analyst's arsenal. Although the tract level identifiers are not utilized beyond this point, I have included it as a reference for future projects and as part of my Replicating NIMBY journey. Due to the differences in methodology, my figures can not align flawlessly; however, examining the overall trends for congruence remains a worthwhile endeavor.
 
 ### load packages
 
@@ -53,8 +48,7 @@ county_codes <- (read.csv("~/gvsu/winter 23/CIS 635/NIMBY/cleaning/density table
 
 ### spatial join between dispensary locations and geocodes
 
-At this stage, the zip codes are my main geographical identifier for my dispensary data frame. In an attempt to find the tract level data, I tapped into the tigris package. It was here I realized that a county level analysis was my best approach. My original goal was to pull in the spacial data for mapping later.
-
+At this stage, the zip codes are my main geographical identifier for my dispensary data frame. In an attempt to find the tract level data, I tapped into the Tigris package. 
 [*adapted from "[tigris](https://github.com/walkerke/tigris "Kyle Walker")"*]{style="font-size: 80%;"}
 
 ```{r, echo=FALSE}
@@ -90,7 +84,7 @@ dsps_geos<- dsps_geos %>%
 
 \
 
-### match the files to the county codes
+### match the files to the county codes with join
 
 ```{r}
 # time to add the spacial data to my dispensary list!
@@ -105,8 +99,9 @@ dsps<- left_join(dsps, county_codes, by = "county_code")
 write.csv(dsps, "~/gvsu/winter 23/CIS 635/NIMBY/cleaning/counting_dispensaries/dps_data_cleaned/dispenaries_tracts.csv")
 ```
 
-### count the dispensaries
+\ 
 
+### count the dispensaries with summarize
 ```{r}
 dsps_summed <-  dsps %>% 
   filter(month(date) == 12) %>% 
@@ -152,7 +147,7 @@ colnames(demo_factors)
 
 ### match the change in dispensary density with demographics
 
-Here I join two datasets using "GEOID", aggregate and sums up the annual population and demographic factors by geographic ID, and creates new columns that represent the total population and economic indicators for each geographic ID. The resulting dataset has one row per unique geographic ID.
+Here I join two datasets using "GEOID", aggregate the annual population and demographic factors by geographic ID. Next, I created new variables representing the total population and economic indicators for each geographic ID. The resulting dataset has one row per unique geographic ID.
 
 ```{r}
 # switching from merging to left joins since it's easier to read
@@ -179,6 +174,7 @@ dsps_yoy_demos <- dsps_yoy_demos %>%
   )
 
 ```
+\ 
 
 ## year-over-year function
 
@@ -200,8 +196,9 @@ yoy_avg_function <- function(df) {
 }
 ```
 
-### calculate the year-over-year change average in dispensaries for the state of Colorado
+\
 
+### calculate the year-over-year change average in dispensaries for the state of Colorado
 ```{r}
 colorado_yoy_average <-  dsps_yoy_demos %>% 
   summarize(
@@ -248,7 +245,7 @@ dsps_yoy_qtiles <- yoy_avg_function(dsps_yoy_demos)
 write.csv(dsps_yoy_qtiles, "~/gvsu/winter 23/CIS 635/NIMBY/cleaning/counting_dispensaries/dps_data_cleaned/dsps_yoy_qtiles.csv")
 ```
 
- 
+\
 
 Transform the data into a tabluar format to be presented in a simple summarized table
 
@@ -342,66 +339,93 @@ density_table1 <- poverty_qts %>%
   left_join(employment_qts, by = c("qrt_pov" = "qrt_employment"))
 
 
-# 
 # rename the columns
+colnames(density_table1) <- c("Quartile", "Poverty Rate", "Pct. Black", "Pct. Hispanic", "Employment", "Colorado Average")
+combined_table <- bind_rows(density_table1 , colorado_yoy_average)
 ```
+
+
+
+
+# Created a formated table for the results section
 
 format the table for a side by side comparison [*adapted from "[Making high-quality tables in R with the gt package](https://www.youtube.com/watch?v=dxDeotwylr8 "R for the Rest of Us")"*]{style="font-size: 80%;"}
 
-colnames(density_table1) <- c("Quartile", "Poverty Rate", "Pct. Black", "Pct. Hispanic", "Employment", "Colorado Average")
-# 
-combined_table <- bind_rows(density_table1 , colorado_yoy_average)
-
-# Average change in dispensary density by local characteristics [Table 1]
-density_table1
-combined_table
-
-
 ```{r}
-# table attempt 2
-table2 <- combined_table %>%gt() %>% 
-    sub_missing(
-    columns = everything(), # remove the null vaules from the colorado average data
+table2 <- combined_table %>% 
+ gt() %>%  # table function
+  sub_missing(
+    columns = everything(), # remove the NAs from my Colorado Stat, appears blank
     missing_text = ""
   ) %>% 
   
-  tab_header(title = "average change in dispensary density by local characteristics",
-             subtitle = "Brooke's Version"
-              ) %>%
-
+  
+  tab_header(
+    title = "average change in dispensary density by local characteristics",
+    subtitle = "replicated verison"
+  ) %>%
+  
+  # column headers
   tab_style(
-    style = list(
-      cell_text(weight = "bold")),
+    style = cell_text(weight = "bold", align = "center"),
     locations = cells_column_labels(everything())
-
   ) %>% 
+ 
+  # cells
+   tab_style(
+    style = cell_text(align = "center"),
+    locations = cells_body(columns = everything())
+  ) %>% 
+ 
+  # cells 
+  tab_style(
+    style = cell_borders(sides = "all", color = "transparent", weight = px(0)),
+    locations = cells_body(columns = `Colorado Average`)
+  ) %>%
   
-    tab_style(style = list( cell_text(weight = "bold")),
-            locations = cells_body(columns = `Colorado Average`)) %>% 
+  # cells
+  tab_style(
+    style = cell_fill(color = "#ABC7A9", alpha = 0.2),
+    locations = cells_body(columns = vars(`Colorado Average`))
+  ) %>%
+ 
+  # last column
+   tab_style(
+    style = cell_borders(sides = "left", color = "black", weight = px(1)),
+    locations = cells_body(columns = `Colorado Average`)
+  ) %>%
   
-    opt_table_lines(extent =  "default") %>% # keep table lines
+  # last column
+  tab_style(
+    style = cell_fill(color = "#f2f2f2"),
+    locations = cells_body(rows = seq(1, nrow(combined_table), by = 2), columns = 1:(ncol(combined_table) - 1))
+  ) %>%
+  
+  tab_style(
+    style = cell_text(size = "18px", style = "italic"),
+    locations = cells_title(groups = "title")
+  ) %>%
+  
+  # spending too much time on the headers :-) 
   tab_options(
     column_labels.border.top.color = "white",
-    column_labels.border.top.width = px(3), # adjusts space between title and column headers
+    column_labels.border.top.width = px(3),
     column_labels.border.bottom.color = "black",
-    table_body.border.bottom.color =  "black",
-      table.width = pct(100),
+    table_body.border.bottom.color = "black",
+    table.width = pct(100),
     data_row.padding = px(10),
-    column_labels.background.color = "#EAB8B7") %>% 
+    column_labels.background.color = "#73A16F"
+  ) %>%
   
-  # align text to the center
-  tab_style(style = cell_text(
-    align = "center"),
-    locations = cells_body(columns = TRUE) # Apply the style to all columns in the body of the table
-  ) %>% 
-  tab_style(
-    style = list(
-      cell_fill(color = "black", alpha = 0.2)),
-    locations = cells_body(
-      columns = vars(`Colorado Average`)))
+  tab_options(
+    data_row.padding = px(12)
+  ) %>%
+  cols_width(
+    starts_with("Color") ~ px(80),
+    everything() ~ px(120)
+  )
 
-    
-table2 
+table2
 
 ```
 

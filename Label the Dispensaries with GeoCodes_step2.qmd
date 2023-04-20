@@ -48,7 +48,7 @@ county_codes <- (read.csv("~/gvsu/winter 23/CIS 635/NIMBY/cleaning/density table
 
 ### spatial join between dispensary locations and geocodes
 
-At this stage, the zip codes are my main geographical identifier for my dispensary data frame. In an attempt to find the tract level data, I tapped into the Tigris package. [*adapted from "[tigris](https://github.com/walkerke/tigris "Kyle Walker")"*]{style="font-size: 80%;"}
+At this stage, the zip codes are my main geographical identifier for my dispensary data frame. In an attempt to find the tract level data, I tapped into the Tigris package.   [*adapted from "[tigris](https://github.com/walkerke/tigris "Kyle Walker")"*]{style="font-size: 80%;"}
 
 ```{r, echo=FALSE}
 zctas <- zctas(state = 08, year = 2010, class = "sf")
@@ -177,7 +177,7 @@ dsps_yoy_demos <- dsps_yoy_demos %>%
 
  
 
-## year-over-year function
+### year-over-year function
 
 One of former professors told me, if you have do write something three times then it's time to write a function! The year over year variance is another crucial aspect of NIMBY's model. This function will be applied to several variables
 
@@ -348,7 +348,9 @@ combined_table <- bind_rows(density_table1 , colorado_yoy_average)
 
 # create a formated table for the results section
 
-format the table for a side by side comparison [*adapted from "[Making high-quality tables in R with the gt package](https://www.youtube.com/watch?v=dxDeotwylr8 "R for the Rest of Us")"*]{style="font-size: 80%;"}
+format the table for a side by side comparison
+
+[*adapted from "[Making high-quality tables in R with the gt package](https://www.youtube.com/watch?v=dxDeotwylr8 "R for the Rest of Us")"*]{style="font-size: 80%;"}
 
 ```{r}
 table2 <- combined_table %>% 

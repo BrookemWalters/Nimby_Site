@@ -192,9 +192,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#section" id="toc-section" class="nav-link active" data-scroll-target="#section"><img src="images/linear_model.jpg" class="img-fluid"></a></li>
-  <li><a href="#load-packages" id="toc-load-packages" class="nav-link" data-scroll-target="#load-packages">load packages</a></li>
-  <li><a href="#load-in-my-datasets" id="toc-load-in-my-datasets" class="nav-link" data-scroll-target="#load-in-my-datasets">load in my datasets</a></li>
+  <li><a href="#load-in-my-datasets" id="toc-load-in-my-datasets" class="nav-link active" data-scroll-target="#load-in-my-datasets">load in my datasets</a></li>
   <li><a href="#find-the-three-year-average-count-of-dispensaries" id="toc-find-the-three-year-average-count-of-dispensaries" class="nav-link" data-scroll-target="#find-the-three-year-average-count-of-dispensaries">find the three year average count of dispensaries</a></li>
   <li><a href="#find-the-local-population-rates-for-2014.-2015-2016" id="toc-find-the-local-population-rates-for-2014.-2015-2016" class="nav-link" data-scroll-target="#find-the-local-population-rates-for-2014.-2015-2016">find the local population rates for 2014. 2015, 2016</a></li>
   <li><a href="#join-the-population-fields-to-the-main-dataframe" id="toc-join-the-population-fields-to-the-main-dataframe" class="nav-link" data-scroll-target="#join-the-population-fields-to-the-main-dataframe">join the population fields to the main dataframe</a></li>
@@ -202,7 +200,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#pull-in-the-fbi-crime-data-same-as-the-dispensary" id="toc-pull-in-the-fbi-crime-data-same-as-the-dispensary" class="nav-link" data-scroll-target="#pull-in-the-fbi-crime-data-same-as-the-dispensary">pull in the fbi crime data same as the dispensary</a></li>
   <li><a href="#filter-to-get-2016-data-and-pivot-summarize-by-year-and-geography" id="toc-filter-to-get-2016-data-and-pivot-summarize-by-year-and-geography" class="nav-link" data-scroll-target="#filter-to-get-2016-data-and-pivot-summarize-by-year-and-geography">filter to get 2016 data, and pivot, summarize by year and geography</a></li>
   <li><a href="#calculate-the-crimes-per-capita" id="toc-calculate-the-crimes-per-capita" class="nav-link" data-scroll-target="#calculate-the-crimes-per-capita">calculate the crimes per capita</a></li>
-  <li><a href="#time-to-join-the-per-capitas-together" id="toc-time-to-join-the-per-capitas-together" class="nav-link" data-scroll-target="#time-to-join-the-per-capitas-together">time to join the per capitas together!</a></li>
+  <li><a href="#time-to-join-the-per-capitas-together" id="toc-time-to-join-the-per-capitas-together" class="nav-link" data-scroll-target="#time-to-join-the-per-capitas-together">time to join the per capitas together</a></li>
+  <li><a href="#making-a-map" id="toc-making-a-map" class="nav-link" data-scroll-target="#making-a-map">making a map</a></li>
   </ul>
 </nav>
     </div>
@@ -219,14 +218,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>maps the fbi historical crime data into a single data frame</li>
 <li>calculates the county crime rates</li>
 <li>matches the crime rates with the dispensaries per capita by geoid</li>
-<li>generates a scatter plot</li>
+<li>maps the crime rates against the dispensaries growth</li>
 </ol>
-<p>The goal is recreate this linear model:</p>
-<section id="section" class="level3">
-<h3 class="anchored" data-anchor-id="section"><img src="images/linear_model.jpg" class="img-fluid"></h3>
-</section>
-<section id="load-packages" class="level3">
-<h3 class="anchored" data-anchor-id="load-packages">load packages</h3>
+<p>load packages</p>
 <div class="cell">
 <div class="cell-output cell-output-stderr">
 <pre><code>
@@ -253,7 +247,6 @@ Attaching package: 'lubridate'</code></pre>
 ✖ lubridate::union()       masks base::union()</code></pre>
 </div>
 </div>
-</section>
 <section id="load-in-my-datasets" class="level3">
 <h3 class="anchored" data-anchor-id="load-in-my-datasets">load in my datasets</h3>
 <p>select the relevant fields</p>
@@ -383,7 +376,7 @@ Fetching data by table type ("B/C", "S", "DP") and combining the result.</code><
 </section>
 <section id="pull-in-the-fbi-crime-data-same-as-the-dispensary" class="level3">
 <h3 class="anchored" data-anchor-id="pull-in-the-fbi-crime-data-same-as-the-dispensary">pull in the fbi crime data same as the dispensary</h3>
-<div class="cell">
+<div class="cell" data-hash="calculate-crime-and-dispensaries-per-capita_step3_cache/html/unnamed-chunk-7_bee1754f17f1e4c7239dba0d6c211d29">
 
 </div>
 </section>
@@ -450,7 +443,7 @@ Fetching data by table type ("B/C", "S", "DP") and combining the result.</code><
 </div>
 </section>
 <section id="time-to-join-the-per-capitas-together" class="level3">
-<h3 class="anchored" data-anchor-id="time-to-join-the-per-capitas-together">time to join the per capitas together!</h3>
+<h3 class="anchored" data-anchor-id="time-to-join-the-per-capitas-together">time to join the per capitas together</h3>
 <div class="cell">
 <details open="">
 <summary>Code</summary>
@@ -476,7 +469,7 @@ Fetching data by table type ("B/C", "S", "DP") and combining the result.</code><
 </div>
 <details open="">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>linear_variables <span class="ot">&lt;-</span>  linear_variables <span class="sc">%&gt;%</span> </span>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>linear_variables <span class="ot">&lt;-</span>  linear_variables <span class="sc">%&gt;%</span></span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(</span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    GEOID,</span>
 <span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"County"</span> <span class="ot">=</span><span class="st">`</span><span class="at">NAME.x</span><span class="st">`</span>,</span>
@@ -484,28 +477,102 @@ Fetching data by table type ("B/C", "S", "DP") and combining the result.</code><
 <span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>    dps_per_cap,</span>
 <span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>    crime_yoy_avg,</span>
 <span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>    dsp_yoy_avg,</span>
-<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>    pct_poverty_rate,</span>
-<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>    pct_black,</span>
-<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>    pct_hispanic,</span>
-<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>    employeed_pop)</span>
-<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>    dsps_average,</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>    pct_poverty_rate,</span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>    pct_black,</span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>    pct_hispanic,</span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>    employeed_pop)</span>
 <span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a><span class="co"># update the NAs to reflect the 0 crimes and the 0 dispensary locations </span></span>
-<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>linear_variables <span class="ot">&lt;-</span> linear_variables <span class="sc">%&gt;%</span> </span>
-<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">dsp_yoy_avg =</span> <span class="fu">round</span>(dsp_yoy_avg, <span class="dv">1</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">dsp_yoy_avg =</span> <span class="fu">if_else</span>(<span class="fu">is.na</span>(dsp_yoy_avg), <span class="dv">0</span>, dsp_yoy_avg)) <span class="sc">%&gt;%</span></span>
-<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">dsp_yoy_avg =</span> <span class="fu">if_else</span>(dsp_yoy_avg <span class="sc">==</span> <span class="cn">Inf</span>, <span class="dv">0</span>, dsp_yoy_avg)) <span class="sc">%&gt;%</span></span>
-<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">crime_yoy_avg =</span> <span class="fu">if_else</span>(<span class="fu">is.na</span>(crime_yoy_avg), <span class="dv">0</span>, crime_yoy_avg)) <span class="sc">%&gt;%</span></span>
-<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">crime_yoy_avg =</span> <span class="fu">if_else</span>(crime_yoy_avg <span class="sc">==</span> <span class="cn">Inf</span>, <span class="dv">0</span>, crime_yoy_avg))</span>
-<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a><span class="co"># update the NAs to reflect the 0 crimes and the 0 dispensary locations</span></span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a>linear_variables <span class="ot">&lt;-</span> linear_variables <span class="sc">%&gt;%</span></span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">dsp_yoy_avg =</span> <span class="fu">round</span>(dsp_yoy_avg, <span class="dv">1</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">dsp_yoy_avg =</span> <span class="fu">if_else</span>(<span class="fu">is.na</span>(dsp_yoy_avg), <span class="dv">0</span>, dsp_yoy_avg)) <span class="sc">%&gt;%</span></span>
+<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">dsp_yoy_avg =</span> <span class="fu">if_else</span>(dsp_yoy_avg <span class="sc">==</span> <span class="cn">Inf</span>, <span class="dv">0</span>, dsp_yoy_avg)) <span class="sc">%&gt;%</span></span>
+<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">crime_yoy_avg =</span> <span class="fu">if_else</span>(<span class="fu">is.na</span>(crime_yoy_avg), <span class="dv">0</span>, crime_yoy_avg)) <span class="sc">%&gt;%</span></span>
+<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">crime_yoy_avg =</span> <span class="fu">if_else</span>(crime_yoy_avg <span class="sc">==</span> <span class="cn">Inf</span>, <span class="dv">0</span>, crime_yoy_avg))</span>
 <span id="cb25-23"><a href="#cb25-23" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb25-24"><a href="#cb25-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-25"><a href="#cb25-25" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(linear_variables, <span class="st">"~/gvsu/winter 23/CIS 635/NIMBY/cleaning/linear_model/variables/linear_variable.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb25-25"><a href="#cb25-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-26"><a href="#cb25-26" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(linear_variables, <span class="st">"~/gvsu/winter 23/CIS 635/NIMBY/cleaning/linear_model/variables/linear_variable.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>### make a scatter plot by crime rate and dispensaries</p>
+</section>
+<section id="making-a-map" class="level3">
+<h3 class="anchored" data-anchor-id="making-a-map">making a map</h3>
+<p><span style="font-size: 80%;"><em>adapted from “<a href="https://www.linkedin.com/learning/creating-maps-with-r/why-create-maps-with-r?autoplay=true&amp;u=74414348" title="Charlie Joey Hadley">Creating Maps in R</a>”</em></span></p>
 <div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(maps)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'maps'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:purrr':
 
+    map</code></pre>
+</div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(cowplot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'cowplot'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:lubridate':
+
+    stamp</code></pre>
+</div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the county boundaries data for Colorado</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>counties <span class="ot">&lt;-</span> <span class="fu">map_data</span>(<span class="st">"county"</span>, <span class="st">"colorado"</span>)</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>counties <span class="ot">&lt;-</span> <span class="fu">rename</span>(counties, <span class="at">County =</span> subregion)</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert 'County' to lowercase for merging with 'linear_variables'</span></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>linear_variables<span class="sc">$</span>County <span class="ot">&lt;-</span> <span class="fu">tolower</span>(linear_variables<span class="sc">$</span>County)</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>my_map_data <span class="ot">&lt;-</span> <span class="fu">left_join</span>(counties, linear_variables, <span class="at">by =</span> <span class="st">"County"</span>)</span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove duplicate counties from the merged data</span></span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>my_map_dsps_data <span class="ot">&lt;-</span> <span class="fu">distinct</span>(my_map_data, County, <span class="at">.keep_all =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a><span class="co"># find the centroids by averaging all of duplicat</span></span>
+<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a>centroid_coords <span class="ot">&lt;-</span> my_map_dsps_data <span class="sc">%&gt;%</span></span>
+<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(group) <span class="sc">%&gt;%</span></span>
+<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">X =</span> <span class="fu">mean</span>(long),</span>
+<span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">Y =</span> <span class="fu">mean</span>(lat),</span>
+<span id="cb32-18"><a href="#cb32-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">Dispensary Count</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">mean</span>(dsps_average))</span>
+<span id="cb32-19"><a href="#cb32-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-20"><a href="#cb32-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-21"><a href="#cb32-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-22"><a href="#cb32-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the heat map</span></span>
+<span id="cb32-23"><a href="#cb32-23" aria-hidden="true" tabindex="-1"></a>my_map <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb32-24"><a href="#cb32-24" aria-hidden="true" tabindex="-1"></a>  <span class="co"># heat map</span></span>
+<span id="cb32-25"><a href="#cb32-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_polygon</span>(<span class="at">data =</span> my_map_data , </span>
+<span id="cb32-26"><a href="#cb32-26" aria-hidden="true" tabindex="-1"></a>               <span class="fu">aes</span>(<span class="at">x =</span> long, <span class="at">y =</span> lat, <span class="at">group =</span> group, <span class="at">fill =</span> crime_per_cap)) <span class="sc">+</span></span>
+<span id="cb32-27"><a href="#cb32-27" aria-hidden="true" tabindex="-1"></a> <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Crime Rate and Dispensary Count by County in Colorado"</span>,</span>
+<span id="cb32-28"><a href="#cb32-28" aria-hidden="true" tabindex="-1"></a>      <span class="at">subtitle =</span> <span class="st">"Three Year Average 2014, 2015, 2016"</span>,</span>
+<span id="cb32-29"><a href="#cb32-29" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">"Crime Rate"</span>) <span class="sc">+</span></span>
+<span id="cb32-30"><a href="#cb32-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_gradient</span>(<span class="at">low =</span> <span class="st">"#F8E9E8"</span>, <span class="at">high =</span> <span class="st">"#C9463F"</span>) <span class="sc">+</span></span>
+<span id="cb32-31"><a href="#cb32-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-32"><a href="#cb32-32" aria-hidden="true" tabindex="-1"></a>  <span class="co"># geo bubble charts</span></span>
+<span id="cb32-33"><a href="#cb32-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> centroid_coords, <span class="fu">aes</span>(<span class="at">x =</span> X, <span class="at">y =</span> Y, <span class="at">size =</span>  <span class="st">`</span><span class="at">Dispensary Count</span><span class="st">`</span>),</span>
+<span id="cb32-34"><a href="#cb32-34" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> <span class="st">"#AD9BCB"</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span> </span>
+<span id="cb32-35"><a href="#cb32-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_map</span>()</span>
+<span id="cb32-36"><a href="#cb32-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-37"><a href="#cb32-37" aria-hidden="true" tabindex="-1"></a>my_map</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="calculate-crime-and-dispensaries-per-capita_step3_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+</div>
 </div>
 
 

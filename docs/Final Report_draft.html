@@ -153,7 +153,12 @@ div.csl-indent {
   <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">- Introduction</a></li>
   <li><a href="#related-works" id="toc-related-works" class="nav-link" data-scroll-target="#related-works">- Related Works</a></li>
   <li><a href="#methods" id="toc-methods" class="nav-link" data-scroll-target="#methods">- Methods</a></li>
-  <li><a href="#results-and-discussion" id="toc-results-and-discussion" class="nav-link" data-scroll-target="#results-and-discussion">- Results and Discussion</a></li>
+  <li><a href="#results-and-discussion" id="toc-results-and-discussion" class="nav-link" data-scroll-target="#results-and-discussion">- Results and Discussion</a>
+  <ul class="collapse">
+  <li><a href="#comparing-dispensary-counts" id="toc-comparing-dispensary-counts" class="nav-link" data-scroll-target="#comparing-dispensary-counts">Comparing Dispensary Counts</a></li>
+  <li><a href="#comparing-control-variables" id="toc-comparing-control-variables" class="nav-link" data-scroll-target="#comparing-control-variables">Comparing Control Variables</a></li>
+  <li><a href="#comparing-the-dependent-and-independent-variables" id="toc-comparing-the-dependent-and-independent-variables" class="nav-link" data-scroll-target="#comparing-the-dependent-and-independent-variables">Comparing the Dependent and Independent variables:</a></li>
+  </ul></li>
   <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">- Conclusion</a></li>
   <li><a href="#data-and-software" id="toc-data-and-software" class="nav-link" data-scroll-target="#data-and-software">- Data and Software</a>
   <ul class="collapse">
@@ -181,7 +186,7 @@ div.csl-indent {
 <h2 class="anchored" data-anchor-id="introduction">- Introduction</h2>
 <p>Somewhere in my mother’s basement, is my prized 1995 tie-dyed <a href="https://dare.org/">DARE</a> tee-shirt, a paradoxical relic of elementary classroom hours spent discussing the dangers of peer-led drug use. &nbsp;Those fears were not unwarranted, the CDC (Center for Disease Control) reports that 136 Americans die daily from opioids and illicitly manufactured fentanyl<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, for me - a friend or three. In my experience, most drug prevention programs portray cannabis as the catalyst to the life doomed by addiction.</p>
 <p>When recreational cannabis use became legal in Michigan, the culture shift was palpable. In an ironic twist of fate, the taboo habits of those once deemed as social deviants are now capitalized and funding K-12 education<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. I am fascinated by this turn of events, and I am curious if there are predictors from more tenured “green” states that reveal unintended ill-consequences.</p>
-<p>In my data mining project, I explore the relationship between the presence of cannabis dispensaries and neighborhood crime rates. By replicating the methodology of Brinkman and Mok-Lamme’s 2019 study, “<em>Not in my backyard? Not so fast. The effect of marijuana legalization on neighborhood crime</em>” (NIMBY), I aim to contribute a nuanced perspective on Michigan’s budding industry and how it shapes public safety and city planning.</p>
+<p>In my data mining project, I explore the relationship between the presence of cannabis dispensaries and neighborhood crime rates. By replicating the methodology of Brinkman and Mok-Lamme’s 2019 study, “<em>Not in my backyard? Not so fast. The effect of marijuana legalization on neighborhood crime</em>” (NIMBY), I aim to contribute a nuanced perspective on this budding industry and how it shapes public safety and city planning.</p>
 <p>My approach involved immersing myself in the wild world of crime and cannabis statistics in Colorado. Using the data sources outlined in NIMBY, I built the variables defined in NIMBY’s linear regression model, described in more detail in the methods section.</p>
 <p>In line with the results in NIMBY, my findings indicate that there is no statistically significant relationship between an increased presence of cannabis dispensaries and crime.</p>
 </section>
@@ -204,32 +209,87 @@ div.csl-indent {
 <li><p>I wove the datasets together using county-level identifiers (GEOID), allowing for the computation of per capita values for dispensaries and crime rates and year-over-year fluctuations. | <a href="#0" title="per capita">code</a></p></li>
 <li><p>Finally, I introduced the new variables into a linear model regression model. | <a href="https://brookemwalters.github.io/Nimby_Site/build_the_linear_model_step4.html">code</a></p>
 <p><img src="images/linear_model.jpg" class="img-fluid"></p>
-<blockquote class="blockquote">
-<p><em>The time period for the analysis starts with the year-over-year change from January 2013 to January 2014, the first month where recreational dispensaries are legal. The last year-over-year change in the sample is from December 2015 to December 2016.</em></p>
-</blockquote></li>
+<p>The goal is to estimate the causal effect of changes in dispensary density on changes in crime rates, while accounting for potential biases and confounding factors using the linear regression model above.</p>
+<table class="table">
+<colgroup>
+<col style="width: 38%">
+<col style="width: 61%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th>Defined</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Δcrime</td>
+<td>year-over-year changes in crime rates</td>
+</tr>
+<tr class="even">
+<td>Δdisp</td>
+<td>year-over-year changes in dispensary rates</td>
+</tr>
+<tr class="odd">
+<td><em>j</em></td>
+<td>neighborhood</td>
+</tr>
+<tr class="even">
+<td><em>t</em></td>
+<td>time</td>
+</tr>
+<tr class="odd">
+<td>𝛽0</td>
+<td>(intercept) baseline level of year-over-year changes in crime rates</td>
+</tr>
+<tr class="even">
+<td>𝛽1</td>
+<td>expected change in year-over-year crime rates associated with a one-unit increase</td>
+</tr>
+<tr class="odd">
+<td>𝛽2</td>
+<td>vector of estimated coefficients on the control variables (<em>demographic characteristics, economic conditions</em>)</td>
+</tr>
+<tr class="even">
+<td>x</td>
+<td>a vector of control variables (<em>demographic characteristics, economic conditions</em>)</td>
+</tr>
+<tr class="odd">
+<td>Δ𝛿</td>
+<td>time fixed effects</td>
+</tr>
+<tr class="even">
+<td>⋲</td>
+<td>error term</td>
+</tr>
+</tbody>
+</table></li>
 </ul>
 </section>
 <section id="results-and-discussion" class="level2">
 <h2 class="anchored" data-anchor-id="results-and-discussion">- Results and Discussion</h2>
+<section id="comparing-dispensary-counts" class="level3">
+<h3 class="anchored" data-anchor-id="comparing-dispensary-counts">Comparing Dispensary Counts</h3>
+</section>
+<section id="comparing-control-variables" class="level3">
+<h3 class="anchored" data-anchor-id="comparing-control-variables">Comparing Control Variables</h3>
 <ul>
-<li><p>comparing soccio-ecconmic factors:</p>
-<p><strong>how to read:</strong> Panel B, shows the quartiles (lowest to highest) counties by the four variables. The percentages of the table represent the three-year average of year-over-year changes in dispensary businesses.</p>
-<p>interpretation: the average county in Colorado saw a 11.9% increase in the number of dispensaries between 2014-2017. Counties that fall within the 4th quartile (highest) for poverty rates saw the largest increase (22.1%) average growth in the number of dispensaries, followed by the 4th quartile for Hispanic populations, and the 1st quartile (lowest) employed populations.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="https://www.sciencedirect.com/science/article/abs/pii/S016604621830293X#preview-section-snippets"><img src="images/Table1(cropped).jpg" class="img-fluid figure-img" width="495"></a></p>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="https://brookemwalters.github.io/Nimby_Site/Label%20the%20Dispensaries%20with%20GeoCodes_step2.html#create-quartiles-to-recreate-table1"><img src="images/Rplot.jpeg" title="Replicated Table" class="img-fluid figure-img" width="494"></a></p>
-</figure>
-</div></li>
+<li><p><strong>how to read:</strong> NIMBY’s <em>Table1 Panel B</em>, shows the quartiles counties (lowest to highest) by the four variables. The percentages of the table represent the three-year average of year-over-year growth in dispensary businesses.</p>
+<p><strong>interpretation:</strong> the average county in Colorado saw a 11.9% increase in the number of dispensaries between 2014-2017. Counties that fall within the 4th quartile (highest) for poverty rates saw the largest increase (22.1%) average growth in the number of dispensaries, followed by the 4th quartile for Hispanic populations, and the 1st quartile (lowest) employed populations.</p>
+<p><img src="images/Table1(cropped).jpg" class="img-fluid" width="586"></p>
+<p><img src="images/Rplot01.jpeg" title="Replicated Table" class="img-fluid" width="582"></p></li>
 </ul>
-<p>Now let’s look at my results, my calculations led me to a 11.5% three year average which is very close NIMBY’s result. However, when I look at the individual demographics there is a lot of variance between the two results. The lowest quartile for employed populations revealed the most growth in dispensaries (+50.8%), followed by the 2nd quartile for black populations (27.0%).</p>
+<p><strong>comparison:</strong> now let’s look at my results, my calculations led me to a 11.5% three-year average growth in dispensaries, which is very close NIMBY’s result. However, when I compare the individual demographics there is a lot of variance between the two results. The lowest quartile for employed populations revealed the most growth in dispensaries (+50.8%), followed by the 2nd quartile for black populations (27.0%).</p>
+</section>
+<section id="comparing-the-dependent-and-independent-variables" class="level3">
+<h3 class="anchored" data-anchor-id="comparing-the-dependent-and-independent-variables">Comparing the Dependent and Independent variables:</h3>
+<p><img src="images/map.png" class="img-fluid"></p>
+<p>What’s interesting here is XYZ</p>
+</section>
 </section>
 <section id="conclusion" class="level2">
 <h2 class="anchored" data-anchor-id="conclusion">- Conclusion</h2>
+<p>the zen art of naivety</p>
 </section>
 <section id="data-and-software" class="level2">
 <h2 class="anchored" data-anchor-id="data-and-software">- Data and Software</h2>

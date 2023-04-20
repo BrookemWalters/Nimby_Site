@@ -19,7 +19,7 @@ When recreational cannabis use became legal in Michigan, the culture shift was p
 
 [^2]: Michigan Department of Treasury. "Adult-Use Marijuana Payments Being Distributed to Michigan Municipalities and Counties." Michigan.gov, 28 Feb. 2023, https://www.michigan.gov/treasury/news/2023/02/28/adult-use-marijuana-payments-being--distributed-to-michigan-municipalities-and-counties, , Accessed 12 Apr. 2023.
 
-In my data mining project, I explore the relationship between the presence of cannabis dispensaries and neighborhood crime rates. By replicating the methodology of Brinkman and Mok-Lamme's 2019 study, "*Not in my backyard? Not so fast. The effect of marijuana legalization on neighborhood crime*" (NIMBY), I aim to contribute a nuanced perspective on Michigan's budding industry and how it shapes public safety and city planning.
+In my data mining project, I explore the relationship between the presence of cannabis dispensaries and neighborhood crime rates. By replicating the methodology of Brinkman and Mok-Lamme's 2019 study, "*Not in my backyard? Not so fast. The effect of marijuana legalization on neighborhood crime*" (NIMBY), I aim to contribute a nuanced perspective on this budding industry and how it shapes public safety and city planning.
 
 My approach involved immersing myself in the wild world of crime and cannabis statistics in Colorado. Using the data sources outlined in NIMBY, I built the variables defined in NIMBY's linear regression model, described in more detail in the methods section.
 
@@ -55,23 +55,46 @@ In summation, the data mining pipeline consisted of several stages, each color c
 
     ![](images/linear_model.jpg)
 
-    > *The time period for the analysis starts with the year-over-year change from January 2013 to January 2014, the first month where recreational dispensaries are legal. The last year-over-year change in the sample is from December 2015 to December 2016.*
+    The goal is to estimate the causal effect of changes in dispensary density on changes in crime rates, while accounting for potential biases and confounding factors using the linear regression model above.
+
+    | Variable | Defined                                                                                                        |
+    |----------------------------|--------------------------------------------|
+    | Δcrime   | year-over-year changes in crime rates                                                                          |
+    | Δdisp    | year-over-year changes in dispensary rates                                                                     |
+    | *j*      | neighborhood                                                                                                   |
+    | *t*      | time                                                                                                           |
+    | 𝛽0       | (intercept) baseline level of year-over-year changes in crime rates                                            |
+    | 𝛽1       | expected change in year-over-year crime rates associated with a one-unit increase                              |
+    | 𝛽2       | vector of estimated coefficients on the control variables (*demographic characteristics, economic conditions*) |
+    | x        | a vector of control variables (*demographic characteristics, economic conditions*)                             |
+    | Δ𝛿       | time fixed effects                                                                                             |
+    | ⋲        | error term                                                                                                     |
 
 ## - Results and Discussion
 
--   comparing soccio-ecconmic factors:
+### Comparing Dispensary Counts
 
-    **how to read:** Panel B, shows the quartiles (lowest to highest) counties by the four variables. The percentages of the table represent the three-year average of year-over-year changes in dispensary businesses.
+### Comparing Control Variables
 
-    interpretation: the average county in Colorado saw a 11.9% increase in the number of dispensaries between 2014-2017. Counties that fall within the 4th quartile (highest) for poverty rates saw the largest increase (22.1%) average growth in the number of dispensaries, followed by the 4th quartile for Hispanic populations, and the 1st quartile (lowest) employed populations.
+-   **how to read:** NIMBY's *Table1 Panel B*, shows the quartiles counties (lowest to highest) by the four variables. The percentages of the table represent the three-year average of year-over-year growth in dispensary businesses.
 
-    [![](images/Table1(cropped).jpg){width="495"}](https://www.sciencedirect.com/science/article/abs/pii/S016604621830293X#preview-section-snippets)
+    **interpretation:** the average county in Colorado saw a 11.9% increase in the number of dispensaries between 2014-2017. Counties that fall within the 4th quartile (highest) for poverty rates saw the largest increase (22.1%) average growth in the number of dispensaries, followed by the 4th quartile for Hispanic populations, and the 1st quartile (lowest) employed populations.
 
-    [![](images/Rplot.jpeg "Replicated Table"){width="494"}](https://brookemwalters.github.io/Nimby_Site/Label%20the%20Dispensaries%20with%20GeoCodes_step2.html#create-quartiles-to-recreate-table1)
+    ![](images/Table1(cropped).jpg){width="586"}
 
-Now let's look at my results, my calculations led me to a 11.5% three year average which is very close NIMBY's result. However, when I look at the individual demographics there is a lot of variance between the two results. The lowest quartile for employed populations revealed the most growth in dispensaries (+50.8%), followed by the 2nd quartile for black populations (27.0%).
+    ![](images/Rplot01.jpeg "Replicated Table"){width="582"}
+
+**comparison:** now let's look at my results, my calculations led me to a 11.5% three-year average growth in dispensaries, which is very close NIMBY's result. However, when I compare the individual demographics there is a lot of variance between the two results. The lowest quartile for employed populations revealed the most growth in dispensaries (+50.8%), followed by the 2nd quartile for black populations (27.0%).
+
+### Comparing the Dependent and Independent variables:
+
+![](images/map.png)
+
+What's interesting here is XYZ
 
 ## - Conclusion
+
+the zen art of naivety
 
 ## - Data and Software
 

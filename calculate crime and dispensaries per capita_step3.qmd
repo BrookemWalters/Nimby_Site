@@ -16,13 +16,9 @@ format:
 3.  maps the fbi historical crime data into a single data frame
 4.  calculates the county crime rates
 5.  matches the crime rates with the dispensaries per capita by geoid
-6.   generates a scatter plot
+6.  maps the crime rates against the dispensaries growth
 
-The goal is recreate this linear model:
-
-### ![](images/linear_model.jpg)
-
-### load packages
+load packages
 
 ```{r, echo=FALSE, warning=FALSE}
 library(fs) # for listing all files in a directory
@@ -121,7 +117,7 @@ dsps_per_capita  <-  dsps_per_capita %>% mutate_at(vars(starts_with("dps")), fun
 
 ### pull in the fbi crime data same as the dispensary
 
-```{r, echo=FALSE, warning=FALSE}
+```{r, echo=FALSE, warning=FALSE, cache=TRUE}
 setwd("~/gvsu/winter 23/CIS 635/NIMBY/cleaning/crime/FBI Crime Rates")
 co_crime <- dir_ls() %>% set_names()
 all_co_crime <- map_df(co_crime, ~read_excel(.x), .id = "filename")
@@ -129,6 +125,9 @@ all_co_crime <- map_df(co_crime, ~read_excel(.x), .id = "filename")
 # create a year column
 all_co_crime$year <-   str_extract(all_co_crime$filename, "\\d{4}")
 all_co_crime <- all_co_crime %>%  select(2,4, 76) 
+
+# restoreing this so i can render this page
+setwd("~/gvsu/winter 23/CIS 635/NIMBY/Nimby_Site")
 ```
 
 ### filter to get 2016 data, and pivot, summarize by year and geography
@@ -161,7 +160,7 @@ crime_per_capita$crime_per_cap <- (crime_per_capita$crime_average / crime_per_ca
 crime_per_capita <-  crime_per_capita %>% mutate_at(vars(starts_with("crime")), funs(round(., 1)))  # round
 ```
 
-### time to join the per capitas together!
+### time to join the per capitas together
 
 ```{r}
 # connect the variables, pulling some in from the density file
@@ -174,7 +173,7 @@ linear_variables <-  left_join(linear_variables, dsps_yoy_qtiles, by = "GEOID")
 
 colnames(linear_variables)
 
-linear_variables <-  linear_variables %>% 
+linear_variables <-  linear_variables %>%
   select(
     GEOID,
     "County" =`NAME.x`,
@@ -182,15 +181,16 @@ linear_variables <-  linear_variables %>%
     dps_per_cap,
     crime_yoy_avg,
     dsp_yoy_avg,
+    dsps_average,
     pct_poverty_rate,
     pct_black,
     pct_hispanic,
     employeed_pop)
 
 
-# update the NAs to reflect the 0 crimes and the 0 dispensary locations 
-linear_variables <- linear_variables %>% 
-  mutate(dsp_yoy_avg = round(dsp_yoy_avg, 1)) %>% 
+# update the NAs to reflect the 0 crimes and the 0 dispensary locations
+linear_variables <- linear_variables %>%
+  mutate(dsp_yoy_avg = round(dsp_yoy_avg, 1)) %>%
   mutate(dsp_yoy_avg = if_else(is.na(dsp_yoy_avg), 0, dsp_yoy_avg)) %>%
   mutate(dsp_yoy_avg = if_else(dsp_yoy_avg == Inf, 0, dsp_yoy_avg)) %>%
   mutate(crime_yoy_avg = if_else(is.na(crime_yoy_avg), 0, crime_yoy_avg)) %>%
@@ -200,14 +200,54 @@ linear_variables <- linear_variables %>%
 
 write.csv(linear_variables, "~/gvsu/winter 23/CIS 635/NIMBY/cleaning/linear_model/variables/linear_variable.csv")
 ```
- 
- 
- ### make a scatter plot by crime rate and dispensaries
- 
-```{r}
+
+### making a map
+
+[*adapted from "[Creating Maps in R](https://www.linkedin.com/learning/creating-maps-with-r/why-create-maps-with-r?autoplay=true&u=74414348 "Charlie Joey Hadley")"*]{style="font-size: 80%;"}
+
+```{r warning=FALSE}
+library(ggplot2)
+library(maps)
+library(dplyr)
+library(cowplot)
+
+
+# Load the county boundaries data for Colorado
+counties <- map_data("county", "colorado")
+counties <- rename(counties, County = subregion)
+
+# Convert 'County' to lowercase for merging with 'linear_variables'
+linear_variables$County <- tolower(linear_variables$County)
+my_map_data <- left_join(counties, linear_variables, by = "County")
+
+# Remove duplicate counties from the merged data
+my_map_dsps_data <- distinct(my_map_data, County, .keep_all = TRUE)
+
+# find the centroids by averaging all of duplicat
+centroid_coords <- my_map_dsps_data %>%
+  group_by(group) %>%
+  summarize(
+    X = mean(long),
+    Y = mean(lat),
+    `Dispensary Count` = mean(dsps_average))
+
+
+
+# Create the heat map
+my_map <- ggplot() +
+  # heat map
+  geom_polygon(data = my_map_data , 
+               aes(x = long, y = lat, group = group, fill = crime_per_cap)) +
+ labs(title = "Crime Rate and Dispensary Count by County in Colorado",
+      subtitle = "Three Year Average 2014, 2015, 2016",
+       fill = "Crime Rate") +
+  scale_fill_gradient(low = "#F8E9E8", high = "#C9463F") +
+
+  # geo bubble charts
+  geom_point(data = centroid_coords, aes(x = X, y = Y, size =  `Dispensary Count`),
+             color = "#AD9BCB", alpha = 0.8) + 
+  theme_map()
+
+my_map
 
 ```
- 
- 
- 
- 

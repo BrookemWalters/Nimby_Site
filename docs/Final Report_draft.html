@@ -187,39 +187,42 @@ div.csl-indent {
 </section>
 <section id="related-works" class="level2">
 <h2 class="anchored" data-anchor-id="related-works">- Related Works</h2>
-<p>A related and noteworthy body of work is the 2021 meta-analysis conducted by D. Mark Anderson and Daniel I. Rees’ paper “The Public Health Effects of Legalizing Marijuana.” The appendix presents an extensive comparison of 70 studies related to the impact of marijuana legalization on public health outcomes by empirical strategy, and study results. This paper served as an excellent resource to understand the myriad of ways in which this topic is being studied, including the study I will replicate. The authors ultimately conclude that while the existing body of research benefits from a wealth of state-level data, the outcomes remain inconclusive. Further research along with careful policy design is needed to mitigate the negative impact of legalization on crime rates and other outcomes.</p>
-<p>In contrast, the 2019 paper “Marijuana Dispensaries and Neighborhood Crime and Disorder in Denver, Colorado” by Lorrine A. Hughes, Lonnie M. Schaible, and Katherine Jimmerson offers contradictory findings. Utilizing a Bayesian Poisson regression model, the authors discovered a statistically significant correlation between the presence of dispensaries and increased rates of neighborhood crime—except for murder and auto theft. This study highlights the complexities of the issue and the necessity for a more nuanced understanding of the interplay between cannabis dispensaries and crime rates.</p>
+<p>A related and noteworthy body of work is the 2021 meta-analysis conducted by D. Mark Anderson and Daniel I. Rees’ paper “<a href="https://www.aeaweb.org/articles?id=10.1257%2Fjel.20211635&amp;utm_campaign=Economic%20Studies&amp;utm_source=hs_email&amp;utm_medium=email"><em>The Public Health Effects of Legalizing Marijuana</em></a>.” The appendix presents an extensive comparison of 70 studies related to the impact of marijuana legalization on public health outcomes by empirical strategy, and study results. This paper served as an excellent resource to understand the myriad of ways in which this topic is being studied, including the study I will replicate. The authors ultimately conclude that while the existing body of research benefits from a wealth of state-level data, the outcomes remain inconclusive. Further research along with careful policy design is needed to mitigate the negative impact of legalization on crime rates and other outcomes.</p>
+<p>In contrast, the 2019 paper “<a href="https://www.tandfonline.com/doi/abs/10.1080/07418825.2019.1567807"><em>Marijuana Dispensaries and Neighborhood Crime and Disorder in Denver</em></a><em>,</em> Colorado” by Lorrine A. Hughes, Lonnie M. Schaible, and Katherine Jimmerson offers contradictory findings. Utilizing a Bayesian Poisson regression model, the authors discovered a statistically significant correlation between the presence of dispensaries and increased rates of neighborhood crime—except for murder and auto theft. This study highlights the complexities of the issue and the necessity for a more nuanced understanding of the interplay between cannabis dispensaries and crime rates.</p>
 <p><img src="https://www.netsuite.com/portal/assets/img/business-articles/data-warehouse/social-data-mining.jpg?v2" class="img-fluid" width="688"></p>
 </section>
 <section id="methods" class="level2">
 <h2 class="anchored" data-anchor-id="methods">- Methods</h2>
-<p>While striving to replicate NIMBY’s observations regarding crime outcomes and cannabis dispensary locations, I employed the data sources delineated in the original paper’s methodology. However, due to data quality issues and time limitations, I found it necessary to modify my approach. The diagram presented below illustrates the utilization of R code to construct a data pipeline for the linear model and its associated variables.</p>
-<p>In the interest of interpretability, I divided my work into four distinct segments, each highlighted in the navigation bar of this site. I hope this structured breakdown allows readers to navigate through my process efficiently, providing a transparent insight into my methods employed and limitations faced in this project.</p>
+<p>While all of the data referenced in NIMBY is publicly available, I found it necessary to deviate from the original’s papers methodology due to data quality issues and time constraints.</p>
+<p>My diagram below illustrates the utilization of R code to construct a data pipeline for the linear model and its associated variables.</p>
+<p>In the interest of interpretability, I divided my work into four distinct segments, each highlighted in the navigation bar of this site. I hope this structured breakdown allows readers to navigate through my process efficiently, providing transparent insight into my methods employed and limitations faced throughout this project.</p>
 <p><img src="images/methodology.png" class="img-fluid"></p>
 <p>In summation, the data mining pipeline consisted of several stages, each color coded above.</p>
 <ul>
 <li><p>Dispensary license records were cleaned and preprocessed, removing irrelevant columns, standardizing the format, and aggregating the data by county and year. | <a href="https://brookemwalters.github.io/Nimby_Site/counting_dispensaries_step1.html" title="Counting Dispensaries">code</a></p></li>
-<li><p>Leveraging the power of the TidyCensus package, I extracted population data for the targeted variables from the American Community Survey (ACS) census database. | <a href="https://brookemwalters.github.io/Nimby_Site/Label%20the%20Dispensaries%20with%20GeoCodes_step2.html" title="Geocodes, Census Variables, and Dispensaries Per Capita">code</a></p></li>
+<li><p>Leveraging the power of the TidyCensus package, I extracted population data for the target variables from the American Community Survey (ACS) census database. | <a href="https://brookemwalters.github.io/Nimby_Site/Label%20the%20Dispensaries%20with%20GeoCodes_step2.html" title="Geocodes, Census Variables, and Dispensaries Per Capita">code</a></p></li>
 <li><p>I wove the datasets together using county-level identifiers (GEOID), allowing for the computation of per capita values for dispensaries and crime rates and year-over-year fluctuations. | <a href="#0" title="per capita">code</a></p></li>
-<li><p>Finally, I introduced the new variables into a linear model regression model. | <a href="https://brookemwalters.github.io/Nimby_Site/build_the_linear_model_step4.html">code</a></p></li>
+<li><p>Finally, I introduced the new variables into a linear model regression model. | <a href="https://brookemwalters.github.io/Nimby_Site/build_the_linear_model_step4.html">code</a></p>
+<p><img src="images/linear_model.jpg" class="img-fluid"></p>
+<blockquote class="blockquote">
+<p><em>The time period for the analysis starts with the year-over-year change from January 2013 to January 2014, the first month where recreational dispensaries are legal. The last year-over-year change in the sample is from December 2015 to December 2016.</em></p>
+</blockquote></li>
 </ul>
 </section>
 <section id="results-and-discussion" class="level2">
 <h2 class="anchored" data-anchor-id="results-and-discussion">- Results and Discussion</h2>
 <ul>
 <li><p>comparing soccio-ecconmic factors:</p>
-<p>how to read: Panel B, shows the quartiles (lowest to highest) counties by the four variables. The percentages of the table represent the three-year average of year-over-year changes in dispensary businesses.</p>
+<p><strong>how to read:</strong> Panel B, shows the quartiles (lowest to highest) counties by the four variables. The percentages of the table represent the three-year average of year-over-year changes in dispensary businesses.</p>
 <p>interpretation: the average county in Colorado saw a 11.9% increase in the number of dispensaries between 2014-2017. Counties that fall within the 4th quartile (highest) for poverty rates saw the largest increase (22.1%) average growth in the number of dispensaries, followed by the 4th quartile for Hispanic populations, and the 1st quartile (lowest) employed populations.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images/Table1(cropped).jpg" class="img-fluid figure-img" width="495"></p>
-<p></p><figcaption class="figure-caption">NIMBY’s Version</figcaption><p></p>
+<p><a href="https://www.sciencedirect.com/science/article/abs/pii/S016604621830293X#preview-section-snippets"><img src="images/Table1(cropped).jpg" class="img-fluid figure-img" width="495"></a></p>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images/Rplot.jpeg" class="img-fluid figure-img" width="494"></p>
-<p></p><figcaption class="figure-caption">Replicated Version</figcaption><p></p>
+<p><a href="https://brookemwalters.github.io/Nimby_Site/Label%20the%20Dispensaries%20with%20GeoCodes_step2.html#create-quartiles-to-recreate-table1"><img src="images/Rplot.jpeg" title="Replicated Table" class="img-fluid figure-img" width="494"></a></p>
 </figure>
 </div></li>
 </ul>

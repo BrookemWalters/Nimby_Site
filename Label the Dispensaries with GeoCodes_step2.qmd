@@ -10,16 +10,16 @@ format:
 
 **This code: creates a table of dispensary density by socioeconomic factors**
 
-1.  matches zip codes to census geocodes\
-2.  connects to census API\
-3.  retrieves demographic population data\
-4.  calculates poverty, race, and employment rates\
-5.  matches the statistics above with year-over-year changes in dispensaries\
-6.  creates a table showing dispensary YOY growth by socioeconomic quartiles\
+1.  matches zip codes to census geocodes
+2.  connects to census API
+3.  retrieves demographic population data
+4.  calculates poverty, race, and employment rates
+5.  matches the statistics above with year-over-year changes in dispensaries
+6.  generates an overly formatted table showing dispensary YOY growth by socioeconomic quartiles\
 
 This section of my methodology was the most exciting for me, yet it was also where I recognized the need to adapt my approach. My first limitation was the challenge of matching dispensary locations to their corresponding census tracts. To achieve this, I would need to obtain each location's physical address, which was not provided by Colorado.Gov's dispensary archive. While this information can be accessed for a price through vendors or tediously scraping the web, for the sake of time and sanity, proceeding with county-level data was my best option for completing this project.
 
-Nonetheless, the TIGRIS package's ability to create maps at the census tract level remains a potent instrument in an analyst's arsenal. Although the tract level identifiers are not utilized beyond this point, I have included it as a reference for future projects and as part of my Replicating NIMBY journey. Due to the differences in methodology, my figures can not align flawlessly; however, examining the overall trends for congruence remains a worthwhile endeavor.
+Nonetheless, the TIGRIS package's ability to create maps at the census tract level remains a potent instrument in an analyst's arsenal. Although the tract level identifiers are not utilized beyond this point, I have included it as a reference for future projects and as part of my Replicating NIMBY journey. Due to the differences in methodology, my figures do not align flawlessly; however, examining the overall trends for congruence remains a worthwhile endeavor.
 
 ### load packages
 
@@ -48,8 +48,7 @@ county_codes <- (read.csv("~/gvsu/winter 23/CIS 635/NIMBY/cleaning/density table
 
 ### spatial join between dispensary locations and geocodes
 
-At this stage, the zip codes are my main geographical identifier for my dispensary data frame. In an attempt to find the tract level data, I tapped into the Tigris package. 
-[*adapted from "[tigris](https://github.com/walkerke/tigris "Kyle Walker")"*]{style="font-size: 80%;"}
+At this stage, the zip codes are my main geographical identifier for my dispensary data frame. In an attempt to find the tract level data, I tapped into the Tigris package. [*adapted from "[tigris](https://github.com/walkerke/tigris "Kyle Walker")"*]{style="font-size: 80%;"}
 
 ```{r, echo=FALSE}
 zctas <- zctas(state = 08, year = 2010, class = "sf")
@@ -99,9 +98,10 @@ dsps<- left_join(dsps, county_codes, by = "county_code")
 write.csv(dsps, "~/gvsu/winter 23/CIS 635/NIMBY/cleaning/counting_dispensaries/dps_data_cleaned/dispenaries_tracts.csv")
 ```
 
-\ 
+ 
 
 ### count the dispensaries with summarize
+
 ```{r}
 dsps_summed <-  dsps %>% 
   filter(month(date) == 12) %>% 
@@ -174,7 +174,8 @@ dsps_yoy_demos <- dsps_yoy_demos %>%
   )
 
 ```
-\ 
+
+ 
 
 ## year-over-year function
 
@@ -199,6 +200,7 @@ yoy_avg_function <- function(df) {
 \
 
 ### calculate the year-over-year change average in dispensaries for the state of Colorado
+
 ```{r}
 colorado_yoy_average <-  dsps_yoy_demos %>% 
   summarize(
@@ -247,7 +249,7 @@ write.csv(dsps_yoy_qtiles, "~/gvsu/winter 23/CIS 635/NIMBY/cleaning/counting_dis
 
 \
 
-Transform the data into a tabluar format to be presented in a simple summarized table
+transform the data into a tabluar format to be presented in a simple summarized table
 
 ```{r warning=FALSE}
 # poverty quartiles by dispensary density
@@ -344,10 +346,7 @@ colnames(density_table1) <- c("Quartile", "Poverty Rate", "Pct. Black", "Pct. Hi
 combined_table <- bind_rows(density_table1 , colorado_yoy_average)
 ```
 
-
-
-
-# Created a formated table for the results section
+# create a formated table for the results section
 
 format the table for a side by side comparison [*adapted from "[Making high-quality tables in R with the gt package](https://www.youtube.com/watch?v=dxDeotwylr8 "R for the Rest of Us")"*]{style="font-size: 80%;"}
 
@@ -362,7 +361,7 @@ table2 <- combined_table %>%
   
   tab_header(
     title = "average change in dispensary density by local characteristics",
-    subtitle = "replicated verison"
+    subtitle = "replicated for the state of Colorado"
   ) %>%
   
   # column headers
@@ -428,4 +427,3 @@ table2 <- combined_table %>%
 table2
 
 ```
-

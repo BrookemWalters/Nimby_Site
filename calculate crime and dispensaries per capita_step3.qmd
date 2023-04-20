@@ -12,14 +12,15 @@ format:
 **This code: finds the crime and dispensary rates per 10,000 by county**
 
 1.  finds the population three year average
-
 2.  calculates dispensaries per capita
-
 3.  maps the fbi historical crime data into a single data frame
-
 4.  calculates the county crime rates
-
 5.  matches the crime rates with the dispensaries per capita by geoid
+6.   generates a scatter plot
+
+The goal is recreate this linear model:
+
+### ![](images/linear_model.jpg)
 
 ### load packages
 
@@ -32,7 +33,7 @@ library(tidycensus)
 library(tidyverse) # purr package mapping, dplyer package 
 ```
 
-### load in data
+### load in my datasets
 
 select the relevant fields
 
@@ -53,7 +54,7 @@ dsps_avg  <-  dsps_avg %>% mutate_at("dsps_average", round, .2) # round
 dsps_avg <-  dsps_avg %>% select(GEOID,dsps_average)
 ```
 
-### find the local population rates
+### find the local population rates for 2014. 2015, 2016
 
 ```{r}
 #pull the population totals from the tidycensus
@@ -199,3 +200,14 @@ linear_variables <- linear_variables %>%
 
 write.csv(linear_variables, "~/gvsu/winter 23/CIS 635/NIMBY/cleaning/linear_model/variables/linear_variable.csv")
 ```
+ 
+ 
+ ### make a scatter plot by crime rate and dispensaries
+ 
+```{r}
+
+```
+ 
+ 
+ 
+ 

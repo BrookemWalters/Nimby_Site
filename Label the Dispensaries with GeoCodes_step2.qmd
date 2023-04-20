@@ -386,7 +386,7 @@ table2 <- combined_table %>%
   
   # cells
   tab_style(
-    style = cell_fill(color = "#ABC7A9", alpha = 0.2),
+    style = cell_fill(color = "#DBF9EB", alpha = 0.2),
     locations = cells_body(columns = vars(`Colorado Average`))
   ) %>%
  
@@ -415,7 +415,7 @@ table2 <- combined_table %>%
     table_body.border.bottom.color = "black",
     table.width = pct(100),
     data_row.padding = px(10),
-    column_labels.background.color = "#73A16F"
+    column_labels.background.color = "#DBF9EB"
   ) %>%
   
   tab_options(
@@ -427,5 +427,5 @@ table2 <- combined_table %>%
   )
 
 table2
-
+gtsave(table2, "images/table2.html")
 ```

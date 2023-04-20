@@ -205,14 +205,6 @@ write.csv(linear_variables, "~/gvsu/winter 23/CIS 635/NIMBY/cleaning/linear_mode
 
 [*adapted from "[Creating Maps in R](https://www.linkedin.com/learning/creating-maps-with-r/why-create-maps-with-r?autoplay=true&u=74414348 "Charlie Joey Hadley")"*]{style="font-size: 80%;"}
 
-my_map \<- ggplot() +
-
-\# heat map
-
-geom_polygon(data = my_map_data,
-
-aes(x =Longitude, y =Latitude, fill = crime_per_cap))
-
 ```{r warning=FALSE}
 library(ggplot2)
 library(maps)
@@ -251,8 +243,10 @@ my_map <- ggplot() +
   scale_fill_gradient(low = "#DAF0FA", high = "#B41876"
                       ) +
     scale_color_manual(values = "black", guide = FALSE) + # Remove border color from legend
+
   # Bubble chart with updated label
  
+
   # geo bubble charts
   geom_point(data = dsp_points, aes(x = Longitude, y = Latitude, size = dsps_average),
              color = "#23CB7F", 
@@ -260,9 +254,13 @@ my_map <- ggplot() +
              alpha = 0.8)+
   labs(size = "no. of dispensaries")+
 
-  theme_map() +
-   theme(plot.caption = element_text(size = 8, face = "italic",
-                                     hjust = .1))
+  theme_minimal() +
+   theme(plot.caption = element_text(size = 8, face = "italic", hjust = .1),
+         axis.text = element_blank(),
+         axis.ticks = element_blank(),
+         axis.title = element_blank())
+         
+           
 # Remove border color from legend
   # guides(color = guide_legend(override.aes = list(color = NA)))
 

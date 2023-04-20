@@ -82,13 +82,13 @@ In summation, the data mining pipeline consisted of several stages, each color c
 
     ![](images/Table1(cropped).jpg){width="586"}
 
-    ![](images/Rplot01.jpeg "Replicated Table"){width="582"}
+    ![](images/Rplot02.jpeg "Replicated Table"){width="592"}
 
 **comparison:** now let's look at my results, my calculations led me to a 11.5% three-year average growth in dispensaries, which is very close NIMBY's result. However, when I compare the individual demographics there is a lot of variance between the two results. The lowest quartile for employed populations revealed the most growth in dispensaries (+50.8%), followed by the 2nd quartile for black populations (27.0%).
 
 ### Comparing the Dependent and Independent variables:
 
-![](images/map.png)
+![](images/co_map.png)
 
 What's interesting here is XYZ
 

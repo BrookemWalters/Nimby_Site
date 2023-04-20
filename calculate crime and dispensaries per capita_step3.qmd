@@ -230,7 +230,7 @@ linear_variables$County <- tolower(linear_variables$County)
 my_map_data <- left_join(counties, linear_variables, by = "County")
 
 
-# Create the heat map
+
 my_map <- ggplot() +
   # heat map
   geom_polygon(data = my_map_data , 
@@ -242,11 +242,7 @@ my_map <- ggplot() +
       color = "county boarder") +
   scale_fill_gradient(low = "#DAF0FA", high = "#B41876"
                       ) +
-    scale_color_manual(values = "black", guide = FALSE) + # Remove border color from legend
-
-  # Bubble chart with updated label
- 
-
+    scale_color_manual(values = "black", guide = FALSE) + # emove border color from legend
   # geo bubble charts
   geom_point(data = dsp_points, aes(x = Longitude, y = Latitude, size = dsps_average),
              color = "#23CB7F", 
@@ -260,10 +256,10 @@ my_map <- ggplot() +
          axis.ticks = element_blank(),
          axis.title = element_blank())
          
-           
-# Remove border color from legend
-  # guides(color = guide_legend(override.aes = list(color = NA)))
+my_map           
+ggsave("images/co_map1.png", plot = my_map)
+# for some reason I have to run the code twice for it to work, so I'm linking to the final result
 
-my_map
-ggsave("images/co_map.png", plot = my_map)
 ```
+
+![](images/co_map.png)

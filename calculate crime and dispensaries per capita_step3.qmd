@@ -17,7 +17,7 @@ format:
 4.  calculates the county crime rates
 5.  matches the crime rates with the dispensaries per capita by geoid
 6.  maps the crime rates against the dispensaries growth
-7.   visualizes the results , to be embedded in the conclusion
+7.  visualizes the results , to be embedded in the conclusion
 
 load packages
 
@@ -202,7 +202,7 @@ linear_variables <- linear_variables %>%
 write.csv(linear_variables, "~/gvsu/winter 23/CIS 635/NIMBY/cleaning/linear_model/variables/linear_variable.csv")
 ```
 
-###  a map comparing the independent and dependent variables 
+### a map comparing the independent and dependent variables
 
 [*adapted from "[Creating Maps in R](https://www.linkedin.com/learning/creating-maps-with-r/why-create-maps-with-r?autoplay=true&u=74414348 "Charlie Joey Hadley")"*]{style="font-size: 80%;"}
 
@@ -237,8 +237,8 @@ my_map <- ggplot() +
                    group = group, fill = crime_per_cap, color = "")) +
   coord_fixed(ratio = 1) +
   
- labs(title = "Crime Rate and Dispensary Count by County in Colorado",
-      subtitle = "Three Year Average 2014, 2015, 2016",
+ labs(title = "Crime Rate and Dispensary Count by County",
+      subtitle = "State of Colorado | Three-Year Average 2014, 2015, 2016",
       caption = "Mineral county crime data not available",
        fill = "avg crime rate",
       color = "county boarder") +
@@ -301,4 +301,4 @@ ggsave("images/co_map1.png")
 
 ```
 
-![](images/co_map.png){width="685"}
+![](images/co_map.png)

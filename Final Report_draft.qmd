@@ -51,7 +51,7 @@ In summation, the data mining pipeline consisted of several stages, each color c
 
 -   I wove the datasets together using county-level identifiers (GEOID), allowing for the computation of per capita values for dispensaries and crime rates and year-over-year fluctuations. \| [code](#0 "per capita")
 
--   Finally, I introduced the new variables into a linear model regression model. \| [code](https://brookemwalters.github.io/Nimby_Site/build_the_linear_model_step4.html)
+-   Finally, I introduced the new variables into a linear regression model. \| [code](https://brookemwalters.github.io/Nimby_Site/build_the_linear_model_step4.html)
 
     ![](images/linear_model.jpg)
 
@@ -76,25 +76,25 @@ In summation, the data mining pipeline consisted of several stages, each color c
 
 ### Comparing Control Variables
 
--   **how to read:** NIMBY's *Table1 Panel B*, shows the quartiles counties (lowest to highest) by the four variables. The percentages of the table represent the three-year average of year-over-year growth in dispensary businesses.
+**Table 1.** From NIMBY:
 
-    **interpretation:** the average county in Colorado saw a 11.9% increase in the number of dispensaries between 2014-2017. Counties that fall within the 4th quartile (highest) for poverty rates saw the largest increase (22.1%) average growth in the number of dispensaries, followed by the 4th quartile for Hispanic populations, and the 1st quartile (lowest) employed populations.
+![**how to read**: Panel B, shows the county quartiles (lowest to highest) by the four variables. The figures represent the three-year average of year-over-year growth in dispensary businesses. (Brinkman Pg. 78) ](images/Table1(cropped).jpg){width="675"}
 
-    ![](images/Table1(cropped).jpg){width="586"}
+**interpretation:** the average county in Colorado saw a 11.9% increase in the number of dispensaries between 2014-2017. Counties that fall within the 4th quartile (highest) for poverty rates saw the largest increase (22.1%) average growth in the number of dispensaries, followed by the 4th quartile for Hispanic populations, and the 1st quartile (lowest) employed populations.
 
-    ![](images/Rplot02.jpeg "Replicated Table"){width="592"}
+**comparison:** now let's look at my results, my calculations led me to a 11.5% three-year average growth in dispensaries, which is very close to NIMBY's result. However, when I compare the individual demographics there is a lot of variance between the two results. The lowest quartile for employed populations revealed the most growth in dispensaries (+50.8%), followed by the 2nd quartile for black populations (27.0%).
 
-**comparison:** now let's look at my results, my calculations led me to a 11.5% three-year average growth in dispensaries, which is very close NIMBY's result. However, when I compare the individual demographics there is a lot of variance between the two results. The lowest quartile for employed populations revealed the most growth in dispensaries (+50.8%), followed by the 2nd quartile for black populations (27.0%).
+The gaps between my employment quartiles and NIMBY's are too wide to ignore. With more time, I'd explore the difference in methodologies and identify the contributing factors.
+
+![**how to read**: figures represent the county quartiles (lowest to highest) by the four variables, showing represent three-year average of year-over-year growth in dispensary businesses. (Brinkman Pg. 78)](images/Rplot02.jpeg "Replicated Table"){width="680"}
+
+## - Conclusions
 
 ### Comparing the Dependent and Independent variables:
 
-![](images/co_map.png)
+![**how to read:** the three year average of crimes per 10,000 residents are plotted by Colorado county, overlaid by the three year average count of dispensaries with in the county.](images/co_map.png)
 
-What's interesting here is XYZ
-
-## - Conclusion
-
-the zen art of naivety
+**interpretation:** Denver is clearly where we see the larger crime rates, and more dispensaries. NIMBY referrs to Devver as the "mecca of recreational cannabis." El Paso is an interesting county with a relativity high dispensary density and low crime rate, as well as Montrose county where the inverse is true.
 
 ## - Data and Software
 

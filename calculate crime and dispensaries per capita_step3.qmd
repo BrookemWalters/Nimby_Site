@@ -17,6 +17,7 @@ format:
 4.  calculates the county crime rates
 5.  matches the crime rates with the dispensaries per capita by geoid
 6.  maps the crime rates against the dispensaries growth
+7.   visualizes the results , to be embedded in the conclusion
 
 load packages
 
@@ -201,7 +202,7 @@ linear_variables <- linear_variables %>%
 write.csv(linear_variables, "~/gvsu/winter 23/CIS 635/NIMBY/cleaning/linear_model/variables/linear_variable.csv")
 ```
 
-### making a map
+###  a map comparing the independent and dependent variables 
 
 [*adapted from "[Creating Maps in R](https://www.linkedin.com/learning/creating-maps-with-r/why-create-maps-with-r?autoplay=true&u=74414348 "Charlie Joey Hadley")"*]{style="font-size: 80%;"}
 
@@ -213,19 +214,17 @@ library(cowplot)
 
 
 # Load the county boundaries data for Colorado
-county_centers <-  read.csv("~/gvsu/winter 23/CIS 635/NIMBY/cleaning/geo_files/co_cords.csv") # info downloaded from the web
+county_centers <-  read.csv("~/gvsu/winter 23/CIS 635/NIMBY/cleaning/geo_files/co_cords.csv") # centeralized county lat and long downloaded from the web
 
 counties <- map_data("county", "colorado")
 counties <- rename(counties, County = subregion)
 
-# link the average dispensary county with the center of the county
+# join the average dispensary county with the center of the county
 dsp_points <- left_join(county_centers, linear_variables, by = "County")
 
 
-
-#link the crime data with the shape files
+# join the crime data with the shape files
 # make the counties the same case so they match with the other data
-
 linear_variables$County <- tolower(linear_variables$County)
 my_map_data <- left_join(counties, linear_variables, by = "County")
 
@@ -234,32 +233,72 @@ my_map_data <- left_join(counties, linear_variables, by = "County")
 my_map <- ggplot() +
   # heat map
   geom_polygon(data = my_map_data , 
-               aes(x = long, y = lat, group = group, fill = crime_per_cap, color = "")) +
+               aes(x = long, y = lat, 
+                   group = group, fill = crime_per_cap, color = "")) +
+  coord_fixed(ratio = 1) +
+  
  labs(title = "Crime Rate and Dispensary Count by County in Colorado",
       subtitle = "Three Year Average 2014, 2015, 2016",
       caption = "Mineral county crime data not available",
-       fill = "crimes per 10k pop",
+       fill = "avg crime rate",
       color = "county boarder") +
-  scale_fill_gradient(low = "#DAF0FA", high = "#B41876"
-                      ) +
-    scale_color_manual(values = "black", guide = FALSE) + # emove border color from legend
+  
+  # colors
+  scale_fill_gradient(low = "#DAF0FA", high = "#B41876") +
+    scale_color_manual(values = "black", guide = FALSE) + # remove border color 
+  
+  # repostion legends  
+  guides(
+    fill = guide_colorbar(title.position = "top",
+                          title.hjust = 0.5, 
+                          label.position = "bottom",
+                          direction = "horizontal")) + 
+
+  theme(legend.position = "bottom",
+        plot.caption = element_text(size = 8, face = "italic", hjust = .1),
+        axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank()) +
+  
   # geo bubble charts
-  geom_point(data = dsp_points, aes(x = Longitude, y = Latitude, size = dsps_average),
+  geom_point(data = dsp_points,
+             aes(x = Longitude, y = Latitude, size = dsps_average),
              color = "#23CB7F", 
-            stroke_width = 1,
              alpha = 0.8)+
-  labs(size = "no. of dispensaries")+
+
+  labs(size = "avg no. of dispensaries")+
+  
+  
+  # horizontal legend
+  guides(
+    size = guide_legend(title.position = "top",
+                        title.hjust = 0.5,
+                        label.position = "bottom",
+                        direction = "horizontal")) +
+
+    # add county labels
+    geom_text(data
+              = county_centers, aes(x = Longitude, y = Latitude, label = County),
+            size = 2, color = "black", fontface = "bold", nudge_y = -0.08) +
 
   theme_minimal() +
    theme(plot.caption = element_text(size = 8, face = "italic", hjust = .1),
-         axis.text = element_blank(),
+                 axis.text = element_blank(), # remove extra stuff
          axis.ticks = element_blank(),
-         axis.title = element_blank())
+         axis.title = element_blank(), 
+
+         # messing with the legend for far too long
+         legend.position = "right",
+         legend.key.size = unit(.25, 'cm'), #change legend key size
+         legend.key.height = unit(.25, 'cm'), #change legend key height
+         legend.key.width = unit(.5, 'cm'),
+         legend.title = element_text(size= 7),
+         legend.text = element_text(size = 7)) 
          
 my_map           
-ggsave("images/co_map1.png", plot = my_map)
+ggsave("images/co_map1.png")
 # for some reason I have to run the code twice for it to work, so I'm linking to the final result
 
 ```
 
-![](images/co_map.png)
+![](images/co_map.png){width="685"}

@@ -157,9 +157,11 @@ div.csl-indent {
   <ul class="collapse">
   <li><a href="#comparing-dispensary-counts" id="toc-comparing-dispensary-counts" class="nav-link" data-scroll-target="#comparing-dispensary-counts">Comparing Dispensary Counts</a></li>
   <li><a href="#comparing-control-variables" id="toc-comparing-control-variables" class="nav-link" data-scroll-target="#comparing-control-variables">Comparing Control Variables</a></li>
+  </ul></li>
+  <li><a href="#conclusions" id="toc-conclusions" class="nav-link" data-scroll-target="#conclusions">- Conclusions</a>
+  <ul class="collapse">
   <li><a href="#comparing-the-dependent-and-independent-variables" id="toc-comparing-the-dependent-and-independent-variables" class="nav-link" data-scroll-target="#comparing-the-dependent-and-independent-variables">Comparing the Dependent and Independent variables:</a></li>
   </ul></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">- Conclusion</a></li>
   <li><a href="#data-and-software" id="toc-data-and-software" class="nav-link" data-scroll-target="#data-and-software">- Data and Software</a>
   <ul class="collapse">
   <li><a href="#data-sources" id="toc-data-sources" class="nav-link" data-scroll-target="#data-sources">Data Sources:</a></li>
@@ -207,7 +209,7 @@ div.csl-indent {
 <li><p>Dispensary license records were cleaned and preprocessed, removing irrelevant columns, standardizing the format, and aggregating the data by county and year. | <a href="https://brookemwalters.github.io/Nimby_Site/counting_dispensaries_step1.html" title="Counting Dispensaries">code</a></p></li>
 <li><p>Leveraging the power of the TidyCensus package, I extracted population data for the target variables from the American Community Survey (ACS) census database. | <a href="https://brookemwalters.github.io/Nimby_Site/Label%20the%20Dispensaries%20with%20GeoCodes_step2.html" title="Geocodes, Census Variables, and Dispensaries Per Capita">code</a></p></li>
 <li><p>I wove the datasets together using county-level identifiers (GEOID), allowing for the computation of per capita values for dispensaries and crime rates and year-over-year fluctuations. | <a href="#0" title="per capita">code</a></p></li>
-<li><p>Finally, I introduced the new variables into a linear model regression model. | <a href="https://brookemwalters.github.io/Nimby_Site/build_the_linear_model_step4.html">code</a></p>
+<li><p>Finally, I introduced the new variables into a linear regression model. | <a href="https://brookemwalters.github.io/Nimby_Site/build_the_linear_model_step4.html">code</a></p>
 <p><img src="images/linear_model.jpg" class="img-fluid"></p>
 <p>The goal is to estimate the causal effect of changes in dispensary density on changes in crime rates, while accounting for potential biases and confounding factors using the linear regression model above.</p>
 <table class="table">
@@ -273,23 +275,40 @@ div.csl-indent {
 </section>
 <section id="comparing-control-variables" class="level3">
 <h3 class="anchored" data-anchor-id="comparing-control-variables">Comparing Control Variables</h3>
-<ul>
-<li><p><strong>how to read:</strong> NIMBY’s <em>Table1 Panel B</em>, shows the quartiles counties (lowest to highest) by the four variables. The percentages of the table represent the three-year average of year-over-year growth in dispensary businesses.</p>
+<p><strong>Table 1.</strong> From NIMBY:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Table1(cropped).jpg" class="img-fluid figure-img" width="675"></p>
+<p></p><figcaption class="figure-caption"><strong>how to read</strong>: Panel B, shows the county quartiles (lowest to highest) by the four variables. The figures represent the three-year average of year-over-year growth in dispensary businesses. (Brinkman Pg. 78)</figcaption><p></p>
+</figure>
+</div>
 <p><strong>interpretation:</strong> the average county in Colorado saw a 11.9% increase in the number of dispensaries between 2014-2017. Counties that fall within the 4th quartile (highest) for poverty rates saw the largest increase (22.1%) average growth in the number of dispensaries, followed by the 4th quartile for Hispanic populations, and the 1st quartile (lowest) employed populations.</p>
-<p><img src="images/Table1(cropped).jpg" class="img-fluid" width="586"></p>
-<p><img src="images/Rplot02.jpeg" title="Replicated Table" class="img-fluid" width="592"></p></li>
-</ul>
-<p><strong>comparison:</strong> now let’s look at my results, my calculations led me to a 11.5% three-year average growth in dispensaries, which is very close NIMBY’s result. However, when I compare the individual demographics there is a lot of variance between the two results. The lowest quartile for employed populations revealed the most growth in dispensaries (+50.8%), followed by the 2nd quartile for black populations (27.0%).</p>
+<p><strong>comparison:</strong> now let’s look at my results, my calculations led me to a 11.5% three-year average growth in dispensaries, which is very close to NIMBY’s result. However, when I compare the individual demographics there is a lot of variance between the two results. The lowest quartile for employed populations revealed the most growth in dispensaries (+50.8%), followed by the 2nd quartile for black populations (27.0%).</p>
+<p>The gaps between my employment quartiles and NIMBY’s are too wide to ignore. With more time, I’d explore the difference in methodologies and identify the contributing factors.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<figure class="figure">
+<img src="images/Rplot02.jpeg" title="Replicated Table" class="img-fluid figure-img" width="680">
+</figure>
+<p></p><figcaption class="figure-caption"><strong>how to read</strong>: figures represent the county quartiles (lowest to highest) by the four variables, showing represent three-year average of year-over-year growth in dispensary businesses. (Brinkman Pg. 78)</figcaption><p></p>
+</figure>
+</div>
 </section>
+</section>
+<section id="conclusions" class="level2">
+<h2 class="anchored" data-anchor-id="conclusions">- Conclusions</h2>
+<p>Putting it all together on this map we see<br>
+</p>
 <section id="comparing-the-dependent-and-independent-variables" class="level3">
 <h3 class="anchored" data-anchor-id="comparing-the-dependent-and-independent-variables">Comparing the Dependent and Independent variables:</h3>
-<p><img src="images/co_map.png" class="img-fluid"></p>
-<p>What’s interesting here is XYZ</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/co_map.png" class="img-fluid figure-img" width="731"></p>
+<p></p><figcaption class="figure-caption"><strong>how to read:</strong> the three year average of crimes per 10,000 residents are plotted by Colorado county, overlaid by the three year average count of dispensaries with in the county.</figcaption><p></p>
+</figure>
+</div>
+<p><strong>interpretation:</strong> Denver is clearly where we see the larger crime rates, and more dispensaries. NIMBY referrs to Devver as the “<em>mecca of recreational cannabis</em>.” El Paso is an interesting county with a relativity high dispensary density and low crime rate, as well as pueblo county where the inverse is true</p>
 </section>
-</section>
-<section id="conclusion" class="level2">
-<h2 class="anchored" data-anchor-id="conclusion">- Conclusion</h2>
-<p>the zen art of naivety</p>
 </section>
 <section id="data-and-software" class="level2">
 <h2 class="anchored" data-anchor-id="data-and-software">- Data and Software</h2>

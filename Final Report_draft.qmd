@@ -2,7 +2,7 @@
 format:
   html:
     toc: true
-    code-overflow: wrap
+    code-overflow: wrap  
 bibliography: references.bib
 ---
 
@@ -59,7 +59,7 @@ In summation, the data mining pipeline consisted of several stages, each color c
     The goal is to estimate the causal effect of changes in dispensary density on changes in crime rates, while accounting for potential biases and confounding factors using the linear regression model above.
 
     | Variable     | Defined                                                                                                        |
-    |----------------------|--------------------------------------------------|
+    |--------------|----------------------------------------------------------------------------------------------------------------|
     | Δcrime *j,t* | year-over-year changes in crime rates the jth geography in month t                                             |
     | Δdisp *j,t*  | year-over-year changes in dispensary rates                                                                     |
     | *j*          | neighborhood                                                                                                   |
@@ -87,7 +87,7 @@ In summation, the data mining pipeline consisted of several stages, each color c
 
 The gaps between my employment quartiles and NIMBY's are too wide to ignore. With more time, I'd explore the difference in methodologies and identify the contributing factors.
 
-![**how to read***: figures represent the county quartiles (lowest to highest) by the four variables, showing represent three-year average of year-over-year growth in dispensary businesses. (Brinkman Pg. 78)*](images/Rplot02.jpeg "Replicated Table"){width="680"}
+![how to read: figures represent the county quartiles (lowest to highest) by the four variables, showing represent three-year average of year-over-year growth in dispensary businesses.](images/Rplot02.jpeg "Replicated Table"){width="680"}\
 
 ## - Conclusions
 
@@ -110,8 +110,7 @@ The gaps between my employment quartiles and NIMBY's are too wide to ignore. Wit
 
 The unequal distribution of plots around the horizontal line (y=0), indicates my model not an ideal fit for the data.
 
-**evaluation:**
-My Model's output
+**evaluation:** my model's output
 
 ```{r message=TRUE, warning=TRUE, cache=FALSE}
 # import data
@@ -126,7 +125,13 @@ model2 <- lm(linear_variables$crime_yoy_avg ~ linear_variables$dsp_yoy_avg +
 summary(model2)
 ```
 
-Reviewing the summary output, there is more evidence that my model appears is a poor fit for the data, as it only explains about 1.9% of the variation in the dependent variable. The adjusted R-squared is negative,.
+Reviewing the summary output, there are several indicators that my model is a poor fit for the data:
+
+-   the negative adjust r-square
+
+-   low multiple R square, reveals that dispensary density only explains about 1.9% of the variation in crime rates
+
+-   the residuals skew left
 
 Additionally, the high p-value (0.95) indicates that we can not reject the null hypothesis that dispensary presences has no effect on crime rates.
 
@@ -141,17 +146,11 @@ This model is part of NIMBY's baseline estimation strategy. Their next model ite
 
 # Final Thoughts:
 
-It's not so simple as X predicts Y. Findings the right model takes xyz. what I got out of this project:
+![](images/data-preparation-diagram_0.svg){width="487"}
 
--   Understand data construction
+The third law of Tom Khabaza's [Nine Laws of Data Mining](http://khabaza.codimension.net/index_files/9laws.htm) states that "*Data preparation is more than half of every data mining process.*" Throughout this project, I embraced this maximum as I worked my way through the various data quality issues encountered. Data is messy, and it was my task to make sense out of it. Additionally, predicting the relationship between recreational cannabis legalization and crime rates no straightforward task. Even with careful consideration of data construction , an accruate predictive model takes trial and error, as well as an understanding of the many factors that go into crime rate.
 
--   the art of dealing with changing data
-
--   data pipelines
-
--   missing data
-
-    data processing
+In order to fully address the concerns surrounding the long term implications of legal recreational cannabis use, we need to look at the issue from multiple angles. After this experience, I am more inclined to trust the results of meta-analyses of existing studies than one sole research study. As for Michigan, if I were to attempt a similar study, I would take a completely different approach. Crime rates are influenced by so many factors, I would spend my time analyzing the dynamics in state revenue and how those funds are being spent and how the multiplicities benefited.
 
 ## - Data and Software
 

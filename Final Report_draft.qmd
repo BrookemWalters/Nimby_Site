@@ -2,6 +2,7 @@
 format:
   html:
     toc: true
+    code-overflow: wrap
 bibliography: references.bib
 ---
 
@@ -58,7 +59,7 @@ In summation, the data mining pipeline consisted of several stages, each color c
     The goal is to estimate the causal effect of changes in dispensary density on changes in crime rates, while accounting for potential biases and confounding factors using the linear regression model above.
 
     | Variable     | Defined                                                                                                        |
-    |--------------|----------------------------------------------------------|
+    |----------------------|--------------------------------------------------|
     | Δcrime *j,t* | year-over-year changes in crime rates the jth geography in month t                                             |
     | Δdisp *j,t*  | year-over-year changes in dispensary rates                                                                     |
     | *j*          | neighborhood                                                                                                   |
@@ -86,11 +87,61 @@ In summation, the data mining pipeline consisted of several stages, each color c
 
 The gaps between my employment quartiles and NIMBY's are too wide to ignore. With more time, I'd explore the difference in methodologies and identify the contributing factors.
 
-![**how to read**: figures represent the county quartiles (lowest to highest) by the four variables, showing represent three-year average of year-over-year growth in dispensary businesses. (Brinkman Pg. 78)](images/Rplot02.jpeg "Replicated Table"){width="680"}
+![**how to read***: figures represent the county quartiles (lowest to highest) by the four variables, showing represent three-year average of year-over-year growth in dispensary businesses. (Brinkman Pg. 78)*](images/Rplot02.jpeg "Replicated Table"){width="680"}
 
 ## - Conclusions
 
-what I got out of this project:
+```         
+```
+
+### Comparing the Dependent and Independent Variables:
+
+![**how to read:** *the three-year average of crimes per 10,000 residents are plotted by Colorado county, overlaid by the three year average count of dispensaries with in the county.*](images/co_map.png){width="731"}
+
+**interpretation:** Denver is clearly where we see the larger crime rates, and more dispensaries. NIMBY refers to Denver as the "*mecca of recreational cannabis*." El Paso is an interesting county with a relativity high dispensary density and low crime rate, as well as pueblo county where the inverse is true
+
+\
+
+### Evaluating the Model
+
+![**How to read:** *the x axis is the predicted value of crime rate change, and the y is the difference between the actual values against the predicted*](images/model2.png){width="685"}
+
+**interpretation:**This plot helps determine the accuracy of my model in determining the relationship between county crime rates growth and county dispensary density growth, while controlling for poverty rate, racial demographics, and employment rate. The x-axis represents the crime rate predictions made by the model, while the y-axis represents the difference between these predictions and the actual observed crime rates.
+
+The unequal distribution of plots around the horizontal line (y=0), indicates my model not an ideal fit for the data.
+
+**evaluation:**
+My Model's output
+
+```{r message=TRUE, warning=TRUE, cache=FALSE}
+# import data
+linear_variables <- read.csv("~/gvsu/winter 23/CIS 635/NIMBY/cleaning/linear_model/variables/linear_variable.csv")
+
+model2 <- lm(linear_variables$crime_yoy_avg ~ linear_variables$dsp_yoy_avg +
+               linear_variables$pct_poverty_rate  +
+               linear_variables$pct_black  +
+               linear_variables$pct_hispanic  +
+               linear_variables$employeed_pop,
+                data = linear_variables)
+summary(model2)
+```
+
+Reviewing the summary output, there is more evidence that my model appears is a poor fit for the data, as it only explains about 1.9% of the variation in the dependent variable. The adjusted R-squared is negative,.
+
+Additionally, the high p-value (0.95) indicates that we can not reject the null hypothesis that dispensary presences has no effect on crime rates.
+
+**Comparison:**
+
+![](images/linear_model.jpg)\
+This model is part of NIMBY's baseline estimation strategy. Their next model iteration adds in another explanatory variable "miles from the border." It is from this final set of variables they draw their conclusions. Additionally, while most of the insights in NIMBY look at the census tract level, the authors discuss the county effects:
+
+> "The OLS estimates show no significant correlation between changes in dispensary density and changes in crime at the county level. The IV estimates are consistent with the tract-level results, showing some evidence of reduced crime in counties that received more dispensaries.
+>
+> The results, however, are weaker both economically and statistically, which is to be expected given that we have shown that the effects tend to be contained at the neighborhood level where the dispensaries are located."[@brinkman2019]
+
+# Final Thoughts:
+
+It's not so simple as X predicts Y. Findings the right model takes xyz. what I got out of this project:
 
 -   Understand data construction
 
@@ -101,16 +152,6 @@ what I got out of this project:
 -   missing data
 
     data processing
-
-    \
-
-### Comparing the Dependent and Independent variables:
-
-![**how to read:** the three year average of crimes per 10,000 residents are plotted by Colorado county, overlaid by the three year average count of dispensaries with in the county.](images/co_map.png){width="731"}
-
-**interpretation:** Denver is clearly where we see the larger crime rates, and more dispensaries. NIMBY referrs to Devver as the "*mecca of recreational cannabis*." El Paso is an interesting county with a relativity high dispensary density and low crime rate, as well as pueblo county where the inverse is true
-
-![](images/model2.png){width="766"}
 
 ## - Data and Software
 
@@ -130,9 +171,13 @@ what I got out of this project:
 
     -   Packages:
 
+        -   cowplot [@cowplot]
+
         -   fs [@fs]
 
         -   lubridate [@lubridate]
+
+        -   maps [@maps]
 
         -   openxlsx [@openxlsx]
 

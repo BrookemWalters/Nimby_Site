@@ -8,34 +8,47 @@ format:
 
 ![](images/regression%20model.png)
 
-**This code: imports the variables into a linear regression model**
+**This code:**
 
-Implements my variables into two linear models and outputs very sad p-values and confidence variables
+-   Implements the derived variables into two linear models for evaluation:
 
-#### variable checklist:
+### Fitting Linear Model One:
 
--   crimes per capita and YoY change
-
--   dispensaries per capita and YoY change
-
--   Poverty Rate
-
--   \% Black
-
--   \% Hispanic
-
--   Employment
+where average crime rate change is the dependent variable, and average dispensary density change is the independent variable.
 
 ```{r, warning=FALSE}
 source("~/gvsu/winter 23/CIS 635/NIMBY/cleaning/linear_model/variables/crime and dispenaries per capita.R")
 colnames(linear_variables) 
 
-modell <- lm(linear_variables$crime_yoy_avg ~ linear_variables$dsp_yoy_avg,  
+model1 <- lm(linear_variables$crime_yoy_avg ~ linear_variables$dsp_yoy_avg,  
              data = linear_variables)
 
-summary(modell)
-modell
 
+model1
+summary(model1)
+
+
+```
+
+
+```{r}
+library(tidyverse) # ggplot
+
+ggplot(linear_variables, aes(x = dsp_yoy_avg, y = crime_yoy_avg)) +
+  geom_point() + 
+  # add linear regression line
+  geom_smooth(method = "lm", se = FALSE, color = "red") +
+  # add axis labels and plot title
+  xlab("Dispensary Density (Year-over-Year Change)") +
+  ylab("Crime Rate (Year-over-Year Change)") +
+  ggtitle("Relationship Between Dispensary Density and Crime Rate")
+```
+
+
+
+
+
+```{r}
 #  y = YOY crime at the county level
 model2 <- lm(linear_variables$crime_yoy_avg ~ linear_variables$dsp_yoy_avg +
                linear_variables$pct_poverty_rate  +
@@ -46,5 +59,6 @@ model2 <- lm(linear_variables$crime_yoy_avg ~ linear_variables$dsp_yoy_avg +
 
 summary(model2)
 model2
+
 
 ```

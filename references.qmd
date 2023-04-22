@@ -29,6 +29,20 @@ artist: "moomusician", vectorstock.com
 
 -   2014 American Community Survey: [Colorado Population, Race, Ethnicity, and Poverty Rates](https://www.census.gov/acs/www/data/data-tables-and-tools/data-profiles/2014/ "Connected to the API via the TidyCensus Package")
 
+### Resources:
+
+-   *\"[Creating Maps in R](https://www.linkedin.com/learning/creating-maps-with-r/why-create-maps-with-r?autoplay=true&u=74414348 "Charlie Joey Hadley")\"*
+
+-   *"[Dplyr solution using slice and group](https://stackoverflow.com/questions/52465215/dplyr-solution-using-slice-and-group "StackOverflow")"*
+
+-   *"[How to Use the coalesce() Function in dplyr](https://www.statology.org/dplyr-coalesce "Statology")"*
+
+-   *\"[Join Data with dplyr in R: 6 Examples](https://www.youtube.com/watch?v=Yg-pNqzDuN4 "Statistics Globe Youtube Channel")\"*
+
+-   *\"[Making high-quality tables in R with the gt package](https://www.youtube.com/watch?v=dxDeotwylr8 "R for the Rest of Us")\"*
+
+-   *"[Pass chunk of filename to column name in a loop](https://community.rstudio.com/t/pass-chunk-of-filename-to-column-name-in-a-loop/141523 "Posit Community")"*
+
 ### Software:
 
 -   Rstudio

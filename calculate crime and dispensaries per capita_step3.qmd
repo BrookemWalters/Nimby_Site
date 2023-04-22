@@ -11,13 +11,13 @@ format:
 
 **This code: finds the crime and dispensary rates per 10,000 by county**
 
-1.  finds the population three year average
-2.  calculates dispensaries per capita
-3.  maps the fbi historical crime data into a single data frame
-4.  calculates the county crime rates
-5.  matches the crime rates with the dispensaries per capita by geoid
-6.  maps the crime rates against the dispensaries growth
-7.  visualizes the results , to be embedded in the conclusion
+-   finds the population three year average
+-   calculates dispensaries per capita
+-   maps the fbi historical crime data into a single data frame
+-   calculates the county crime rates
+-   matches the crime rates with the dispensaries per capita by geoid
+-   maps the crime rates against the dispensaries growth
+-   visualizes the results , to be embedded in the conclusion
 
 load packages
 
@@ -30,7 +30,7 @@ library(tidycensus)
 library(tidyverse) # purr package mapping, dplyer package 
 ```
 
-### load in my datasets
+### import the summarized counts of dispensaries by year
 
 select the relevant fields
 
@@ -51,7 +51,7 @@ dsps_avg  <-  dsps_avg %>% mutate_at("dsps_average", round, .2) # round
 dsps_avg <-  dsps_avg %>% select(GEOID,dsps_average)
 ```
 
-### find the local population rates for 2014. 2015, 2016
+### find the local population rates for 2014, 2015, 2016
 
 ```{r}
 #pull the population totals from the tidycensus
@@ -83,10 +83,11 @@ dsps_avg <-  dsps_avg %>% select(GEOID,dsps_average)
     ))
 ```
 
-### join the population fields to the main dataframe
+### calculate the three-year average population
 
 ```{r}
-# add the population estimates to the main doc.  
+# add the population estimates to the main doc. 
+# pop 14 is already in there
 population_avg$pop15 <- population15$estimate
 population_avg$pop16 <- population16$estimate
 
@@ -102,10 +103,12 @@ population_avg <- population_avg %>%
 select(1,2,6) #geo id, name and average
 ```
 
-### match the geoids and calculate the per capital dispensary rate
+### join the population data to the dispensary counts by county GEOID
+
+use the population average to calcuate the count of dispensaries per 10,000 residents
 
 ```{r}
-#match the geoids between the two dataframes
+
 population_avg$GEOID <-  as.integer(population_avg$GEOID)
 population_avg$NAME<- gsub(" County, Colorado", "", population_avg$NAME) # format the name to fit the crime
 dsps_per_capita <- left_join(population_avg, dsps_avg, by = "GEOID") %>% 
@@ -117,6 +120,8 @@ dsps_per_capita  <-  dsps_per_capita %>% mutate_at(vars(starts_with("dps")), fun
 ```
 
 ### pull in the fbi crime data same as the dispensary
+
+same as the "database" section minus adjusting for naming conventions. although crime data gets a bad rap, at least it was uniform.
 
 ```{r, echo=FALSE, warning=FALSE, cache=TRUE}
 setwd("~/gvsu/winter 23/CIS 635/NIMBY/cleaning/crime/FBI Crime Rates")
@@ -133,7 +138,7 @@ setwd("~/gvsu/winter 23/CIS 635/NIMBY/Nimby_Site")
 
 ### filter to get 2016 data, and pivot, summarize by year and geography
 
-calcuate YOY average
+calculate YOY crime average
 
 ```{r}
 all_co_crime  <- all_co_crime %>% 
@@ -152,7 +157,7 @@ all_co_crime  <-  all_co_crime  %>% select(1,9,10)
 
 ### calculate the crimes per capita
 
-join to the population totals
+join the crime data to the population totals
 
 ```{r}
 crime_per_capita <-  left_join(population_avg, all_co_crime, by = c("NAME" = "Geography"))
@@ -161,7 +166,7 @@ crime_per_capita$crime_per_cap <- (crime_per_capita$crime_average / crime_per_ca
 crime_per_capita <-  crime_per_capita %>% mutate_at(vars(starts_with("crime")), funs(round(., 1)))  # round
 ```
 
-### time to join the per capitas together
+### join the crime rates to the dispensary rates by county GEOID
 
 ```{r}
 # connect the variables, pulling some in from the density file

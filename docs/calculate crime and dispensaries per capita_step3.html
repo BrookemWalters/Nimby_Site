@@ -192,15 +192,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#load-in-my-datasets" id="toc-load-in-my-datasets" class="nav-link active" data-scroll-target="#load-in-my-datasets">load in my datasets</a></li>
+  <li><a href="#import-the-summarized-counts-of-dispensaries-by-year" id="toc-import-the-summarized-counts-of-dispensaries-by-year" class="nav-link active" data-scroll-target="#import-the-summarized-counts-of-dispensaries-by-year">import the summarized counts of dispensaries by year</a></li>
   <li><a href="#find-the-three-year-average-count-of-dispensaries" id="toc-find-the-three-year-average-count-of-dispensaries" class="nav-link" data-scroll-target="#find-the-three-year-average-count-of-dispensaries">find the three year average count of dispensaries</a></li>
-  <li><a href="#find-the-local-population-rates-for-2014.-2015-2016" id="toc-find-the-local-population-rates-for-2014.-2015-2016" class="nav-link" data-scroll-target="#find-the-local-population-rates-for-2014.-2015-2016">find the local population rates for 2014. 2015, 2016</a></li>
-  <li><a href="#join-the-population-fields-to-the-main-dataframe" id="toc-join-the-population-fields-to-the-main-dataframe" class="nav-link" data-scroll-target="#join-the-population-fields-to-the-main-dataframe">join the population fields to the main dataframe</a></li>
-  <li><a href="#match-the-geoids-and-calculate-the-per-capital-dispensary-rate" id="toc-match-the-geoids-and-calculate-the-per-capital-dispensary-rate" class="nav-link" data-scroll-target="#match-the-geoids-and-calculate-the-per-capital-dispensary-rate">match the geoids and calculate the per capital dispensary rate</a></li>
+  <li><a href="#find-the-local-population-rates-for-2014-2015-2016" id="toc-find-the-local-population-rates-for-2014-2015-2016" class="nav-link" data-scroll-target="#find-the-local-population-rates-for-2014-2015-2016">find the local population rates for 2014, 2015, 2016</a></li>
+  <li><a href="#calculate-the-three-year-average-population" id="toc-calculate-the-three-year-average-population" class="nav-link" data-scroll-target="#calculate-the-three-year-average-population">calculate the three-year average population</a></li>
+  <li><a href="#join-the-population-data-to-the-dispensary-counts-by-county-geoid" id="toc-join-the-population-data-to-the-dispensary-counts-by-county-geoid" class="nav-link" data-scroll-target="#join-the-population-data-to-the-dispensary-counts-by-county-geoid">join the population data to the dispensary counts by county GEOID</a></li>
   <li><a href="#pull-in-the-fbi-crime-data-same-as-the-dispensary" id="toc-pull-in-the-fbi-crime-data-same-as-the-dispensary" class="nav-link" data-scroll-target="#pull-in-the-fbi-crime-data-same-as-the-dispensary">pull in the fbi crime data same as the dispensary</a></li>
   <li><a href="#filter-to-get-2016-data-and-pivot-summarize-by-year-and-geography" id="toc-filter-to-get-2016-data-and-pivot-summarize-by-year-and-geography" class="nav-link" data-scroll-target="#filter-to-get-2016-data-and-pivot-summarize-by-year-and-geography">filter to get 2016 data, and pivot, summarize by year and geography</a></li>
   <li><a href="#calculate-the-crimes-per-capita" id="toc-calculate-the-crimes-per-capita" class="nav-link" data-scroll-target="#calculate-the-crimes-per-capita">calculate the crimes per capita</a></li>
-  <li><a href="#time-to-join-the-per-capitas-together" id="toc-time-to-join-the-per-capitas-together" class="nav-link" data-scroll-target="#time-to-join-the-per-capitas-together">time to join the per capitas together</a></li>
+  <li><a href="#join-the-crime-rates-to-the-dispensary-rates-by-county-geoid" id="toc-join-the-crime-rates-to-the-dispensary-rates-by-county-geoid" class="nav-link" data-scroll-target="#join-the-crime-rates-to-the-dispensary-rates-by-county-geoid">join the crime rates to the dispensary rates by county GEOID</a></li>
   <li><a href="#a-map-comparing-the-independent-and-dependent-variables" id="toc-a-map-comparing-the-independent-and-dependent-variables" class="nav-link" data-scroll-target="#a-map-comparing-the-independent-and-dependent-variables">a map comparing the independent and dependent variables</a></li>
   </ul>
 </nav>
@@ -212,7 +212,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <p><img src="images/per capita.png" class="img-fluid"></p>
 <p><strong>This code: finds the crime and dispensary rates per 10,000 by county</strong></p>
-<ol type="1">
+<ul>
 <li>finds the population three year average</li>
 <li>calculates dispensaries per capita</li>
 <li>maps the fbi historical crime data into a single data frame</li>
@@ -220,7 +220,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>matches the crime rates with the dispensaries per capita by geoid</li>
 <li>maps the crime rates against the dispensaries growth</li>
 <li>visualizes the results , to be embedded in the conclusion</li>
-</ol>
+</ul>
 <p>load packages</p>
 <div class="cell">
 <div class="cell-output cell-output-stderr">
@@ -248,8 +248,8 @@ Attaching package: 'lubridate'</code></pre>
 ✖ lubridate::union()       masks base::union()</code></pre>
 </div>
 </div>
-<section id="load-in-my-datasets" class="level3">
-<h3 class="anchored" data-anchor-id="load-in-my-datasets">load in my datasets</h3>
+<section id="import-the-summarized-counts-of-dispensaries-by-year" class="level3">
+<h3 class="anchored" data-anchor-id="import-the-summarized-counts-of-dispensaries-by-year">import the summarized counts of dispensaries by year</h3>
 <p>select the relevant fields</p>
 <div class="cell">
 <details open="">
@@ -274,8 +274,8 @@ Attaching package: 'lubridate'</code></pre>
 </details>
 </div>
 </section>
-<section id="find-the-local-population-rates-for-2014.-2015-2016" class="level3">
-<h3 class="anchored" data-anchor-id="find-the-local-population-rates-for-2014.-2015-2016">find the local population rates for 2014. 2015, 2016</h3>
+<section id="find-the-local-population-rates-for-2014-2015-2016" class="level3">
+<h3 class="anchored" data-anchor-id="find-the-local-population-rates-for-2014-2015-2016">find the local population rates for 2014, 2015, 2016</h3>
 <div class="cell">
 <details open="">
 <summary>Code</summary>
@@ -326,42 +326,43 @@ Fetching data by table type ("B/C", "S", "DP") and combining the result.</code><
 </div>
 </div>
 </section>
-<section id="join-the-population-fields-to-the-main-dataframe" class="level3">
-<h3 class="anchored" data-anchor-id="join-the-population-fields-to-the-main-dataframe">join the population fields to the main dataframe</h3>
+<section id="calculate-the-three-year-average-population" class="level3">
+<h3 class="anchored" data-anchor-id="calculate-the-three-year-average-population">calculate the three-year average population</h3>
 <div class="cell">
 <details open="">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add the population estimates to the main doc.  </span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>population_avg<span class="sc">$</span>pop15 <span class="ot">&lt;-</span> population15<span class="sc">$</span>estimate</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>population_avg<span class="sc">$</span>pop16 <span class="ot">&lt;-</span> population16<span class="sc">$</span>estimate</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="co"># find the average population over the time period</span></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>population_avg<span class="sc">$</span>pop_avg <span class="ot">&lt;-</span>  <span class="fu">rowMeans</span>(population_avg[, <span class="fu">c</span>(<span class="st">"pop14"</span>, <span class="st">"pop15"</span>, <span class="st">"pop16"</span>)], <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>population_avg  <span class="ot">&lt;-</span>  population_avg  <span class="sc">%&gt;%</span> <span class="fu">mutate_at</span>(<span class="st">"pop_avg"</span>, round) <span class="co"># round</span></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="co">#use this data to calculate crime rates</span></span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(population_avg, (<span class="st">"~/gvsu/winter 23/CIS 635/NIMBY/cleaning/crime/populations_avg.csv"</span>)) </span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a></span>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add the population estimates to the main doc. </span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co"># pop 14 is already in there</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>population_avg<span class="sc">$</span>pop15 <span class="ot">&lt;-</span> population15<span class="sc">$</span>estimate</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>population_avg<span class="sc">$</span>pop16 <span class="ot">&lt;-</span> population16<span class="sc">$</span>estimate</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="co"># find the average population over the time period</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>population_avg<span class="sc">$</span>pop_avg <span class="ot">&lt;-</span>  <span class="fu">rowMeans</span>(population_avg[, <span class="fu">c</span>(<span class="st">"pop14"</span>, <span class="st">"pop15"</span>, <span class="st">"pop16"</span>)], <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>population_avg  <span class="ot">&lt;-</span>  population_avg  <span class="sc">%&gt;%</span> <span class="fu">mutate_at</span>(<span class="st">"pop_avg"</span>, round) <span class="co"># round</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="co">#use this data to calculate crime rates</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(population_avg, (<span class="st">"~/gvsu/winter 23/CIS 635/NIMBY/cleaning/crime/populations_avg.csv"</span>)) </span>
 <span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>population_avg <span class="ot">&lt;-</span> population_avg <span class="sc">%&gt;%</span></span>
-<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">6</span>) <span class="co">#geo id, name and average</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>population_avg <span class="ot">&lt;-</span> population_avg <span class="sc">%&gt;%</span></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">6</span>) <span class="co">#geo id, name and average</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </section>
-<section id="match-the-geoids-and-calculate-the-per-capital-dispensary-rate" class="level3">
-<h3 class="anchored" data-anchor-id="match-the-geoids-and-calculate-the-per-capital-dispensary-rate">match the geoids and calculate the per capital dispensary rate</h3>
+<section id="join-the-population-data-to-the-dispensary-counts-by-county-geoid" class="level3">
+<h3 class="anchored" data-anchor-id="join-the-population-data-to-the-dispensary-counts-by-county-geoid">join the population data to the dispensary counts by county GEOID</h3>
+<p>use the population average to calcuate the count of dispensaries per 10,000 residents</p>
 <div class="cell">
 <details open="">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">#match the geoids between the two dataframes</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>population_avg<span class="sc">$</span>GEOID <span class="ot">&lt;-</span>  <span class="fu">as.integer</span>(population_avg<span class="sc">$</span>GEOID)</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>population_avg<span class="sc">$</span>NAME<span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">" County, Colorado"</span>, <span class="st">""</span>, population_avg<span class="sc">$</span>NAME) <span class="co"># format the name to fit the crime</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>dsps_per_capita <span class="ot">&lt;-</span> <span class="fu">left_join</span>(population_avg, dsps_avg, <span class="at">by =</span> <span class="st">"GEOID"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate_at</span>(<span class="fu">vars</span>(<span class="dv">4</span>), replace_na, <span class="at">replace =</span> <span class="dv">0</span>) <span class="co"># remove NAs</span></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate the dispensary per 10,000 population rate</span></span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>dsps_per_capita<span class="sc">$</span>dps_per_cap <span class="ot">&lt;-</span> (dsps_per_capita<span class="sc">$</span>dsps_average <span class="sc">/</span> dsps_per_capita<span class="sc">$</span>pop_avg) <span class="sc">*</span> <span class="dv">10000</span></span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>dsps_per_capita  <span class="ot">&lt;-</span>  dsps_per_capita <span class="sc">%&gt;%</span> <span class="fu">mutate_at</span>(<span class="fu">vars</span>(<span class="fu">starts_with</span>(<span class="st">"dps"</span>)), <span class="fu">funs</span>(<span class="fu">round</span>(., <span class="dv">1</span>))) <span class="co"># round</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>population_avg<span class="sc">$</span>GEOID <span class="ot">&lt;-</span>  <span class="fu">as.integer</span>(population_avg<span class="sc">$</span>GEOID)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>population_avg<span class="sc">$</span>NAME<span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">" County, Colorado"</span>, <span class="st">""</span>, population_avg<span class="sc">$</span>NAME) <span class="co"># format the name to fit the crime</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>dsps_per_capita <span class="ot">&lt;-</span> <span class="fu">left_join</span>(population_avg, dsps_avg, <span class="at">by =</span> <span class="st">"GEOID"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate_at</span>(<span class="fu">vars</span>(<span class="dv">4</span>), replace_na, <span class="at">replace =</span> <span class="dv">0</span>) <span class="co"># remove NAs</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate the dispensary per 10,000 population rate</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>dsps_per_capita<span class="sc">$</span>dps_per_cap <span class="ot">&lt;-</span> (dsps_per_capita<span class="sc">$</span>dsps_average <span class="sc">/</span> dsps_per_capita<span class="sc">$</span>pop_avg) <span class="sc">*</span> <span class="dv">10000</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>dsps_per_capita  <span class="ot">&lt;-</span>  dsps_per_capita <span class="sc">%&gt;%</span> <span class="fu">mutate_at</span>(<span class="fu">vars</span>(<span class="fu">starts_with</span>(<span class="st">"dps"</span>)), <span class="fu">funs</span>(<span class="fu">round</span>(., <span class="dv">1</span>))) <span class="co"># round</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: `funs()` was deprecated in dplyr 0.8.0.
@@ -377,13 +378,14 @@ Fetching data by table type ("B/C", "S", "DP") and combining the result.</code><
 </section>
 <section id="pull-in-the-fbi-crime-data-same-as-the-dispensary" class="level3">
 <h3 class="anchored" data-anchor-id="pull-in-the-fbi-crime-data-same-as-the-dispensary">pull in the fbi crime data same as the dispensary</h3>
+<p>same as the “database” section minus adjusting for naming conventions. although crime data gets a bad rap, at least it was uniform.</p>
 <div class="cell" data-hash="calculate-crime-and-dispensaries-per-capita_step3_cache/html/unnamed-chunk-7_bee1754f17f1e4c7239dba0d6c211d29">
 
 </div>
 </section>
 <section id="filter-to-get-2016-data-and-pivot-summarize-by-year-and-geography" class="level3">
 <h3 class="anchored" data-anchor-id="filter-to-get-2016-data-and-pivot-summarize-by-year-and-geography">filter to get 2016 data, and pivot, summarize by year and geography</h3>
-<p>calcuate YOY average</p>
+<p>calculate YOY crime average</p>
 <div class="cell">
 <details open="">
 <summary>Code</summary>
@@ -422,7 +424,7 @@ Fetching data by table type ("B/C", "S", "DP") and combining the result.</code><
 </section>
 <section id="calculate-the-crimes-per-capita" class="level3">
 <h3 class="anchored" data-anchor-id="calculate-the-crimes-per-capita">calculate the crimes per capita</h3>
-<p>join to the population totals</p>
+<p>join the crime data to the population totals</p>
 <div class="cell">
 <details open="">
 <summary>Code</summary>
@@ -443,8 +445,8 @@ Fetching data by table type ("B/C", "S", "DP") and combining the result.</code><
 </div>
 </div>
 </section>
-<section id="time-to-join-the-per-capitas-together" class="level3">
-<h3 class="anchored" data-anchor-id="time-to-join-the-per-capitas-together">time to join the per capitas together</h3>
+<section id="join-the-crime-rates-to-the-dispensary-rates-by-county-geoid" class="level3">
+<h3 class="anchored" data-anchor-id="join-the-crime-rates-to-the-dispensary-rates-by-county-geoid">join the crime rates to the dispensary rates by county GEOID</h3>
 <div class="cell">
 <details open="">
 <summary>Code</summary>

@@ -10,14 +10,14 @@ format:
 
 **This code: creates a dataframe of dispensaries from 2013 - 2023**
 
-1.  retrieves all of the filenames from the working directory
-2.  retains the filename as new variable
-3.  combines the listed excel files from that directory into a single dataframe
-4.  creates a new date variable extracted from the filename
-5.  merges like variables with different column names together and overrides the N/As
-6.  cleans up the business names, and classifies the observation drawn from the license number prefix
-7.  finds missing business names and replaces the null values with features extracted matching license numbers
-8.  finds the missing zips codes and replaces the null values with matching license numbers
+-   retrieves all of the filenames from the working directory
+-   retains the filename as new variable
+-   combines the listed excel files from a defined directory into a single dataframe
+-   creates a new date variable extracted from the filename
+-   merges like variables with different column names together and overrides the N/As
+-   cleans up the business names, and classifies the observation drawn from the license number prefix
+-   finds missing business names and replaces the null values with features extracted from similar observations
+-   finds the missing zips codes and replaces the null values with matching license numbers
 
 This section of my methodology was the most time intensive. Having quality historical data is the foundation of my project. Calculating the number of dispensaries is a key variable for the linear regression model.
 

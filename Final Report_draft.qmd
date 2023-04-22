@@ -19,7 +19,7 @@ When recreational cannabis use became legal in Michigan, the culture shift was p
 
 [^2]: Michigan Department of Treasury. "Adult-Use Marijuana Payments Being Distributed to Michigan Municipalities and Counties." Michigan.gov, 28 Feb. 2023, https://www.michigan.gov/treasury/news/2023/02/28/adult-use-marijuana-payments-being--distributed-to-michigan-municipalities-and-counties, , Accessed 12 Apr. 2023.
 
-In my data mining project, I explore the relationship between the presence of cannabis dispensaries and neighborhood crime rates. By replicating the methodology of Brinkman and Mok-Lamme's 2019 study, "*Not in my backyard? Not so fast. The effect of marijuana legalization on neighborhood crime*" (NIMBY), I aim to contribute a nuanced perspective on this budding industry and how it shapes public safety and city planning.
+In my data mining project, I explore the relationship between the presence of cannabis dispensaries and neighborhood crime rates. By replicating the methodology of Brinkman and Mok-Lamme's 2019 study, "[*Not in my backyard? Not so fast. The effect of marijuana legalization on neighborhood crime*](https://www.sciencedirect.com/science/article/abs/pii/S016604621830293X)" (NIMBY), I aim to contribute a nuanced perspective on this budding industry and how it shapes public safety and city planning.
 
 My approach involved immersing myself in the wild world of crime and cannabis statistics in Colorado. Using the data sources outlined in NIMBY, I built the variables defined in NIMBY's linear regression model, described in more detail in the methods section.
 
@@ -57,18 +57,18 @@ In summation, the data mining pipeline consisted of several stages, each color c
 
     The goal is to estimate the causal effect of changes in dispensary density on changes in crime rates, while accounting for potential biases and confounding factors using the linear regression model above.
 
-    | Variable | Defined                                                                                                        |
-    |----------------------------|--------------------------------------------|
-    | Δcrime   | year-over-year changes in crime rates                                                                          |
-    | Δdisp    | year-over-year changes in dispensary rates                                                                     |
-    | *j*      | neighborhood                                                                                                   |
-    | *t*      | time                                                                                                           |
-    | 𝛽0       | (intercept) baseline level of year-over-year changes in crime rates                                            |
-    | 𝛽1       | expected change in year-over-year crime rates associated with a one-unit increase                              |
-    | 𝛽2       | vector of estimated coefficients on the control variables (*demographic characteristics, economic conditions*) |
-    | x        | a vector of control variables (*demographic characteristics, economic conditions*)                             |
-    | Δ𝛿       | time fixed effects                                                                                             |
-    | ⋲        | error term                                                                                                     |
+    | Variable     | Defined                                                                                                        |
+    |--------------|----------------------------------------------------------------------------------------------------------------|
+    | Δcrime *j,t* | year-over-year changes in crime rates the jth geography in month t                                             |
+    | Δdisp *j,t*  | year-over-year changes in dispensary rates                                                                     |
+    | *j*          | neighborhood                                                                                                   |
+    | *t*          | time                                                                                                           |
+    | 𝛽0           | (intercept) baseline level of year-over-year changes in crime rates                                            |
+    | 𝛽1           | (coefficient) expected change in year-over-year crime rates associated with a one-unit increase                |
+    | 𝛽2           | vector of estimated coefficients on the control variables (*demographic characteristics, economic conditions*) |
+    | X            | a vector of control variables (*demographic characteristics, economic conditions*)                             |
+    | Δ𝛿t          | time fixed effects                                                                                             |
+    | ⋲ j,t        | error term                                                                                                     |
 
 ## - Results and Discussion
 
@@ -78,7 +78,7 @@ In summation, the data mining pipeline consisted of several stages, each color c
 
 **Table 1.** From NIMBY:
 
-![**how to read**: Panel B, shows the county quartiles (lowest to highest) by the four variables. The figures represent the three-year average of year-over-year growth in dispensary businesses. (Brinkman Pg. 78) ](images/Table1(cropped).jpg){width="675"}
+![**how to read**: Panel B, shows the county quartiles (lowest to highest) by the four variables. The figures represent the three-year average of year-over-year growth in dispensary businesses. (Brinkman Pg. 78)](images/Table1(cropped).jpg){width="675"}
 
 **interpretation:** the average county in Colorado saw a 11.9% increase in the number of dispensaries between 2014-2017. Counties that fall within the 4th quartile (highest) for poverty rates saw the largest increase (22.1%) average growth in the number of dispensaries, followed by the 4th quartile for Hispanic populations, and the 1st quartile (lowest) employed populations.
 
@@ -90,7 +90,19 @@ The gaps between my employment quartiles and NIMBY's are too wide to ignore. Wit
 
 ## - Conclusions
 
-Putting it all together on this map we see \
+what I got out of this project:
+
+-   Understand data construction
+
+-   the art of dealing with changing data
+
+-   data pipelines
+
+-   missing data
+
+    data processing
+
+    \
 
 ### Comparing the Dependent and Independent variables:
 

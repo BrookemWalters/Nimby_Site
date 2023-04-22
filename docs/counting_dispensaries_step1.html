@@ -214,16 +214,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <p><img src="images/counting dispensaries.png" class="img-fluid"></p>
 <p><strong>This code: creates a dataframe of dispensaries from 2013 - 2023</strong></p>
-<ol type="1">
+<ul>
 <li>retrieves all of the filenames from the working directory</li>
 <li>retains the filename as new variable</li>
-<li>combines the listed excel files from that directory into a single dataframe</li>
+<li>combines the listed excel files from a defined directory into a single dataframe</li>
 <li>creates a new date variable extracted from the filename</li>
 <li>merges like variables with different column names together and overrides the N/As</li>
 <li>cleans up the business names, and classifies the observation drawn from the license number prefix</li>
-<li>finds missing business names and replaces the null values with features extracted matching license numbers</li>
+<li>finds missing business names and replaces the null values with features extracted from similar observations</li>
 <li>finds the missing zips codes and replaces the null values with matching license numbers</li>
-</ol>
+</ul>
 <p>This section of my methodology was the most time intensive. Having quality historical data is the foundation of my project. Calculating the number of dispensaries is a key variable for the linear regression model.</p>
 <section id="nimbys-method" class="level2">
 <h2 class="anchored" data-anchor-id="nimbys-method">NIMBY’s Method:</h2>

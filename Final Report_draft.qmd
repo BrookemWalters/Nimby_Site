@@ -49,7 +49,7 @@ In summation, the data mining pipeline consisted of several stages, each color c
 
 -   Leveraging the power of the TidyCensus package, I extracted population data for the target variables from the American Community Survey (ACS) census database. \| [code](https://brookemwalters.github.io/Nimby_Site/Label%20the%20Dispensaries%20with%20GeoCodes_step2.html "Geocodes, Census Variables, and Dispensaries Per Capita")
 
--   I wove the datasets together using county-level identifiers (GEOID), allowing for the computation of per capita values for dispensaries and crime rates and year-over-year fluctuations. \| [code](#0 "per capita")
+-   I wove the datasets together using county-level identifiers (GEOID), allowing for the computation of per capita values for dispensaries and crime rates and year-over-year fluctuations. \| [code](https://brookemwalters.github.io/Nimby_Site/calculate%20crime%20and%20dispensaries%20per%20capita_step3.html "per capita")
 
 -   Finally, I introduced the new variables into a linear regression model. \| [code](https://brookemwalters.github.io/Nimby_Site/build_the_linear_model_step4.html)
 
@@ -58,7 +58,7 @@ In summation, the data mining pipeline consisted of several stages, each color c
     The goal is to estimate the causal effect of changes in dispensary density on changes in crime rates, while accounting for potential biases and confounding factors using the linear regression model above.
 
     | Variable     | Defined                                                                                                        |
-    |--------------|----------------------------------------------------------------------------------------------------------------|
+    |--------------|----------------------------------------------------------|
     | Δcrime *j,t* | year-over-year changes in crime rates the jth geography in month t                                             |
     | Δdisp *j,t*  | year-over-year changes in dispensary rates                                                                     |
     | *j*          | neighborhood                                                                                                   |
@@ -109,6 +109,8 @@ what I got out of this project:
 ![**how to read:** the three year average of crimes per 10,000 residents are plotted by Colorado county, overlaid by the three year average count of dispensaries with in the county.](images/co_map.png){width="731"}
 
 **interpretation:** Denver is clearly where we see the larger crime rates, and more dispensaries. NIMBY referrs to Devver as the "*mecca of recreational cannabis*." El Paso is an interesting county with a relativity high dispensary density and low crime rate, as well as pueblo county where the inverse is true
+
+![](images/model2.png){width="766"}
 
 ## - Data and Software
 

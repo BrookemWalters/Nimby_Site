@@ -15,7 +15,7 @@ website:
     logo: "images/logo.png"
     left: 
       - text: final report
-        href: Final Report_draft.qmd
+        href: Final Report.qmd
       - text: database
         href: counting_dispensaries_step1.qmd
       - text: classification

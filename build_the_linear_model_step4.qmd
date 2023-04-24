@@ -45,11 +45,10 @@ summary(model1)
 
 Regarding model 1, the shape of the graph reveals:
 
-It appears that Model One is not a good fit for the data based on the negative initial adjusted R-squared value. 
-Other insights I see from these results, include a slope of low magnitude indicating a weak relationship between variables. Additionally, the p-value of 0.62
-the data I've input into the model is not strong enough to reject the null hypothesis at the chosen level of significance
+It appears that Model One is not a good fit for the data based on the negative initial adjusted R-squared value. Other insights I see from these results, include a slope of low magnitude indicating a weak relationship between variables. Additionally, the p-value of 0.62 the data I've input into the model is not strong enough to reject the null hypothesis at the chosen level of significance
 
 because this linear model is so difficult to look at, I'm going to compare the residuals between the two models
+
 ```{r}
 ggplot(model1, aes(x = .fitted, y = .resid)) +
   geom_point(alpha = 0.5, size =4, color ="#1679A6" ) +
@@ -59,8 +58,6 @@ ggplot(model1, aes(x = .fitted, y = .resid)) +
     x = "Fitted Values", y = "Residuals") +
   theme_minimal()
 ```
-
-
 
 ### Model Two, adding in explanatory variables:
 
@@ -80,6 +77,7 @@ model2 <- lm(linear_variables$crime_yoy_avg ~ linear_variables$dsp_yoy_avg +
 ```
 
 https://www.statology.org/ggplot2-residual-plot/
+
 ```{r}
 library(ggplot2)
 
@@ -89,7 +87,7 @@ mode2_plot <- ggplot(model2, aes(x = .fitted, y = .resid)) +
   geom_point(alpha = 0.5, size =4, color ="#1679A6" ) +
   geom_hline(yintercept = 0
              , color = "#B41876") +
- labs(title='Model Two: Residual vs. Fitted Values Plot',
+ labs(title=' Replicated Model: Residual vs. Fitted Values Plot',
     x = "Fitted Values", y = "Residuals") +
   theme_minimal()
 
@@ -104,8 +102,4 @@ summary(model2)
 
 ### Interpreting the Results \| Mode 2
 
-Model 2 is also not an ideal fit for the data set, and I draw the same conclusions as above.
-Additionally looking at the residual vs predicted graph, the plots are not evenly distributed vertically, so model two is also not a good fit for this dataset
-
-
-
+Model 2 is also not an ideal fit for the data set, and I draw the same conclusions as above. Additionally looking at the residual vs predicted graph, the plots are not evenly distributed vertically, so model two is also not a good fit for this dataset.

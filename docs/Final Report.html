@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>replicating nimby – final-report_draft</title>
+<title>replicating nimby – final-report</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -166,7 +166,7 @@ div.csl-indent {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./Final Report_draft.html" aria-current="page">
+    <a class="nav-link active" href="./Final Report.html" aria-current="page">
  <span class="menu-text">final report</span></a>
   </li>  
   <li class="nav-item">
@@ -211,7 +211,7 @@ div.csl-indent {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#the-final-report-draft" id="toc-the-final-report-draft" class="nav-link active" data-scroll-target="#the-final-report-draft">The Final Report (DRAFT)</a>
+  <li><a href="#the-final-report" id="toc-the-final-report" class="nav-link active" data-scroll-target="#the-final-report">The Final Report</a>
   <ul class="collapse">
   <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">- Introduction</a></li>
   <li><a href="#related-works" id="toc-related-works" class="nav-link" data-scroll-target="#related-works">- Related Works</a></li>
@@ -224,7 +224,7 @@ div.csl-indent {
   <li><a href="#conclusions" id="toc-conclusions" class="nav-link" data-scroll-target="#conclusions">- Conclusions</a>
   <ul class="collapse">
   <li><a href="#comparing-the-dependent-and-independent-variables" id="toc-comparing-the-dependent-and-independent-variables" class="nav-link" data-scroll-target="#comparing-the-dependent-and-independent-variables">Comparing the Dependent and Independent Variables:</a></li>
-  <li><a href="#evaluating-the-model" id="toc-evaluating-the-model" class="nav-link" data-scroll-target="#evaluating-the-model">Evaluating the Model</a></li>
+  <li><a href="#evaluating-my-model" id="toc-evaluating-my-model" class="nav-link" data-scroll-target="#evaluating-my-model">Evaluating My Model</a></li>
   </ul></li>
   </ul></li>
   <li><a href="#final-thoughts" id="toc-final-thoughts" class="nav-link" data-scroll-target="#final-thoughts">Final Thoughts:</a>
@@ -249,8 +249,8 @@ div.csl-indent {
 <p><img src="images/Main Title.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
-<section id="the-final-report-draft" class="level1">
-<h1>The Final Report (DRAFT)</h1>
+<section id="the-final-report" class="level1">
+<h1>The Final Report</h1>
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">- Introduction</h2>
 <p>Somewhere in my mother’s basement, is my prized 1995 tie-dyed <a href="https://dare.org/">DARE</a> tee-shirt, a paradoxical relic of elementary classroom hours spent discussing the dangers of peer-led drug use. &nbsp;Those fears were not unwarranted, the CDC (Center for Disease Control) reports that 136 Americans die daily from opioids and illicitly manufactured fentanyl<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, for me - a friend or three. In my experience, most drug prevention programs portray cannabis as the catalyst to the life doomed by addiction.</p>
@@ -261,13 +261,13 @@ div.csl-indent {
 </section>
 <section id="related-works" class="level2">
 <h2 class="anchored" data-anchor-id="related-works">- Related Works</h2>
-<p>A related and noteworthy body of work is the 2021 meta-analysis conducted by D. Mark Anderson and Daniel I. Rees’ paper “<a href="https://www.aeaweb.org/articles?id=10.1257%2Fjel.20211635&amp;utm_campaign=Economic%20Studies&amp;utm_source=hs_email&amp;utm_medium=email"><em>The Public Health Effects of Legalizing Marijuana</em></a>.” The appendix presents an extensive comparison of 70 studies related to the impact of marijuana legalization on public health outcomes by empirical strategy, and study results. This paper served as an excellent resource to understand the myriad of ways in which this topic is being studied, including the study I will replicate. The authors ultimately conclude that while the existing body of research benefits from a wealth of state-level data, the outcomes remain inconclusive. Further research along with careful policy design is needed to mitigate the negative impact of legalization on crime rates and other outcomes.</p>
+<p>A related and noteworthy body of work is the 2021 meta-analysis conducted by D. Mark Anderson and Daniel I. Rees’ paper “<a href="https://www.aeaweb.org/articles?id=10.1257%2Fjel.20211635&amp;utm_campaign=Economic%20Studies&amp;utm_source=hs_email&amp;utm_medium=email"><em>The Public Health Effects of Legalizing Marijuana</em></a>.” The appendix presents an extensive comparison of 70 studies related to the impact of marijuana legalization on public health outcomes by empirical strategy, and study results. This paper served as an excellent resource to understand the myriad of ways in which this topic is being studied, including NIMBY, the research I will replicate. The authors ultimately conclude that while the existing body of research benefits from a wealth of state-level data, the outcomes remain inconclusive. Further research along with careful policy design is needed to mitigate the negative impact of legalization on crime rates and other outcomes.</p>
 <p>In contrast, the 2019 paper “<a href="https://www.tandfonline.com/doi/abs/10.1080/07418825.2019.1567807"><em>Marijuana Dispensaries and Neighborhood Crime and Disorder in Denver</em></a><em>,</em> Colorado” by Lorrine A. Hughes, Lonnie M. Schaible, and Katherine Jimmerson offers contradictory findings. Utilizing a Bayesian Poisson regression model, the authors discovered a statistically significant correlation between the presence of dispensaries and increased rates of neighborhood crime—except for murder and auto theft. This study highlights the complexities of the issue and the necessity for a more nuanced understanding of the interplay between cannabis dispensaries and crime rates.</p>
 <p><img src="https://www.netsuite.com/portal/assets/img/business-articles/data-warehouse/social-data-mining.jpg?v2" class="img-fluid" width="688"></p>
 </section>
 <section id="methods" class="level2">
 <h2 class="anchored" data-anchor-id="methods">- Methods</h2>
-<p>While all of the data referenced in NIMBY is publicly available, I found it necessary to deviate from the original’s papers methodology due to data quality issues and time constraints.</p>
+<p>While all of the data referenced in NIMBY is publicly available, I found it necessary to deviate from the original paper’s methodology due to data quality issues and time constraints.</p>
 <p>My diagram below illustrates the utilization of R code to construct a data pipeline for the linear model and its associated variables.</p>
 <p>In the interest of interpretability, I divided my work into four distinct segments, each highlighted in the navigation bar of this site. I hope this structured breakdown allows readers to navigate through my process efficiently, providing transparent insight into my methods employed and limitations faced throughout this project.</p>
 <p><img src="images/methodology.png" class="img-fluid"></p>
@@ -347,11 +347,11 @@ div.csl-indent {
 <p></p><figcaption class="figure-caption"><strong>how to read:</strong> “<em>The panels of this figure show the total number of store fronts (calculated using data from Colorado Department of Revenue) cross tabbed by stores that sell only medical marijuana (green), both medical and recreational marijuana (red), and only recreational marijuana (blue). The vertical red line shows the first date (January 1, 2014) when recreational sales were legal.</em>” (Brinkman Pg. 5)</figcaption><p></p>
 </figure>
 </div>
-<p><strong>interpretation:</strong> Once recreational cannabis was legalized in Colorado, we see a many dispensaries begin selling both recreational and medical products. In 2015 Retail only store begin their growth trajectory while medical and both types remain relatively flat.</p>
+<p><strong>interpretation:</strong> Once recreational cannabis was legalized in Colorado, we see many dispensaries begin selling both recreational and medical products. In 2015 recreational only stores begin their growth trajectory while medical and both store fronts remain relatively flat.</p>
 <section id="replicated-area-graph" class="level4">
 <h4 class="anchored" data-anchor-id="replicated-area-graph">Replicated Area Graph</h4>
 <p><img src="images/dsp_growth.png" class="img-fluid"></p>
-<p><strong>comparison:</strong> Although I applied a different approach, my total counts are similar to the original study. The graph tells a similar story as the one above, outside of the the missing data sets in 2016 .</p>
+<p><strong>comparison:</strong> Although I applied a different approach, my total counts are similar to the original study. My graph tells a comparable story as the plot above, but there are a few plots that look suspicious. With more time, I would investigate and validate the sharp dips seen in early 2015 and 2016.</p>
 <p><br>
 </p>
 </section>
@@ -379,26 +379,21 @@ div.csl-indent {
 <h2 class="anchored" data-anchor-id="conclusions">- Conclusions</h2>
 <section id="comparing-the-dependent-and-independent-variables" class="level3">
 <h3 class="anchored" data-anchor-id="comparing-the-dependent-and-independent-variables">Comparing the Dependent and Independent Variables:</h3>
+<p>Does dispensary density (green) influence crime rate (magenta)?</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/co_map.png" class="img-fluid figure-img" width="731"></p>
-<p></p><figcaption class="figure-caption"><strong>how to read:</strong> <em>the three-year average of crimes per 10,000 residents are plotted by Colorado county, overlaid by the three year average count of dispensaries with in the county.</em></figcaption><p></p>
+<p></p><figcaption class="figure-caption"><strong>how to read:</strong> <em>the three-year average of crimes per 10,000 residents are plotted by Colorado county, overlaid by the three-year average county total dispensary count.</em></figcaption><p></p>
 </figure>
 </div>
-<p><strong>interpretation:</strong> Denver is clearly where we see the larger crime rates, and more dispensaries. NIMBY refers to Denver as the “<em>mecca of recreational cannabis</em>.” El Paso is an interesting county with a relativity high dispensary density and low crime rate, as well as pueblo county where the inverse is true</p>
-<p><br>
-</p>
+<p><strong>interpretation:</strong> Denver is clearly where we see the larger crime rates, and more dispensaries. NIMBY refers to Denver as the “<em>mecca of recreational cannabis</em>.” El Paso is an interesting county with a relatively high dispensary density and low crime rate, as well as Pueblo county where the inverse is true</p>
+<p>From this map, at a glance, no clear relationship between dispensary density and crime rate is evident; but what does the math reveal?</p>
 </section>
-<section id="evaluating-the-model" class="level3">
-<h3 class="anchored" data-anchor-id="evaluating-the-model">Evaluating the Model</h3>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/model2.png" class="img-fluid figure-img" width="685"></p>
-<p></p><figcaption class="figure-caption"><strong>How to read:</strong> <em>the x axis is the predicted value of crime rate change, and the y is the difference between the actual values against the predicted</em></figcaption><p></p>
-</figure>
-</div>
-<p><strong>interpretation:</strong>This plot helps determine the accuracy of my model in determining the relationship between county crime rates growth and county dispensary density growth, while controlling for poverty rate, racial demographics, and employment rate. The x-axis represents the crime rate predictions made by the model, while the y-axis represents the difference between these predictions and the actual observed crime rates.</p>
-<p>The unequal distribution of plots around the horizontal line (y=0), indicates my model not an ideal fit for the data.</p>
+<section id="evaluating-my-model" class="level3">
+<h3 class="anchored" data-anchor-id="evaluating-my-model">Evaluating My Model</h3>
+<p><img src=".\images/model2.png" class="img-fluid"></p>
+<p><strong>interpretation:</strong> This plot serves to evaluate the accuracy of the replicated model in predicting the relationship between the growth of county crime rates and county dispensary density growth, while controlling for poverty rate, racial demographics, and employment rate.</p>
+<p>The unequal distribution of plots around the horizontal line (y=0), indicates that my replicated model is not an ideal fit for the data.</p>
 <p><strong>evaluation:</strong> my model’s output</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># import data</span></span>
@@ -443,7 +438,7 @@ F-statistic: 0.225 on 5 and 58 DF,  p-value: 0.9502</code></pre>
 <li><p>low multiple R square, reveals that dispensary density only explains about 1.9% of the variation in crime rates</p></li>
 <li><p>the residuals skew left</p></li>
 </ul>
-<p>Additionally, the high p-value (0.95) indicates that we can not reject the null hypothesis that dispensary presences has no effect on crime rates.</p>
+<p>Additionally, the high p-value (0.95) indicates that we can not reject the null hypothesis that dispensary presence has no effect on crime rates.</p>
 <p><strong>Comparison:</strong></p>
 <p><img src="images/linear_model.jpg" class="img-fluid"><br>
 This model is part of NIMBY’s baseline estimation strategy. Their next model iteration adds in another explanatory variable “miles from the border.” It is from this final set of variables they draw their conclusions. Additionally, while most of the insights in NIMBY look at the census tract level, the authors discuss the county effects:</p>
@@ -457,8 +452,9 @@ This model is part of NIMBY’s baseline estimation strategy. Their next model i
 <section id="final-thoughts" class="level1">
 <h1>Final Thoughts:</h1>
 <p><img src="images/data-preparation-diagram_0.svg" class="img-fluid" width="487"></p>
-<p>The third law of Tom Khabaza’s <a href="http://khabaza.codimension.net/index_files/9laws.htm">Nine Laws of Data Mining</a> states that “<em>Data preparation is more than half of every data mining process.</em>” Throughout this project, I embraced this maxim as I worked my way through various data quality issues. Predicting the relationship between recreational cannabis legalization and crime rates is no straightforward task. Even with careful data construction , an accurate predictive model takes trial and error, domain knowledge, and a stamina for problem solving. After this experience, I am more inclined to trust the results of meta-analyses of existing studies than one sole research study.</p>
-<p>In order to fully address the concerns surrounding the longterm implications of legal recreational cannabis use, we need to look at the issue from multiple angles. As for Michigan, if I were to attempt a similar study, I would take a completely different approach. Crime rates are influenced by so many factors, I would spend my time analyzing the dynamics in state revenue and how those funds are being spent and how the multiplicities benefited.</p>
+<p>The third law of Tom Khabaza’s <a href="http://khabaza.codimension.net/index_files/9laws.htm">Nine Laws of Data Mining</a> states that “<em>Data preparation is more than half of every data mining process.</em>” Throughout this project, I embraced this maxim as I worked my way through various data quality issues. In my final project, I reproduced many of the larger themes, but once I dived into the specific elements of the data, I see where I need to re-evaluate my approach.</p>
+<p>Predicting the relationship between recreational cannabis legalization and crime rates is no straightforward task. Even with careful data construction, an accurate predictive model requires trial and error, domain knowledge, and a stamina for problem-solving. After this experience, I am more inclined to trust the results of meta-analyses of existing studies than a single investigation.</p>
+<p>In order to fully address the concerns surrounding the long-term implications of legal recreational cannabis use, we need to look at the issue from different vantage points. As for Michigan, if I were to attempt a similar study, I would take a completely different approach. Crime rates are sensitive to a wide range of factors; I am more interested in analyzing the complexities in cannabis-generated state revenue, evaluating the allocation of funds, and examining the benefits for municipalities.</p>
 <section id="data-and-software" class="level2">
 <h2 class="anchored" data-anchor-id="data-and-software">- Data and Software</h2>
 <section id="data-sources" class="level3">

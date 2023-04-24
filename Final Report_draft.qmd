@@ -46,7 +46,7 @@ In the interest of interpretability, I divided my work into four distinct segmen
 
 In summation, the data mining pipeline consisted of several stages, each color coded above.
 
--   Dispensary license records were cleaned and preprocessed, removing irrelevant columns, standardizing the format, and aggregating the data by county and year. \| [code](https://brookemwalters.github.io/Nimby_Site/counting_dispensaries_step1.html "Counting Dispensaries")
+-   Dispensary license records were cleaned and pre-processed, removing irrelevant columns, standardizing the format, and aggregating the data by county and year. \| [code](https://brookemwalters.github.io/Nimby_Site/counting_dispensaries_step1.html "Counting Dispensaries")
 
 -   Leveraging the power of the TidyCensus package, I extracted population data for the target variables from the American Community Survey (ACS) census database. \| [code](https://brookemwalters.github.io/Nimby_Site/Label%20the%20Dispensaries%20with%20GeoCodes_step2.html "Geocodes, Census Variables, and Dispensaries Per Capita")
 
@@ -59,7 +59,7 @@ In summation, the data mining pipeline consisted of several stages, each color c
     The goal is to estimate the causal effect of changes in dispensary density on changes in crime rates, while accounting for potential biases and confounding factors using the linear regression model above.
 
     | Variable     | Defined                                                                                                        |
-    |--------------|----------------------------------------------------------------------------------------------------------------|
+    |-----------------|-------------------------------------------------------|
     | Δcrime *j,t* | year-over-year changes in crime rates the jth geography in month t                                             |
     | Δdisp *j,t*  | year-over-year changes in dispensary rates                                                                     |
     | *j*          | neighborhood                                                                                                   |
@@ -73,26 +73,41 @@ In summation, the data mining pipeline consisted of several stages, each color c
 
 ## - Results and Discussion
 
+To gauge the differences between my work and NIMBY, I recreated a couple of the visual aids.
+
 ### Comparing Dispensary Counts
+
+**Figure 1.** From NIMBY:
+
+![**how to read:** "*The panels of this figure show the total number of store fronts (calculated using data from Colorado Department of Revenue) cross tabbed by stores that sell only medical marijuana (green), both medical and recreational marijuana (red), and only recreational marijuana (blue). The vertical red line shows the first date (January 1, 2014) when recreational sales were legal.*" (Brinkman Pg. 5)](images/Growth%202013%E2%80%932016.png)
+
+**interpretation:** Once recreational cannabis was legalized in Colorado, we see a many dispensaries begin selling both recreational and medical products. In 2015 Retail only store begin their growth trajectory while medical and both types remain relatively flat.
+
+#### Replicated Area Graph
+
+![](images/dsp_growth.png)
+
+**comparison:** Although I applied a different approach, my total counts are similar to the original study. The graph tells a similar story as the one above, outside of the the missing data sets in 2016 .
+
+\
 
 ### Comparing Control Variables
 
 **Table 1.** From NIMBY:
 
-![**how to read**: Panel B, shows the county quartiles (lowest to highest) by the four variables. The figures represent the three-year average of year-over-year growth in dispensary businesses. (Brinkman Pg. 78)](images/Table1(cropped).jpg){width="675"}
+![**how to read**: Panel B, shows the county quartiles (lowest to highest) by the four variables. The figures represent the three-year average of year-over-year growth in dispensary businesses. (Brinkman Pg. 6)](images/Table1(cropped).jpg){width="675"}
 
 **interpretation:** the average county in Colorado saw a 11.9% increase in the number of dispensaries between 2014-2017. Counties that fall within the 4th quartile (highest) for poverty rates saw the largest increase (22.1%) average growth in the number of dispensaries, followed by the 4th quartile for Hispanic populations, and the 1st quartile (lowest) employed populations.
+
+#### **Replicated Table**
+
+![how to read: figures represent the county quartiles (lowest to highest) by the four variables, showing represent three-year average of year-over-year growth in dispensary businesses.](images/Rplot02.jpeg "Replicated Table"){width="680"}\
 
 **comparison:** now let's look at my results, my calculations led me to a 11.5% three-year average growth in dispensaries, which is very close to NIMBY's result. However, when I compare the individual demographics there is a lot of variance between the two results. The lowest quartile for employed populations revealed the most growth in dispensaries (+50.8%), followed by the 2nd quartile for black populations (27.0%).
 
 The gaps between my employment quartiles and NIMBY's are too wide to ignore. With more time, I'd explore the difference in methodologies and identify the contributing factors.
 
-![how to read: figures represent the county quartiles (lowest to highest) by the four variables, showing represent three-year average of year-over-year growth in dispensary businesses.](images/Rplot02.jpeg "Replicated Table"){width="680"}\
-
 ## - Conclusions
-
-```         
-```
 
 ### Comparing the Dependent and Independent Variables:
 
@@ -148,9 +163,9 @@ This model is part of NIMBY's baseline estimation strategy. Their next model ite
 
 ![](images/data-preparation-diagram_0.svg){width="487"}
 
-The third law of Tom Khabaza's [Nine Laws of Data Mining](http://khabaza.codimension.net/index_files/9laws.htm) states that "*Data preparation is more than half of every data mining process.*" Throughout this project, I embraced this maximum as I worked my way through the various data quality issues encountered. Data is messy, and it was my task to make sense out of it. Additionally, predicting the relationship between recreational cannabis legalization and crime rates no straightforward task. Even with careful consideration of data construction , an accruate predictive model takes trial and error, as well as an understanding of the many factors that go into crime rate.
+The third law of Tom Khabaza's [Nine Laws of Data Mining](http://khabaza.codimension.net/index_files/9laws.htm) states that "*Data preparation is more than half of every data mining process.*" Throughout this project, I embraced this maxim as I worked my way through various data quality issues. Predicting the relationship between recreational cannabis legalization and crime rates is no straightforward task. Even with careful data construction , an accurate predictive model takes trial and error, domain knowledge, and a stamina for problem solving. After this experience, I am more inclined to trust the results of meta-analyses of existing studies than one sole research study.
 
-In order to fully address the concerns surrounding the long term implications of legal recreational cannabis use, we need to look at the issue from multiple angles. After this experience, I am more inclined to trust the results of meta-analyses of existing studies than one sole research study. As for Michigan, if I were to attempt a similar study, I would take a completely different approach. Crime rates are influenced by so many factors, I would spend my time analyzing the dynamics in state revenue and how those funds are being spent and how the multiplicities benefited.
+In order to fully address the concerns surrounding the longterm implications of legal recreational cannabis use, we need to look at the issue from multiple angles. As for Michigan, if I were to attempt a similar study, I would take a completely different approach. Crime rates are influenced by so many factors, I would spend my time analyzing the dynamics in state revenue and how those funds are being spent and how the multiplicities benefited.
 
 ## - Data and Software
 

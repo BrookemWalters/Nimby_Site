@@ -7,4 +7,4 @@ bibliography: references.bib
 
 ![](images/Main%20Title.png){fig-align="center"}
 
-Home to my CIS 635 [Final Project.](https://brookemwalters.github.io/Nimby_Site/Final%20Report_draft.html)
+Home to my CIS 635 [Final Project](https://brookemwalters.github.io/Nimby_Site/Final%20Report.html)[.](https://brookemwalters.github.io/Nimby_Site/Final%20Report_draft.html)

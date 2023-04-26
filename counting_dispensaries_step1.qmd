@@ -104,7 +104,7 @@ all_dsps <- all_dsps %>%
 
 ### create uniform business names
 
-Another inconsistent feature of the ledger includes many variations in the spelling of a business name. Throughout this project, I became vary familiar with the cannabis related business names and puns. I assume that if a similarly spelled business holds the same licence number, I can override that name to reflect the predominant naming convention. This tedious task was crucial in allowing me to match businesses that sell both medial and recreational products under different licenses.
+Another inconsistent feature of the ledger includes many variations in the spelling of a business name. Throughout this project, I became vary familiar with the cannabis related business names and puns. I assume that if a similarly spelled business holds the same licence number, I can override that name to reflect the predominant naming convention. This tedious task was crucial in allowing me to match businesses that sell both medical and recreational products under different licenses.
 
 ```{r, cache=TRUE}
 # same case
@@ -425,4 +425,62 @@ storelist_cleaned <- storelist_cleaned %>%  distinct(dba, type, date, zip, .keep
 
 write.csv(storelist_cleaned,
           "dispensary_types_defined.csv")
+```
+
+### Graph the Results for Analysis:
+
+```{r}
+# Summarize the results
+# dsps_growth$date <-  ymd(dsps$date)
+
+# dsps_growth$type <- factor(dsps_growth$type,
+#                             levels=c("med_only", "both", "rec_only"))
+
+# dsps_growth$type <- factor(dsps_growth$type, levels = rev(c("med_only", "both", "rec_only")))
+
+dsps_growth <- storelist_cleaned %>% 
+  filter( year < 2017) %>% 
+  select(type,
+         dba,
+         date) %>%
+  group_by(date, type) %>% 
+  summarise(num_licenses = n())
+
+
+# create a graph
+fig1.b <- ggplot(dsps_growth, aes(x = date, y = num_licenses, 
+                                  fill = factor(type))) + 
+  
+   geom_area(alpha=0.6 , size=.5, colour="white")+
+             scale_fill_manual(values =c("#B41876","#23CB7F", "#1679A6")) +
+                               
+  
+   ylim(0, 800) +
+   geom_vline(xintercept = as.Date("2014-01-01"), linetype = "dashed") +
+  
+  geom_text(x = as.Date("2014-09-01") + 30,
+            y = 750, label = "first recreational sales",
+            family = "Times New Roman") +
+  
+  annotate("text", x = as.Date("2015-01-01"), y = 500, label = "both") +
+  annotate("text", x = as.Date("2015-01-01"), y = 300, label = "medical only") +
+  annotate("text", x = as.Date("2015-01-01"), y = 50, label = "rec only") +
+
+  
+  labs(y="Number of Stores",
+       x ="Year",
+       color = "Type",
+       title = "Dispensary Growth",
+       subtitle = "State of Colorado 2013–2016",
+       hjust = 0, size = 5) +
+  
+  theme_minimal() +
+    theme(legend.position = "none")
+fig1.b
+ggsave("images/dsp_growth.png")
+```
+
+```{r}
+# Create a sample dataset
+
 ```

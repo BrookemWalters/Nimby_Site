@@ -17,9 +17,11 @@ format:
 -   calculates the county crime rates
 -   matches the crime rates with the dispensaries per capita by geoid
 -   maps the crime rates against the dispensaries growth
--   visualizes the results , to be embedded in the conclusion
+-   visualizes the results in a heat and bubble map
 
-load packages
+\
+
+**load packages**
 
 ```{r, echo=FALSE, warning=FALSE}
 library(fs) # for listing all files in a directory

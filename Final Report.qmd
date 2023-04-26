@@ -8,11 +8,11 @@ bibliography: references.bib
 
 ![](images/Main%20Title.png){fig-align="center"}
 
-# The Final Report 
+# The Final Report
 
 ## - Introduction
 
-Somewhere in my mother's basement, is my prized 1995 tie-dyed [DARE](https://dare.org/) tee-shirt, a paradoxical relic of elementary classroom hours spent discussing the dangers of peer-led drug use.  Those fears were not unwarranted, the CDC (Center for Disease Control) reports that 136 Americans die daily from opioids and illicitly manufactured fentanyl[^1], for me - a friend or three. In my experience, most drug prevention programs portray cannabis as the catalyst to the life doomed by addiction.
+Stashed in an unmarked bin of memorabilia, is my prized 1995 tie-dyed [DARE](https://dare.org/) tee-shirt, a paradoxical relic of elementary classroom hours spent discussing the dangers of peer-led drug use.  Those fears were not unwarranted, the CDC (Center for Disease Control) reports that 136 Americans die daily from opioids and illicitly manufactured fentanyl[^1], for me - a friend or three. In my experience, most drug prevention programs portray cannabis as the catalyst to the life doomed by addiction.
 
 [^1]: Drug Abuse Statistics. "Drug Overdose Deaths." Drug Abuse Statistics, 2022, https://drugabusestatistics.org/drug-overdose-deaths, Accessed 12 Apr. 2023.
 
@@ -32,7 +32,7 @@ A related and noteworthy body of work is the 2021 meta-analysis conducted by D. 
 
 In contrast, the 2019 paper "[*Marijuana Dispensaries and Neighborhood Crime and Disorder in Denver*](https://www.tandfonline.com/doi/abs/10.1080/07418825.2019.1567807)*,* Colorado" by Lorrine A. Hughes, Lonnie M. Schaible, and Katherine Jimmerson offers contradictory findings. Utilizing a Bayesian Poisson regression model, the authors discovered a statistically significant correlation between the presence of dispensaries and increased rates of neighborhood crime---except for murder and auto theft. This study highlights the complexities of the issue and the necessity for a more nuanced understanding of the interplay between cannabis dispensaries and crime rates.
 
-![](https://www.netsuite.com/portal/assets/img/business-articles/data-warehouse/social-data-mining.jpg?v2){width="688"}
+[![image source: https://www.netsuite.com/portal/assets/img/business-articles/data-warehouse/social-data-mining.jpg?v2](https://www.netsuite.com/portal/assets/img/business-articles/data-warehouse/social-data-mining.jpg?v2){width="688"}](https://www.netsuite.com/portal/assets/img/business-articles/data-warehouse/social-data-mining.jpg?v2)
 
 ## - Methods
 
@@ -81,7 +81,7 @@ To gauge the differences between my work and NIMBY, I recreated a couple of the 
 
 ![**how to read:** "*The panels of this figure show the total number of store fronts (calculated using data from Colorado Department of Revenue) cross tabbed by stores that sell only medical marijuana (green), both medical and recreational marijuana (red), and only recreational marijuana (blue). The vertical red line shows the first date (January 1, 2014) when recreational sales were legal.*" (Brinkman Pg. 5)](images/Growth%202013%E2%80%932016.png)
 
-**interpretation:** Once recreational cannabis was legalized in Colorado, we see many dispensaries begin selling both recreational and medical products. In 2015 recreational only stores begin their growth trajectory while medical and both store fronts remain relatively flat.
+**interpretation:** Once recreational cannabis was legalized in Colorado, we see many dispensaries begin selling both recreational and medical products. In 2015, recreational only stores begin their growth trajectory, while medical and both store fronts remain relatively flat.
 
 #### Replicated Area Graph
 
@@ -113,21 +113,19 @@ The gaps between my employment quartiles and NIMBY's are too wide to ignore. Wit
 
 Does dispensary density (green) influence crime rate (magenta)?
 
-![**how to read:** *the three-year average of crimes per 10,000 residents are plotted by Colorado county, overlaid by the three-year average county total dispensary count.* ](images/co_map.png){width="731"}
+![**how to read:** *the three-year average of crimes per 10,000 residents are plotted by Colorado county, overlaid by the three-year average county total dispensary count.*](images/co_map.png){width="731"}
 
-**interpretation:** Denver is clearly where we see the larger crime rates, and more dispensaries. NIMBY refers to Denver as the "*mecca of recreational cannabis*." El Paso is an interesting county with a relatively high dispensary density and low crime rate, as well as Pueblo county where the inverse is true
+**interpretation:** Denver is clearly where we see the larger crime rates, and more dispensaries. NIMBY refers to Denver as the "*mecca of recreational cannabis*." El Paso is an interesting county with a relatively high dispensary density and low crime rate, as well as Pueblo County where the inverse is true.
 
 From this map, at a glance, no clear relationship between dispensary density and crime rate is evident; but what does the math reveal?
 
-### Evaluating My Model
+### Evaluating The Replicated Model
 
-![](/images/model2.png)
-
-**interpretation:** This plot serves to evaluate the accuracy of the replicated model in predicting the relationship between the growth of county crime rates and county dispensary density growth, while controlling for poverty rate, racial demographics, and employment rate.
+![](images/model2.png)**interpretation:** this plot evaluates the accuracy of the replicated model in predicting the relationship between the growth of county crime rates and county dispensary density growth, while controlling for poverty rate, racial demographics, and employment rate.
 
 The unequal distribution of plots around the horizontal line (y=0), indicates that my replicated model is not an ideal fit for the data.
 
-**evaluation:** my model's output
+**evaluation:** replicated model's output
 
 ```{r message=TRUE, warning=TRUE, cache=FALSE}
 # import data
@@ -150,26 +148,26 @@ Reviewing the summary output, there are several indicators that my model is a po
 
 -   the residuals skew left
 
-Additionally, the high p-value (0.95) indicates that we can not reject the null hypothesis that dispensary presence has no effect on crime rates.
+Additionally, the high p-value (0.95) indicates that there is insufficient evidence to reject the null hypothesis (*Ho: dispensary presence has no effect on crime rates*).
 
-**Comparison:**
+**Results Comparison:**
 
 ![](images/linear_model.jpg)\
-This model is part of NIMBY's baseline estimation strategy. Their next model iteration adds in another explanatory variable "miles from the border." It is from this final set of variables they draw their conclusions. Additionally, while most of the insights in NIMBY look at the census tract level, the authors discuss the county effects:
+This model is part of NIMBY's baseline estimation strategy. Their next model iteration controls for the "miles from the border." It is from this final set of variables they draw their conclusions. Additionally, while most of the insights in NIMBY look at the census tract level, the authors discuss the county effects:
 
-> "The OLS estimates show no significant correlation between changes in dispensary density and changes in crime at the county level. The IV estimates are consistent with the tract-level results, showing some evidence of reduced crime in counties that received more dispensaries.
+> "*The OLS estimates show no significant correlation between changes in dispensary density and changes in crime at the county level. The IV estimates are consistent with the tract-level results, showing some evidence of reduced crime in counties that received more dispensaries.*
 >
-> The results, however, are weaker both economically and statistically, which is to be expected given that we have shown that the effects tend to be contained at the neighborhood level where the dispensaries are located."[@brinkman2019]
+> *The results, however, are weaker both economically and statistically, which is to be expected given that we have shown that the effects tend to be contained at the neighborhood level where the dispensaries are located*."[@brinkman2019]
 
 # Final Thoughts:
 
-![](images/data-preparation-diagram_0.svg){width="487"}
+![](images/Crime%20and%20Cannabis.png){width="177"}
 
-The third law of Tom Khabaza's [Nine Laws of Data Mining](http://khabaza.codimension.net/index_files/9laws.htm) states that "*Data preparation is more than half of every data mining process.*" Throughout this project, I embraced this maxim as I worked my way through various data quality issues. In my final project, I reproduced many of the larger themes, but once I dived into the specific elements of the data, I see where I need to re-evaluate my approach.
+Tom Khabaza's [Third Law of Data Mining](http://khabaza.codimension.net/index_files/9laws.htm) states that "*Data preparation is more than half of every data mining process.*" This maxim was my guiding principle as I navigated a labyrinth of data quality challenges. Although I reproduced many of the macro themes from NIMBY, the intricate details unveiled my code requires further refinement and reassessment of my methodology.
 
-Predicting the relationship between recreational cannabis legalization and crime rates is no straightforward task. Even with careful data construction, an accurate predictive model requires trial and error, domain knowledge, and a stamina for problem-solving. After this experience, I am more inclined to trust the results of meta-analyses of existing studies than a single investigation.
+Predicting crime rates is no straightforward task. Even with careful data construction, an accurate predictive model requires trial and error, domain knowledge, and a stamina for problem-solving. After this experience, I am more inclined to trust the results of meta-analyses of existing studies than a single investigation.
 
-In order to fully address the concerns surrounding the long-term implications of legal recreational cannabis use, we need to look at the issue from different vantage points. As for Michigan, if I were to attempt a similar study, I would take a completely different approach. Crime rates are sensitive to a wide range of factors; I am more interested in analyzing the complexities in cannabis-generated state revenue, evaluating the allocation of funds, and examining the benefits for municipalities.
+To holistically understand the long-term implications of legal recreational cannabis use, a multifaceted perspective is necessary. If I were to embark on a similar study in Michigan, rather than refine this model, I would radically reimagine my approach. Crime rates are swayed by a kaleidoscope of factors, but the cannabis industry remains an unproven culprit. Scrutinizing the allocation of cannabis-generated state revenue, and extracting the measureable benefits for local municipalities presents a captivating and insightful challenge to explore.
 
 ## - Data and Software
 

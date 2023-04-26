@@ -13,9 +13,9 @@ Brinkman, J., & Mok-Lamme, D. (2019). Not in my backyard? *Not so fast. The effe
 
 Anderson, D. M., & Rees, D. I. (2023). *The Public Health Effects of Legalizing Marijuana.* Journal of Economic Literature, 61(1), 86--143. https://doi-org.ezproxy.gvsu.edu/10.1257/jel.20211635
 
-Hughes, Lorine A., Lonnie M. Schaible, and Katherine Jimmerson. "Marijuana Dispensaries and Neighborhood Crime and Disorder in Denver, Colorado." Justice Quarterly, vol. 37, no. 3, 2020, pp. 461-485, doi: 10.1080/07418825.2019.1567807.
+Hughes, Lorine A., Lonnie M. Schaible, and Katherine Jimmerson. "*Marijuana Dispensaries and Neighborhood Crime and Disorder in Denver, Colorado*." Justice Quarterly, vol. 37, no. 3, 2020, pp. 461-485, doi: 10.1080/07418825.2019.1567807.
 
-### Image Credit:
+### Website Image Credit:
 
 artist: "moomusician", vectorstock.com
 
@@ -31,15 +31,15 @@ artist: "moomusician", vectorstock.com
 
 ### Resources:
 
--   *\"[Creating Maps in R](https://www.linkedin.com/learning/creating-maps-with-r/why-create-maps-with-r?autoplay=true&u=74414348 "Charlie Joey Hadley")\"*
+-   *"[Creating Maps in R](https://www.linkedin.com/learning/creating-maps-with-r/why-create-maps-with-r?autoplay=true&u=74414348 "Charlie Joey Hadley")"*
 
 -   *"[Dplyr solution using slice and group](https://stackoverflow.com/questions/52465215/dplyr-solution-using-slice-and-group "StackOverflow")"*
 
 -   *"[How to Use the coalesce() Function in dplyr](https://www.statology.org/dplyr-coalesce "Statology")"*
 
--   *\"[Join Data with dplyr in R: 6 Examples](https://www.youtube.com/watch?v=Yg-pNqzDuN4 "Statistics Globe Youtube Channel")\"*
+-   *"[Join Data with dplyr in R: 6 Examples](https://www.youtube.com/watch?v=Yg-pNqzDuN4 "Statistics Globe Youtube Channel")"*
 
--   *\"[Making high-quality tables in R with the gt package](https://www.youtube.com/watch?v=dxDeotwylr8 "R for the Rest of Us")\"*
+-   *"[Making high-quality tables in R with the gt package](https://www.youtube.com/watch?v=dxDeotwylr8 "R for the Rest of Us")"*
 
 -   *"[Pass chunk of filename to column name in a loop](https://community.rstudio.com/t/pass-chunk-of-filename-to-column-name-in-a-loop/141523 "Posit Community")"*
 

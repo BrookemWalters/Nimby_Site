@@ -10,12 +10,14 @@ format:
 
 **This code:**
 
--   Implements the test data into two linear models for evaluation
--   Plots the residuals
+-   implements all the transformed data into two linear models for evaluation
+-   plots the residuals and linear regression
+
+This is where it all comes together! After all the time and effort to construct my data pipeline and calculating variables.... running the linear model function was so simple yet illuminating.
 
 ### Fitting Linear Model One:
 
-where average crime rate change is the dependent variable, and average dispensary density change is the independent variable.
+where the average change in crime rate is the dependent variable, and the average change in dispensary density is the independent variable.
 
 ```{r, warning=FALSE}
 # import data
@@ -45,7 +47,7 @@ summary(model1)
 
 Regarding model 1, the shape of the graph reveals:
 
-It appears that Model One is not a good fit for the data based on the negative initial adjusted R-squared value. Other insights I see from these results, include a slope of low magnitude indicating a weak relationship between variables. Additionally, the p-value of 0.62 the data I've input into the model is not strong enough to reject the null hypothesis at the chosen level of significance
+It appears that Model One is not a good fit for the data based on the negative initial adjusted R-squared value. Other insights I see from these results, include a slope of low magnitude indicating a weak relationship between variables. Additionally, the p-value of 0.62 is not strong enough to reject the null hypothesis at the level of significance (0.05)
 
 because this linear model is so difficult to look at, I'm going to compare the residuals between the two models
 
@@ -75,8 +77,6 @@ model2 <- lm(linear_variables$crime_yoy_avg ~ linear_variables$dsp_yoy_avg +
 
 
 ```
-
-https://www.statology.org/ggplot2-residual-plot/
 
 ```{r}
 library(ggplot2)

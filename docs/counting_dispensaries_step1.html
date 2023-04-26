@@ -147,7 +147,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./Final Report_draft.html">
+    <a class="nav-link" href="./Final Report.html">
  <span class="menu-text">final report</span></a>
   </li>  
   <li class="nav-item">
@@ -203,6 +203,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#find-missing-business-names" id="toc-find-missing-business-names" class="nav-link" data-scroll-target="#find-missing-business-names">find missing business names</a></li>
   <li><a href="#find-the-missing-zip-codes" id="toc-find-the-missing-zip-codes" class="nav-link" data-scroll-target="#find-the-missing-zip-codes">find the missing zip codes</a></li>
   <li><a href="#find-dispensaries-that-are-both-medical-and-recreational-sellers" id="toc-find-dispensaries-that-are-both-medical-and-recreational-sellers" class="nav-link" data-scroll-target="#find-dispensaries-that-are-both-medical-and-recreational-sellers">find dispensaries that are both medical and recreational sellers</a></li>
+  <li><a href="#graph-the-results-for-analysis" id="toc-graph-the-results-for-analysis" class="nav-link" data-scroll-target="#graph-the-results-for-analysis">Graph the Results for Analysis:</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -345,7 +346,7 @@ New names:
 </section>
 <section id="create-uniform-business-names" class="level3">
 <h3 class="anchored" data-anchor-id="create-uniform-business-names">create uniform business names</h3>
-<p>Another inconsistent feature of the ledger includes many variations in the spelling of a business name. Throughout this project, I became vary familiar with the cannabis related business names and puns. I assume that if a similarly spelled business holds the same licence number, I can override that name to reflect the predominant naming convention. This tedious task was crucial in allowing me to match businesses that sell both medial and recreational products under different licenses.</p>
+<p>Another inconsistent feature of the ledger includes many variations in the spelling of a business name. Throughout this project, I became vary familiar with the cannabis related business names and puns. I assume that if a similarly spelled business holds the same licence number, I can override that name to reflect the predominant naming convention. This tedious task was crucial in allowing me to match businesses that sell both medical and recreational products under different licenses.</p>
 <div class="cell" data-hash="counting_dispensaries_step1_cache/html/unnamed-chunk-4_1e4825af58519d803a3ea584fb43bcaa">
 <details open="">
 <summary>Code</summary>
@@ -678,6 +679,97 @@ New names:
 <span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(storelist_cleaned,</span>
 <span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a>          <span class="st">"dispensary_types_defined.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="graph-the-results-for-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="graph-the-results-for-analysis">Graph the Results for Analysis:</h3>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Summarize the results</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co"># dsps_growth$date &lt;-  ymd(dsps$date)</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co"># dsps_growth$type &lt;- factor(dsps_growth$type,</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co">#                             levels=c("med_only", "both", "rec_only"))</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co"># dsps_growth$type &lt;- factor(dsps_growth$type, levels = rev(c("med_only", "both", "rec_only")))</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>dsps_growth <span class="ot">&lt;-</span> storelist_cleaned <span class="sc">%&gt;%</span> </span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>( year <span class="sc">&lt;</span> <span class="dv">2017</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(type,</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>         dba,</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>         date) <span class="sc">%&gt;%</span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(date, type) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">num_licenses =</span> <span class="fu">n</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>`summarise()` has grouped output by 'date'. You can override using the
+`.groups` argument.</code></pre>
+</div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create a graph</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>fig1.b <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dsps_growth, <span class="fu">aes</span>(<span class="at">x =</span> date, <span class="at">y =</span> num_licenses, </span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">fill =</span> <span class="fu">factor</span>(type))) <span class="sc">+</span> </span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_area</span>(<span class="at">alpha=</span><span class="fl">0.6</span> , <span class="at">size=</span>.<span class="dv">5</span>, <span class="at">colour=</span><span class="st">"white"</span>)<span class="sc">+</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>             <span class="fu">scale_fill_manual</span>(<span class="at">values =</span><span class="fu">c</span>(<span class="st">"#B41876"</span>,<span class="st">"#23CB7F"</span>, <span class="st">"#1679A6"</span>)) <span class="sc">+</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>                               </span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>   <span class="fu">ylim</span>(<span class="dv">0</span>, <span class="dv">800</span>) <span class="sc">+</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">as.Date</span>(<span class="st">"2014-01-01"</span>), <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">x =</span> <span class="fu">as.Date</span>(<span class="st">"2014-09-01"</span>) <span class="sc">+</span> <span class="dv">30</span>,</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>            <span class="at">y =</span> <span class="dv">750</span>, <span class="at">label =</span> <span class="st">"first recreational sales"</span>,</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>            <span class="at">family =</span> <span class="st">"Times New Roman"</span>) <span class="sc">+</span></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="fu">as.Date</span>(<span class="st">"2015-01-01"</span>), <span class="at">y =</span> <span class="dv">500</span>, <span class="at">label =</span> <span class="st">"both"</span>) <span class="sc">+</span></span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="fu">as.Date</span>(<span class="st">"2015-01-01"</span>), <span class="at">y =</span> <span class="dv">300</span>, <span class="at">label =</span> <span class="st">"medical only"</span>) <span class="sc">+</span></span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="fu">as.Date</span>(<span class="st">"2015-01-01"</span>), <span class="at">y =</span> <span class="dv">50</span>, <span class="at">label =</span> <span class="st">"rec only"</span>) <span class="sc">+</span></span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y=</span><span class="st">"Number of Stores"</span>,</span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span><span class="st">"Year"</span>,</span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>       <span class="at">color =</span> <span class="st">"Type"</span>,</span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Dispensary Growth"</span>,</span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"State of Colorado 2013–2016"</span>,</span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a>       <span class="at">hjust =</span> <span class="dv">0</span>, <span class="at">size =</span> <span class="dv">5</span>) <span class="sc">+</span></span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
+ℹ Please use `linewidth` instead.</code></pre>
+</div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>fig1.b</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, :
+font family not found in Windows font database</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="counting_dispensaries_step1_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+</div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"images/dsp_growth.png"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Saving 7 x 5 in image</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, :
+font family not found in Windows font database</code></pre>
+</div>
+</div>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a sample dataset</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 

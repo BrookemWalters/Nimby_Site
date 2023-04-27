@@ -479,4 +479,3 @@ fig1.b <- ggplot(dsps_growth, aes(x = date, y = num_licenses,
 fig1.b
 ggsave("images/dsp_growth.png")
 ```
-

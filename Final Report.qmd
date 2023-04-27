@@ -59,7 +59,7 @@ In summation, the data mining pipeline consisted of several stages, each color c
     The goal is to estimate the causal effect of changes in dispensary density on changes in crime rates, while accounting for potential biases and confounding factors using the linear regression model above.
 
     | Variable     | Defined                                                                                                        |
-    |-----------------|-------------------------------------------------------|
+    |------------------|------------------------------------------------------|
     | Δcrime *j,t* | year-over-year changes in crime rates the jth geography in month t                                             |
     | Δdisp *j,t*  | year-over-year changes in dispensary rates                                                                     |
     | *j*          | neighborhood                                                                                                   |
@@ -167,7 +167,7 @@ Tom Khabaza's [Third Law of Data Mining](http://khabaza.codimension.net/index_fi
 
 Predicting crime rates is no straightforward task. Even with careful data construction, an accurate predictive model requires trial and error, domain knowledge, and a stamina for problem-solving. After this experience, I am more inclined to trust the results of meta-analyses of existing studies than a single investigation.
 
-To holistically understand the long-term implications of legal recreational cannabis use, a multifaceted perspective is necessary. If I were to embark on a similar study in Michigan, rather than refine this model, I would radically reimagine my approach. Crime rates are swayed by a kaleidoscope of factors, but the cannabis industry remains an unproven culprit. Scrutinizing the allocation of cannabis-generated state revenue, and extracting the measureable benefits for local municipalities presents a captivating and insightful challenge to explore.
+To holistically understand the long-term implications of legal recreational cannabis use, a multifaceted perspective is necessary. If I were to embark on a similar study in Michigan, rather than refine this model, I would radically reimagine my approach. Crime rates are swayed by a kaleidoscope of factors, but the cannabis industry remains an unproven culprit. Scrutinizing the allocation of cannabis-generated state revenue, and extracting the measureable benefits for local municipalities presents a more captivating challenge to explore.
 
 ## - Data and Software
 
@@ -211,8 +211,8 @@ To holistically understand the long-term implications of legal recreational cann
 
 ## - Works Cited
 
-Brinkman, J., & Mok-Lamme, D. (2019). Not in my backyard? *Not so fast. The effect of marijuana legalization on neighborhood crime*. Regional Science and Urban Economics, 78. https://doi-org.ezproxy.gvsu.edu/10.1016/j.regsciurbeco.2019.103460
+Brinkman, J., & Mok-Lamme, D. (2019). *Not in my backyard?* *Not so fast. The effect of marijuana legalization on neighborhood crime*. Regional Science and Urban Economics, 78. https://doi-org.ezproxy.gvsu.edu/10.1016/j.regsciurbeco.2019.103460
 
 Anderson, D. M., & Rees, D. I. (2023). *The Public Health Effects of Legalizing Marijuana.* Journal of Economic Literature, 61(1), 86--143. https://doi-org.ezproxy.gvsu.edu/10.1257/jel.20211635
 
-Hughes, Lorine A., Lonnie M. Schaible, and Katherine Jimmerson. "Marijuana Dispensaries and Neighborhood Crime and Disorder in Denver, Colorado." Justice Quarterly, vol. 37, no. 3, 2020, pp. 461-485, doi: 10.1080/07418825.2019.1567807.
+Hughes, Lorine A., Lonnie M. Schaible, and Katherine Jimmerson. *Marijuana Dispensaries and Neighborhood Crime and Disorder in Denver, Colorado.* Justice Quarterly, vol. 37, no. 3, 2020, pp. 461-485, doi: 10.1080/07418825.2019.1567807.

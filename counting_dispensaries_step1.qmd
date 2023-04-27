@@ -480,7 +480,3 @@ fig1.b
 ggsave("images/dsp_growth.png")
 ```
 
-```{r}
-# Create a sample dataset
-
-```

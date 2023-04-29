@@ -32,7 +32,7 @@ A related and noteworthy body of work is the 2021 meta-analysis conducted by D. 
 
 In contrast, the 2019 paper "[*Marijuana Dispensaries and Neighborhood Crime and Disorder in Denver*](https://www.tandfonline.com/doi/abs/10.1080/07418825.2019.1567807)*,* Colorado" by Lorrine A. Hughes, Lonnie M. Schaible, and Katherine Jimmerson offers contradictory findings. Utilizing a Bayesian Poisson regression model, the authors discovered a statistically significant correlation between the presence of dispensaries and increased rates of neighborhood crime---except for murder and auto theft. This study highlights the complexities of the issue and the necessity for a more nuanced understanding of the interplay between cannabis dispensaries and crime rates.
 
-[![image source: https://www.netsuite.com/portal/assets/img/business-articles/data-warehouse/social-data-mining.jpg?v2](https://www.netsuite.com/portal/assets/img/business-articles/data-warehouse/social-data-mining.jpg?v2){width="688"}](https://www.netsuite.com/portal/assets/img/business-articles/data-warehouse/social-data-mining.jpg?v2)
+[![](https://www.netsuite.com/portal/assets/img/business-articles/data-warehouse/social-data-mining.jpg?v2){width="688"}](https://www.netsuite.com/portal/assets/img/business-articles/data-warehouse/social-data-mining.jpg?v2)
 
 ## - Methods
 
@@ -59,7 +59,7 @@ In summation, the data mining pipeline consisted of several stages, each color c
     The goal is to estimate the causal effect of changes in dispensary density on changes in crime rates, while accounting for potential biases and confounding factors using the linear regression model above.
 
     | Variable     | Defined                                                                                                        |
-    |------------------|------------------------------------------------------|
+    |-------------------|-----------------------------------------------------|
     | Δcrime *j,t* | year-over-year changes in crime rates the jth geography in month t                                             |
     | Δdisp *j,t*  | year-over-year changes in dispensary rates                                                                     |
     | *j*          | neighborhood                                                                                                   |
